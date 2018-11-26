@@ -1,4 +1,4 @@
-<header _ngcontent-c0="" class="header">
+<header class="header">
 
 	<div class="site-logo">
 		<a routerlink="/" href="/">
@@ -7,8 +7,8 @@
 	</div>
 
 	<div id="nav-menu">
-		<a _ngcontent-c8="" id="login-btn" routerlink="/iniciar-sesion" class="waves-effect waves-light view-mobile" href="/iniciar-sesion">
-			<i _ngcontent-c8="" class="material-icons">person</i>
+		<a id="login-btn" routerlink="/iniciar-sesion" class="waves-effect waves-light view-mobile" href="/iniciar-sesion">
+			<i class="material-icons">person</i>
 		</a>
 
 		<div class="mobile-btn" id="mobile-btn"><span></span></div>
