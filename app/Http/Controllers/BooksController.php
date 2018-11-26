@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Books;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
+
+    protected $books;
+
+    public function __construct(Books $books) {
+        $this->books = $books;
+    }
     
 	public function index() {
 	}
 
-	public function show($id) {
-		//$API_URL = 'http://localhost:3000/api/1.0';
-        $API_URL = 'https://amolca-backend.herokuapp.com/api/1.0/';
+	public function show($slug) {
 
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => $API_URL
-        ]);
+		$book = $this->books->findBySlug($slug);
+		return view('book', ["book" => $book, 'active_country' => env('APP_COUNTRY')]);
 
-        $response = $client->request('GET', "specialties/{$id}");	
 	}
 
 }

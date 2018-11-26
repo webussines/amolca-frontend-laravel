@@ -1,0 +1,304 @@
+.single-book {
+    font-family: Tahoma;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    position: relative;
+}
+
+.single-book .row {
+    position: relative;
+}
+
+/*COLUMN IMAGE*/
+.image-book img {
+    display: block;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: auto;
+}
+    .image-book img.active {
+        max-height: none;
+        max-width: none;
+    }
+
+#image-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 100;
+}
+
+#image-container.scroll-waiting {
+    bottom: 0px;
+    left: 0;
+    max-height: -webkit-calc('100vh - 180px');
+    max-height: -moz-calc('100vh - 180px');
+    max-height: -ms-calc('100vh - 180px');
+	max-height: calc('100vh - 180px');
+	max-width: -webkit-calc('41.6666666667% - 0.75rem');
+	max-width: -moz-calc('41.6666666667% - 0.75rem');
+	max-width: -ms-calc('41.6666666667% - 0.75rem');
+	max-width: calc('41.6666666667% - 0.75rem');
+    position: absolute;
+}
+
+#image-container.scroll-fixed {
+    left: 5%;
+    max-height: -webkit-calc('100vh - 180px');
+    max-height: -moz-calc('100vh - 180px');
+    max-height: -ms-calc('100vh - 180px');
+    max-height: calc('100vh - 180px');
+    max-width: -webkit-calc('41.6666666667% - 3.75rem');
+    max-width: -moz-calc('41.6666666667% - 3.75rem');
+    max-width: -ms-calc('41.6666666667% - 3.75rem');
+    max-width: calc('41.6666666667% - 3.75rem');
+    position: fixed;
+    top: 160px;
+}
+    #image-container.scroll-fixed img,
+    #image-container.scroll-waiting img {
+    	max-height: -webkit-calc('100vh - 340px');
+	    max-height: -moz-calc('100vh - 340px');
+	    max-height: -ms-calc('100vh - 340px');
+	    max-height: calc('100vh - 340px');
+    }
+        #image-container.scroll-fixed img.active,
+        #image-container.scroll-waiting img.active {
+            max-height: none;
+        }
+
+/*Scroll interaction*/
+.scroll-info {
+    background-color: #f5f5f5;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: none;
+    padding: 30px 5%;
+    text-align: center;
+}
+    .scroll-info .add-to-cart {
+        margin-bottom: 0px;
+        margin-right: 0px;
+    }
+
+/*COLUMN INFORMATION*/
+.main.book .summary-book {
+    padding-left: 40px;
+}
+
+.name {
+    color: #00396f;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 100%;
+    margin: 0px;
+    text-align: justify;
+}
+
+.author {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+    .author a {
+        color: #666;
+        line-height: normal;
+        position: relative;
+        text-decoration: none;
+    }
+        .author a:before {
+            content: '';
+            background-color: #666;
+            bottom: 0px;
+            height: 1px;
+            left: 0px;
+            position: absolute;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            width: 0%;
+        }
+        .author a:hover:before {
+            width: 100%;
+        }
+
+.price {
+    color: #e2231a;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 100%;
+    margin: 0px;
+}
+
+.shipping {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+
+.versions {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+    .version-btn {
+        color: #666;
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+        .version-btn span {
+            border-radius: 50%;
+            border: 1px solid #a5a5a5;
+            color: #00396f;
+            display: inline-block;
+            font-size: 20px;
+            height: 37px;
+            line-height: 35px;
+            text-align: center;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            vertical-align: inherit;
+            width: 37px;
+        }
+            .version-btn span.icon-book {
+                font-size: 15px;
+            }
+
+        .version-btn:hover span {
+            background-color: #00396f;
+            border-color: #00396f;
+            color: #fff;
+        }
+
+.main.book .add-to-cart {
+    margin: 20px 10px 20px 0px;
+}
+    .main.book .add-to-cart input {
+        height: 39px;
+        margin-bottom: 0px;
+        margin-right: 20px;
+        width: 150px;
+        vertical-align: middle;
+    }
+    .main.book .add-to-cart .button {
+        text-align: center;
+    }
+
+/*Collapsible*/
+.main.book .collapsible {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+    .main.book .collapsible-item {
+        margin-bottom: 10px;
+    }
+        .main.book .collapsible-header {
+            background-color: #eaeaea;
+            border-radius: 7px;
+            color: #666;
+            font-family: Tahoma;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 100%;
+            overflow: hidden;
+            padding-left: 24px;
+            padding-right: 24px;
+            position: relative;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+            .main.book .collapsible-header span {
+                background-color: #00396f;
+                border-radius: 50%;
+                color: #fff;
+                display: inline-block;
+                font-family: icomoon!important;
+                font-size: 9px;
+                font-weight: 400;
+                font-style: normal;
+                height: 20px;
+                line-height: 21px;
+                margin-right: 15px;
+                margin-top: 1px;
+                position: relative;
+                text-align: center;
+                transition: .4s;
+                width: 20px;
+            }
+                .main.book .collapsible-header span::after {
+                    background-color: transparent;
+                    border-radius: 50%;
+                    border: 2px solid #a5a5a5;
+                    bottom: -7px;
+                    content: '';
+                    left: -7px;
+                    position: absolute;
+                    right: -7px;
+                    top: -7px;
+                }
+
+        .collapsible-body {
+            background-color: #f5f5f5;
+            border-bottom: 0px;
+            border-radius: 10px;
+            color: #a5a5a5;
+            font-family: Tahoma;
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 30px 30px 30px 60px;
+        }
+
+/*Author Panel*/
+.row.author-item {
+    margin-bottom: 10px;
+}
+    /*Image*/
+    .author-item .image img {
+        border-radius: 50%;
+        overflow: hidden;
+        height: auto;
+        max-width: 100%;
+    }
+    /*Information*/
+    .author-item .name {
+        font-size: 25px;
+    }
+    .author-item .description {
+        margin: 10px auto;
+    }
+
+/*Mockup book page loader*/
+.mockup.image {
+    padding-top: 100%;
+    width: 100%;
+}
+
+.mockup.name {
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.mockup.author {
+    height: 30px;
+}
+
+.mockup.shipping {
+    height: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.mockup.accordion {
+    height: 50px;
+}
+
+.related-products .page-container {
+    margin-bottom: 40px;
+}

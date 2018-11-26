@@ -13,13 +13,11 @@ class HomeController extends Controller
     public function __construct(Books $books)
     {
         //$this->middleware('auth');
-        $this->books = $books;
     }
 
     public function index()
     {
-        $books = $this->books->all();
-        return view('home', ['books' => $books]);
+        return view('home');
     }
 
     public function login() 

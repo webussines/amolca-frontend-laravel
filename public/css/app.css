@@ -13,6 +13,7 @@ body {
     overflow-x: hidden;
 }
 
+/*Top bar styles*/
 .top-bar {
     align-items: center;
     background-color: #55b9d4;
@@ -266,11 +267,134 @@ ul.social-networks.top {
 
 /*Main content*/
 .main {
+    color: #666;
+    font-family: Tahoma;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 140px;
     position: relative;
     width: 100%;
 }
 
+.main p {
+    margin: 7px auto;
+}
+
+.content-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    width: 90%;
+}
+
+.content-block {
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
+
+/*Link's*/
+.main a {
+    color: #00396f;
+    cursor: pointer;
+    font-family: Tahoma;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/*Titles & subtitle*/
+.title {
+    color: #00396f;
+    font-family: Tahoma;
+    font-weight: 700;
+    margin-bottom: 35px;
+    margin-top: 0;
+    text-align: center;
+}
+    .title span {
+        color: #55b9d4;
+    }
+
+/*Common buttons*/
+.button {
+    border: 0;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    outline: 0;
+    padding: 10px 20px;
+    transition: .4s;
+    text-decoration: none;
+}
+    .button.primary {
+        background-color: #00396f;
+        color: #fff;
+    }
+    .button.white {
+        background-color: #fff;
+        color: #00396f;
+    }
+    .button.danger {
+        background-color: #e2231a;
+        color: #fff;
+    }
+        .button.danger:hover,
+        .button.danger:active,
+        .button.danger:focus {
+            background-color: #b4170f;
+        }
+    .button[disabled] {
+        cursor: initial;
+        opacity: 0.5;
+    }
+
+/*Global form styles*/
+input:not([type]),
+input[type=date]:not(.browser-default), 
+input[type=datetime-local]:not(.browser-default), 
+input[type=datetime]:not(.browser-default), 
+input[type=email]:not(.browser-default), 
+input[type=number]:not(.browser-default), 
+input[type=password]:not(.browser-default), 
+input[type=search]:not(.browser-default), 
+input[type=tel]:not(.browser-default), 
+input[type=text]:not(.browser-default), 
+input[type=time]:not(.browser-default), 
+input[type=url]:not(.browser-default), 
+textarea, 
+textarea.materialize-textarea {
+    border-radius: 5px !important;
+    border: 1px solid #a5a5a5 !important;
+    -ms-box-sizing: border-box !important;
+    -o-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+    color: #666 !important;
+    font-family: Tahoma !important;
+    font-weight: 400;
+    outline: 0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+    input:not([type]):focus:not([readonly]), 
+    input[type=date]:not(.browser-default):focus:not([readonly]), 
+    input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
+    input[type=datetime]:not(.browser-default):focus:not([readonly]), 
+    input[type=email]:not(.browser-default):focus:not([readonly]), 
+    input[type=number]:not(.browser-default):focus:not([readonly]), 
+    input[type=password]:not(.browser-default):focus:not([readonly]), 
+    input[type=search]:not(.browser-default):focus:not([readonly]), 
+    input[type=tel]:not(.browser-default):focus:not([readonly]), 
+    input[type=text]:not(.browser-default):focus:not([readonly]), 
+    input[type=time]:not(.browser-default):focus:not([readonly]), 
+    input[type=url]:not(.browser-default):focus:not([readonly]), 
+    textarea.materialize-textarea:focus:not([readonly]), 
+    textarea:focus:not([readonly]) {
+        border: 1px solid #00396f !important;
+        box-shadow: none !important;
+    }
+
+/*Big searcher styles*/
 .big-searcher-content {
     font-family: Tahoma;
     margin-left: auto;
@@ -324,6 +448,159 @@ form.big-searcher {
     background-color: #f5f5f5;
 }
 
+.books-block .col-left {
+    border-right: 1px solid #eaeaea;
+}
+    .main.home .books-block .title {
+        font-size: 30px;
+    }
+
+.main.home .authors-block {
+    background-color: #eaeaea;
+    border-bottom: 1px solid #ccc;
+}
+
+/*Books loop's*/
+.books-loop {
+    display: flex;
+    flex-flow: row wrap;
+    font-family: Tahoma;
+    justify-content: left;
+    margin-left: -15px;
+    margin-right: -15px;
+    width: 100%;
+}
+    .books-loop .item {
+        background-color: #f5f5f5;
+        margin: 15px;
+        transition: .4s;
+        visibility: visible!important;
+        text-align: center;
+        width: 100%;
+    }
+        .books-loop.items-per-page-2 .item {
+            max-width: -ms-calc(50% - 30px);
+            max-width: -o-calc(50% - 30px);
+            max-width: calc(50% - 30px);
+        }
+        .books-loop.items-per-page-4 .item {
+            max-width: -ms-calc(25% - 30px);
+            max-width: -o-calc(25% - 30px);
+            max-width: calc(25% - 30px);
+        }
+
+    .books-loop .item p {
+        margin: 0;
+    }
+
+    .books-loop .item .contain-img {
+        background-color: #fff;
+        border-bottom: 1px solid #a5a5a5;
+        display: block;
+        padding-bottom: 100%;
+        position: relative;
+    }
+        .books-loop .item .contain-img img {
+            display: block;
+            left: 50%;
+            max-height: 85%;
+            max-width: 75%;
+            position: absolute;
+            top: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+
+    .books-loop .item .versions {
+        margin-top: -20px;
+        padding: 0 30px;
+        position: relative;
+        text-align: left;
+    }
+        .books-loop .item .versions a {
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #a5a5a5;
+            display: inline-block;
+            font-size: 16px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            width: 40px;
+        }
+
+    .books-loop .item .info {
+        padding: 15px 30px 20px;
+        text-align: left;
+    }
+        .books-loop .item .name {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: normal;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+            .books-loop .item .name a {
+                color: #00396f;
+                text-decoration: none;
+                width: 100%;
+            }
+        .books-loop .item .authors > span {
+            margin-right: 3px;
+        }
+            .books-loop .item .authors a {
+                color: #666;
+                font-size: 14px;
+                font-weight: 700;
+            }
+
+        .books-loop .item .actions {
+            align-items: center;
+            display: flex;
+            flex-flow: row wrap;
+            font-size: 24px;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+            .books-loop .item .actions .price {
+                color: #00396f;
+                font-weight: 700;
+                font-size: 20px;
+            }
+            .books-loop .item .actions a {
+                cursor: pointer;
+                display: inline-block;
+                height: 36px;
+                line-height: 43px;
+                text-align: center;
+                text-decoration: none;
+                width: 35px;
+            }
+                .books-loop .item .actions .cart-btn {
+                    color: #00396f;
+                }
+                .books-loop .item .actions .hearth-btn {
+                    color: #e2231a;
+                    margin-left: 5px;
+                }
+
+/*Specialty page styles*/
+.specialty-title {
+    background-image: url('/img/common/titles-bg.png');
+    background-position: left center;
+    background-size: cover;
+    color: #fff;
+    font-family: Tahoma;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 15px 5%;
+}
+    .specialty-title > * {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0;
+    }
+
 /*Footer styles*/
 .footer {
     background-color: #eaeaea;
@@ -347,6 +624,7 @@ form.big-searcher {
         font-weight: 700;
         margin-bottom: 20px;
         margin-top: 0;
+        text-align: left;
     }
 
     .footer .custom-row {

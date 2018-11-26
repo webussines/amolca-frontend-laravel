@@ -6,16 +6,18 @@ use GuzzleHttp\Client;
 
 class Books extends GuzzleHttpRequest {
 
+	public $country = "COLOMBIA";
+
 	public function all() {
-
-        return $this->get('specialties');
-
+        return $this->get('books');
 	}
 
-	public function show($id) {
+	public function findBySlug($slug) {
+		return $this->get("books/slug/{$slug}");
+	}
 
-		return $this->get("specialties/{$id}");
-
+	public function specialty($id) {
+		return $this->get("specialties/{$id}/books");
 	}
 	
 }
