@@ -8,16 +8,20 @@ class Books extends GuzzleHttpRequest {
 
 	public $country = "COLOMBIA";
 
-	public function all() {
-        return $this->get('books');
+	public function all($params = 'limit=30') {
+        return $this->get("books?{$params}");
+	}
+
+	public function findById($id) {
+		return $this->get("books/{$id}");
 	}
 
 	public function findBySlug($slug) {
 		return $this->get("books/slug/{$slug}");
 	}
 
-	public function specialty($id) {
-		return $this->get("specialties/{$id}/books");
+	public function specialty($id, $params = '') {
+		return $this->get("specialties/{$id}/books?{$params}");
 	}
 	
 }

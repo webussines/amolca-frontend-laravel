@@ -1,0 +1,17 @@
+.section-header .title {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.content-tabs {
+	padding: 30px;
+}
+	.content-tabs.subtab {
+		background-color: #f9f9f9;
+	}
+
+.col-image img {
+	display: block;
+	margin: auto;
+	max-width: 90%;
+}

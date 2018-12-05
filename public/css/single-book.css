@@ -1,3 +1,8 @@
+.content-container#single-book {
+    padding-bottom: 0px;
+    margin-bottom: 40px;
+}
+
 .single-book {
     font-family: Tahoma;
     padding-bottom: 40px;
@@ -33,36 +38,36 @@
 #image-container.scroll-waiting {
     bottom: 0px;
     left: 0;
-    max-height: -webkit-calc('100vh - 180px');
-    max-height: -moz-calc('100vh - 180px');
-    max-height: -ms-calc('100vh - 180px');
-	max-height: calc('100vh - 180px');
-	max-width: -webkit-calc('41.6666666667% - 0.75rem');
-	max-width: -moz-calc('41.6666666667% - 0.75rem');
-	max-width: -ms-calc('41.6666666667% - 0.75rem');
-	max-width: calc('41.6666666667% - 0.75rem');
+    max-height: -webkit-calc(100vh - 180px);
+    max-height: -moz-calc(100vh - 180px);
+    max-height: -ms-calc(100vh - 180px);
+	max-height: calc(100vh - 180px);
+	max-width: -webkit-calc(41.6666666667% - 0.75rem);
+	max-width: -moz-calc(41.6666666667% - 0.75rem);
+	max-width: -ms-calc(41.6666666667% - 0.75rem);
+	max-width: calc(41.6666666667% - 0.75rem);
     position: absolute;
 }
 
 #image-container.scroll-fixed {
     left: 5%;
-    max-height: -webkit-calc('100vh - 180px');
-    max-height: -moz-calc('100vh - 180px');
-    max-height: -ms-calc('100vh - 180px');
-    max-height: calc('100vh - 180px');
-    max-width: -webkit-calc('41.6666666667% - 3.75rem');
-    max-width: -moz-calc('41.6666666667% - 3.75rem');
-    max-width: -ms-calc('41.6666666667% - 3.75rem');
-    max-width: calc('41.6666666667% - 3.75rem');
+    max-height: -webkit-calc(100vh - 180px);
+    max-height: -moz-calc(100vh - 180px);
+    max-height: -ms-calc(100vh - 180px);
+    max-height: calc(100vh - 180px);
+    max-width: -webkit-calc(41.6666666667% - 3.75rem);
+    max-width: -moz-calc(41.6666666667% - 3.75rem);
+    max-width: -ms-calc(41.6666666667% - 3.75rem);
+    max-width: calc(41.6666666667% - 3.75rem);
     position: fixed;
     top: 160px;
 }
     #image-container.scroll-fixed img,
     #image-container.scroll-waiting img {
-    	max-height: -webkit-calc('100vh - 340px');
-	    max-height: -moz-calc('100vh - 340px');
-	    max-height: -ms-calc('100vh - 340px');
-	    max-height: calc('100vh - 340px');
+    	max-height: -webkit-calc(100vh - 340px);
+	    max-height: -moz-calc(100vh - 340px);
+	    max-height: -ms-calc(100vh - 340px);
+	    max-height: calc(100vh - 340px);
     }
         #image-container.scroll-fixed img.active,
         #image-container.scroll-waiting img.active {
@@ -88,7 +93,7 @@
     padding-left: 40px;
 }
 
-.name {
+.summary-book .name {
     color: #00396f;
     font-size: 28px;
     font-weight: bold;
@@ -97,18 +102,18 @@
     text-align: justify;
 }
 
-.author {
+.summary-book .author {
     font-size: 15px;
     font-weight: bold;
     margin: 20px 0px;
 }
-    .author a {
+    .summary-book .author a {
         color: #666;
         line-height: normal;
         position: relative;
         text-decoration: none;
     }
-        .author a:before {
+        .summary-book .author a:before {
             content: '';
             background-color: #666;
             bottom: 0px;
@@ -120,7 +125,7 @@
             transition: all 0.4s ease;
             width: 0%;
         }
-        .author a:hover:before {
+        .summary-book .author a:hover:before {
             width: 100%;
         }
 
@@ -138,18 +143,18 @@
     margin: 20px 0px;
 }
 
-.versions {
+.summary-book .versions {
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
 }
-    .version-btn {
+    .summary-book .version-btn {
         color: #666;
         display: inline-block;
         margin-left: 10px;
         vertical-align: middle;
     }
-        .version-btn span {
+        .summary-book .version-btn span {
             border-radius: 50%;
             border: 1px solid #a5a5a5;
             color: #00396f;
@@ -164,11 +169,11 @@
             vertical-align: inherit;
             width: 37px;
         }
-            .version-btn span.icon-book {
+            .summary-book .version-btn span.icon-book {
                 font-size: 15px;
             }
 
-        .version-btn:hover span {
+        .summary-book .version-btn:hover span {
             background-color: #00396f;
             border-color: #00396f;
             color: #fff;
@@ -299,6 +304,10 @@
     height: 50px;
 }
 
+/*Related products*/
+.related-products .section-title {
+    margin-bottom: 0px;
+}
 .related-products .page-container {
     margin-bottom: 40px;
 }
