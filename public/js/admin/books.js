@@ -1,6 +1,70 @@
 jQuery(function($){
 	getMoreBooks();
+
+	$(document).ready(function() {
+		createDataTable();
+	});
 });
+
+const createDataTable = function() {
+	$('table.books').dataTable( {
+	    ajax: {
+	    	method: "POST",
+	    	url: '/am-admin/books/get-books',
+	    	data: {
+	    		"limit": 40,
+				"skip": 0,
+				"_token": $('#_token').val()
+	    	}
+	    },
+	    columns: [
+	    	{ 
+	    		data: "image",
+	    		className: "image",
+	    		"render": function (data, type, JsonResultRow, meta) {
+                    return '<img src="'+ JsonResultRow.image + '">';
+                } 
+            },
+	    	{ 	
+	    		data: "title",
+	    		className: "title"
+	    	},
+	    	{ 	
+	    		data: "specialty",
+	    		className: "specialty",
+	    		render: function(data, type, JsonResultRow, meta) {
+	    			return JsonResultRow.specialty[1].title;
+	    		}
+	    	},
+	    	{ 	
+	    		data: "isbn",
+	    		className: "isbn"
+	    	},
+	    	{ 	
+	    		data: "author[0].name",
+	    		className: "author",
+	    		"render": function (data, type, JsonResultRow, meta) {
+                  	switch(JsonResultRow.state) {
+                  		case 'PUBLISHED':
+                  			return 'Publicado';
+                  		break;
+                  		case 'DRAFT':
+                  			return 'Borrador';
+                  		break;
+                  		case 'TRASH':
+                  			return 'En papelera';
+                  		break;
+                  		default:
+                  			return 'Borrador';
+                  		break;
+                  	}
+                } 
+	    	},
+	    ]
+	});
+
+	$('#DataTables_Table_0_length select').formSelect();
+}
 
 const getMoreBooks = function() {
 
@@ -12,7 +76,7 @@ const getMoreBooks = function() {
 			$('.loader').removeClass('hidde')
 
 		$.ajax({
-			method: "POST",
+			type: "POST",
 			url: "/am-admin/books/get-books",
 			data: {
 				"limit": 40,

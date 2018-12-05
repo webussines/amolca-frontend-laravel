@@ -2,8 +2,13 @@
 
 @section('title', 'Todos los libros - Admin Amolca')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('libs/datatables/css/jquery.dataTables.min.css') }}">
+@endsection
+
 @section('scripts')
 <script src="{{ asset('js/admin/books.js') }}"></script>
+<script src="{{ asset('libs/datatables/js/jquery.dataTables.min.js') }}"></script>
 @endsection
 
 @section('contentClass', 'all-books')
@@ -25,59 +30,24 @@
 
 		<tbody>
 
-			@foreach ($books as $book)
-				<tr>
-					<td class="image">
-						<img src="{{$book->image}}" alt="{{$book->title}}">
-					</td>
-					<td class="title">
-						{{$book->title}}
-					</td>
-					<td class="specialty">
-						{{$book->specialty[1]->title}}
-					</td>
-					<td class="isbn">
-						{{$book->isbn}}
-					</td>
-					<td class="state">
-						@if ($book->state == 'PUBLISHED')
-							Publicado
-						@endif
-
-						@if ($book->state == 'DRAFT')
-							Borrador
-						@endif
-
-						@if ($book->state == 'TRASH')
-							En papelera
-						@endif
-					</td>
-					<td class="actions">
-						<a class="edit" href="/am-admin/libros/{{$book->_id}}">
-		                    <span class="icon-mode_edit"></span>
-		                </a>
-
-		                <a class="actions">
-		                    <span class="icon-trash"></span>
-		                </a>
-					</td>
-				</tr>
-			@endforeach
+			
 
 		</tbody>
 
 		<tfoot>
-			<tr>
-				<td colspan="6">
-					<div class="loader hidde">
-						<div class="progress">
-							<div class="indeterminate"></div>
-						</div>
-					</div>
-					<a id="btn-load-more" class="button primary">Cargar más libros</a>
-				</td>
-			</tr>
+			
 		</tfoot>
 	</table>
+
+	<tr>
+		<td colspan="6">
+			<div class="loader hidde">
+				<div class="progress">
+					<div class="indeterminate"></div>
+				</div>
+			</div>
+			<a id="btn-load-more" class="button primary">Cargar más libros</a>
+		</td>
+	</tr>
 
 @endsection

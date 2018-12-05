@@ -1,22 +1,31 @@
 <?php
 
 //Admin routes
-Route::prefix('am-admin')->group(function() {
+Route::group(['prefix' => 'am-admin'], function() {
+
+	//Home routes
 	Route::get('/', 'Admin\AdminHomeController@index');
 	Route::get('/lost-password', function() {
-		return 'Contraseña perdida';
+		return session('access_token');
 	});
 
-	Route::get('/dashboard', 'Admin\AdminAccountController@index');
-	Route::get('/mi-cuenta', 'Admin\AdminAccountController@MyAccount');
+	//Login & logout
+	Route::get('/login', 'Admin\AdminAuthController@login');
+	Route::get('/logout', 'Admin\AdminAuthController@logout');
 
-	Route::resources([
-	    'libros' => 'Admin\AdminBooksController'
-	]);
+	Route::group(['middleware' => 'admin'], function() {
 
-	//Routes for get info
-	Route::prefix('books')->group(function(){
-		Route::post('/get-books', 'Admin\AdminBooksController@getBooks');
+		Route::get('/dashboard', 'Admin\AdminAccountController@index');
+		Route::get('/mi-cuenta', 'Admin\AdminAccountController@MyAccount');
+
+		Route::resources([
+		    'libros' => 'Admin\AdminBooksController'
+		]);
+
+		//Routes for get info
+		Route::prefix('books')->group(function(){
+			Route::post('/get-books', 'Admin\AdminBooksController@getBooks');
+		});
 	});
 });
 

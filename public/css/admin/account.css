@@ -287,67 +287,70 @@
 }
 
 /*Data tables styles*/
-.data-table thead th {
-    color: rgba(0,0,0,.54);
-    font-family: 'Tahoma';
-    font-size: 13px;
-    justify-content: center;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    text-align: center;
+.data-table {
+    width: 100% !important;
 }
-    .data-table thead th.title {
-        text-align: left;
+    .data-table thead th {
+        color: rgba(0,0,0,.54);
+        font-family: 'Tahoma';
+        font-size: 13px;
+        justify-content: center;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        text-align: center;
     }
-
-.data-table .image {
-    padding-left: 0;
-    max-width: 120px;
-    min-width: 120px;
-}
-    .data-table .image img {
-        display: block;
-        margin: auto;
-        width: 50px;
-    }
-        .data-table.books .image img {
-            width: 90px;
-        }
-
-.data-table td {
-    text-align: center;
-}
-    .data-table td.title {
-        font-weight: 700;
-        justify-content: left;
-        padding-right: 10px;
-        text-align: left;
-    }
-        .data-table.books td.title {
+        .data-table thead th.title {
             text-align: left;
-            max-width: 35%;
-            min-width: 35%;
-            width: 35%;
         }
 
-    .data-table td.actions {
-        position: relative;
+    .data-table .image {
+        padding-left: 0;
+        max-width: 120px;
+        min-width: 120px;
     }
-        .data-table td.actions > a {
-            color: #878786;
-            cursor: pointer;
-            font-size: 20px;
-            margin: 0 5px;
-            text-align: center;
-            width: 30px;
+        .data-table .image img {
+            display: block;
+            margin: auto;
+            width: 50px;
         }
-        .data-table td.actions ul#actions-menu-dropdown {
-            top: 20px !important;
-        }
+            .data-table.books .image img {
+                width: 90px;
+            }
 
-.data-table tfoot .button {
-    min-width: 50%;
-}
+    .data-table td {
+        text-align: center;
+    }
+        .data-table td.title {
+            font-weight: 700;
+            justify-content: left;
+            padding-right: 10px;
+            text-align: left;
+        }
+            .data-table.books td.title {
+                text-align: left;
+                max-width: 35%;
+                min-width: 35%;
+                width: 35%;
+            }
+
+        .data-table td.actions {
+            position: relative;
+        }
+            .data-table td.actions > a {
+                color: #878786;
+                cursor: pointer;
+                font-size: 20px;
+                margin: 0 5px;
+                text-align: center;
+                width: 30px;
+            }
+            .data-table td.actions ul#actions-menu-dropdown {
+                top: 20px !important;
+            }
+
+    .data-table tfoot .button {
+        min-width: 50%;
+    }
 
 .mce-notification-warning {
     display: none !important;

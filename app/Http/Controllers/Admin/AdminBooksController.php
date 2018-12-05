@@ -28,7 +28,7 @@ class AdminBooksController extends Controller
 
         $resp = [];
 
-        $resp['books'] = $this->books->all($params);
+        $resp['data'] = $this->books->all($params);
 
         return $resp;
     }

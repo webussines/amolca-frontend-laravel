@@ -14,8 +14,8 @@
 <img src="{{ asset('/img/admin/logo.png') }}" alt="Iniciar sesión" class="logo">
 <form id="login-form" class="login-form">
   <div class="form-group">
-    <label for="user">Usuario / Correo electrónico</label>
-    <input type="text" name="user" id="user" autocomplete="off" placeholder="Escribe tu correo electrónico...">
+    <label for="username">Usuario / Correo electrónico</label>
+    <input type="text" name="username" id="username" autocomplete="off" placeholder="Escribe tu correo electrónico...">
   </div>
 
   <div class="form-group">
@@ -24,10 +24,11 @@
   </div>
 
   <div *ngIf="error.show" class="form-group">
-    <p class="error">error</p>
+    <p id="global-error" class="error">error</p>
   </div>
 
   <div class="form-group">
+    <input type="hidden" id="_token" value="{{ csrf_token() }}">
     <input type="submit" class="button primary" value="Iniciar sesión">
   </div>
   
