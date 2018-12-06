@@ -14,6 +14,12 @@
 @section('contentClass', 'all-books')
 @section('content')
 
+	<div class="loader hidde">
+		<div class="progress">
+			<div class="indeterminate"></div>
+		</div>
+	</div>
+
 	<input type="hidden" id="_token" value="{{ csrf_token() }}">
 
 	<table class="table data-table books">
@@ -29,25 +35,11 @@
 		</thead>
 
 		<tbody>
-
-			
-
 		</tbody>
 
 		<tfoot>
 			
 		</tfoot>
 	</table>
-
-	<tr>
-		<td colspan="6">
-			<div class="loader hidde">
-				<div class="progress">
-					<div class="indeterminate"></div>
-				</div>
-			</div>
-			<a id="btn-load-more" class="button primary">Cargar más libros</a>
-		</td>
-	</tr>
 
 @endsection

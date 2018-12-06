@@ -72,16 +72,17 @@ body {
 }
 
 /*Buttons*/
-.button {
-    border-radius: 5px;
-    border: none;
+.button, button.button, input.button {
+    border-radius: 5px !important;
+    border: none !important;
     cursor: pointer;
     display: inline-block;
     font-family: 'Tahoma';
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 16px!important;
+    font-weight: 500!important;
     outline: 0;
-    padding: 11px 15px;
+    padding: 11px 15px!important;
+    text-align: center;
     text-decoration: none;
     -webkit-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
@@ -93,14 +94,18 @@ body {
         opacity: 0.6;
     }
 
-    .button.primary {
+    .button.primary,
+    button.button.primary,
+    input.button.primary {
         background-color: #00396F;
-        color: #fff;
+        color: #fff !important;
     }
 
-    .button.danger {
+    .button.danger,
+    button.button.danger,
+    input.button.danger {
         background-color: $red-color;
-        color: #fff;
+        color: #fff !important;
     }
 
 /*Form's*/
@@ -142,6 +147,15 @@ textarea.materialize-textarea, textarea {
         .progress .indeterminate {
             background-color: #00396f !important;
         }
+
+.toast.bottom {
+    bottom: 5%;
+    left: auto;
+    position: fixed;
+    right: 5%;
+    top: auto !important;
+    z-index: 1000;
+}
 
 /*Nav menu*/
 nav-menu {
