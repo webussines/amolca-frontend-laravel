@@ -36,7 +36,7 @@ const createDataTable = function() {
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
 	    ajax: {
 	    	method: "POST",
-	    	url: '/am-admin/books/get-books',
+	    	url: '/am-admin/books/all',
 	    	data: {
 	    		"limit": 300,
 				"skip": 0,
@@ -141,7 +141,7 @@ const getMoreBooks = function() {
 
 		$.ajax({
 			type: "POST",
-			url: "/am-admin/books/get-books",
+			url: "/am-admin/books/all",
 			data: {
 				"limit": 300,
 				"skip": skip,

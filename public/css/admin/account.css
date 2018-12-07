@@ -286,6 +286,17 @@
     padding-bottom: 20px;
 }
 
+.subsection-header {
+    background-color: #00396f;
+    color: #fff;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+    .subsection-header .title {
+        font-size: 25px;
+        font-weight: bold;
+    }
+
 /*Data tables styles*/
 .data-table {
     width: 100% !important;

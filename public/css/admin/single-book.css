@@ -1,17 +1,138 @@
-.section-header .title {
-    font-size: 25px;
-    font-weight: 700;
+.main.single-books {
+	padding: 20px 0px;
 }
+
+.loader {
+    margin-top: -28px;
+}
+
+/*Section header*/
+.section-header {
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-bottom: 0px;
+}
+	.section-header .title {
+	    font-size: 25px;
+	    font-weight: 700;
+	}
+
+/*Tabs*/
+.top-tabs {
+	background-color: #00396F;
+}
+	.top-tabs .indicator {
+		background-color: #fff;
+		height: 3px;
+	}
+
+	.top-tabs .tab a,
+	.top-tabs .tab a {
+		color: #b7b7b7;
+		letter-spacing: 1px;
+	}
+		.top-tabs .tab a:hover,
+		.top-tabs .tab a.active,
+		.top-tabs .tab a:focus,
+		.top-tabs .tab a:focus.active {
+			background-color: #55b9d4;
+			color: #fff;
+		}
+
+.inside-tabs {
+	background-color: #F5F5F5;
+}
+	.inside-tabs .indicator {
+		background-color: #fff;
+		height: 3px;
+	}
+
+	.inside-tabs .tab a,
+	.inside-tabs .tab a {
+		color: #666666;
+		letter-spacing: 1px;
+	}
+		.inside-tabs .tab a:hover,
+		.inside-tabs .tab a.active,
+		.inside-tabs .tab a:focus, 
+		.inside-tabs .tab a:focus.active {
+			background-color: #00396F;
+			color: #fff;
+		}
 
 .content-tabs {
 	padding: 30px;
 }
-	.content-tabs.subtab {
-		background-color: #f9f9f9;
-	}
 
 .col-image img {
 	display: block;
 	margin: auto;
 	max-width: 90%;
 }
+
+/*Versions*/
+.col-versions {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 10px auto;
+}
+	.col-versions .version {
+	    margin-left: 20px;
+	}
+		.col-versions .version:first-child {
+			margin-left: 0px;
+		}
+
+		.col-versions .version p{
+			color: #666;
+		    font-size: 16px;
+		    font-family: 'Tahoma';
+		}
+
+		.col-versions .version [type="checkbox"]+span:not(.lever) {
+			padding-left: 25px;
+		}
+
+/*Specialties*/
+.row.specialties > .col:first-child {
+	border-right: 1px solid #ccc;
+	padding-right: 30px;
+}
+.row.specialties > .col:last-child {
+	padding-left: 30px;
+}
+
+	.row.specialties .parent {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 10px;
+	}
+		.row.specialties .parent [type="checkbox"]+span:not(.lever) {
+			color: #00396F;
+			font-size: 20px;
+			font-weight: bold;
+	    	line-height: 21px;
+		}
+
+	.row.specialties .childs {
+	    margin-left: 5px;
+	    margin-top: 10px;
+	}
+		.row.specialties .childs .col {
+			padding-bottom: 5px;
+			padding-top: 5px;
+		}
+
+.fixed-action-btn {
+	right: 40px;
+}
+	.fixed-action-btn a#save-book {
+		line-height: 65px;
+	}
+		.fixed-action-btn a#save-book span {
+			font-size: 24px;
+		}
+	.fixed-action-btn a#go-all-books {
+	    line-height: 58px;
+	}

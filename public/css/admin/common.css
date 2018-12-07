@@ -8,7 +8,7 @@
     $blue-opacity: #A1B3C7;
 
     //Red colors
-    $red-color: #E2231A;
+    $red: #E2231A;
     $red-dark: #b4170f;
 
     //Gray colors
@@ -60,7 +60,7 @@ body {
 
 /*Global text*/
 .error {
-    color: $red-color;
+    color: #E2231A;
     margin-bottom: 10px;
 }
 
@@ -104,7 +104,7 @@ body {
     .button.danger,
     button.button.danger,
     input.button.danger {
-        background-color: $red-color;
+        background-color: #E2231A;
         color: #fff !important;
     }
 
@@ -133,9 +133,33 @@ textarea.materialize-textarea, textarea {
     padding-top: 10px;
 }
 
-.required {
-    color: $red-color;
+/*Checkboxes*/
+.main [type="checkbox"]:checked+span:not(.lever):before {
+    border-right: 2px solid #00396f;
+    border-bottom: 2px solid #00396f;
 }
+
+/*Requireds*/
+.required {
+    color: red;
+}
+
+/*Select2 lists*/
+.select2-container--default .select2-selection--single {
+    border: none;
+    box-shadow: none;
+    outline: 0;
+}
+    .main .select2-container--default .select2-selection--single .select2-selection__rendered {
+        box-shadow: none;
+        line-height: 44px;
+        outline: 0;
+        padding-left: 10px;
+        text-transform: uppercase;
+    }
+        .main .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 44px;
+        }
 
 /*Material progress bar*/
 .loader.hidde {

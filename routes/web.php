@@ -24,7 +24,13 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 		//Routes for get info
 		Route::prefix('books')->group(function(){
-			Route::post('/get-books', 'Admin\AdminBooksController@getBooks');
+			Route::post('/all', 'Admin\AdminBooksController@getBooks');
+			Route::post('/edit/{id}', 'Admin\AdminBooksController@edit');
+		});
+
+		//Routes for get info
+		Route::prefix('countries')->group(function(){
+			Route::get('/all', 'CountriesController@index');
 		});
 	});
 });

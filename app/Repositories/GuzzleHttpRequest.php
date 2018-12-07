@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 class GuzzleHttpRequest {
 
@@ -22,6 +23,38 @@ class GuzzleHttpRequest {
     public function post($url) {
 
     	$response = $this->client->request('POST', $url);
+        return json_decode( $response->getBody()->getContents() );
+
+    }
+
+    public function put($url, $body) {
+
+        try {
+
+            $headers = [
+                        "Content-type" => "application/json",
+                        "authorization" => "Bearer " . session('access_token')
+                    ];
+
+            $req = $this->client->request('PUT', $url, ["headers" => $headers, "json" => $body ]);
+            $resp = $req->getBody()->getContents();
+
+            return $resp;
+
+        } catch(ClientException $e) {
+
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+
+            return $responseBodyAsString;
+            
+        }
+
+    }
+
+    public function delete($url) {
+
+        $response = $this->client->request('DELETE', $url);
         return json_decode( $response->getBody()->getContents() );
 
     }

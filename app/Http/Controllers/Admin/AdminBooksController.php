@@ -42,65 +42,37 @@ class AdminBooksController extends Controller
         return view('admin.books.index', ['books' => $books]);
     }
 
+    public function show($id)
+    {
+        $specialties = $this->specialties->all();
+        $book = $this->books->findById($id);
+
+        return view('admin.books.edit', ['book' => $book, 'specialties' => $specialties]);
+    }
+
+    public function edit($id)
+    {
+        $update = Input::post('update');
+        return $this->books->updateById($id, $update);
+    }
+
     /**/
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $book = $this->books->findById($id);
-
-        return view('admin.books.edit', ['book' => $book]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return 'Edit';
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //

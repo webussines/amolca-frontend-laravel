@@ -20,6 +20,10 @@ class Books extends GuzzleHttpRequest {
 		return $this->get("books/slug/{$slug}");
 	}
 
+	public function updateById($id, $update) {
+		return $this->put("books/{$id}", $update);
+	}
+
 	public function specialty($id, $params = '') {
 		return $this->get("specialties/{$id}/books?{$params}");
 	}
