@@ -11,7 +11,7 @@
 <script src="{{ asset('libs/datatables/js/jquery.dataTables.min.js') }}"></script>
 @endsection
 
-@section('contentClass', 'all-books')
+@section('contentClass', 'all-specialties')
 @section('content')
 
 	<div class="loader hidde">

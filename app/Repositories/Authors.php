@@ -6,11 +6,11 @@ use GuzzleHttp\Client;
 
 class Authors extends GuzzleHttpRequest {
 
-	public function all() {
-        return $this->get('authors');
+	public function all($params = 'limit=800') {
+        return $this->get("authors?{$params}");
 	}
 
-	public function show($id) {
+	public function findById($id) {
 		return $this->get("authors/{$id}");
 	}
 	
