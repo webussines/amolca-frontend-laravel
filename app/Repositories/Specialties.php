@@ -6,8 +6,12 @@ use GuzzleHttp\Client;
 
 class Specialties extends GuzzleHttpRequest {
 
-	public function all() {
-        return $this->get('specialties');
+	public function all($params = 'limit=30') {
+        return $this->get("specialties?{$params}");
+	}
+
+	public function findById($id) {
+		return $this->get("specialties/{$id}");
 	}
 
 	public function find($slug) {

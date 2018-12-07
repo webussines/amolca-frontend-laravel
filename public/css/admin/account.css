@@ -278,6 +278,9 @@
     transition: all 0.4s ease;
     width: 80%;
 }
+    .main.single {
+        padding: 20px 0px;
+    }
 
 /*Sections*/
 .section-header {
@@ -285,6 +288,17 @@
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
+
+/*Section header*/
+.single.section-header {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 0px;
+}
+    .single.section-header .title {
+        font-size: 25px;
+        font-weight: 700;
+    }
 
 .subsection-header {
     background-color: #00396f;
@@ -295,6 +309,19 @@
     .subsection-header .title {
         font-size: 25px;
         font-weight: bold;
+    }
+
+.fixed-action-btn {
+    right: 40px;
+}
+    .btn-floating.save-resource {
+        line-height: 65px;
+    }
+        .btn-floating.save-resource span {
+            font-size: 24px;
+        }
+    .btn-floating.go-all-resources {
+        line-height: 58px;
     }
 
 /*Data tables styles*/

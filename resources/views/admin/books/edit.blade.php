@@ -13,7 +13,7 @@
 <script src="{{ asset('js/admin/single-book.js') }}"></script>
 @endsection
 
-@section('contentClass', 'single-books')
+@section('contentClass', 'single single-specialty')
 @section('content')
 
     <div class="loader hidde">
@@ -22,21 +22,21 @@
         </div>
     </div>
 
-	<div class="row section-header valign-wrapper">
+	<div class="row single section-header valign-wrapper">
 		<div class="col s12 m10 l10">
 			<p class="title"> {{$book->title}} </p>
 		</div>
 		<div class="col s12 m2 l2 actions">
-            <a class="btn-floating btn-large green save-book">
+            <a class="btn-floating btn-large green save-resource">
                 <span class="icon-save1"></span>
             </a>
-            <a class="btn-floating btn-large red go-all-books" href="/am-admin/libros">
+            <a class="btn-floating btn-large red go-all-resources" href="/am-admin/libros">
                 <span class="icon-cross"></span>
             </a>
 		</div>
 	</div>
 
-    <form action="" id="book-edit" class="book-edit">
+    <form id="book-edit" class="book-edit">
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
         <input type="hidden" id="id" value="{{ $book->_id }}">
 
@@ -332,10 +332,10 @@
         </div>
 
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large green save-book">
+            <a class="btn-floating btn-large green save-resource">
                 <span class="icon-save1"></span>
             </a>
-            <a class="btn-floating btn-large red go-all-books" href="/am-admin/libros">
+            <a class="btn-floating btn-large red go-all-resources" href="/am-admin/libros">
                 <span class="icon-cross"></span>
             </a>
         </div>

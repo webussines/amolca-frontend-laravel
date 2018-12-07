@@ -19,16 +19,23 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::get('/mi-cuenta', 'Admin\AdminAccountController@MyAccount');
 
 		Route::resources([
-		    'libros' => 'Admin\AdminBooksController'
+		    'libros' => 'Admin\AdminBooksController',
+		    'especialidades' => 'Admin\AdminSpecialtiesController'
 		]);
 
-		//Routes for get info
+		//Routes for get info "LIBOS"
 		Route::prefix('books')->group(function(){
 			Route::post('/all', 'Admin\AdminBooksController@getBooks');
 			Route::post('/edit/{id}', 'Admin\AdminBooksController@edit');
 		});
 
-		//Routes for get info
+		//Routes for get info "ESPECIALIDADES"
+		Route::prefix('specialties')->group(function(){
+			Route::post('/all', 'Admin\AdminSpecialtiesController@all');
+			Route::post('/edit/{id}', 'Admin\AdminSpecialtiesController@edit');
+		});
+
+		//Routes for get info "PAISES"
 		Route::prefix('countries')->group(function(){
 			Route::get('/all', 'CountriesController@index');
 		});
