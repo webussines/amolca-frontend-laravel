@@ -2,53 +2,6 @@
     margin-top: -28px;
 }
 
-/*Tabs*/
-.top-tabs {
-	background-color: #00396F;
-}
-	.top-tabs .indicator {
-		background-color: #fff;
-		height: 3px;
-	}
-
-	.top-tabs .tab a,
-	.top-tabs .tab a {
-		color: #b7b7b7;
-		letter-spacing: 1px;
-	}
-		.top-tabs .tab a:hover,
-		.top-tabs .tab a.active,
-		.top-tabs .tab a:focus,
-		.top-tabs .tab a:focus.active {
-			background-color: #55b9d4;
-			color: #fff;
-		}
-
-.inside-tabs {
-	background-color: #F5F5F5;
-}
-	.inside-tabs .indicator {
-		background-color: #fff;
-		height: 3px;
-	}
-
-	.inside-tabs .tab a,
-	.inside-tabs .tab a {
-		color: #666666;
-		letter-spacing: 1px;
-	}
-		.inside-tabs .tab a:hover,
-		.inside-tabs .tab a.active,
-		.inside-tabs .tab a:focus, 
-		.inside-tabs .tab a:focus.active {
-			background-color: #00396F;
-			color: #fff;
-		}
-
-.content-tabs {
-	padding: 30px;
-}
-
 .col-image img {
 	display: block;
 	margin: auto;

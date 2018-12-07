@@ -1,16 +1,29 @@
 jQuery(function($){
 	$(document).ready(function() {
 		createDataTable();
+		GetMoreBooks();
+
 		$('.book-form #add-country').on('click', function() {
 			AddNewCountry();
 		});
-		GetMoreBooks();
 
 		$('.modal').modal({
 			onCloseEnd: function() {
-				let html = '<div class="row-country"></div>';
+				let html = '<div class="last-row-country"></div>';
 				$('.book-form .countries').html(html);
+				$('.book-form #ficha').html('');
+				$('#book-title').html('');
+
+				if(!$('.loader').hasClass('hidde'))
+					$('.loader').addClass('hidde')
+			},
+			onOpenEnd: function() {
+				$('#book-modal').removeAttr('tabindex');
 			}
+		});
+
+		$('.save-resource').on('click', function() {
+			SaveBookInfo();
 		});
 	});
 });
@@ -143,6 +156,7 @@ const UpdateBook = function(tbody, table) {
 
 		var data = table.row($(this).parents("tr")).data();
 		var _id = $('#_id').val(data._id);
+		var title = $('#book-title').html(data.title);
 		var country = data.countries;
 
 		let number = $('.row-country').length + 1;
@@ -161,8 +175,6 @@ const UpdateBook = function(tbody, table) {
 
 			for (let c = 0; c < country.length; c++) {
 				let co = country[c];
-				console.log(co)
-
 				let state = {};
 
 				if(co.state == 'STOCK') {
@@ -186,13 +198,13 @@ const UpdateBook = function(tbody, table) {
 				let newRow = `<div class="row row-country ${rowClass}">
 							<div class="col s12 m4">
 						        <label for="name"><span class="required">*</span> País:</label>
-						        <input type="text" readonly name="country-name" id="country-name" value="${co.name}">
+						        <input type="text" readonly name="country-name" class="country-name" id="country-name" value="${co.name}">
 						    </div>
-						    <div class="col s12 m2">
+						    <div class="col s12 m3">
 						        <label for="price"><span class="required">*</span> Precio:</label>
 						        <input type="text" class="country-price" id="price" name="price" placeholder="Precio sin espacios ni caracteres especiales..."  value="${co.price}">
 						    </div>
-						    <div class="col s12 m2">
+						    <div class="col s12 m3">
 						        <label for="country-state">Estado:</label>
 						        <select class="country-state normal-select" name="country-state" id="country-state">
 		                            <option value="STOCK" ${state.stock}>Disponible</option>
@@ -204,22 +216,18 @@ const UpdateBook = function(tbody, table) {
 						        <label for="quantity">Cantidad:</label>
 						        <input type="text" class="country-quantity" id="quantity" name="quantity" placeholder="Escriba la cantidad de libros que hay disponibles" value="${co.quantity}">
 						    </div>
-						    <div class="col s12 m2">
-						        <label>Acciones:</label>
-						        <div>
-						            <button class="button primary delete-attribute">Borrar</button>
-						        </div>
-						    </div>
 						</div>`;
 
-				let lastRow = $('.book-form .countries .row-country');
+				let lastRow = $('.book-form .countries .last-row-country');
 
 				lastRow.after(newRow);
 			}
 
+			$('#ficha').html(SetDataSheet(data));
+
+			$('.modal').modal('open');
 			$('.normal-select').formSelect();
 			$('.select2-normal').select2();
-			$('.modal').modal('open');
 		});
 
 	});
@@ -248,11 +256,11 @@ const AddNewCountry = function() {
 					        <select class="country-name select2-normal" name="country-name" id="${rowClass}">
 					        </select>
 					    </div>
-					    <div class="col s12 m2">
+					    <div class="col s12 m3">
 					        <label for="price"><span class="required">*</span> Precio:</label>
 					        <input type="text" class="country-price" id="price" name="price" placeholder="Precio sin espacios ni caracteres especiales..."  value="0">
 					    </div>
-					    <div class="col s12 m2">
+					    <div class="col s12 m3">
 					        <label for="country-state">Estado:</label>
 					        <select class="country-state normal-select" name="country-state" id="country-state">
 	                            <option value="STOCK" selected>Disponible</option>
@@ -263,12 +271,6 @@ const AddNewCountry = function() {
 					    <div class="col s12 m2">
 					        <label for="quantity">Cantidad:</label>
 					        <input type="text" class="country-quantity" id="quantity" name="quantity" placeholder="Escriba la cantidad de libros que hay disponibles" value="0">
-					    </div>
-					    <div class="col s12 m2">
-					        <label>Acciones:</label>
-					        <div>
-					            <button class="button primary delete-attribute">Borrar</button>
-					        </div>
 					    </div>
 					</div>`;
 
@@ -303,6 +305,109 @@ const AddNewCountry = function() {
 		$('.select2-normal').select2();
 	});
 
+}
+
+const SetDataSheet = function(data) {
+	//Agregar "Ficha tecnica"
+
+	let version = {};
+
+	if(data.version == 'VIDEO') {
+		version.video = 'checked="checked"';
+	} else {
+		version.video = '';
+	}
+
+	if(data.version == 'PAPER') {
+		version.paper = 'checked="checked"';
+	} else {
+		version.paper = '';
+	}
+
+	if(data.version == 'EBOOK') {
+		version.ebook = 'checked="checked"';
+	} else {
+		version.ebook = '';
+	}
+
+	let datasheet = `<div class="row">
+						<div class="col s12 col-versions">
+				            <div class="version">
+				                <p>Versiones:</p>
+				            </div>
+
+				            <div class="version">
+				                <label for="version-paper">
+				                    <input type="checkbox" name="version" id="version-paper" ${version.paper} value="PAPER">
+				                    <span>Papel</span>
+				                </label>
+				            </div>
+
+				            <div class="version">
+				                <label for="version-video">
+				                    <input type="checkbox" name="version" id="version-video" ${version.video} value="VIDEO">
+				                    <span>Vídeo</span>
+				                </label>
+				            </div>
+
+				            <div class="version">
+				                <label for="version-ebook">
+				                    <input type="checkbox" name="version" id="version-ebook" ${version.ebook} value="EBOOK">
+				                    <span>Ebook</span>
+				                </label>
+				            </div>
+				        </div>
+				    </div>`;
+
+	datasheet += `<div class="row">
+		                <div class="col s6">
+		                    <label for="publication-year"><span class="required">*</span> Año de publicación:</label>
+		                    <input type="text" readonly id="publication-year-name" name="publication-year-name" value="Año de publicación">
+		                </div>
+		                <div class="col s6">
+		                    <label for="publication-year"><span class="required">*</span> Valor:</label>
+		                    <input type="number" id="publication-year" name="publication-year" value="${data.publicationYear}">
+		                </div>
+		            </div>
+		            
+		            <div class="row">
+		                <div class="col s6">
+		                    <label for="number-pages"><span class="required">*</span> Número de páginas:</label>
+		                    <input type="text" readonly id="number-pages-name" name="number-pages-name" value="Número de páginas">
+		                </div>
+		                <div class="col s6">
+		                    <label for="number-pages"><span class="required">*</span> Valor:</label>
+		                    <input type="number" id="number-pages" name="number-pages" value="${data.numberPages}">
+		                </div>
+		            </div>
+
+		            <div class="row">
+		                <div class="col s6">
+		                    <label for="number-volumes"><span class="required">*</span> Número de tomos:</label>
+		                    <input type="text" readonly id="volumes-name" name="volumes-name" value="Número de tomos">
+		                </div>
+		                <div class="col s6">
+		                    <label for="number-volumes"><span class="required">*</span> Valor:</label>
+		                    <input type="number" id="number-volumes" name="number-volumes" value="${data.volume}">
+		                </div>
+		            </div>`;
+
+		return datasheet;
+}
+
+const SetAttributes = function(data) {
+
+}
+
+//Funcion que devuelve un arreglo con las versiones seleccionadas
+const GetCheckedVersions = function() {
+	let values = [];
+
+	$('#book-modal input[name="version"]:checked').each(function() {
+		values.push($(this).val());
+	});
+
+	return values;
 }
 
 //Funcion que devuelve un arreglo con los precios por país
@@ -418,4 +523,68 @@ const GetMoreBooks = function() {
 
 	});
 
+}
+
+const SaveBookInfo = function() {
+
+	if($('.loader').hasClass('hidde'))
+		$('.loader').removeClass('hidde')
+
+	//Unique values
+	let id = $('#_id').val();
+	let publication = $('#publication-year').val();
+	let pages = $('#number-pages').val();
+	let volumes = $('#number-volumes').val();
+
+	//Multiple values
+	let versions = GetCheckedVersions();
+	let countries = GetPrices();
+
+	//Formateando valores numericos
+	if(typeof pages == 'string') {
+		pages = parseInt(pages);
+	}
+
+	if(typeof volumes == 'string') {
+		volumes = parseInt(volumes);
+	}
+
+	if(typeof publication == 'string') {
+		publication = parseInt(publication);
+	}
+
+	let book = {
+		version: versions,
+		countries: countries,
+		publicationYear: publication,
+		numberPages: pages,
+		volume: volumes
+	}
+
+	$.ajax({
+		method: 'POST',
+		url: '/am-admin/books/edit/' + id,
+		data: {
+			"update": book,
+			"_token": $('#_token').val()
+		}
+	}).done(function(resp) {
+		//console.log(resp)
+
+		let data = JSON.parse(resp);
+
+		if(data._id !== undefined) {
+
+			$('.modal').modal('close');
+
+			let toastMsg = 'Se realizaron los cambios correctamente.';
+			M.toast({html: toastMsg, classes: 'green accent-4 bottom'});
+
+			$('.data-table').DataTable().ajax.reload();
+
+		} else {
+			switch(data.status) {
+			}
+		}
+	})
 }

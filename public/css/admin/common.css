@@ -263,3 +263,50 @@ nav-menu {
             .actions-menu li a:hover, .actions-menu li a:active {
                 background-color: #F5F5F5;
             }
+
+/*Tabs*/
+.main .top-tabs {
+    background-color: #00396F;
+}
+    .main .top-tabs .indicator {
+        background-color: #fff;
+        height: 3px;
+    }
+
+    .main .top-tabs .tab a,
+    .main .top-tabs .tab a {
+        color: #b7b7b7;
+        letter-spacing: 1px;
+    }
+        .main .top-tabs .tab a:hover,
+        .main .top-tabs .tab a.active,
+        .main .top-tabs .tab a:focus,
+        .main .top-tabs .tab a:focus.active {
+            background-color: #55b9d4;
+            color: #fff;
+        }
+
+.main .inside-tabs {
+    background-color: #F5F5F5;
+}
+    .main .inside-tabs .indicator {
+        background-color: #fff;
+        height: 3px;
+    }
+
+    .main .inside-tabs .tab a,
+    .main .inside-tabs .tab a {
+        color: #666666;
+        letter-spacing: 1px;
+    }
+        .main .inside-tabs .tab a:hover,
+        .main .inside-tabs .tab a.active,
+        .main .inside-tabs .tab a:focus, 
+        .main .inside-tabs .tab a:focus.active {
+            background-color: #00396F;
+            color: #fff;
+        }
+
+.content-tabs {
+    padding: 30px;
+}

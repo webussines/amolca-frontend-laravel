@@ -422,5 +422,42 @@ table.inventory th.actions {
 }
 
 div#book-modal {
+    max-height: 80%;
+    height: 100%;
     width: 80%;
 }
+    div#book-modal.modal-fixed-footer .modal-content {
+        max-height: -webkit-calc(100% - 80px);
+        max-height: -moz-calc(100% - 80px);
+        max-height: -ms-calc(100% - 80px);
+        max-height: calc(100% - 80px);
+    }
+    div#book-modal .modal-footer {
+        height: 80px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    div#book-modal .col-versions {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 10px auto;
+    }
+        div#book-modal .col-versions .version {
+            margin-left: 20px;
+        }
+            div#book-modal .col-versions .version:first-child {
+                margin-left: 0px;
+            }
+
+            div#book-modal .col-versions .version p{
+                color: #666;
+                font-size: 16px;
+                font-family: 'Tahoma';
+            }
+
+            div#book-modal .col-versions .version [type="checkbox"]+span:not(.lever) {
+                padding-left: 25px;
+            }

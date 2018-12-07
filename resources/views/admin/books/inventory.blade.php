@@ -16,33 +16,56 @@
 @section('contentClass', 'books-inventory')
 @section('content')
 
-	<div class="loader hidde">
-		<div class="progress">
-			<div class="indeterminate"></div>
-		</div>
-	</div>
-
 	<!-- Modal Structure -->
-	<div id="book-modal" class="modal">
+	<div id="book-modal" class="modal modal-fixed-footer">
 		<div class="modal-content">
-			<h4 id="book-title"></h4>
+			<div class="loader hidde">
+				<div class="progress">
+					<div class="indeterminate"></div>
+				</div>
+			</div>
+			<div class="single section-header">
+				<p id="book-title" class="title"></p>
+			</div>
 			<form class="book-form">
 				<input type="hidden" id="_token" value="{{ csrf_token() }}">
 				<input type="hidden" id="_id" value="">
 
-				<div class="countries">
-					<div class="row-country"></div>
-				</div>
+				<ul class="tabs top-tabs">
+		            <li class="tab">
+		                <a class="active" href="#precios">Precios</a>
+		            </li>
+		            <li class="tab">
+		                <a href="#ficha">Ficha técnica</a>
+		            </li>
+		        </ul>
 
-				<div class="row">
-	                <div class="col s12">
-	                    <input type="button" id="add-country" class="button primary" value="Agregar un país">
-	                </div>
-	            </div>
+		        <div id="precios" class="content-tabs">
+
+					<div class="countries">
+						<div class="last-row-country"></div>
+					</div>
+
+					<div class="row">
+		                <div class="col s12">
+		                    <input type="button" id="add-country" class="button primary" value="Agregar un país">
+		                </div>
+		            </div>
+
+		        </div>
+
+		        <div id="ficha" class="content-tabs">
+		        </div>
+
 			</form>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+			<a class="btn-floating btn-large green save-resource">
+                <span class="icon-save1"></span>
+            </a>
+            <a class="modal-close btn-floating btn-large red go-all-resources">
+                <span class="icon-cross"></span>
+            </a>
 		</div>
 	</div>
 
