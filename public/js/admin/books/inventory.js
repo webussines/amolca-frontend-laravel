@@ -274,7 +274,12 @@ const AddNewCountry = function() {
 					    </div>
 					</div>`;
 
-		let lastRow = $('.book-form .countries .row-country:last');
+		let lastRow = '';
+		if($('.countries .row-country').length > 0) {
+			lastRow = $('.book-form .countries .row-country:last');
+		} else {
+			lastRow = $('.book-form .countries .last-row-country');
+		}
 
 		lastRow.after(newRow);
 
