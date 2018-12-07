@@ -127,12 +127,12 @@
 .fixed-action-btn {
 	right: 40px;
 }
-	.fixed-action-btn a#save-book {
+	.btn-floating.save-book {
 		line-height: 65px;
 	}
-		.fixed-action-btn a#save-book span {
+		.btn-floating.save-book span {
 			font-size: 24px;
 		}
-	.fixed-action-btn a#go-all-books {
+	.btn-floating.go-all-books {
 	    line-height: 58px;
 	}

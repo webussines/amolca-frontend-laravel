@@ -12,8 +12,8 @@ jQuery(function($){
 		AddNewCountry();
 	});
 
-	$('#save-book').on('click', function() {
-		GetBookInfo();
+	$('.save-book').on('click', function() {
+		SaveBookInfo();
 	});
 
 });
@@ -204,7 +204,7 @@ const AddNewCountry = function() {
 
 }
 
-const GetBookInfo = function() {
+const SaveBookInfo = function() {
 
 	if($('.loader').hasClass('hidde'))
 		$('.loader').removeClass('hidde')

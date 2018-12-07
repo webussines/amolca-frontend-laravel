@@ -1,6 +1,6 @@
 @extends('admin.layouts.account')
 
-@section('title', 'Editar: Libro - Admin Amolca')
+@section('title', 'Libro: ' . $book->title . ' - Admin Amolca')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/admin/single-book.css') }}">
@@ -27,7 +27,12 @@
 			<p class="title"> {{$book->title}} </p>
 		</div>
 		<div class="col s12 m2 l2 actions">
-            <button id="get-info">GET INFO</button>
+            <a class="btn-floating btn-large green save-book">
+                <span class="icon-save1"></span>
+            </a>
+            <a class="btn-floating btn-large red go-all-books" href="/am-admin/libros">
+                <span class="icon-cross"></span>
+            </a>
 		</div>
 	</div>
 
@@ -327,10 +332,10 @@
         </div>
 
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large green" id="save-book">
+            <a class="btn-floating btn-large green save-book">
                 <span class="icon-save1"></span>
             </a>
-            <a class="btn-floating btn-large red" id="go-all-books" href="/am-admin/libros">
+            <a class="btn-floating btn-large red go-all-books" href="/am-admin/libros">
                 <span class="icon-cross"></span>
             </a>
         </div>
