@@ -12,7 +12,7 @@ jQuery(function($){
 		AddNewCountry();
 	});
 
-	$('.save-book').on('click', function() {
+	$('.save-resource').on('click', function() {
 		SaveBookInfo();
 	});
 
