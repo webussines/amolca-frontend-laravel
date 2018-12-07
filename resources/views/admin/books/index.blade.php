@@ -7,7 +7,7 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/admin/books.js') }}"></script>
+<script src="{{ asset('js/admin/books/books.js') }}"></script>
 <script src="{{ asset('libs/datatables/js/jquery.dataTables.min.js') }}"></script>
 @endsection
 

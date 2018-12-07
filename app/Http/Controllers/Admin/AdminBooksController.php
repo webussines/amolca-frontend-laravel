@@ -42,6 +42,7 @@ class AdminBooksController extends Controller
         return view('admin.books.index', ['books' => $books]);
     }
 
+    /*Mostrar*/
     public function show($id)
     {
         $specialties = $this->specialties->all();
@@ -50,10 +51,20 @@ class AdminBooksController extends Controller
         return view('admin.books.edit', ['book' => $book, 'specialties' => $specialties]);
     }
 
+    /*Editar*/
     public function edit($id)
     {
         $update = Input::post('update');
         return $this->books->updateById($id, $update);
+    }
+
+    /*Inventario*/
+    public function inventory()
+    {
+        $params = "orderby=title&order=1&limit=100&skip=0";
+        $books = $this->books->all($params);
+
+        return view('admin.books.inventory', ['books' => $books]);
     }
 
     /**/

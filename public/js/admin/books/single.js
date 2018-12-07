@@ -152,8 +152,8 @@ const AddNewCountry = function() {
 					        <input type="text" class="country-price" id="price" name="price" placeholder="Precio sin espacios ni caracteres especiales...">
 					    </div>
 					    <div class="col s12 m2">
-					        <label for="state">Estado:</label>
-					        <select class="country-state normal-select" name="state" id="state">
+					        <label for="country-state">Estado:</label>
+					        <select class="country-state normal-select" name="country-state" id="country-state">
 	                            <option value="STOCK" selected>Disponible</option>
 	                            <option value="RESERVED">Reservado</option>
 	                            <option value="SPENT">Agotado</option>

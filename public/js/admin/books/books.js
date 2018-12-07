@@ -95,6 +95,7 @@ const createDataTable = function() {
 	    		data: "_id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
+	    			//console.log(JsonResultRow)
 	    			let str = `<a class="edit" href="/am-admin/libros/${JsonResultRow._id}">
 				                    <span class="icon-mode_edit"></span>
 				                </a>
@@ -148,6 +149,7 @@ const getMoreBooks = function() {
 				"_token": $('#_token').val()
 			}
 		}).done(function(resp) {
+			//console.log(resp.data)
 
 			if(!$('.loader').hasClass('hidde'))
 				$('.loader').addClass('hidde')
@@ -179,7 +181,7 @@ const getMoreBooks = function() {
 						"title": el.title,
 						"specialty": el.specialty,
 						"isbn": el.isbn,
-						"actions": actionStr,
+						"_id": el._id,
 					}).draw();
 				}
 

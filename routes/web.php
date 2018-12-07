@@ -18,6 +18,9 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::get('/dashboard', 'Admin\AdminAccountController@index');
 		Route::get('/mi-cuenta', 'Admin\AdminAccountController@MyAccount');
 
+		//Custom routes for "LIBROS"
+		Route::get('libros/inventario', 'Admin\AdminBooksController@inventory');
+
 		Route::resources([
 		    'libros' => 'Admin\AdminBooksController',
 		    'especialidades' => 'Admin\AdminSpecialtiesController',

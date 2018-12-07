@@ -10,7 +10,7 @@
 @section('scripts')
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=1icfygu7db6ym5ibmufjkk2myppelx6v827sc9rq8xt1eo2n'></script>
 <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('js/admin/single-book.js') }}"></script>
+<script src="{{ asset('js/admin/books/single.js') }}"></script>
 @endsection
 
 @section('contentClass', 'single single-specialty')
@@ -79,7 +79,7 @@
 
                     <div class="form-group col s12 m6">
                         <label for="state">Estado:</label>
-                        <select name="state" id="satet" class="normal-select">
+                        <select name="state" id="state" class="normal-select">
                             <option @if ($book->state == 'PUBLISHED') selected @endif value="PUBLISHED">Publicado</option>
                             <option @if ($book->state == 'DRAFT') selected @endif value="DRAFT">Borrador</option>
                             <option @if ($book->state == 'TRASH') selected @endif value="TRASH">En papelera</option>
@@ -301,8 +301,8 @@
                         <input type="text" class="country-price" id="price" name="price" value="{{ $country->price }}">
                     </div>
                     <div class="col s12 m2">
-                        <label for="state">Estado:</label>
-                        <select class="country-state normal-select" name="state" id="state">
+                        <label for="country-state">Estado:</label>
+                        <select class="country-state normal-select" name="country-state" id="country-state">
                             <option value="STOCK" @if ($country->state == "STOCK") selected @endif>Disponible</option>
                             <option value="RESERVED" @if ($country->state == "RESERVED") selected @endif>Reservado</option>
                             <option value="SPENT" @if ($country->state == "SPENT") selected @endif>Agotado</option>
