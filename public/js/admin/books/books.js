@@ -86,7 +86,7 @@ const createDataTable = function() {
                   			return 'En papelera';
                   		break;
                   		default:
-                  			return 'Borrador';
+                  			return 'Publicado';
                   		break;
                   	}
                 } 
@@ -181,6 +181,7 @@ const getMoreBooks = function() {
 						"title": el.title,
 						"specialty": el.specialty,
 						"isbn": el.isbn,
+						"state": el.state,
 						"_id": el._id,
 					}).draw();
 				}

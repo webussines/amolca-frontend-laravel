@@ -155,6 +155,7 @@ const UpdateBook = function(tbody, table) {
 	$(tbody).on('click', '.edit-book', function() {
 
 		var data = table.row($(this).parents("tr")).data();
+		//console.log(data)
 		var _id = $('#_id').val(data._id);
 		var title = $('#book-title').html(data.title);
 		var country = data.countries;
@@ -507,7 +508,11 @@ const GetMoreBooks = function() {
 						"isbn": el.isbn,
 						"countries": el.countries,
 						"version": el.version,
+						"publicationYear": el.publicationYear,
+						"numberPages": el.numberPages,
+						"volume": el.volume,
 						"actions": actionStr,
+						"_id": el._id,
 					}).draw();
 				}
 
@@ -577,6 +582,7 @@ const SaveBookInfo = function() {
 		//console.log(resp)
 
 		let data = JSON.parse(resp);
+		//console.log(data)
 
 		if(data._id !== undefined) {
 
@@ -585,11 +591,11 @@ const SaveBookInfo = function() {
 			let toastMsg = 'Se realizaron los cambios correctamente.';
 			M.toast({html: toastMsg, classes: 'green accent-4 bottom'});
 
-			$('.data-table').DataTable().ajax.reload();
+			setTimeout(function(){
+				location.reload();
+			}, 1000);
 
 		} else {
-			switch(data.status) {
-			}
 		}
 	})
 }

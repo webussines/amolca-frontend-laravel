@@ -225,6 +225,9 @@
 
         <div id="ficha" class="content-tabs">
 
+                {{-- expr --}}
+            
+
             <div class="row">
                 <div class="col s6 m5">
                     <label for="publication-year"><span class="required">*</span> Año de publicación:</label>
@@ -232,10 +235,10 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="publication-year"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="publication-year" name="publication-year" value="{{ $book->publicationYear }}">
+                    <input type="number" id="publication-year" name="publication-year" value="@php if(isset($book->publicationYear)) { echo $book->publicationYear; } else { echo 0; } @endphp">
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col s6 m5">
                     <label for="number-pages"><span class="required">*</span> Número de páginas:</label>
@@ -243,7 +246,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="number-pages"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="number-pages" name="number-pages" value="{{ $book->numberPages }}">
+                    <input type="number" id="number-pages" name="number-pages" value="@php if(isset($book->numberPages)) { echo $book->numberPages; } else { echo 0; } @endphp">
                 </div>
             </div>
 
@@ -254,7 +257,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="number-volumes"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="number-volumes" name="number-volumes" value="{{ $book->volume }}">
+                    <input type="number" id="number-volumes" name="number-volumes" value="@php if(isset($book->volume)) { echo $book->volume; } else { echo 0; } @endphp">
                 </div>
             </div>
 
