@@ -315,6 +315,21 @@ const AddNewCountry = function() {
 
 const SetDataSheet = function(data) {
 	//Agregar "Ficha tecnica"
+	let publication = 0;
+	let pages = 0;
+	let volumes = 0;
+
+	if(data.publicationYear) {
+		publication = data.publicationYear;
+	}
+
+	if(data.numberPages) {
+		pages = data.numberPages;
+	}
+
+	if(data.volume) {
+		volumes = data.volume;
+	}
 
 	let version = {};
 
@@ -372,7 +387,7 @@ const SetDataSheet = function(data) {
 		                </div>
 		                <div class="col s6">
 		                    <label for="publication-year"><span class="required">*</span> Valor:</label>
-		                    <input type="number" id="publication-year" name="publication-year" value="${data.publicationYear}">
+		                    <input type="number" id="publication-year" name="publication-year" value="${publication}">
 		                </div>
 		            </div>
 		            
@@ -383,7 +398,7 @@ const SetDataSheet = function(data) {
 		                </div>
 		                <div class="col s6">
 		                    <label for="number-pages"><span class="required">*</span> Valor:</label>
-		                    <input type="number" id="number-pages" name="number-pages" value="${data.numberPages}">
+		                    <input type="number" id="number-pages" name="number-pages" value="${pages}">
 		                </div>
 		            </div>
 
@@ -394,7 +409,7 @@ const SetDataSheet = function(data) {
 		                </div>
 		                <div class="col s6">
 		                    <label for="number-volumes"><span class="required">*</span> Valor:</label>
-		                    <input type="number" id="number-volumes" name="number-volumes" value="${data.volume}">
+		                    <input type="number" id="number-volumes" name="number-volumes" value="${volumes}">
 		                </div>
 		            </div>`;
 
@@ -579,7 +594,7 @@ const SaveBookInfo = function() {
 			"_token": $('#_token').val()
 		}
 	}).done(function(resp) {
-		//console.log(resp)
+		console.log(resp)
 
 		let data = JSON.parse(resp);
 		//console.log(data)
