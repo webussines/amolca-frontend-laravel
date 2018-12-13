@@ -1,3 +1,10 @@
+.loader {
+    left: 0px;
+    position: fixed;
+    top: -8px;
+    width: 100%;
+}
+
 img.logo {
     display: block;
     height: 150px;

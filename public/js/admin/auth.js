@@ -42,7 +42,13 @@ const loginFormFunction = () => {
 
 const sendLoginData = (username, password, token) => {
 
-	console.log(username, password, token)
+	//console.log(username, password, token)
+
+	if($('.loader').hasClass('hidde'))
+		$('.loader').removeClass('hidde')
+
+	$('input[type="submit"]').val('Iniciando sesión...').attr('disabled', 'disabled')
+
 	$.ajax({
 		method: "GET",
     	url: '/am-admin/login',
@@ -78,8 +84,13 @@ const sendLoginData = (username, password, token) => {
 				break;
 		}
 
+		if(!$('.loader').hasClass('hidde'))
+			$('.loader').addClass('hidde')
+
 		$('#global-error')
 			.html(error.msg)
 			.css('display', 'block')
+
+		$('input[type="submit"]').val('Iniciar sesión').removeAttr('disabled')
 	})
 }

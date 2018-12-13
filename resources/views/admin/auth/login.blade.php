@@ -11,6 +11,12 @@
 @endsection
 
 @section('content')
+<div class="loader hidde">
+    <div class="progress">
+        <div class="indeterminate"></div>
+    </div>
+</div>
+
 <img src="{{ asset('/img/admin/logo.png') }}" alt="Iniciar sesión" class="logo">
 <form id="login-form" class="login-form">
   <div class="form-group">
