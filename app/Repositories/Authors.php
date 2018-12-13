@@ -13,5 +13,9 @@ class Authors extends GuzzleHttpRequest {
 	public function findById($id) {
 		return $this->get("authors/{$id}");
 	}
+
+	public function updateById($id, $update) {
+		return $this->put("authors/{$id}", $update);
+	}
 	
 }

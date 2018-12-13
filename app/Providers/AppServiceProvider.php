@@ -9,8 +9,8 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
 
-    //protected $API_URL = 'http://localhost:3000/api/1.0/';
-    protected $API_URL = 'https://amolca-backend.herokuapp.com/api/1.0/';
+    protected $API_URL = 'http://localhost:3000/api/1.0/';
+    //protected $API_URL = 'https://amolca-backend.herokuapp.com/api/1.0/';
 
     public function boot()
     {
@@ -25,6 +25,16 @@ class AppServiceProvider extends ServiceProvider
             return $this->client = $client = new Client([
                         'base_uri' => $this->API_URL
                     ]);
+        });
+    }
+
+    protected function mapApiRoutes(){
+        Route::group([
+            'middleware' => ['api', 'auth:api'],
+            'namespace' => $this->namespace,
+            'prefix' => 'api',
+        ], function ($router) {
+            require base_path('routes/api.php');
         });
     }
 }

@@ -49,17 +49,18 @@ class AdminAuthorsController extends Controller
         return view('admin.authors.edit', ['author' => $author, 'specialties' => $specialties]);
     }
 
+    public function edit($id)
+    {
+        $update = Input::post('update');
+        return $this->authors->updateById($id, $update);
+    }
+
     public function create()
     {
         //
     }
 
     public function store(Request $request)
-    {
-        //
-    }
-
-    public function edit($id)
     {
         //
     }
