@@ -45,6 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
+            //'root' => public_path('../..') . '/amolca.webussines.com/uploads',
             'root' => public_path('uploads'),
         ],
 
