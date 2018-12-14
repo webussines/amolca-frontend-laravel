@@ -54,6 +54,8 @@ const ReadImgUrl = (input) => {
 
 //Subir imagen al servidor
 const UploadImage = () => {
+
+	const RouteAuthorsImg = 'https://amolca.webussines.com/uploads/authors/';
 	
 	$('#save-file-btn').on('click', function() {
 
@@ -109,6 +111,8 @@ const UploadImage = () => {
 							.removeClass('error')
 							.addClass('success')
 							.css({ 'display': 'block' })
+
+						$('#image-url').val(RouteAuthorsImg + resp.fileName)
 
 						setTimeout(function() {
 							$('#image-error')
@@ -180,7 +184,7 @@ const SaveAuthor = function() {
 		let id = $('#_id').val();
 		let name = $('#name').val();
 		let description = $('#description').val();
-		let image = $('#author-image').attr('src');
+		let image = $('#image-url').val();
 		let specialties = GetCheckedSpecialties();
 
 		let metaTitle = $('#meta-title').val();

@@ -70,8 +70,10 @@
 
                     @if (isset($author->image))
                         <img id="author-image" src="{{ $author->image }}" alt="">
+                        <input type="hidden" id="image-url" name="image-url" value="{{ $author->image }}">
                     @else
                         <img id="author-image" src="https://amolca.webussines.com/uploads/authors/no-author-image.png" alt="">
+                        <input type="hidden" id="image-url" name="image-url">
                     @endif
 
                     <div class="circle-preloader preloader-wrapper big active">
