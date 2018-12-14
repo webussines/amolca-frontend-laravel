@@ -155,6 +155,7 @@ const UpdateBook = function(tbody, table) {
 	$(tbody).on('click', '.edit-book', function() {
 
 		var data = table.row($(this).parents("tr")).data();
+
 		//console.log(data)
 		var _id = $('#_id').val(data._id);
 		var title = $('#book-title').html(data.title);

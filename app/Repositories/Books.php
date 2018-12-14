@@ -16,6 +16,10 @@ class Books extends GuzzleHttpRequest {
 		return $this->get("books/{$id}");
 	}
 
+	public function navigation($id, $params) {
+		return $this->get("books/navigation/{$id}{$params}");
+	}
+
 	public function findBySlug($slug) {
 		return $this->get("books/slug/{$slug}");
 	}

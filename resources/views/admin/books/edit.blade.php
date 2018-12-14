@@ -334,6 +334,16 @@
 
         </div>
 
+        <div class="book-navigation">
+            @if ($previousBook !== null)
+                <a class="btn-navigation previous" href="{{ $previousBook->_id }}?orderby={{$navOrderby}}&orderby={{$navOrder}}"><span class="icon-arrow-left2"></span> Anterior</a>
+            @endif
+
+            @if ($nextBook !== null)
+                <a class="btn-navigation next" href="{{ $nextBook->_id }}?orderby={{$navOrderby}}&orderby={{$navOrder}}">Siguiente <span class="icon-arrow-right2"></span></a>
+            @endif
+        </div>
+
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large green save-resource">
                 <span class="icon-save1"></span>

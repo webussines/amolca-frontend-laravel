@@ -45,10 +45,20 @@ class AdminBooksController extends Controller
     /*Mostrar*/
     public function show($id)
     {
-        $specialties = $this->specialties->all();
-        $book = $this->books->findById($id);
 
-        return view('admin.books.edit', ['book' => $book, 'specialties' => $specialties]);
+        $params = '?orderby=' . Input::get('orderby') . '&order=' . Input::get('order');
+
+        $specialties = $this->specialties->all();
+        $book = $this->books->navigation($id, $params);
+
+        return view('admin.books.edit', [
+            'book' => $book[0],
+            'navOrderby' => Input::get('orderby'),
+            'navOrder' => Input::get('order'),
+            'previousBook' => $book[1],
+            'nextBook' => $book[2],
+            'specialties' => $specialties
+        ]);
     }
 
     /*Editar*/

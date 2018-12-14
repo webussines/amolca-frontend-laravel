@@ -31,6 +31,8 @@ const language = {
 };
 
 const createDataTable = function() {
+	let SortColumn = { column: 'title', order: -1};
+
 	var table = $('table.books').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
@@ -43,6 +45,41 @@ const createDataTable = function() {
 				"_token": $('#_token').val()
 	    	}
 	    },
+	    fnDrawCallback: function(e, dt) {
+		    let direction = e.aaSorting[0][1];
+		    let columnIndex = e.aaSorting[0][0];
+		    let columnName = e.aoColumns[columnIndex].sTitle;
+
+
+
+		    columnName = columnName.toLowerCase().replace(/:/gi, '').replace(/\./gi, '');
+
+		    if(columnName !== 'img') {
+		    	switch (columnName) {
+		    		case 'título':
+		    			SortColumn.column = 'title';
+		    			break;
+		    		case 'especialidad':
+		    			SortColumn.column = 'specialty.title';
+		    			break;
+		    		case 'isbn':
+		    			SortColumn.column = 'isbn';
+		    			break;
+		    		case 'estado':
+		    			SortColumn.column = 'state';
+		    			break;
+		    	}
+
+		    	switch (direction) {
+			    	case 'asc':
+			    		SortColumn.order = 1;
+			    		break;
+			    	case 'desc':
+			    		SortColumn.order = -1;
+			    		break;
+			    }
+		    }
+		},
 	    columns: [
 	    	{ 
 	    		data: "image",
@@ -96,7 +133,16 @@ const createDataTable = function() {
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
 	    			//console.log(JsonResultRow)
-	    			let str = `<a class="edit" href="/am-admin/libros/${JsonResultRow._id}">
+	    			/*let str = `<a class="edit" href="/am-admin/libros/${JsonResultRow._id}">
+				                    <span class="icon-mode_edit"></span>
+				                </a>
+
+				                <a class="delete">
+				                    <span class="icon-trash"></span>
+				                </a>
+		                  	`;*/
+
+		            let str = `<a class="edit">
 				                    <span class="icon-mode_edit"></span>
 				                </a>
 
@@ -109,6 +155,8 @@ const createDataTable = function() {
 	    	},
 	    ]
 	});
+
+	SingleBookRedirect('.data-table tbody', table, SortColumn);
 
 	$('#DataTables_Table_0_length select').formSelect();
 	$('.dataTables_filter input[type="search"]').attr('placeholder', 'Escribe una palabra clave para encontrar un libro');
@@ -125,6 +173,46 @@ const createDataTable = function() {
 	$('table.books').DataTable().on('draw', function() {
 		$('#btn-load-more').removeAttr('disabled');
 	})
+}
+
+const SingleBookRedirect = function(tbody, table, sort) {
+
+	$(tbody).on('click', '.edit', function() {
+		let data = table.row($(this).parents("tr")).data();
+
+		let ItemIndex = table.row($(this).parents("tr")).index();
+		let TableIndexes = table.rows().indexes();
+		let IndexArrayKeys = TableIndexes.indexOf(ItemIndex);
+
+		let previous = TableIndexes[IndexArrayKeys - 1];
+		let next = TableIndexes[IndexArrayKeys + 1];
+
+		let PreviousRow = table.row(previous).data();
+		let NextRow = table.row(next).data();
+
+		let PreviousParam = '?';
+		let NextParam = '';
+		let SortParam = '';
+
+		if(data._id !== PreviousRow._id) {
+			PreviousParam = '?previous=' + PreviousRow._id
+		}
+
+		if(data._id !== NextRow._id && PreviousParam !== '?') {
+			NextParam = '&next=' + NextRow._id
+		} else if(data._id !== NextRow._id && PreviousParam == '?') {
+			NextParam = 'next=' + NextRow._id
+		}
+
+		if(PreviousParam !== '?' || NextParam !== '') {
+			SortParam = '&orderby=' + sort.column + '&order=' + sort.order;
+		}
+
+		let RedirectRoute = '/am-admin/libros/' + data._id + PreviousParam + NextParam + SortParam;
+
+		window.location.href = RedirectRoute;
+	});
+
 }
 
 const getMoreBooks = function() {

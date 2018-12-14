@@ -4,5 +4,5 @@
 
 @section('contentClass', 'dashboard')
 @section('content')
-	Contenido de mi cuenta
+	{{ session('user')->_id }}
 @endsection
