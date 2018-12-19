@@ -16,7 +16,7 @@
 @section('contentClass', 'single single-author')
 @section('content')
 
-    <div class="loader hidde">
+    <div class="loader top hidde">
         <div class="progress">
             <div class="indeterminate"></div>
         </div>
@@ -49,6 +49,7 @@
 
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
         <input type="hidden" id="_id" value="{{ $author->_id }}">
+        <input type="hidden" id="_src" value="authors">
 
         <ul class="tabs top-tabs">
             <li class="tab">
@@ -69,10 +70,10 @@
                 <div class="col s12 m5 col-image">
 
                     @if (isset($author->image))
-                        <img id="author-image" src="{{ $author->image }}" alt="">
+                        <img id="resource-image" src="{{ $author->image }}" alt="">
                         <input type="hidden" id="image-url" name="image-url" value="{{ $author->image }}">
                     @else
-                        <img id="author-image" src="https://amolca.webussines.com/uploads/authors/no-author-image.png" alt="">
+                        <img id="resource-image" src="https://amolca.webussines.com/uploads/authors/no-author-image.png" alt="">
                         <input type="hidden" id="image-url" name="image-url">
                     @endif
 

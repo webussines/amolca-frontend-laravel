@@ -46,17 +46,18 @@ class AdminSpecialtiesController extends Controller
         return view('admin.specialties.edit', ['specialty' => $specialty, 'specialties' => $specialties]);
     }
 
+    public function edit($id)
+    {
+        $update = Input::post('update');
+        return $this->specialties->updateById($id, $update);
+    }
+
     public function create()
     {
         //
     }
 
     public function store(Request $request)
-    {
-        //
-    }
-
-    public function edit($id)
     {
         //
     }

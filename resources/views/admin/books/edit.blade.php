@@ -16,7 +16,7 @@
 @section('contentClass', 'single single-specialty')
 @section('content')
 
-    <div class="loader hidde">
+    <div class="loader top hidde">
         <div class="progress">
             <div class="indeterminate"></div>
         </div>

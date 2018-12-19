@@ -17,5 +17,9 @@ class Specialties extends GuzzleHttpRequest {
 	public function find($slug) {
 		return $this->get("specialties/slug/{$slug}");
 	}
+
+	public function updateById($id, $update) {
+		return $this->put("specialties/{$id}", $update);
+	}
 	
 }
