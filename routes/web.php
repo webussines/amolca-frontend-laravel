@@ -24,7 +24,8 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::resources([
 		    'libros' => 'Admin\AdminBooksController',
 		    'especialidades' => 'Admin\AdminSpecialtiesController',
-		    'autores' => 'Admin\AdminAuthorsController'
+		    'autores' => 'Admin\AdminAuthorsController',
+		    'sliders' => 'Admin\AdminSlidersController'
 		]);
 
 		//Routes for get info "LIBOS"
@@ -43,6 +44,12 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::prefix('authors')->group(function(){
 			Route::post('/all', 'Admin\AdminAuthorsController@all');
 			Route::post('/edit/{id}', 'Admin\AdminAuthorsController@edit');
+		});
+
+		//Routes for get info "SLIDERS"
+		Route::prefix('sliders')->group(function(){
+			Route::post('/all', 'Admin\AdminSlidersController@all');
+			Route::post('/edit/{id}', 'Admin\AdminSlidersController@edit');
 		});
 
 		//Routes for get info "PAISES"

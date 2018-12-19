@@ -32,6 +32,16 @@
             </ul>
         </li>
         <li>
+            <a data-id="sliders">
+                <span class="icon icon-images"></span> <span class="text">Sliders</span>
+            </a>
+
+            <ul class="submenu" data-menu="sliders">
+                <li><a href="/am-admin/sliders">Todos los slider</a></li>
+                <li><a href="/">Añadir slider</a></li>
+            </ul>
+        </li>
+        <li>
             <a data-id="coupons">
                 <span class="icon icon-price-tags"></span> <span class="text">Cupones</span>
             </a>
