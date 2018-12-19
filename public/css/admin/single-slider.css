@@ -1,0 +1,103 @@
+.drag-grid {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding-bottom: 15px;
+}
+  .drag-grid .grid-header {
+    background: #00396f;
+    border-radius: 3px 3px 0 0;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    padding: 0 20px;
+    position: relative;
+    text-align: center;
+  }
+  .drag-grid .grid {
+    margin: 10px auto 0px;
+    padding: 14px;
+    position: relative;
+  }
+
+.item {
+  background-color: #fff;
+  background-position: left 10px center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 1px 5px 0 rgba(0,0,0,0.5);
+  box-shadow: 0px 1px 5px 0 rgba(0,0,0,0.5);
+  color: #666;
+  cursor: move;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  width: 90%;
+  min-height: 100px;
+  max-height: 100px;
+  margin: 7px 5%;
+  z-index: 1;
+}
+  .item .options {
+    background-color: #fff;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    height: 100px;
+    left: 0px;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    width: 40px;
+  }
+    .item a.order {
+      background-color: #00396f;
+      border-radius: 50%;
+      display: inline-block;
+      color: #fff;
+      font-size: 14px;
+      height: 25px;
+      left: 7px;
+      line-height: 25px;
+      margin: 0px auto 5px;
+      text-align: center;
+      top: 7px;
+      width: 25px;
+    }
+
+    .item a.edit {
+      background-color: #55b9d4;
+      border-radius: 50%;
+      display: inline-block;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      height: 25px;
+      line-height: 25px;
+      margin: 0 auto;
+      text-align: center;
+      width: 25px;
+    }
+
+.item.muuri-item-dragging {
+  z-index: 3;
+}
+.item.muuri-item-releasing {
+  z-index: 2;
+}
+.item.muuri-item-hidden {
+  z-index: 0;
+}
+.item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image-wrap img {
+  max-width: 100%;
+  width: 100%;
+}

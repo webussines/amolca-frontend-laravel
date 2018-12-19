@@ -15,7 +15,7 @@ const InitEditorBoxes = () => {
              "code link image imagetools visualblocks visualchars advcode",
              "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime nonbreaking",
              "save contextmenu directionality emoticons template paste textcolor"
-       ],
+       ]
 	})
 }
 
@@ -48,7 +48,7 @@ const SaveAuthor = function() {
 
 		let id = $('#_id').val();
 		let name = $('#name').val();
-		let description = $('#description').val();
+		let description = tinymce.activeEditor.getContent();
 		let image = $('#image-url').val();
 		let specialties = GetCheckedSpecialties();
 
@@ -65,8 +65,6 @@ const SaveAuthor = function() {
 			metaDescription: metaDescription,
 			metaTags: metaTags
 		}
-
-		//console.log(author)
 
 		$.ajax({
 			method: 'POST',

@@ -1,5 +1,9 @@
 @extends('admin.layouts.account')
 
+@php
+    $description = (isset($author->description)) ? $author->description : ' ';
+@endphp
+
 @section('title', 'Autor: ' . $author->name . ' - Admin Amolca')
 
 @section('styles')
@@ -119,7 +123,7 @@
 
                     <div class="form-group col s12 m12">
                         <label for="description">Descripción:</label>
-                        <textarea name="description" id="description">@if (isset($author->description)) {{ $author->description }} @endif</textarea>
+                        <textarea name="description" id="description">{{ $description }}</textarea>
                     </div>
 
                 </div>
