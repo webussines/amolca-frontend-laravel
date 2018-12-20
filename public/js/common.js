@@ -138,6 +138,8 @@ const UploadImage = () => {
 				
 			}, 1000)
 
+		}).catch(function(err){
+		    console.log(err)
 		})
 	});
 
