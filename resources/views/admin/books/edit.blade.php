@@ -1,6 +1,12 @@
 @extends('admin.layouts.account')
 
-@section('title', 'Libro: ' . $book->title . ' - Admin Amolca')
+@php
+    $title = (isset($book->title)) ? $book->title : '';
+    $id = (isset($book->_id)) ? $book->_id : '';
+    $image = (isset($book->image)) ? $book->image : 'https://amolca.webussines.com/uploads/images/no-image.jpg';
+@endphp
+
+@section('title', 'Libro: ' . $title . ' - Admin Amolca')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/admin/single-book.css') }}">
@@ -24,7 +30,7 @@
 
 	<div class="row single section-header valign-wrapper">
 		<div class="col s12 m10 l10">
-			<p class="title"> {{$book->title}} </p>
+			<p class="title"> {{$title}} </p>
 		</div>
 		<div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
@@ -38,7 +44,8 @@
 
     <form id="book-edit" class="book-edit">
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
-        <input type="hidden" id="id" value="{{ $book->_id }}">
+        <input type="hidden" id="_src" value="books">
+        <input type="hidden" id="id" value="{{ $id }}">
 
         <ul class="tabs top-tabs">
             <li class="tab">
@@ -62,7 +69,43 @@
 
             <div class="row">
                 <div class="col s12 m5 col-image">
-                    <img src="{{ $book->image }}" alt="{{ $book->title }}">
+
+                    <div class="image-wrap">
+                        <img id="resource-image" src="{{ $image }}" alt="">
+                        <input type="hidden" id="image-url" name="image-url" value="{{ $image }}">
+
+                        <div class="circle-preloader preloader-wrapper big active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="global-upload-wrap">
+
+                        <p id="image-error" class="error"></p>
+
+                        <p class="desc">
+                            El archivo debe pesar menos de 25mb.<br/>
+                            Las medidas recomendadas son <b>250 x 250</b> (en pixeles).
+                        </p>
+
+                        <input type="button" id="save-file-btn" class="save" value="Guardar imagen">
+
+                        <div class="file-upload-wrapper">
+                            <button id="upload-file-btn" class="upload">Modificar imagen</button>
+                            <input type="file" id="image" name="image">
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="col s12 m7">
