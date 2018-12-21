@@ -4,6 +4,21 @@
     $title = (isset($book->title)) ? $book->title : '';
     $id = (isset($book->_id)) ? $book->_id : '';
     $image = (isset($book->image)) ? $book->image : 'https://amolca.webussines.com/uploads/images/no-image.jpg';
+    $isbn = (isset($book->isbn)) ? $book->isbn : '';
+    $state = (isset($book->state)) ? $book->state : '';
+    $versions = (isset($book->versions)) ? $book->versions : [];
+    $description = (isset($book->description)) ? $book->description : '';
+    $index = (isset($book->index)) ? $book->index : '';
+    $keyPoints = (isset($book->keyPoints)) ? $book->keyPoints : '';
+
+    $bookSpecialty = (isset($book->specialty)) ? $book->specialty : [];
+    $publicationYear = (isset($book->publicationYear)) ? $book->publicationYear : 0;
+    $numberPages = (isset($book->numberPages)) ? $book->numberPages : 0;
+    $volume = (isset($book->volume)) ? $book->volume : 0;
+
+    $attributes = (isset($book->attributes)) ? $book->attributes : [];
+    $countries = (isset($book->countries)) ? $book->countries : [];
+
 @endphp
 
 @section('title', 'Libro: ' . $title . ' - Admin Amolca')
@@ -101,7 +116,7 @@
                         <input type="button" id="save-file-btn" class="save" value="Guardar imagen">
 
                         <div class="file-upload-wrapper">
-                            <button id="upload-file-btn" class="upload">Modificar imagen</button>
+                            <button id="upload-file-btn" class="upload">Seleccionar imagen</button>
                             <input type="file" id="image" name="image">
                         </div>
                     </div>
@@ -112,20 +127,20 @@
 
                     <div class="form-group col s12 m12">
                         <label for="title"><span class="required">*</span> Título del libro:</label>
-                        <input type="text" name="title" id="title" value="{{ $book->title }}">
+                        <input type="text" name="title" id="title" value="{{ $title }}">
                     </div>
 
                     <div class="form-group col s12 m6">
                         <label for="isbn"><span class="required">*</span> ISBN del libro:</label>
-                        <input type="text" name="isbn" id="isbn" value="{{ $book->isbn }}">
+                        <input type="text" name="isbn" id="isbn" value="{{ $isbn }}">
                     </div>
 
                     <div class="form-group col s12 m6">
                         <label for="state">Estado:</label>
                         <select name="state" id="state" class="normal-select">
-                            <option @if ($book->state == 'PUBLISHED') selected @endif value="PUBLISHED">Publicado</option>
-                            <option @if ($book->state == 'DRAFT') selected @endif value="DRAFT">Borrador</option>
-                            <option @if ($book->state == 'TRASH') selected @endif value="TRASH">En papelera</option>
+                            <option @if ($state == 'PUBLISHED') selected @endif value="PUBLISHED">Publicado</option>
+                            <option @if ($state == 'DRAFT') selected @endif value="DRAFT">Borrador</option>
+                            <option @if ($state == 'TRASH') selected @endif value="TRASH">En papelera</option>
                         </select>
                     </div>
 
@@ -140,7 +155,7 @@
                             $video = false;
                         @endphp
 
-                        @foreach ($book->version as $version)
+                        @foreach ($versions as $version)
                             @php
                                 if($version == 'PAPER'){
                                     $paper = true;
@@ -176,7 +191,7 @@
 
                     <div class="form-group col s12 m12">
                         <label for="description">Descripción:</label>
-                        <textarea name="description" id="description">@if (isset($book->description)) {{ $book->description }} @endif</textarea>
+                        <textarea name="description" id="description">{{$description}}</textarea>
                     </div>
 
                 </div>
@@ -195,12 +210,12 @@
 
                 <div id="indice" class="content-tabs subtab">
                     <div class="form-group">
-                        <textarea name="index" id="index" class="common-editor">@if (isset($book->index)) {{ $book->index }} @endif</textarea>
+                        <textarea name="index" id="index" class="common-editor">{{ $index }}</textarea>
                     </div>
                 </div>
                 <div id="puntos-clave" class="content-tabs subtab">
                     <div class="form-group">
-                        <textarea name="key-points" id="key-points" class="common-editor">@if (isset($book->keyPoints)) {{ $book->keyPoints }} @endif</textarea>
+                        <textarea name="key-points" id="key-points" class="common-editor">{{ $keyPoints }}</textarea>
                     </div>
                 </div>
 
@@ -219,13 +234,15 @@
                                 <label for="specialty-{{$specialty->_id}}">
                                     @php $checked = ''; @endphp
                                     
-                                    @foreach ($book->specialty as $selected)
-                                        @php
-                                            if($selected->_id == $specialty->_id){
-                                                $checked = 'checked="checked"';
-                                            }
-                                        @endphp
-                                    @endforeach
+                                    @if (count($bookSpecialty) > 0)
+                                        @foreach ($bookSpecialty as $selected)
+                                            @php
+                                                if($selected->_id == $specialty->_id){
+                                                    $checked = 'checked="checked"';
+                                                }
+                                            @endphp
+                                        @endforeach
+                                    @endif
 
                                     <input type="checkbox" name="specialty" id="specialty-{{$specialty->_id}}"  {{$checked}} value="{{$specialty->_id}}">
 
@@ -242,13 +259,15 @@
                                         <label for="specialty-{{$child->_id}}">
                                             @php $checked = ''; @endphp
                                             
-                                            @foreach ($book->specialty as $selected)
-                                                @php
-                                                    if($selected->_id == $child->_id){
-                                                        $checked = 'checked="checked"';
-                                                    }
-                                                @endphp
-                                            @endforeach
+                                            @if (count($bookSpecialty) > 0)
+                                                @foreach ($bookSpecialty as $selected)
+                                                    @php
+                                                        if($selected->_id == $child->_id){
+                                                            $checked = 'checked="checked"';
+                                                        }
+                                                    @endphp
+                                                @endforeach
+                                            @endif
 
                                             <input type="checkbox" name="specialty" id="specialty-{{$child->_id}}"  {{$checked}} value="{{$child->_id}}">
 
@@ -268,9 +287,6 @@
 
         <div id="ficha" class="content-tabs">
 
-                {{-- expr --}}
-            
-
             <div class="row">
                 <div class="col s6 m5">
                     <label for="publication-year"><span class="required">*</span> Año de publicación:</label>
@@ -278,7 +294,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="publication-year"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="publication-year" name="publication-year" value="@php if(isset($book->publicationYear)) { echo $book->publicationYear; } else { echo 0; } @endphp">
+                    <input type="number" id="publication-year" name="publication-year" value="{{ $publicationYear }}">
                 </div>
             </div>
 
@@ -289,7 +305,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="number-pages"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="number-pages" name="number-pages" value="@php if(isset($book->numberPages)) { echo $book->numberPages; } else { echo 0; } @endphp">
+                    <input type="number" id="number-pages" name="number-pages" value="{{ $numberPages }}">
                 </div>
             </div>
 
@@ -300,7 +316,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="number-volumes"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="number-volumes" name="number-volumes" value="@php if(isset($book->volume)) { echo $book->volume; } else { echo 0; } @endphp">
+                    <input type="number" id="number-volumes" name="number-volumes" value="{{ $volume }}">
                 </div>
             </div>
 
@@ -308,66 +324,70 @@
 
         <div id="atributos" class="content-tabs">
             
-            @foreach ($book->attributes as $attr)
-                
-                <div class="row row-attr">
+            @if (count($attributes) > 0)
+                @foreach ($attributes as $attr)
                     
-                    <div class="col s12 m5">
-                        <label for="name"><span class="required">*</span> Nombre:</label>
-                        <input type="text" id="name" class="attr-name" name="name" value="{{ $attr->name }}">
-                    </div>
-                    <div class="col s12 m5">
-                        <label for="value"><span class="required">*</span> Valor:</label>
-                        <input type="text" id="value" class="attr-value" name="value" value="{{ $attr->value }}">
-                    </div>
-                    <div class="col s12 m2">
-                        <label>Acciones:</label>
-                        <div>
-                            <button class="button primary delete-attribute">Borrar</button>
+                    <div class="row row-attr">
+                        
+                        <div class="col s12 m5">
+                            <label for="name"><span class="required">*</span> Nombre:</label>
+                            <input type="text" id="name" class="attr-name" name="name" value="{{ $attr->name }}">
                         </div>
+                        <div class="col s12 m5">
+                            <label for="value"><span class="required">*</span> Valor:</label>
+                            <input type="text" id="value" class="attr-value" name="value" value="{{ $attr->value }}">
+                        </div>
+                        <div class="col s12 m2">
+                            <label>Acciones:</label>
+                            <div>
+                                <button class="button primary delete-attribute">Borrar</button>
+                            </div>
+                        </div>
+
                     </div>
 
-                </div>
-
-            @endforeach
+                @endforeach
+            @endif
 
         </div>
         <div id="precios" class="content-tabs">
             
-            @foreach ($book->countries as $country)
-                
-                <div class="row row-country">
+            @if (count($countries) > 0)
+                @foreach ($countries as $country)
                     
-                    <div class="col s12 m4">
-                        <label for="name"><span class="required">*</span> País:</label>
-                        <input type="text" readonly class="country-name" id="name" name="name" value="{{ $country->name }}">
-                    </div>
-                    <div class="col s12 m2">
-                        <label for="price"><span class="required">*</span> Precio:</label>
-                        <input type="text" class="country-price" id="price" name="price" value="{{ $country->price }}">
-                    </div>
-                    <div class="col s12 m2">
-                        <label for="country-state">Estado:</label>
-                        <select class="country-state normal-select" name="country-state" id="country-state">
-                            <option value="STOCK" @if ($country->state == "STOCK") selected @endif>Disponible</option>
-                            <option value="RESERVED" @if ($country->state == "RESERVED") selected @endif>Reservado</option>
-                            <option value="SPENT" @if ($country->state == "SPENT") selected @endif>Agotado</option>
-                        </select>
-                    </div>
-                    <div class="col s12 m2">
-                        <label for="quantity">Cantidad:</label>
-                        <input type="text" class="country-quantity" id="quantity" name="quantity" value="{{ $country->quantity }}">
-                    </div>
-                    <div class="col s12 m2">
-                        <label>Acciones:</label>
-                        <div>
-                            <button class="button primary delete-attribute">Borrar</button>
+                    <div class="row row-country">
+                        
+                        <div class="col s12 m4">
+                            <label for="name"><span class="required">*</span> País:</label>
+                            <input type="text" readonly class="country-name" id="name" name="name" value="{{ $country->name }}">
                         </div>
+                        <div class="col s12 m2">
+                            <label for="price"><span class="required">*</span> Precio:</label>
+                            <input type="text" class="country-price" id="price" name="price" value="{{ $country->price }}">
+                        </div>
+                        <div class="col s12 m2">
+                            <label for="country-state">Estado:</label>
+                            <select class="country-state normal-select" name="country-state" id="country-state">
+                                <option value="STOCK" @if ($country->state == "STOCK") selected @endif>Disponible</option>
+                                <option value="RESERVED" @if ($country->state == "RESERVED") selected @endif>Reservado</option>
+                                <option value="SPENT" @if ($country->state == "SPENT") selected @endif>Agotado</option>
+                            </select>
+                        </div>
+                        <div class="col s12 m2">
+                            <label for="quantity">Cantidad:</label>
+                            <input type="text" class="country-quantity" id="quantity" name="quantity" value="{{ $country->quantity }}">
+                        </div>
+                        <div class="col s12 m2">
+                            <label>Acciones:</label>
+                            <div>
+                                <button class="button primary delete-attribute">Borrar</button>
+                            </div>
+                        </div>
+
                     </div>
 
-                </div>
-
-            @endforeach
+                @endforeach
+            @endif
 
             <div class="row">
                 <div class="col s12">
@@ -378,13 +398,15 @@
         </div>
 
         <div class="book-navigation">
-            @if ($previousBook !== null)
-                <a class="btn-navigation previous" href="{{ $previousBook->_id }}?orderby={{$navOrderby}}&orderby={{$navOrder}}"><span class="icon-arrow-left2"></span> Anterior</a>
+
+            @if (isset($navigation) && isset($navigation['prev']))
+                <a class="btn-navigation previous" href="{{ $navigation['prev']->_id }}?order={{ $navigation['order'] }}&orderby={{ $navigation['orderby'] }}"><span class="icon-arrow-left2"></span> Anterior</a>
             @endif
 
-            @if ($nextBook !== null)
-                <a class="btn-navigation next" href="{{ $nextBook->_id }}?orderby={{$navOrderby}}&orderby={{$navOrder}}">Siguiente <span class="icon-arrow-right2"></span></a>
+            @if (isset($navigation) && isset($navigation['next']))
+                <a class="btn-navigation next" href="{{ $navigation['next']->_id }}?order={{ $navigation['order'] }}&orderby={{ $navigation['orderby'] }}">Siguiente <span class="icon-arrow-right2"></span></a>
             @endif
+
         </div>
 
         <div class="fixed-action-btn">

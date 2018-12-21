@@ -7,7 +7,7 @@
 
             <ul class="submenu" data-menu="books">
                 <li><a href="/am-admin/libros">Todos los libros</a></li>
-                <li><a href="/">Añadir libro</a></li>
+                <li><a href="/am-admin/libros/create">Añadir libro</a></li>
                 <li><a href="/am-admin/libros/inventario">Inventario</a></li>
             </ul>
         </li>

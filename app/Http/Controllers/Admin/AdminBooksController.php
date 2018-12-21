@@ -47,17 +47,30 @@ class AdminBooksController extends Controller
     {
 
         $params = '?orderby=' . Input::get('orderby') . '&order=' . Input::get('order');
+        $navigation = [];
 
         $specialties = $this->specialties->all();
         $book = $this->books->navigation($id, $params);
 
-        return view('admin.books.edit', [
-            'book' => $book[0],
-            'navOrderby' => Input::get('orderby'),
-            'navOrder' => Input::get('order'),
-            'previousBook' => $book[1],
-            'nextBook' => $book[2],
-            'specialties' => $specialties
+
+        if( isset($book->prev) && isset($book->next) ) {
+            $navigation['prev'] = $book->prev;
+            $navigation['next'] = $book->next;
+        }
+
+        if( !isset($book->next) && isset($book->prev) ) {
+            $navigation['next'] = $book->prev;
+        }
+
+        $navigation['orderby'] = Input::get('orderby');
+        $navigation['order'] = Input::get('order');
+
+        return view('admin.books.single', [
+            'action' => 'edit',
+            'var' => $book,
+            'book' => $book->selected,
+            'specialties' => $specialties,
+            'navigation' => $navigation
         ]);
     }
 
@@ -80,7 +93,15 @@ class AdminBooksController extends Controller
     /**/
     public function create()
     {
-        //
+        $params = '?orderby=' . Input::get('orderby') . '&order=' . Input::get('order');
+
+        $specialties = $this->specialties->all();
+
+        return view('admin.books.single', [
+            'action' => 'create',
+            'specialties' => $specialties,
+            'navigation' => null
+        ]);
     }
 
     public function store(Request $request)
