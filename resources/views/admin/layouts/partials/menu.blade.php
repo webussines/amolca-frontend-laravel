@@ -18,7 +18,7 @@
 
             <ul class="submenu" data-menu="specialties">
                 <li><a href="/am-admin/especialidades">Todos las especialidades</a></li>
-                <li><a href="/">Añadir especialidad</a></li>
+                <li><a>Añadir especialidad</a></li>
             </ul>
         </li>
         <li>
@@ -28,7 +28,7 @@
 
             <ul class="submenu" data-menu="authors">
                 <li><a href="/am-admin/autores">Todos los autores</a></li>
-                <li><a href="/">Añadir autor</a></li>
+                <li><a>Añadir autor</a></li>
             </ul>
         </li>
         <li>
@@ -38,7 +38,7 @@
 
             <ul class="submenu" data-menu="sliders">
                 <li><a href="/am-admin/sliders">Todos los slider</a></li>
-                <li><a href="/">Añadir slider</a></li>
+                <li><a>Añadir slider</a></li>
             </ul>
         </li>
         <li>
@@ -47,8 +47,8 @@
             </a>
 
             <ul class="submenu" data-menu="coupons">
-                <li><a href="/">Todos los cupones</a></li>
-                <li><a href="/">Añadir cupón</a></li>
+                <li><a>Todos los cupones</a></li>
+                <li><a>Añadir cupón</a></li>
             </ul>
         </li>
         <li>
@@ -57,9 +57,9 @@
             </a>
 
             <ul class="submenu" data-menu="orders">
-                <li><a href="/am-admin/pedidos">Ver pedidos</a></li>
-                <li><a href="/">Facturas</a></li>
-                <li><a href="/">Carritos de compra</a></li>
+                <li><a>Ver pedidos</a></li>
+                <li><a>Facturas</a></li>
+                <li><a>Carritos de compra</a></li>
             </ul>
         </li>
         <li>
@@ -68,8 +68,8 @@
             </a>
 
             <ul class="submenu" data-menu="clients">
-                <li><a href="/">Ver clientes</a></li>
-                <li><a href="/">Direcciones</a></li>
+                <li><a>Ver clientes</a></li>
+                <li><a>Direcciones</a></li>
             </ul>
         </li>
         <li>
@@ -78,8 +78,8 @@
             </a>
 
             <ul class="submenu" data-menu="blog">
-                <li><a href="/">Ver publicaciones</a></li>
-                <li><a href="/">Categorías</a></li>
+                <li><a>Ver publicaciones</a></li>
+                <li><a>Categorías</a></li>
             </ul>
         </li>
         <li>
@@ -88,9 +88,9 @@
             </a>
 
             <ul class="submenu" data-menu="users">
-                <li><a href="/am-admin/usuarios">Ver usuarios</a></li>
-                <li><a href="/">Añadir cliente</a></li>
-                <li><a href="/">Añadir empleado</a></li>
+                <li><a>Ver usuarios</a></li>
+                <li><a>Añadir cliente</a></li>
+                <li><a>Añadir empleado</a></li>
             </ul>
         </li>
         <li>
@@ -99,9 +99,9 @@
             </a>
 
             <ul class="submenu" data-menu="settings">
-                <li><a href="/">Configuración global</a></li>
-                <li><a href="/">Optimización SEO</a></li>
-                <li><a href="/">Contacto</a></li>
+                <li><a>Configuración global</a></li>
+                <li><a>Optimización SEO</a></li>
+                <li><a>Contacto</a></li>
             </ul>
         </li>
         <li>
