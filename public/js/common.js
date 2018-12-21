@@ -116,6 +116,7 @@ const UploadImage = () => {
 							.css({ 'display': 'block' })
 
 						$('#image-url').val(RouteAuthorsImg + resp.fileName)
+						localStorage.setItem('fileName', RouteAuthorsImg + resp.fileName);
 
 						setTimeout(function() {
 							$('#image-error')

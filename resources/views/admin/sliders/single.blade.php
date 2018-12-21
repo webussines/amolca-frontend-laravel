@@ -47,6 +47,7 @@
 
     <form id="slider-edit" class="slider-edit">
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
+        <input type="hidden" id="_src" value="sliders">
         <input type="hidden" id="id" value="{{ $slider->_id }}">
 
         <ul class="tabs top-tabs">
@@ -56,6 +57,13 @@
         </ul>
 
         <div id="ajustes-basicos" class="content-tabs">
+
+            <div class="row">
+                <div class="form-group col s12">
+                    <label for="title"><span class="required">*</span> Título:</label>
+                    <input type="text" id="title" name="title" value="{{ $title }}">
+                </div>
+            </div>
             
             <div class="row">
                 
@@ -84,7 +92,7 @@
 
                 <div class="col s12 m8">
                     <div class="image-wrap">
-                        <img id="resource-image" src="https://amolca.webussines.com/uploads/images/no-image.jpg" alt="">
+                        <img id="resource-image" src="https://amolca.webussines.com/uploads/sliders/slider-no-image.jpg" alt="">
                         <input type="hidden" id="image-url" name="image-url" value="">
                         <input type="hidden" id="slide-index" name="slide-index" value="">
 
@@ -112,11 +120,16 @@
                             Las medidas recomendadas son <b>1888 x 560</b> (en pixeles).
                         </p>
 
-                        <input type="button" id="save-file-btn" class="save" value="Guardar imagen">
+                        <div class="buttons">
+                            <a class="save-changes">¡Listo!</a>
 
-                        <div class="file-upload-wrapper">
-                            <button id="upload-file-btn" class="upload">Modificar imagen</button>
-                            <input type="file" id="image" name="image">
+                            <input type="button" id="save-file-btn" class="save" value="Subir imagen">
+                            
+                            <div class="file-upload-wrapper">
+                                <button id="upload-file-btn" class="upload">Seleccionar imagen</button>
+                                <input type="file" id="image" name="image">
+                            </div>
+                            <a class="cancel">Cancelar</a>
                         </div>
                     </div>
                 </div>

@@ -46,7 +46,8 @@ class AdminSlidersController extends Controller
 
     public function edit($id)
     {
-        //
+        $update = Input::post('update');
+        return $this->sliders->updateById($id, $update);
     }
 
     public function create()

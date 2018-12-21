@@ -567,3 +567,10 @@ div#book-modal {
         opacity: 0;
         right: 0;
     }
+
+.global-upload-wrap .cancel {
+    color: red;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: underline;
+}
