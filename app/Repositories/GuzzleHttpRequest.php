@@ -54,8 +54,26 @@ class GuzzleHttpRequest {
 
     public function delete($url) {
 
-        $response = $this->client->request('DELETE', $url);
-        return json_decode( $response->getBody()->getContents() );
+        try {
+
+            $headers = [
+                        "Content-type" => "application/json",
+                        "authorization" => "Bearer " . session('access_token')
+                    ];
+
+            $req = $this->client->request('DELETE', $url, ["headers" => $headers ]);
+            $resp = $req->getBody()->getContents();
+
+            return $resp;
+
+        } catch(ClientException $e) {
+
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+
+            return $responseBodyAsString;
+            
+        }
 
     }
 

@@ -117,6 +117,6 @@ class AdminBooksController extends Controller
     
     public function destroy($id)
     {
-        //
+        return $this->books->deleteById($id);
     }
 }

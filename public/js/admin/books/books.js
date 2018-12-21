@@ -157,6 +157,7 @@ const createDataTable = function() {
 	});
 
 	SingleBookRedirect('.data-table tbody', table, SortColumn);
+	DeleteBook('.data-table tbody', table, SortColumn);
 
 	$('#DataTables_Table_0_length select').formSelect();
 	$('.dataTables_filter input[type="search"]').attr('placeholder', 'Escribe una palabra clave para encontrar un libro');
@@ -211,6 +212,44 @@ const SingleBookRedirect = function(tbody, table, sort) {
 		let RedirectRoute = '/am-admin/libros/' + data._id + PreviousParam + NextParam + SortParam;
 
 		window.location.href = RedirectRoute;
+	});
+
+}
+
+const DeleteBook = function(tbody, table, sort) {
+
+	$(tbody).on('click', '.delete', function() {
+
+		let data = table.row($(this).parents("tr")).data();
+
+		let alerta = confirm('Seguro que deseas eliminar permanentemente el libro: ' + data.title);
+
+		if(alerta) {
+			if($('.loader').hasClass('hidde'))
+				$('.loader').removeClass('hidde')
+
+			$.ajax({
+				type: "DELETE",
+				url: "/am-admin/libros/" + data._id,
+				data: { "_token": $('#_token').val() }
+			}).done(function(resp) {
+				console.log(resp)
+
+				$('.data-table').DataTable().ajax.reload();
+
+				$('table.books').DataTable().on('draw', function() {
+					if(!$('.loader').hasClass('hidde'))
+					$('.loader').addClass('hidde')
+
+					let toastMsg = 'Se elminó exitosamente el libro: ' + data.title + '.';
+					M.toast({html: toastMsg, classes: 'green accent-4 bottom'});
+				})
+
+			}).catch(function(err) {
+				console.log(err)
+			})
+		}
+
 	});
 
 }

@@ -28,6 +28,10 @@ class Books extends GuzzleHttpRequest {
 		return $this->put("books/{$id}", $update);
 	}
 
+	public function deleteById($id) {
+		return $this->delete("books/{$id}");
+	}
+
 	public function specialty($id, $params = '') {
 		return $this->get("specialties/{$id}/books?{$params}");
 	}
