@@ -133,6 +133,10 @@ textarea.materialize-textarea, textarea {
     padding-top: 10px;
 }
 
+input:not([type]).field-error, input[type=text]:not(.browser-default).field-error, input[type=password]:not(.browser-default).field-error, input[type=email]:not(.browser-default).field-error, input[type=url]:not(.browser-default).field-error, input[type=time]:not(.browser-default).field-error, input[type=date]:not(.browser-default).field-error, input[type=datetime]:not(.browser-default).field-error, input[type=datetime-local]:not(.browser-default).field-error, input[type=tel]:not(.browser-default).field-error, input[type=number]:not(.browser-default).field-error, input[type=search]:not(.browser-default).field-error, textarea.materialize-textarea.field-error, textarea.field-error, .field-error {
+    border-color: red !important;
+}
+
 /*Checkboxes*/
 .main [type="checkbox"]:checked+span:not(.lever):before {
     border-right: 2px solid #00396f;
@@ -161,6 +165,22 @@ textarea.materialize-textarea, textarea {
             height: 44px;
         }
 
+.main .select2-container--default .select2-search--inline .select2-search__field,
+.main .select2-container--default .select2-search--inline .select2-search__field:focus {
+    border: 0px !important;
+    font-size: 16px;
+    height: auto;
+    line-height: 28px;
+    margin-top: 9px;
+    padding: 0px !important;
+}
+
+.main .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #f4f4f4;
+    border: 1px solid #e1e1e1;
+    padding: 8px 10px;
+}
+
 /*Material progress bar*/
 .loader.hidde {
     display: none;
@@ -171,6 +191,11 @@ textarea.materialize-textarea, textarea {
         .progress .indeterminate {
             background-color: #00396f !important;
         }
+
+.toast.bottom.left {
+    left: 23% !important;
+    right: auto !important;
+}
 
 .toast.bottom {
     bottom: 5%;

@@ -35,7 +35,7 @@ class AdminAuthorsController extends Controller
 
     public function index()
     {
-        $params = "orderby=title&order=1&limit=800&skip=0";
+        $params = "orderby=title&order=1&limit=1000&skip=0";
         $authors = $this->authors->all($params);
 
         return view('admin.authors.index', ['authors' => $authors]);

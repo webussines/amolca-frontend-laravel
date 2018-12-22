@@ -8,12 +8,15 @@ jQuery(function($){
 	    }
 	});
 
-	$('#add-country').on('click', function() {
-		AddNewCountry();
-	});
+	$('#add-country').on('click', AddNewCountry)
 
-	$('.save-resource').on('click', function() {
-		SaveBookInfo();
+	$('.save-resource').on('click', SaveBookInfo)
+
+	ResetFormErrors();
+
+	$('.select2-normal').select2();
+	$('#autores').select2({
+		placeholder: 'Seleccione al menos un autor...'
 	});
 
 });
@@ -204,7 +207,36 @@ const AddNewCountry = function() {
 
 }
 
+const ResetFormErrors = function() {
+	$('.required-field').on('keyup change', function() {
+
+		if($(this).val() !== '' && $(this).val() !== ' ') {
+
+			if($(this).hasClass('field-error'))
+				$(this).removeClass('field-error')
+
+		}
+
+	})
+
+	$('#autores').on('change', function() {
+
+		if($(this).val().length > 0) {
+
+			if($('.select2-selection--multiple').hasClass('field-error'))
+				$('.select2-selection--multiple').removeClass('field-error')
+
+		}
+
+	});
+}
+
 const SaveBookInfo = function() {
+
+	let flag = true;
+	let _action = $('#_action').val();
+	let _token = $('#_token').val();
+	let _user = $('#_user').val();
 
 	if($('.loader').hasClass('hidde'))
 		$('.loader').removeClass('hidde')
@@ -220,6 +252,7 @@ const SaveBookInfo = function() {
 	let description = $('#description').val().replace(/"/gi, "'");
 	let index = $('#index').val().replace(/"/gi, "'");
 	let keyPoints = $('#key-points').val().replace(/"/gi, "'");
+	let author = $('#autores').val();
 
 	//Multiple values
 	let versions = GetCheckedVersions();
@@ -243,6 +276,7 @@ const SaveBookInfo = function() {
 	let book = {
 		title: title,
 		isbn: isbn,
+		author: author,
 		state: state,
 		index: index,
 		description: description,
@@ -253,27 +287,73 @@ const SaveBookInfo = function() {
 		countries: countries,
 		publicationYear: publication,
 		numberPages: pages,
-		volume: volumes
+		volume: volumes,
+		userId: _user
 	}
+
+	let ActionRoute;
 	
-	$.ajax({
-		method: 'POST',
-		url: '/am-admin/books/edit/' + id,
-		data: {
-			"update": book,
-			"_token": $('#_token').val()
+	switch(_action) {
+		case 'edit':
+			ActionRoute = '/am-admin/books/edit/' + id;
+		break;
+
+		case 'create':
+			ActionRoute = '/am-admin/libros';
+		break;
+	}
+
+	$('.required-field').each(function(){
+		
+		let val = $(this).val();
+
+		if(val === ' ' || val === '' || val === null) {
+			$(this).addClass('field-error');
+			flag = false;
 		}
-	}).done(function(resp) {
-		console.log(resp)
 
-		let data = JSON.parse(resp);
+	});
 
-		if(data._id !== undefined) {
-			location.reload();
-		} else {
-			switch(data.status) {
+	if($('#autores').val().length < 1) {
+		$('.select2-selection--multiple').addClass('field-error');
+		flag = false;
+	}
+
+	if(flag) {
+		$.ajax({
+			method: 'POST',
+			url: ActionRoute,
+			data: {
+				"body": book,
+				"_token": _token
 			}
-		}
-	})
+		}).done(function(resp) {
+			console.log(resp)
+
+			let data = JSON.parse(resp);
+
+			if(data._id !== undefined) {
+				
+				switch(_action) {
+					case 'edit':
+						location.reload();
+					break;
+					case 'create':
+						window.location.href = '/am-admin/libros/' + data._id;
+					break;
+				}
+
+			}
+		}).catch(function(err) {
+			console.log(err)
+		})
+	} else {
+
+		if(!$('.loader').hasClass('hidde'))
+			$('.loader').addClass('hidde')
+
+		let toastMsg = 'Debes llenar los campos obligatorios.';
+		M.toast({html: toastMsg, classes: 'red accent-4 bottom left'});
+	}
 
 }

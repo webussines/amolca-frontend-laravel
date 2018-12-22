@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Specialties;
+use App\Repositories\Authors;
 use App\Repositories\Books;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,13 +12,15 @@ use Illuminate\Support\Facades\Input;
 class AdminBooksController extends Controller
 {
 
+    protected $authors;
     protected $banners;
     protected $specialties;
     protected $books;
 
-    public function __construct(Specialties $specialties, Books $books) {
+    public function __construct(Specialties $specialties, Books $books, Authors $authors) {
         $this->specialties = $specialties;
         $this->books = $books;
+        $this->authors = $authors;
     }
 
     public function getBooks() {
@@ -49,6 +52,7 @@ class AdminBooksController extends Controller
         $params = '?orderby=' . Input::get('orderby') . '&order=' . Input::get('order');
         $navigation = [];
 
+        $authors = $this->authors->all();
         $specialties = $this->specialties->all();
         $book = $this->books->navigation($id, $params);
 
@@ -70,6 +74,7 @@ class AdminBooksController extends Controller
             'var' => $book,
             'book' => $book->selected,
             'specialties' => $specialties,
+            'authors' => $authors,
             'navigation' => $navigation
         ]);
     }
@@ -77,8 +82,8 @@ class AdminBooksController extends Controller
     /*Editar*/
     public function edit($id)
     {
-        $update = Input::post('update');
-        return $this->books->updateById($id, $update);
+        $body = Input::post('body');
+        return $this->books->updateById($id, $body);
     }
 
     /*Inventario*/
@@ -95,18 +100,21 @@ class AdminBooksController extends Controller
     {
         $params = '?orderby=' . Input::get('orderby') . '&order=' . Input::get('order');
 
+        $authors = $this->authors->all();
         $specialties = $this->specialties->all();
 
         return view('admin.books.single', [
             'action' => 'create',
             'specialties' => $specialties,
+            'authors' => $authors,
             'navigation' => null
         ]);
     }
 
     public function store(Request $request)
     {
-        //
+        $book = $request->post('body');
+        return $this->books->create($book);
     }
 
     public function update(Request $request, $id)

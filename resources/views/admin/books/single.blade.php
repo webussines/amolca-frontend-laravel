@@ -12,6 +12,7 @@
     $keyPoints = (isset($book->keyPoints)) ? $book->keyPoints : '';
 
     $bookSpecialty = (isset($book->specialty)) ? $book->specialty : [];
+    $bookAuthor = (isset($book->author)) ? $book->author : [];
     $publicationYear = (isset($book->publicationYear)) ? $book->publicationYear : 0;
     $numberPages = (isset($book->numberPages)) ? $book->numberPages : 0;
     $volume = (isset($book->volume)) ? $book->volume : 0;
@@ -45,7 +46,7 @@
 
 	<div class="row single section-header valign-wrapper">
 		<div class="col s12 m10 l10">
-			<p class="title"> {{$title}} </p>
+			<p class="title"> @if ($title !== '') {{$title}} @else Creando nuevo libro @endif  </p>
 		</div>
 		<div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
@@ -59,7 +60,9 @@
 
     <form id="book-edit" class="book-edit">
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
+        <input type="hidden" id="_action" value="{{ $action }}">
         <input type="hidden" id="_src" value="books">
+        <input type="hidden" id="_user" value="{{ session('user')->_id }}">
         <input type="hidden" id="id" value="{{ $id }}">
 
         <ul class="tabs top-tabs">
@@ -127,20 +130,42 @@
 
                     <div class="form-group col s12 m12">
                         <label for="title"><span class="required">*</span> Título del libro:</label>
-                        <input type="text" name="title" id="title" value="{{ $title }}">
+                        <input type="text" name="title" id="title" class="required-field" placeholder="Título del libro..." value="{{ $title }}">
                     </div>
 
                     <div class="form-group col s12 m6">
                         <label for="isbn"><span class="required">*</span> ISBN del libro:</label>
-                        <input type="text" name="isbn" id="isbn" value="{{ $isbn }}">
+                        <input type="text" name="isbn" id="isbn" class="required-field" placeholder="ISBN del libro..." value="{{ $isbn }}">
                     </div>
 
                     <div class="form-group col s12 m6">
-                        <label for="state">Estado:</label>
+                        <label for="state"><span class="required">*</span> Estado:</label>
                         <select name="state" id="state" class="normal-select">
                             <option @if ($state == 'PUBLISHED') selected @endif value="PUBLISHED">Publicado</option>
                             <option @if ($state == 'DRAFT') selected @endif value="DRAFT">Borrador</option>
                             <option @if ($state == 'TRASH') selected @endif value="TRASH">En papelera</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col s12 m12">
+                        <label for="autores"><span class="required">*</span> Autor/es:</label>
+                        <select name="autores" id="autores" class="select2-normal" multiple>
+
+                            @foreach ($authors as $author)
+                                @php $checked = ''; @endphp
+                                        
+                                @if (count($bookAuthor) > 0)
+                                    @foreach ($bookAuthor as $selected)
+                                        @php
+                                            if($selected->_id == $author->_id){
+                                                $checked = 'selected="selected"';
+                                            }
+                                        @endphp
+                                    @endforeach
+                                @endif
+                                <option {{ $checked }} value="{{ $author->_id }}">{{ $author->name }}</option>
+                            @endforeach
+
                         </select>
                     </div>
 
@@ -191,7 +216,7 @@
 
                     <div class="form-group col s12 m12">
                         <label for="description">Descripción:</label>
-                        <textarea name="description" id="description">{{$description}}</textarea>
+                        <textarea name="description" id="description" placeholder="Descripción del libro...">{{$description}}</textarea>
                     </div>
 
                 </div>
