@@ -14,8 +14,16 @@ class Authors extends GuzzleHttpRequest {
 		return $this->get("authors/{$id}");
 	}
 
+	public function create($body) {
+		return $this->post("authors", $body);
+	}
+
 	public function updateById($id, $update) {
 		return $this->put("authors/{$id}", $update);
+	}
+
+	public function deleteById($id) {
+		return $this->delete("authors/{$id}");
 	}
 	
 }

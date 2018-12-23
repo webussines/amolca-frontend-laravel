@@ -30,7 +30,7 @@ const language = {
 };
 
 const createDataTable = function() {
-	var table = $('table.authors').dataTable( {
+	var table = $('table.authors').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
 	    ajax: {
@@ -87,6 +87,46 @@ const createDataTable = function() {
 	    ]
 	});
 
+	DeleteAuthor('.data-table tbody', table);
+
 	$('#DataTables_Table_0_length select').formSelect();
 	$('.dataTables_filter input[type="search"]').attr('placeholder', 'Escribe una palabra clave para encontrar una autor');
+}
+
+const DeleteAuthor = function(tbody, table) {
+
+	$(tbody).on('click', '.delete', function() {
+
+		let data = table.row($(this).parents("tr")).data();
+
+		let alerta = confirm('Seguro que deseas eliminar permanentemente el libro: ' + data.name);
+
+		if(alerta) {
+			if($('.loader').hasClass('hidde'))
+				$('.loader').removeClass('hidde')
+
+			$.ajax({
+				type: "DELETE",
+				url: "/am-admin/autores/" + data._id,
+				data: { "_token": $('#_token').val() }
+			}).done(function(resp) {
+				console.log(resp)
+
+				$('.data-table').DataTable().ajax.reload();
+
+				$('table.authors').DataTable().on('draw', function() {
+					if(!$('.loader').hasClass('hidde'))
+						$('.loader').addClass('hidde')
+
+					let toastMsg = 'Se elminó exitosamente el autor: ' + data.name + '.';
+					M.toast({html: toastMsg, classes: 'green accent-4 bottom'});
+				})
+
+			}).catch(function(err) {
+				console.log(err)
+			})
+		}
+
+	});
+
 }

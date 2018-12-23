@@ -18,7 +18,7 @@
 
             <ul class="submenu" data-menu="specialties">
                 <li><a href="/am-admin/especialidades">Todos las especialidades</a></li>
-                <li><a>Añadir especialidad</a></li>
+                <li><a href="/am-admin/especialidades/create">Añadir especialidad</a></li>
             </ul>
         </li>
         <li>
@@ -28,7 +28,7 @@
 
             <ul class="submenu" data-menu="authors">
                 <li><a href="/am-admin/autores">Todos los autores</a></li>
-                <li><a>Añadir autor</a></li>
+                <li><a href="/am-admin/autores/create">Añadir autor</a></li>
             </ul>
         </li>
         <li>

@@ -37,7 +37,7 @@ const subMenuInteraction = function() {
 
             //Remove clase "actived" al item
             if(parent.length > 0) {
-              console.log($(parent[0]))
+              //console.log($(parent[0]))
               if(!$(parent[0]).hasClass('actived'))
                 $(parent[0]).addClass('actived');
             }

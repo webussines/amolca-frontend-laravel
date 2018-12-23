@@ -3,6 +3,8 @@ $(document).ready(function() {
 	InitEditorBoxes();
 	SaveAuthor();
 
+	ResetFormErrors();
+
 });
 
 //Funcion para inicializar los editores tinymce
@@ -39,14 +41,32 @@ const GetMetaTags = function() {
 
 }
 
+const ResetFormErrors = function() {
+	$('.required-field').on('keyup change', function() {
+
+		if($(this).val() !== '' && $(this).val() !== ' ') {
+
+			if($(this).hasClass('field-error'))
+				$(this).removeClass('field-error')
+
+		}
+
+	})
+}
+
 const SaveAuthor = function() {
 
 	$('.save-resource').on('click', function() {
 
+		let flag = true;
+		let _id = $('#_id').val();
+		let _action = $('#_action').val();
+		let _token = $('#_token').val();
+		let _user = $('#_user').val();
+
 		if($('.loader').hasClass('hidde'))
 			$('.loader').removeClass('hidde')
 
-		let id = $('#_id').val();
 		let name = $('#name').val();
 		let description = tinymce.activeEditor.getContent();
 		let image = $('#image-url').val();
@@ -66,25 +86,66 @@ const SaveAuthor = function() {
 			metaTags: metaTags
 		}
 
-		$.ajax({
-			method: 'POST',
-			url: '/am-admin/authors/edit/' + id,
-			data: {
-				"update": author,
-				"_token": $('#_token').val()
+		let ActionRoute;
+	
+		switch(_action) {
+			case 'edit':
+				ActionRoute = '/am-admin/authors/edit/' + _id;
+			break;
+
+			case 'create':
+				ActionRoute = '/am-admin/autores';
+			break;
+		}
+
+		$('.required-field').each(function(){
+			
+			let val = $(this).val();
+
+			if(val === ' ' || val === '' || val === null) {
+				$(this).addClass('field-error');
+				flag = false;
 			}
-		}).done(function(resp) {
-			console.log(resp)
 
-			let data = JSON.parse(resp);
+		});
 
-			if(data._id !== undefined) {
-				location.reload();
-			} else {
-				switch(data.status) {
+		if(flag) {
+
+			$.ajax({
+				method: 'POST',
+				url: ActionRoute,
+				data: {
+					"body": author,
+					"_token": _token
 				}
-			}
-		})
+			}).done(function(resp) {
+				console.log(resp)
+
+				let data = JSON.parse(resp);
+
+				if(data._id !== undefined) {
+					
+					switch(_action) {
+						case 'edit':
+							location.reload();
+						break;
+						case 'create':
+							window.location.href = '/am-admin/autores/' + data._id;
+						break;
+					}
+
+				}
+			}).catch(function(err) {
+				console.log(err)
+			})
+
+		} else {
+			if(!$('.loader').hasClass('hidde'))
+				$('.loader').addClass('hidde')
+
+			let toastMsg = 'Debes llenar los campos obligatorios.';
+			M.toast({html: toastMsg, classes: 'red accent-4 bottom left'});
+		}
 
 	});
 

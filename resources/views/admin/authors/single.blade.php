@@ -1,10 +1,22 @@
 @extends('admin.layouts.account')
 
 @php
+    $id = (isset($author->_id)) ? $author->_id : '';
+    $name = (isset($author->name)) ? $author->name : '';
+    $image = (isset($author->image)) ? $author->image : 'https://amolca.webussines.com/uploads/authors/no-author-image.png';
     $description = (isset($author->description)) ? $author->description : ' ';
+    $authorSpecialty = (isset($author->specialty)) ? $author->specialty : [];
+
+    $metaTitle = (isset($author->metaTitle)) ? $author->metaTitle : '';
+    $metaDescription = (isset($author->metaDescription)) ? $author->metaDescription : '';
+    $metaTags = (isset($author->metaTags)) ? $author->metaTags : [];
 @endphp
 
-@section('title', 'Autor: ' . $author->name . ' - Admin Amolca')
+@if ($name !== '')
+    @section('title', 'Autor: ' . $name . ' - Admin Amolca')
+@else
+    @section('title', 'Crear nuevo autor - Admin Amolca')
+@endif
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/admin/single-author.css') }}">
@@ -37,7 +49,7 @@
 
     <div class="row single section-header valign-wrapper">
 		<div class="col s12 m10 l10">
-			<p class="title"> {{$author->name}} </p>
+			<p class="title">@if ($name !== '') {{$name}} @else Creando nuevo autor @endif</p>
 		</div>
 		<div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
@@ -52,7 +64,9 @@
     <form class="author-form" id="author-form" enctype="multipart/form-data">
 
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
-        <input type="hidden" id="_id" value="{{ $author->_id }}">
+        <input type="hidden" id="_action" value="{{ $action }}">
+        <input type="hidden" id="_user" value="{{ session('user')->_id }}">
+        <input type="hidden" id="_id" value="{{ $id }}">
         <input type="hidden" id="_src" value="authors">
 
         <ul class="tabs top-tabs">
@@ -73,24 +87,21 @@
 
                 <div class="col s12 m5 col-image">
 
-                    @if (isset($author->image))
-                        <img id="resource-image" src="{{ $author->image }}" alt="">
-                        <input type="hidden" id="image-url" name="image-url" value="{{ $author->image }}">
-                    @else
-                        <img id="resource-image" src="https://amolca.webussines.com/uploads/authors/no-author-image.png" alt="">
-                        <input type="hidden" id="image-url" name="image-url">
-                    @endif
+                    <div class="image-wrap">
+                        <img id="resource-image" src="{{ $image }}" alt="">
+                        <input type="hidden" id="image-url" name="image-url" value="{{ $image }}">
 
-                    <div class="circle-preloader preloader-wrapper big active">
-                        <div class="spinner-layer spinner-green-only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="gap-patch">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="circle-clipper right">
-                                <div class="circle"></div>
+                        <div class="circle-preloader preloader-wrapper big active">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -107,7 +118,7 @@
                         <input type="button" id="save-file-btn" class="save" value="Guardar imagen">
 
                         <div class="file-upload-wrapper">
-                            <button id="upload-file-btn" class="upload">Modificar imagen</button>
+                            <button id="upload-file-btn" class="upload">Seleccionar imagen</button>
                             <input type="file" id="image" name="image">
                         </div>
                     </div>
@@ -118,12 +129,12 @@
 
                     <div class="form-group col s12 m12">
                         <label for="name"><span class="required">*</span> Nombre del autor:</label>
-                        <input type="text" name="name" id="name" value="{{ $author->name }}">
+                        <input type="text" name="name" id="name" class="required-field" placeholder="Nombre del autor..." value="{{ $name }}">
                     </div>
 
                     <div class="form-group col s12 m12">
                         <label for="description">Descripción:</label>
-                        <textarea name="description" id="description">{{ $description }}</textarea>
+                        <textarea name="description" id="description" placeholder="Descripción del autor...">{{ $description }}</textarea>
                     </div>
 
                 </div>
@@ -143,13 +154,15 @@
                                 <label for="specialty-{{$specialty->_id}}">
                                     @php $checked = ''; @endphp
                                     
-                                    @foreach ($author->specialty as $selected)
-                                        @php
-                                            if($selected->_id == $specialty->_id){
-                                                $checked = 'checked="checked"';
-                                            }
-                                        @endphp
-                                    @endforeach
+                                    @if (count($authorSpecialty) > 0)
+                                        @foreach ($authorSpecialty as $selected)
+                                            @php
+                                                if($selected->_id == $specialty->_id){
+                                                    $checked = 'checked="checked"';
+                                                }
+                                            @endphp
+                                        @endforeach
+                                    @endif
 
                                     <input type="checkbox" name="specialty" id="specialty-{{$specialty->_id}}"  {{$checked}} value="{{$specialty->_id}}">
 
@@ -166,13 +179,15 @@
                                         <label for="specialty-{{$child->_id}}">
                                             @php $checked = ''; @endphp
                                             
-                                            @foreach ($author->specialty as $selected)
-                                                @php
-                                                    if($selected->_id == $child->_id){
-                                                        $checked = 'checked="checked"';
-                                                    }
-                                                @endphp
-                                            @endforeach
+                                            @if (count($authorSpecialty) > 0)
+                                                @foreach ($authorSpecialty as $selected)
+                                                    @php
+                                                        if($selected->_id == $child->_id){
+                                                            $checked = 'checked="checked"';
+                                                        }
+                                                    @endphp
+                                                @endforeach
+                                            @endif
 
                                             <input type="checkbox" name="specialty" id="specialty-{{$child->_id}}"  {{$checked}} value="{{$child->_id}}">
 
@@ -199,7 +214,7 @@
 
                 <div class="form-group col s12 m8">
                     <label for="meta-title">Meta titulo:</label>
-                    <input type="text" id="meta-title" name="meta-title" placeholder="Meta titulo del autor..." value="@if (isset($author->metaTitle)) {{$author->metaTitle}} @endif">
+                    <input type="text" id="meta-title" name="meta-title" placeholder="Meta titulo del autor..." value="{{ $metaTitle }}">
                 </div>
             </div>
 
@@ -210,7 +225,7 @@
 
                 <div class="form-group col s12 m8">
                     <label for="meta-description">Meta descripción:</label>
-                    <textarea rows="3" id="meta-description" name="meta-description" placeholder="Meta descripción del autor...">@if (isset($author->metaDescription)) {{$author->metaDescription}} @endif</textarea>
+                    <textarea rows="3" id="meta-description" name="meta-description" placeholder="Meta descripción del autor...">{{$metaDescription}}</textarea>
                 </div>
             </div>
 
@@ -222,12 +237,10 @@
                 <div class="form-group col s12 m8">
                     <label for="meta-tags">Meta etiquetas:</label>
                     
-                        @if (isset($author->metaTags) && count($author->metaTags) > 0)
-                            <textarea rows="3" id="meta-tags" name="meta-tags" placeholder="Meta etiquetas del autor...">@foreach ($author->metaTags as $tag)
-                                {{$tag}}
-                            @endforeach</textarea>
+                        @if (count($metaTags) > 0)
+                            <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Meta etiquetas del autor...">@foreach ($metaTags as $tag){{$tag}}@endforeach</textarea>
                         @else
-                            <textarea rows="3" id="meta-tags" name="meta-tags" placeholder="Separar cada etiqueta con una comma ( , )..."></textarea>
+                            <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Separar cada etiqueta con una comma ( , )..."></textarea>
                         @endif
                 </div>
             </div>

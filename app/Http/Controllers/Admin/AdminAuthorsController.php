@@ -46,31 +46,41 @@ class AdminAuthorsController extends Controller
         $specialties = $this->specialties->all();
         $author = $this->authors->findById($id);
 
-        return view('admin.authors.edit', ['author' => $author, 'specialties' => $specialties]);
+        return view('admin.authors.single', [
+            'action' => 'edit',
+            'author' => $author,
+            'specialties' => $specialties
+        ]);
     }
 
     public function edit($id)
     {
-        $update = Input::post('update');
-        return $this->authors->updateById($id, $update);
+        $body = Input::post('body');
+        return $this->authors->updateById($id, $body);
     }
 
     public function create()
     {
-        //
+        $specialties = $this->specialties->all();
+
+        return view('admin.authors.single', [
+            'action' => 'create',
+            'specialties' => $specialties
+        ]);
     }
 
     public function store(Request $request)
     {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
+        $author = $request->post('body');
+        return $this->authors->create($author);
     }
 
     public function destroy($id)
+    {
+        return $this->authors->deleteById($id);
+    }
+
+    public function update(Request $request, $id)
     {
         //
     }
