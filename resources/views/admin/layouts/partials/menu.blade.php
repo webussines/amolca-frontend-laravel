@@ -88,9 +88,8 @@
             </a>
 
             <ul class="submenu" data-menu="users">
-                <li><a>Ver usuarios</a></li>
-                <li><a>Añadir cliente</a></li>
-                <li><a>Añadir empleado</a></li>
+                <li><a href="/am-admin/usuarios">Ver todos los usuarios</a></li>
+                <li><a href="/am-admin/usuarios/create">Añadir usuario</a></li>
             </ul>
         </li>
         <li>

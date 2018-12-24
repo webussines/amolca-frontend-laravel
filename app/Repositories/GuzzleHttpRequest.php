@@ -20,6 +20,31 @@ class GuzzleHttpRequest {
 
     }
 
+    public function getAuthenticated($url) {
+
+        try {
+
+            $headers = [
+                        "Content-type" => "application/json",
+                        "authorization" => "Bearer " . session('access_token')
+                    ];
+
+            $req = $this->client->request('GET', $url, ["headers" => $headers]);
+            $resp = $req->getBody()->getContents();
+
+            return json_decode($resp);
+
+        } catch(ClientException $e) {
+
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+
+            return $responseBodyAsString;
+            
+        }
+
+    }
+
     public function post($url, $body) {
 
         try {

@@ -260,6 +260,7 @@ nav-menu {
 }
 /*Select2 data list styles*/
 .select2-container {
+    margin-bottom: 8px !important;
     width: 100% !important;
 }
     .select2-container .select2-selection--single {
