@@ -92,5 +92,7 @@ const sendLoginData = (username, password, token) => {
 			.css('display', 'block')
 
 		$('input[type="submit"]').val('Iniciar sesión').removeAttr('disabled')
+	}).catch(function(err) {
+		console.log(err)
 	})
 }

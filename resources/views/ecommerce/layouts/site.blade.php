@@ -7,7 +7,7 @@
 		<link rel="icon" type="image/x-icon" href="{{ asset('img/common/favicon.ico') }}">
 
 		<link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
-		<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/ecommerce/common.css') }}">
 		<!--MATERIALIZE STYLES-->
 		<link rel="stylesheet" href="{{ asset('libs/materialize/css/materialize.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('libs/icomoon/icomoon.css') }}">

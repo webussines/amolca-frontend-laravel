@@ -25,11 +25,25 @@
 				<span>$0.000</span>
 			</a>
 		</li>
-		<li>
-			<a id="login-btn" routerlink="/iniciar-sesion" class="waves-effect waves-light normal" href="/iniciar-sesion">
-				<i class="icon-person"></i>
-				<span>Inicar sesión</span>
-			</a>
-		</li>
+		@if ( session('user') === null )
+			<li>
+				<a id="login-btn" routerlink="/iniciar-sesion" class="waves-effect waves-light normal" href="/iniciar-sesion">
+					<i class="icon-person"></i>
+					<span>Inicar sesión</span>
+				</a>
+			</li>
+		@else
+			<li>
+				<a id="login-btn dropdown-btn" class="dropdown-btn" data-target="user-menu-dropdown">
+					<i class="icon-person"></i>
+					<span>{{ session('user')->name }}</span>
+				</a>
+				<ul id="user-menu-dropdown" class="user-menu dropdown-content">
+			        <li><a href="/mi-cuenta">Mi cuenta</a></li>
+			        <li><a href="/logout">Cerrar sesión</a></li>
+			    </ul>
+			</li>
+		@endif
+
 	</ul>
 </div>

@@ -10,8 +10,8 @@ Route::group(['prefix' => 'am-admin'], function() {
 	});
 
 	//Login & logout
-	Route::get('/login', 'Admin\AdminAuthController@login');
-	Route::get('/logout', 'Admin\AdminAuthController@logout');
+	Route::get('/login', 'AuthController@login');
+	Route::get('/logout', 'AuthController@AdminLogout');
 
 	Route::group(['middleware' => 'admin'], function() {
 
@@ -66,8 +66,16 @@ Route::group(['prefix' => 'am-admin'], function() {
 	});
 });
 
-Route::get('/', 'Ecommerce\HomeController@index');
+//Authentication ecommerce routes
 Route::get('/iniciar-sesion', 'Ecommerce\HomeController@login');
+Route::get('/logout', 'AuthController@EcommerceLogout');
+
+Route::group(['middleware' => 'ecommerce', 'prefix' => 'mi-cuenta'], function() {
+	Route::get('/', 'Ecommerce\AccountController@account');
+});
+
+//Simple routes
+Route::get('/', 'Ecommerce\HomeController@index');
 Route::get('/carrito', 'Ecommerce\HomeController@cart');
 Route::get('/especialidad/{slug}', 'Ecommerce\SpecialtiesController@show');
 Route::get('/{slug}', 'Ecommerce\BooksController@show');

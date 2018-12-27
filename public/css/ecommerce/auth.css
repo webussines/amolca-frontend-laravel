@@ -1,0 +1,108 @@
+.auth-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 500px;
+}
+
+.page-container.auth {
+    background-color: #55B9D4;
+    /*background-image: url('https://www.amolca.com/assets/img/common/example-library.jpg');*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 80px;
+    padding-top: 80px;
+    position: relative;
+}
+    .page-container.auth:before {
+        content: '';
+        background-color: rgba(0, 57, 111, 0.5);
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        z-index: 0;
+    }
+
+.content {
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 500px;
+}
+
+/*Tabs headers*/
+.tabs .tab a, .tabs .tab {
+    background-color: #55B9D4;
+    color: #ffffff;
+    font-family: 'Tahoma';
+    font-size: 16px;
+    font-weight: normal;
+    opacity: 1;
+}
+    .tabs .tab a:hover, .tabs .tab a:focus, .tabs .tab a:focus.active, .tabs .tab a.active {
+        background-color: #00396F;
+        color: #ffffff;
+    }
+
+.tabs .indicator {
+    background-color: #00396F;
+}
+
+/*Content of tabs*/
+.content-tabs {
+    padding: 40px;
+    position: relative;
+}
+    .content-tabs#login, .col.terms-condition {
+        text-align: center;
+    }
+
+    .col.terms-condition {
+        margin: 10px auto 15px;
+    }
+
+/*Loader*/
+.loader {
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+    .loader .progress {
+        margin: 0px;
+    }
+
+/*GLobal error*/
+.error {
+    text-align: center;
+}
+
+/*Buttons*/
+.button {
+    font-weight: bold;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    width: 100%;
+}
+
+/*Login styles*/
+#login-form input {
+    text-align: center;
+}
+
+@media screen and (max-width: 578px) {
+    .content {
+        width: 85%;
+    }
+    
+    .content-tabs {
+        padding: 30px 20px;
+    }
+}

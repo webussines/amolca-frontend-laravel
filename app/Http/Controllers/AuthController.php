@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Repositories\Authentication;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
-class AdminAuthController extends Controller
+class AuthController extends Controller
 {
 
 	protected $authentication;
@@ -31,10 +31,17 @@ class AdminAuthController extends Controller
 
     }
 
-    public function logout() {
+    public function AdminLogout() {
 
     	$this->request->session()->flush();
     	return redirect('am-admin');
+
+    }
+
+    public function EcommerceLogout() {
+
+        $this->request->session()->flush();
+        return redirect('/');
 
     }
 }
