@@ -15,3 +15,8 @@ use Illuminate\Http\Request;
 
 
 Route::post('upload', 'Api\ApiArchivesController@upload_file');
+
+Route::group(['prefix' => 'options'], function() {
+	Route::post('/', 'Api\ApiOptionsController@store');
+	Route::get('/{name}', 'Api\ApiOptionsController@show');
+});

@@ -1,14 +1,18 @@
 <?php
 
-namespace App;
+namespace App\Http\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Options extends Model
 {
-    use Notifiable;
+
+	/**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'am_options';
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'option_name', 'option_value', 'autoload',
     ];
 
     /**

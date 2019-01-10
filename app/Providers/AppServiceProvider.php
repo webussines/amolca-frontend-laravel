@@ -5,6 +5,8 @@ namespace App\Providers;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('COPMoney', function ($money) {
             return "<?php echo '$' . number_format($money, 0, ',', '.'); ?>";
         });
+
+        Schema::defaultStringLength(191);
     }
 
     public function register()
