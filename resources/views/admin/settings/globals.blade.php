@@ -31,7 +31,7 @@
 <table class="settings-table">
 	<tbody>
 		<tr class="subtitle">
-			<td colspan="2">Información de Casa Matríz</td>
+			<td colspan="2">Información de Casa Matriz</td>
 		</tr>
 
 		<tr class="options">
