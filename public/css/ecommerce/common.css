@@ -26,7 +26,7 @@
     $white-transparence: rgba(255,255,255,0.5);
 
     //Fonts
-    $primary-font: 'Montserrat';
+    $primary-font: 'Tahoma';
 
     $sm-font: 13px;
     $md-font: 16px;
@@ -341,6 +341,12 @@ ul.social-networks.top {
     padding-bottom: 40px;
     padding-top: 40px;
     position: relative;
+    width: 90%;
+}
+
+.common-container {
+    margin-left: auto;
+    margin-right: auto;
     width: 90%;
 }
 
@@ -672,6 +678,55 @@ form.big-searcher {
                     margin-left: 5px;
                 }
 
+/*Authors loop*/
+.authors-loop {
+    position: relative;
+}
+    .authors-loop .item, .authors-loop .item > * {
+        outline: 0;
+    }
+
+    .authors-loop .content {
+        font-family: 'Tahoma';
+        margin: 0px auto;
+        text-align: center;
+        -webkit-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+        width: 90%;
+    }
+        .authors-loop .image {
+            border-radius: 50%;
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            height: 150px;
+            margin: 0px auto 20px;
+            overflow: hidden;
+            width: 150px;
+        }
+            .authors-loop .image a {
+                display: block;
+                height: 150px;
+                width: 150px;
+            }
+                .authors-loop .image img {
+                    max-height: 150px;
+                    max-width: 150px;
+                }
+        .authors-loop .name, .authors-loop .name a {
+            color: #00396F;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: normal;
+            margin-bottom: 10px;
+            margin-top: 0px;
+        }
+        .authors-loop .description {
+            color: #666666;
+            margin: 20px 10px;
+        }
+
 /*Slick Carouse*/
 .slick-prev, .slick-next {
     background-color: transparent;
@@ -709,6 +764,13 @@ form.big-searcher {
     .slick-prev:active, .slick-next:active {
         background-color: transparent;
     }
+
+.slick-frame {
+    visibility: hidden;
+}
+.slick-frame.slick-initialized {
+    visibility: visible;
+}
 
 /*Specialty page styles*/
 .specialty-title {

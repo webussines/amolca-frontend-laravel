@@ -1,6 +1,6 @@
 jQuery(function($) {
 
-	$('.books-carousel').slick({
+	$('.authors-carousel').slick({
 		infinite: true,
 		slidesToScroll: 1,
 		autoplay: true,

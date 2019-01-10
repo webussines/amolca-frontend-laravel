@@ -4,6 +4,7 @@
 
 @section('scripts')
 <script src="{{ asset('js/ecommerce/carousel-books.js') }}"></script>
+<script src="{{ asset('js/ecommerce/carousel-authors.js') }}"></script>
 <script src="{{ asset('libs/slickslider/js/slick.min.js') }}"></script>
 @endsection
 
@@ -43,6 +44,10 @@
 	<h2 class="title">
 		Autores <span class="color-blue-light">destacados</span>
 	</h2>
+
+	<div class="common-container">
+		@include('ecommerce.loops.authors', ['books' => $authors, 'type' => 'carousel', 'items_per_row' => 4])
+	</div>
 </div>
 
 @endsection

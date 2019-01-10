@@ -10,7 +10,7 @@
 		@break
 
 	@case('carousel')
-		<div class="books-loop slick-carousel" data-slick='{ "slidesToShow": {{ $itemsPerRow }} }'>
+		<div class="books-loop books-carousel" data-slick='{ "slidesToShow": {{ $itemsPerRow }} }'>
 		@break
 
 	@default
