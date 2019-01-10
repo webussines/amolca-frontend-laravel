@@ -11,14 +11,15 @@ class HomeController extends Controller
     
     protected $books;
 
-    public function __construct(Books $books)
-    {
-        //$this->middleware('auth');
+    public function __construct(Books $books) {
+        $this->books = $books;
     }
 
     public function index()
     {
-        return view('ecommerce.home');
+        $odontologic = $this->books->all('skip=0&limit=8');
+        $medician = $this->books->all('skip=8&limit=8');
+        return view('ecommerce.home', [ 'medician' => $medician, 'odontologic' => $odontologic ]);
     }
 
     public function login() 

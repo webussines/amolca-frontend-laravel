@@ -2,9 +2,17 @@
 
 @section('title', "$book->title - Amolca Editorial Médica y Odontológica")
 
+<!--Add single books scripts-->
+@section('scripts')
+<script src="{{ asset('js/single-book.js') }}"></script>
+<script src="{{ asset('js/ecommerce/carousel-books.js') }}"></script>
+<script src="{{ asset('libs/slickslider/js/slick.min.js') }}"></script>
+@endsection
+
 <!--Add single books styles-->
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/single-book.css') }}">
+<link rel="stylesheet" href="{{ asset('libs/slickslider/css/slick.css') }}">
 @endsection
 
 @section('contentClass', 'page-container book')
@@ -146,83 +154,19 @@
 	<div class="content-container">
 		<div class="books-loop items-per-page-4">
 
-			@foreach ($related as $relatedBook)
-				<div class="item">
-					<a class="contain-img" href="/{{$relatedBook->slug}}">
-						<img alt="{{$relatedBook->title}}" title="{{$relatedBook->title}}" src="{{$relatedBook->image}}">
-					</a>
-					<!--Versions book loop-->
-					<div class="versions">
-						@foreach ($relatedBook->version as $version)
-							
-							<!--Paper version icon-->
-							@if ($version == "PAPER")
-								<a class="version-btn tooltipped" data-position="top" data-tooltip="Papel" title="Papel">
-									<span class="icon-book"></span>
-								</a>
-							@endif
-							
-							<!--Ebook version icon-->
-							@if ($version == "EBOOK")
-								<a class="version-btn tooltipped" data-position="top" data-tooltip="Ebook" title="Ebook">
-									<span class="icon-document-text"></span>
-								</a>
-							@endif
+			@php
+				$related_options = [ 
+					'type' => 'carousel',
+					'items_per_page' => 8,
+					'items_per_row' => 4,
+					'books' => $related,
+				];
+			@endphp
 
-							<!--Video version icon-->
-							@if ($version == "VIDEO")
-								<a class="version-btn tooltipped" data-position="top" data-tooltip="Vídeo" title="Vídeo">
-									<span class="icon-media-play"></span>
-								</a>
-							@endif
-
-						@endforeach
-					</div>
-					<div class="info">
-						<h3 class="name">
-							<a href="/{{$relatedBook->slug}}">{{$relatedBook->title}}</a>
-						</h3>
-						<p class="authors">
-
-							<!--Authors loop-->
-							@foreach ($relatedBook->author as $author)
-								<span>
-									<a href="/autor/{{$author->slug}}">{{$author->name}} </a>
-								</span>
-							@endforeach
-
-						</p>
-
-						<!--Countries loop-->
-						@foreach ($relatedBook->countries as $country)
-							<!--Show price if country is the actual-->
-							@if ($country->name == $active_country)
-								<div class="actions">
-									<p class="price" id="price">@COPMoney($country->price)</p>
-									<p class="btns">
-										<a class="cart-btn tooltipped" data-position="top" data-tooltip="Añadir al carrito">
-											<span class="icon-add_shopping_cart"></span>
-										</a>
-										<a class="hearth-btn tooltipped" data-position="top" data-tooltip="Añadir a mi lista de deseos">
-											<span class="icon-heart-outline"></span>
-										</a>
-									</p>
-								</div>
-							@endif
-
-						@endforeach
-
-					</div>
-				</div>
-			@endforeach
+			@include('ecommerce.loops.books', $related_options)
 
 		</div>
 	</div>
 
 </div>
-@endsection
-
-<!--Add single books styles-->
-@section('scripts')
-<script src="{{ asset('js/single-book.js') }}"></script>
 @endsection

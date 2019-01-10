@@ -16,7 +16,7 @@
 
 		<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 		<script src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
-		<script src="{{ asset('js/common.js') }}"></script>
+		<script src="{{ asset('js/admin/common-admin.js') }}"></script>
 		<script src="{{ asset('js/admin/nav-menu.js') }}"></script>
 		@yield('scripts')
 
