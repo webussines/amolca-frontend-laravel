@@ -334,6 +334,20 @@ ul.social-networks.top {
 .main p {
     margin: 7px auto;
 }
+    .section-title {
+        background-image: url(/img/common/titles-bg.png);
+        background-position: left center;
+        background-size: cover;
+        color: #fff;
+        font-family: Tahoma;
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 40px;
+        padding: 15px 5%;
+    }
+    .main .subtitle {
+        font-size: 30px;
+    }
 
 .content-container {
     margin-left: auto;
@@ -348,6 +362,12 @@ ul.social-networks.top {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
+}
+
+.common-separator {
+    background-color: #F5F5F5;
+    height: 1px;
+    width: 100%;
 }
 
 .content-block {
@@ -801,17 +821,47 @@ form.big-searcher {
         margin: 0;
     }
 
-/*Sections titles*/
-.section-title {
-    background-image: url(/img/common/titles-bg.png);
-    background-position: left center;
-    background-size: cover;
-    color: #fff;
-    font-family: Tahoma;
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 40px;
-    padding: 15px 5%;
+/*Authors page styles*/
+.author-books .subtitle {
+    color: #00396F;
+    padding-left: 15px;
+}
+
+.author .image-container {
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    width: 250px;
+}
+    .author .image-container img {
+        left: 50%;
+        min-height: 100%;
+        min-width: 100%;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translate( -50%, -50% );
+        -moz-transform: translate( -50%, -50% );
+        -ms-transform: translate( -50%, -50% );
+        transform: translate( -50%, -50% );
+    }
+
+    .author .name {
+        color: #00396F;
+        font-size: 40px;
+        font-weight: bold;
+        margin-top: 0px;
+    }
+    .author .description {
+        color: #666666;
+        font-size: 18px;
+    }
+
+.author .common-separator {
+    background-color: #cccccc;
+    margin: 60px auto 40px;
 }
 
 /*Footer styles*/

@@ -14,6 +14,10 @@ class Authors extends GuzzleHttpRequest {
 		return $this->get("authors/{$id}");
 	}
 
+	public function findBySlug($slug) {
+		return $this->get("authors/slug/{$slug}");
+	}
+
 	public function create($body) {
 		return $this->post("authors", $body);
 	}

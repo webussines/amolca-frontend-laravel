@@ -22,10 +22,17 @@ class BooksController extends Controller
 
 		$book = $this->books->findBySlug($slug);
 
-		$params = "orderby=title&order=-1&limit=4&skip=0";
-		$related = $this->books->specialty($book->specialty[1]->_id, $params)->books;
+		$related_specialty = $book->specialty[0]->_id;
 
-		return view('ecommerce.book', ["book" => $book, "related" => $related, 'active_country' => env('APP_COUNTRY')]);
+		if(count($book->specialty) > 1) {
+			$related_specialty = $book->specialty[1]->_id;
+		}
+
+		$params = "orderby=publicationYear&order=-1&limit=12&skip=0";
+
+		$related = $this->books->specialty($related_specialty, $params)->books;
+
+		return view('ecommerce.book', ["book" => $book, "related" => $related]);
 
 	}
 

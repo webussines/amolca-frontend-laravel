@@ -36,6 +36,10 @@ class Books extends GuzzleHttpRequest {
 		return $this->delete("books/{$id}");
 	}
 
+	public function author($id, $params = '') {
+		return $this->get("authors/{$id}/books?{$params}");
+	}
+
 	public function specialty($id, $params = '') {
 		return $this->get("specialties/{$id}/books?{$params}");
 	}

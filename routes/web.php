@@ -83,6 +83,7 @@ Route::group(['middleware' => 'ecommerce', 'prefix' => 'mi-cuenta'], function() 
 Route::get('/', 'Ecommerce\HomeController@index');
 Route::get('/carrito', 'Ecommerce\HomeController@cart');
 Route::get('/especialidad/{slug}', 'Ecommerce\SpecialtiesController@show');
+Route::get('/autor/{slug}', 'Ecommerce\AuthorsController@show');
 Route::get('/{slug}', 'Ecommerce\BooksController@show');
 
 Auth::routes();
