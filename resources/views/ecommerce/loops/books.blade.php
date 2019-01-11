@@ -90,27 +90,23 @@
 				</p>
 
 				<!--Acciones-->
-				@if (isset($book->countries))
+				@if ( isset($book->countries) && count($book->countries) > 0 )
 					<div class="actions">
-
 						@for ($c = 0; $c < count($book->countries); $c++)
 							
 							@php $country = $book->countries[$c]; @endphp
 
 							@if ($country->name == env('APP_COUNTRY'))
-								<p class="price">@COPMoney($country->price)</p>
-								<p class="btns">
-									<a class="cart-btn tooltipped" data-position="top" data-tooltip="Añadir al carrito">
-										<span class="icon-add_shopping_cart"></span>
-									</a>
-									<a class="hearth-btn tooltipped" data-position="top" data-tooltip="Añadir a mi lista de deseos">
-										<span class="icon-heart-outline"></span>
-									</a>
-								</p>
+								@include('ecommerce.loops.partials.books.actions', ['show_price' => true, 'price' => $country->price])
+							@else
+								@include('ecommerce.loops.partials.books.actions', ['show_price' => false])
 							@endif
 
 						@endfor
-
+					</div>
+				@else
+					<div class="actions without-price">
+						@include('ecommerce.loops.partials.books.actions', ['show_price' => false])
 					</div>
 				@endif
 

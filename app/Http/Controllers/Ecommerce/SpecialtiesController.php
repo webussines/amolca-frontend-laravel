@@ -28,7 +28,7 @@ class SpecialtiesController extends Controller
 
 
 		$specialty = $this->specialties->find($slug);
-		$books = $this->books->specialty($specialty->_id);
+		$books = $this->books->specialty($specialty->_id, 'orderby=publicationYear&order=-1');
 		$country = $this->books->country;
 
         return view('ecommerce.specialty', ['specialty' => $specialty, 'books' => $books->books, 'active_country' => env('APP_COUNTRY')]);

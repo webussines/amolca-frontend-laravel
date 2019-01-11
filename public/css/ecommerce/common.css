@@ -677,6 +677,18 @@ form.big-searcher {
                     color: #e2231a;
                     margin-left: 5px;
                 }
+        .books-loop .item .actions.without-price {
+            justify-content: flex-start;
+        }
+            .books-loop .item .actions.without-price .hearth-btn {
+                font-size: 15px;
+                line-height: normal;
+                width: auto;
+            }
+                .books-loop .item .actions.without-price .hearth-btn span {
+                    font-size: 24px;
+                    vertical-align: sub;
+                }
 
 /*Authors loop*/
 .authors-loop {
