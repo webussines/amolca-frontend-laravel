@@ -337,6 +337,60 @@ nav-menu {
     padding: 30px;
 }
 
+.error-panel {
+    display: none;
+    position: relative;
+}
+    .error-panel b {
+        color: #E2231A;
+    }
+
+.card-panel .hidde-panel {
+    background-color: #E2231A;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 7px 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+/*Common buttons bottom bar*/
+.fixed-bottom-btns {
+    bottom: 20px;
+    left: -webkit-calc(20% + 20px);
+    left: -moz-calc(20% + 20px);
+    left: -ms-calc(20% + 20px);
+    left: calc(20% + 20px);
+    position: fixed;
+    right: 33px;
+}
+    .fixed-bottom-btns .float-left {
+        float: left;
+    }
+    .fixed-bottom-btns .float-right {
+        float: right;
+    }
+
+    .fixed-bottom-btns a,
+    .fixed-bottom-btns .button,
+    .fixed-bottom-btns input[type="button"],
+    .fixed-bottom-btns input[type="submit"],
+    .save-btn {
+        background-color: #000;
+        border-radius: 35px;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        padding: 17px 20px;
+        max-width: 350px;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+    }
+
 /*Settings tables*/
 .settings-table .subtitle {
     color: #00396f;
@@ -350,3 +404,10 @@ nav-menu {
         font-size: 16px;
         font-style: italic;
     }
+
+code {
+    padding: 3px 5px 2px;
+    margin: 0 1px;
+    background: #eaeaea;
+    background: rgba(0,0,0,.07);
+}

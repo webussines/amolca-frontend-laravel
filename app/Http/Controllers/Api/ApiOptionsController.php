@@ -14,6 +14,15 @@ class ApiOptionsController extends Controller
 
 	protected $options;
 	protected $request;
+    protected $messages = [
+                    'required' => 'El campo :attribute es obligatorio',
+                    'option_name.unique' => 'Ya existe un recurso con el mismo option_name',
+                ];
+
+    protected $rules = [
+                    'option_name' => 'required|string|unique:am_options',
+                    'option_value' => 'required',
+                ];
 
 	public function __construct(Options $options, Request $request) {
 		$this->options = $options;
@@ -24,42 +33,39 @@ class ApiOptionsController extends Controller
     public function store()
     {
 
-        try {
+        $all = $this->request->all('body');
 
-            $messages = [
-                'required' => 'El campo :attribute es obligatorio',
-                'option_name.unique' => 'Ya existe un recurso con el mismo option_name',
-            ];
+        for ($i=0; $i < count($all); $i++) {
 
-            $rules = [
-                'option_name' => 'required|string|unique:am_options',
-                'option_value' => 'required',
-            ];
+            $elem = $all[$i];
 
-            $validator = Validator::make($this->request->all(), $rules, $messages);
+            try {
 
-            if ($validator->fails()) {
+                $validator = Validator::make($elem, $this->rules, $this->messages);
 
-                return Response::json([ 'status' => 400, 'error_type' => 'api', 'errors' => $validator->errors() ], 400);
+                if ($validator->fails()) {
 
+                    return Response::json([ 'status' => 400, 'error_type' => 'api', 'errors' => $validator->errors() ], 400);
+
+                }
+
+                $option = Options::create($elem);
+
+            } catch(QueryException $e) {
+
+                $eCode = $e->errorInfo[1];
+                $eMessage = $e->errorInfo[2];
+
+                if($eCode == 1062){
+                    return Response::json([ 'status' => 409, 'message' => $eMessage ], 409);
+                }
+
+                return Response::json([ 'status' => $eCode, 'message' => $eMessage ], 500);
+                
             }
-
-            $option = Options::create($this->request->all());
-
-            return Response::json(["message" => 'Recurso creado correctamente', "status" => 201], 201);
-
-        } catch(QueryException $e) {
-
-            $eCode = $e->errorInfo[1];
-            $eMessage = $e->errorInfo[2];
-
-            if($eCode == 1062){
-                return Response::json([ 'status' => 409, 'message' => $eMessage ], 409);
-            }
-
-            return Response::json([ 'status' => $eCode, 'message' => $eMessage ], 500);
-            
         }
+
+        return Response::json(["message" => 'Recursos creados correctamente', "status" => 201], 201);
 
     }
     
@@ -74,29 +80,66 @@ class ApiOptionsController extends Controller
 	}
 
 	// Controller method for update one option
-    public function update(Request $request, $name)
+    public function update(Request $request, $name = null)
     {
-        $option = Options::where('option_name', '=', $name)->first();
 
-        if(!$option) {
-            return response()->json(['status' => 404, 'message' => 'El recurso que estas buscando no existe'], 404);
+        if($name == null) {
+
+            $all = $this->request->get('body');
+
+            for ($o=0; $o < count($all); $o++) {
+
+                $elem = $all[$o];
+
+                $option = Options::where('option_name', '=', $elem['option_name'])->first();
+
+                // SI no existe la opción se crea inmediatamente
+                if(!$option) {
+                    try {
+
+                        $validator = Validator::make($elem, $this->rules, $this->messages);
+
+                        if ($validator->fails()) {
+
+                            return Response::json([ 'status' => 400, 'error_type' => 'api', 'errors' => $validator->errors(), 'option' => $elem['option_name'] ], 400);
+
+                        }
+
+                        $option = Options::create($elem);
+
+                    } catch(QueryException $e) {
+
+                        $eCode = $e->errorInfo[1];
+                        $eMessage = $e->errorInfo[2];
+
+                        if($eCode == 1062){
+                            return Response::json([ 'status' => 409, 'message' => $eMessage ], 409);
+                        }
+
+                        return Response::json([ 'status' => $eCode, 'message' => $eMessage ], 500);
+                        
+                    }
+                }
+
+                try {
+
+                    //Actualizar la opcion
+                    $option->update( $elem );
+
+                } catch(QueryException $e) {
+
+                    $eCode = $e->errorInfo[1];
+                    $eMessage = $e->errorInfo[2];
+
+                    return Response::json([ 'status' => $eCode, 'message' => $eMessage ], 500);
+                    
+                }
+
+            }
+
+            return Response::json(['status' => 200, 'message' => 'Recursos actualizados correctamente', 'option' => $option], 200);
         }
 
-        try {
-
-            //Actualizar la taxonomia
-            $option->update( $this->request->all() );
-
-            return Response::json(['status' => 200, 'message' => 'Recurso actualizado correctamente', 'option' => $option], 200);
-
-        } catch(QueryException $e) {
-
-            $eCode = $e->errorInfo[1];
-            $eMessage = $e->errorInfo[2];
-
-            return Response::json([ 'status' => $eCode, 'message' => $eMessage ], 500);
-            
-        }
     }
 
 }

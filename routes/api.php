@@ -18,5 +18,6 @@ Route::post('upload', 'Api\ApiArchivesController@upload_file');
 
 Route::group(['prefix' => 'options'], function() {
 	Route::post('/', 'Api\ApiOptionsController@store');
+	Route::put('/', 'Api\ApiOptionsController@update');
 	Route::get('/{name}', 'Api\ApiOptionsController@show');
 });

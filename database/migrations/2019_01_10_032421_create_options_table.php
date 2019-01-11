@@ -16,7 +16,7 @@ class CreateOptionsTable extends Migration
         Schema::create('am_options', function (Blueprint $table) {
             $table->increments('id');
             $table->string('option_name')->unique();
-            $table->string('option_value');
+            $table->longText('option_value');
             $table->string('option_autoload')->default('yes');
             $table->timestamps();
         });

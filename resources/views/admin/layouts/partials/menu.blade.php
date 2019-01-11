@@ -98,9 +98,7 @@
             </a>
 
             <ul class="submenu" data-menu="settings">
-                <li><a href="/am-admin/ajustes">Configuración global</a></li>
-                <li><a>Optimización SEO</a></li>
-                <li><a>Contacto</a></li>
+                <li><a href="/am-admin/ajustes">Ajustes generales</a></li>
             </ul>
         </li>
         <li>

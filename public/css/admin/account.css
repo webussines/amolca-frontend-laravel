@@ -464,7 +464,10 @@ div#book-modal {
 
 /*Uploaders*/
 .loader.top {
-    margin-top: -28px;
+    left: 20%;
+    position: fixed;
+    right: 0px;
+    top: 42px;
 }
 
 .col.col-image {
