@@ -39,7 +39,7 @@ class AdminBooksController extends Controller
     /*Return all books view*/
     public function index()
     {
-        $params = "orderby=title&order=1&limit=100&skip=0";
+        $params = "orderby=title&order=1&limit=1&skip=0";
         $books = $this->books->all($params);
 
         return view('admin.books.index', ['books' => $books]);
@@ -89,7 +89,7 @@ class AdminBooksController extends Controller
     /*Inventario*/
     public function inventory()
     {
-        $params = "orderby=title&order=1&limit=100&skip=0";
+        $params = "orderby=title&order=1&limit=1&skip=0";
         $books = $this->books->all($params);
 
         return view('admin.books.inventory', ['books' => $books]);
