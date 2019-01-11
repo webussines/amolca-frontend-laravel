@@ -71,6 +71,10 @@ body {
     box-sizing: border-box;
 }
 
+.mce-notification {
+    display: none !important;
+}
+
 /*Buttons*/
 .button, button.button, input.button {
     border-radius: 5px !important;

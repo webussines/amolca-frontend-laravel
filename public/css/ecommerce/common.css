@@ -819,6 +819,9 @@ form.big-searcher {
         color: #a5a5a5;
         text-decoration: none;
     }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     .footer .title {
         color: #666;
         font-size: 25px;
@@ -857,7 +860,10 @@ form.big-searcher {
         display: block;
         margin-bottom: 30px;
     }
-    .footer .block-contact #mobile, .footer .block-contact #phone {
+    .footer .block-contact #mobile,
+    .footer .block-contact #phone,
+    .footer .block-contact #mobile a,
+    .footer .block-contact #phone a {
         color: #666;
         font-size: 25px;
     }

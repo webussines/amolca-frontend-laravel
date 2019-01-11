@@ -2,15 +2,21 @@
 		<div class="custom-row">
 			<div class="custom-col block-contact" id="block-principal">
 				<p class="title">Casa Matriz</p>
-				<p>
-					<span id="direction">Carrera 43 # 9 sur 195, Edificio Square, Torre Inexmoda, Medellín, Colombia</span>
-				</p>
-				<p>
-					<span id="mobile">(574) 4797431</span>
-				</p>
-				<p>
-					<span id="email">contacto@amolca.com</span>
-				</p>
+				<p><span id="direction">
+					<a href="{{ get_option('casa_matriz_address_link') }}" target="_blank">
+						{!! get_option('casa_matriz_address') !!}
+					</a>
+				</span></p>
+				<p><span id="mobile">
+					<a href="{{ get_option('casa_matriz_phone_link') }}">
+						{!! get_option('casa_matriz_phone') !!}
+					</a>
+				</span></p>
+				<p><span id="email">
+					<a href="mailto:{{ get_option('casa_matriz_email') }}">
+						{!! get_option('casa_matriz_email') !!}
+					</a>
+				</span></p>
 			</div>
 			<div class="custom-col" id="block-about">
 				<p class="title">Acerca de</p>
@@ -51,13 +57,25 @@
 				<div class="custom-col block-contact" id="block-country">
 					<p class="title">Amolca Colombia</p>
 					<p>
-						<span id="direction">Calle 47 A # 81-58, Medellín, Antioquia, Colombia</span>
+						<span id="direction">
+							<a href="{{ get_option('amolca_address_link') }}" target="_blank">
+								{!! get_option('amolca_address') !!}
+							</a>
+						</span>
 					</p>
 					<p>
-						<span id="mobile">+57 3175049844</span>
+						<span id="mobile">
+							<a href="{{ get_option('amolca_phone_link') }}">
+								{!! get_option('amolca_phone') !!}
+							</a>
+						</span>
 					</p>
 					<p>
-						<span id="email">gcomercial@amolca.com.co</span>
+						<span id="email">
+							<a href="mailto:{{ get_option('amolca_email') }}">
+								{!! get_option('amolca_email') !!}
+							</a>
+						</span>
 					</p>
 				</div>
 			</div>
