@@ -16,8 +16,16 @@ use Illuminate\Http\Request;
 
 Route::post('upload', 'Api\ApiArchivesController@upload_file');
 
+//Options
 Route::group(['prefix' => 'options'], function() {
 	Route::post('/', 'Api\ApiOptionsController@store');
 	Route::put('/', 'Api\ApiOptionsController@update');
 	Route::get('/{name}', 'Api\ApiOptionsController@show');
+});
+
+//Menus
+Route::group(['prefix' => 'menus'], function() {
+	Route::post('/', 'Api\ApiMenusController@store');
+	Route::put('/', 'Api\ApiMenusController@update');
+	Route::get('/{id}', 'Api\ApiMenusController@show');
 });
