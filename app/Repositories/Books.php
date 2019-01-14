@@ -9,7 +9,7 @@ class Books extends GuzzleHttpRequest {
 	public $country = "COLOMBIA";
 
 	public function all($params = 'limit=30') {
-        return $this->get("books?{$params}");
+        return $this->get("posts?type=book&{$params}");
 	}
 
 	public function findById($id) {

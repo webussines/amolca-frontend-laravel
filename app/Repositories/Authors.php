@@ -7,11 +7,11 @@ use GuzzleHttp\Client;
 class Authors extends GuzzleHttpRequest {
 
 	public function all($params = 'limit=800') {
-        return $this->get("authors?{$params}");
+        return $this->get("posts?type=author&{$params}");
 	}
 
 	public function findById($id) {
-		return $this->get("authors/{$id}");
+		return $this->get("posts/{$id}");
 	}
 
 	public function findBySlug($slug) {
