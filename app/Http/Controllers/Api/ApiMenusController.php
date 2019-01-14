@@ -169,14 +169,18 @@ class ApiMenusController extends Controller
 
     }
     
-	public function show($id) {
-		$option = Menu::where('option_name', '=', $name)->first();
+	public function show($slug) {
+		$menu = Menus::where('slug', '=', $slug)->first();
 
-		if($option == null) {
+		if($menu == null) {
             return response()->json(['status' => 404, 'message' => 'El recurso que estas buscando no existe'], 404);
         }
 
-        return $option;
+        $items = MenuItems::where('menu_id', '=', $menu->id)->orderBy('order', 'asc')->get();
+
+        $menu->items = $items;
+
+        return $menu;
 	}
 
 	// Controller method for update one option
