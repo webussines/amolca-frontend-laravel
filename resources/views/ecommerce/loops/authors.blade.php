@@ -4,7 +4,9 @@
 	$items_per_row = (isset($items_per_row)) ? $items_per_row : 2;
 
 	//Paginator
-	$total_pages = round($counter / $items_per_page, 0, PHP_ROUND_HALF_UP);
+	if($type !== 'carousel') {
+		$total_pages = round($counter / $items_per_page, 0, PHP_ROUND_HALF_UP);
+	}
 @endphp
 
 @switch($type)
@@ -49,6 +51,7 @@
 
 </div>
 
+@if ($type !== 'carousel')
 <ul class="pagination">
 
 	<li class="waves-effect @if($active_page == 1) disabled @endif">
@@ -66,3 +69,4 @@
 	</li>
 
 </ul>
+@endif

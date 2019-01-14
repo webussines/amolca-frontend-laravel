@@ -26,49 +26,52 @@
 
 			<!--Portada del libro-->
 			<a class="contain-img" href="/{{ $book->slug }}">
-				<img src="{{ $book->image }}" alt="{{ $book->title }}" title="{{ $book->title }}">
+				<img src="{{ $book->thumbnail }}" alt="{{ $book->title }}" title="{{ $book->title }}">
 			</a>
 
 			<!--Versiones-->
 			<div class="versions">
-				@for ($v = 0; $v < count($book->version); $v++)
-					
-					@php 
-						$title = '';
-						$icon = '';
-						$version = $book->version[$v];
-					@endphp
-
-					@php
-						switch($version) :
-						    case 'PAPER':
-						        $title = 'Papel';
-						        $icon = '<span class="icon-book"></span>';
-						        break;
-
-						    case 'VIDEO':
-						        $title = 'Vídeo';
-						        $icon = '<span class="icon-play"></span>';
-						        break;
-
-						    case 'EBOOK':
-						        $title = 'Ebook';
-						        $icon = '<span class="icon-device-tablet"></span>';
-						        break;
+				@if (isset($book->version))
+					@for ($v = 0; $v < count($book->version); $v++)
 						
-						    default:
-						        $title = 'Papel';
-						        $icon = '<span class="icon-book"></span>';
-						        break;
-						endswitch;
-					@endphp
-					
+						@php 
+							$title = '';
+							$icon = '';
+							$version = $book->version[$v];
+						@endphp
 
-					<a class="version-btn tooltipped" data-position="top" data-tooltip="{{ $title }}">
-						@php echo $icon; @endphp
-					</a>
-				@endfor
+						@php
+							switch($version) :
+							    case 'PAPER':
+							        $title = 'Papel';
+							        $icon = '<span class="icon-book"></span>';
+							        break;
+
+							    case 'VIDEO':
+							        $title = 'Vídeo';
+							        $icon = '<span class="icon-play"></span>';
+							        break;
+
+							    case 'EBOOK':
+							        $title = 'Ebook';
+							        $icon = '<span class="icon-device-tablet"></span>';
+							        break;
+							
+							    default:
+							        $title = 'Papel';
+							        $icon = '<span class="icon-book"></span>';
+							        break;
+							endswitch;
+						@endphp
+						
+
+						<a class="version-btn tooltipped" data-position="top" data-tooltip="{{ $title }}">
+							@php echo $icon; @endphp
+						</a>
+					@endfor
+				@endif
 			</div>
+			
 			<div class="info">
 
 				<!--Titulo del libro-->
@@ -78,15 +81,17 @@
 
 				<!--Autores-->
 				<p class="authors">
-					@for ($a = 0; $a < count($book->author); $a++)
-						@php $author = $book->author[$a]; @endphp
+					@if (isset($book->author))
+						@for ($a = 0; $a < count($book->author); $a++)
+							@php $author = $book->author[$a]; @endphp
 
-						@if ($a < 4)
-							<span><a href="/autor/{{$author->slug}}">
-								{{ $author->name }}@if($a < 3 && count($book->author) > 4 ), @elseif( $a == 3 && count($book->author) > 4 )... @endif
-							</a></span>
-						@endif
-					@endfor
+							@if ($a < 4)
+								<span><a href="/autor/{{$author->slug}}">
+									{{ $author->name }}@if($a < 3 && count($book->author) > 4 ), @elseif( $a == 3 && count($book->author) > 4 )... @endif
+								</a></span>
+							@endif
+						@endfor
+					@endif
 				</p>
 
 				<!--Acciones-->

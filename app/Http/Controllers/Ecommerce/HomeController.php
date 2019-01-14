@@ -22,9 +22,9 @@ class HomeController extends Controller
         $odontologic = $this->books->all('skip=0&limit=8');
         $medician = $this->books->all('skip=8&limit=8');
 
-        $authors = $this->authors->all('skip=0&limit=8&orderby=title&order=asc');
+        $authors = $this->authors->all('skip=0&limit=8&orderby=thumbnail&order=asc');
 
-        return view('ecommerce.home', [ 'medician' => $medician, 'odontologic' => $odontologic, 'authors' => $authors ]);
+        return view('ecommerce.home', [ 'medician' => $medician->posts, 'odontologic' => $odontologic->posts, 'authors' => $authors->posts ]);
     }
 
     public function login() 
