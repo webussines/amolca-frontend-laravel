@@ -29,7 +29,7 @@
 
 				<!--Countries loop for scroll info interaction-->
 				@foreach ($book->countries as $country)
-					@if ($country->name == $active_country && $country->price > 0 && $country->state == "STOCK")
+					@if ($country->name == env('APP_COUNTRY') && $country->price > 0 && $country->state == "STOCK")
 					<div class="scroll-info">
 						<p class="price">@COPMoney($country->price)</p>
 						<div class="add-to-cart">
@@ -59,7 +59,7 @@
 			</h3>
 
 			@foreach ($book->countries as $country)
-				@if ($country->name == $active_country && $country->price > 0 && $country->state == "STOCK")
+				@if ($country->name == env('APP_COUNTRY') && $country->price > 0 && $country->state == "STOCK")
 					<p class="price">@COPMoney($country->price)</p>
 				@endif
 			@endforeach
@@ -95,7 +95,7 @@
 			</p>
 
 			@foreach ($book->countries as $country)
-				@if ($country->name == $active_country && $country->price > 0 && $country->state == "STOCK")
+				@if ($country->name == env('APP_COUNTRY') && $country->price > 0 && $country->state == "STOCK")
 					<div class="add-to-cart">
 						<input placeholder="Cantidad..." type="number">
 						<a class="button danger waves-effect waves-light">Añadir al carrito</a>
