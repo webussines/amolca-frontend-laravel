@@ -24,6 +24,10 @@ class Books extends GuzzleHttpRequest {
 		return $this->get("books/slug/{$slug}");
 	}
 
+	public function meta($id, $data) {
+		return $this->get("posts/{$id}/{$data}");
+	}
+
 	public function create($body) {
 		return $this->post("books", $body);
 	}

@@ -31,6 +31,7 @@
 
 			<!--Versiones-->
 			<div class="versions">
+
 				@if (isset($book->version))
 					@for ($v = 0; $v < count($book->version); $v++)
 						
@@ -76,7 +77,7 @@
 
 				<!--Titulo del libro-->
 				<h3 class="name">
-					<a href="/{{ $book->slug }}">{{ $book->title }}</a>
+					<a href="/{{ $book->slug }}">{{ $book->id }} {{ $book->title }}</a>
 				</h3>
 
 				<!--Autores-->
@@ -87,7 +88,7 @@
 
 							@if ($a < 4)
 								<span><a href="/autor/{{$author->slug}}">
-									{{ $author->name }}@if($a < 3 && count($book->author) > 4 ), @elseif( $a == 3 && count($book->author) > 4 )... @endif
+									{{ $author->title }}@if($a < 3 && count($book->author) > 4 ), @elseif( $a == 3 && count($book->author) > 4 )... @endif
 								</a></span>
 							@endif
 						@endfor
