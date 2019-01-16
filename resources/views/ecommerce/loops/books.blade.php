@@ -1,6 +1,5 @@
 @php
 	$loopType = (isset($type)) ? $type : 'loop';
-	$itemsPerPage = (isset($items_per_page)) ? $items_per_page : 8;
 	$itemsPerRow = (isset($items_per_row)) ? $items_per_row : 2;
 @endphp
 
@@ -116,3 +115,7 @@
 		</div>
 	@endfor
 </div>
+
+@if ($type !== 'carousel')
+{{ $posts->links() }}
+@endif

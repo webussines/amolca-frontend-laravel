@@ -10,7 +10,7 @@
 
 <div class="content-container">
 
-	@include('ecommerce.loops.books', ['books' => $books, 'type' => 'loop', 'items_per_page' => 12, 'items_per_row' => 4])
+	@include('ecommerce.loops.books', ['books' => $posts, 'type' => 'loop', 'items_per_row' => 4])
 
 </div>
 @endsection

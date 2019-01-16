@@ -838,6 +838,35 @@ form.big-searcher {
     visibility: visible;
 }
 
+.main .pagination {
+    text-align: center;
+}
+    .main .pagination li.active {
+        background-color: #00396f;
+        color: #fff;
+    }
+        .main .pagination li.active .page-link {
+            color: #fff;
+            cursor: initial;
+        }
+    .main .pagination li.page-item.disabled {
+        background-color: #eaeaea;
+    }
+    .main .pagination li:hover {
+        background-color: #55b9d4;
+    }
+        .main .pagination li:hover .page-link {
+            color: #fff;
+        }
+
+        .main .pagination .page-item .page-link {
+            color: #444;
+            display: inline-block;
+            font-size: 1.2rem;
+            padding: 0 10px;
+            line-height: 30px;
+        }
+
 /*Specialty page styles*/
 .specialty-title {
     background-image: url('/img/common/titles-bg.png');
