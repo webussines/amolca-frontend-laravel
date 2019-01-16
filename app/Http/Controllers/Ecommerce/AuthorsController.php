@@ -51,6 +51,11 @@ class AuthorsController extends Controller
 
 		$author = $this->authors->findBySlug($slug);
 
+		// Redirigir al home si el recurso no existe
+		if(!isset($author->id)) {
+			return redirect('/');
+		}
+
 		$params = "orderby=publication_year&order=-1";
 		$author_books = $this->books->author($author->id, $params);
 

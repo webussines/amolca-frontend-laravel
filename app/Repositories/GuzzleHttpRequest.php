@@ -15,8 +15,19 @@ class GuzzleHttpRequest {
 
     public function get($url) {
 
-    	$response = $this->client->request('GET', $url);
-        return json_decode( $response->getBody()->getContents() );
+        try {
+
+        	$response = $this->client->request('GET', $url);
+            return json_decode( $response->getBody()->getContents() );
+
+        } catch(ClientException $e) {
+
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+
+            return $responseBodyAsString;
+            
+        }
 
     }
 

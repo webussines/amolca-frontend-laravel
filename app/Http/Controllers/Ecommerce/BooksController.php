@@ -22,6 +22,11 @@ class BooksController extends Controller
 
 		$book = $this->books->findBySlug($slug);
 
+		// Redirigir al home si el recurso no existe
+		if(!isset($book->id)) {
+			return redirect('/');
+		}
+
 		$related_specialty = $book->taxonomies[0]->id;
 
 		if(count($book->taxonomies) > 1) {

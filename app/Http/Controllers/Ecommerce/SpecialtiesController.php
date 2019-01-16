@@ -42,6 +42,12 @@ class SpecialtiesController extends Controller
 
 		// Obtener informacion y posts de la especialidad
 		$specialty = $this->specialties->find($slug);
+
+		// Redirigir al home si el recurso no existe
+		if(!isset($specialty->id)) {
+			return redirect('/');
+		}
+
 		$books = $this->books->taxonomies($specialty->id, $params);
 
 		// Crear paginacion y arreglo con los posts
