@@ -83,12 +83,11 @@ Route::group(['middleware' => 'ecommerce', 'prefix' => 'mi-cuenta'], function() 
 Route::get('/', 'Ecommerce\HomeController@index');
 Route::get('/carrito', 'Ecommerce\HomeController@cart');
 Route::get('/especialidad/{slug}', 'Ecommerce\SpecialtiesController@show');
+Route::get('/especialidad', function() { return redirect('/especialidades'); });
 Route::get('/especialidades', 'Ecommerce\SpecialtiesController@index');
 
 Route::get('/autores', 'Ecommerce\AuthorsController@index');
-Route::get('/autor', function() {
-	return redirect('/autores');
-});
+Route::get('/autor', function() { return redirect('/autores'); });
 Route::get('/autor/{slug}', 'Ecommerce\AuthorsController@show');
 
 Route::get('/{slug}', 'Ecommerce\BooksController@show');
