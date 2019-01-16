@@ -46,8 +46,8 @@ class AuthorsController extends Controller
 
 		$author = $this->authors->findBySlug($slug);
 
-		$params = "orderby=publicationYear&order=-1";
-		$books = $this->books->author($author->_id, $params);
+		$params = "orderby=publication_year&order=-1";
+		$books = $this->books->author($author->id, $params);
 
 		return view('ecommerce.author', ["author" => $author, "books" => $books]);
 

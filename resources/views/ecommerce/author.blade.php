@@ -1,6 +1,6 @@
 @extends('ecommerce.layouts.site')
 
-@section('title', "$author->name - Amolca Editorial Médica y Odontológica")
+@section('title', "$author->title - Amolca Editorial Médica y Odontológica")
 
 @section('contentClass', 'page-container author')
 @section('content')
@@ -9,12 +9,12 @@
 		<!--Image column-->
 		<div class="col s12 m3 l3 image">
 			<div class="image-container">
-				<img src="{{$author->image}}" />
+				<img src="{{$author->thumbnail}}" />
 			</div>
 		</div>
 		<!--Information column-->
 		<div class="col s12 m9 l9 information">
-			<h2 class="name">{{$author->name}}</h2>
+			<h2 class="name">{{$author->title}}</h2>
 			<div class="description">{!! $author->description !!}</div>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
 	<div class="common-separator"></div>
 
 	<div class="author-books">
-		<p class="subtitle">Libros de <b>{{$author->name}}</b></p>
+		<p class="subtitle">Libros de <b>{{$author->title}}</b></p>
 
 		@php
 			$books_options = [ 

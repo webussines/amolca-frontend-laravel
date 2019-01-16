@@ -41,7 +41,7 @@ class Books extends GuzzleHttpRequest {
 	}
 
 	public function author($id, $params = '') {
-		return $this->get("posts/authors/{$id}/posts?{$params}");
+		return $this->get("authors/{$id}/posts?{$params}");
 	}
 
 	public function taxonomies($id, $params = '') {
