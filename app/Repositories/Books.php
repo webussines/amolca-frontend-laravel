@@ -13,15 +13,15 @@ class Books extends GuzzleHttpRequest {
 	}
 
 	public function findById($id) {
-		return $this->get("books/{$id}");
+		return $this->get("posts/{$id}");
 	}
 
 	public function navigation($id, $params) {
-		return $this->get("books/navigation/{$id}{$params}");
+		return $this->get("posts/navigation/{$id}{$params}");
 	}
 
 	public function findBySlug($slug) {
-		return $this->get("books/slug/{$slug}");
+		return $this->get("posts/slug/{$slug}");
 	}
 
 	public function meta($id, $data) {
@@ -29,23 +29,23 @@ class Books extends GuzzleHttpRequest {
 	}
 
 	public function create($body) {
-		return $this->post("books", $body);
+		return $this->post("posts", $body);
 	}
 
 	public function updateById($id, $update) {
-		return $this->put("books/{$id}", $update);
+		return $this->put("posts/{$id}", $update);
 	}
 
 	public function deleteById($id) {
-		return $this->delete("books/{$id}");
+		return $this->delete("posts/{$id}");
 	}
 
 	public function author($id, $params = '') {
-		return $this->get("authors/{$id}/books?{$params}");
+		return $this->get("authors/{$id}/posts?{$params}");
 	}
 
-	public function specialty($id, $params = '') {
-		return $this->get("specialties/{$id}/books?{$params}");
+	public function taxonomies($id, $params = '') {
+		return $this->get("taxonomies/{$id}/posts?{$params}");
 	}
 	
 }

@@ -24,14 +24,14 @@
 		<div class="col s12 l5 image-book">
 			<div id="image-container">
 				<div class="material-placeholder">
-					<img alt="{{ $book->title }}" title="{{ $book->title }}" class="materialboxed" src="{{ $book->image }}">
+					<img alt="{{ $book->title }}" title="{{ $book->title }}" class="materialboxed" src="{{ $book->thumbnail }}">
 				</div>
 
 				<!--Countries loop for scroll info interaction-->
-				@foreach ($book->countries as $country)
-					@if ($country->name == env('APP_COUNTRY') && $country->price > 0 && $country->state == "STOCK")
+				@foreach ($book->inventory as $inventory)
+					@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
 					<div class="scroll-info">
-						<p class="price">@COPMoney($country->price)</p>
+						<p class="price">@COPMoney($inventory->price)</p>
 						<div class="add-to-cart">
 							<input placeholder="Cantidad..." type="number">
 							<a class="button danger waves-effect waves-light">Añadir al carrito</a>
@@ -52,15 +52,15 @@
 				<!--Authors loop-->
 				@foreach ($book->author as $author)
 					<span>
-						<a href="/autor/{{ $author->slug }}"> {{ $author->name }} </a>
+						<a href="/autor/{{ $author->slug }}"> {{ $author->title }} </a>
 					</span>
 				@endforeach
 
 			</h3>
 
-			@foreach ($book->countries as $country)
-				@if ($country->name == env('APP_COUNTRY') && $country->price > 0 && $country->state == "STOCK")
-					<p class="price">@COPMoney($country->price)</p>
+			@foreach ($book->inventory as $inventory)
+				@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
+					<p class="price">@COPMoney($inventory->price)</p>
 				@endif
 			@endforeach
 
@@ -94,8 +94,8 @@
 
 			</p>
 
-			@foreach ($book->countries as $country)
-				@if ($country->name == env('APP_COUNTRY') && $country->price > 0 && $country->state == "STOCK")
+			@foreach ($book->inventory as $inventory)
+				@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
 					<div class="add-to-cart">
 						<input placeholder="Cantidad..." type="number">
 						<a class="button danger waves-effect waves-light">Añadir al carrito</a>
@@ -106,13 +106,36 @@
 			<ul class="collapsible">
 
 				<!--Book description-->
-				@if (isset($book->description) && $book->description !== "")
+				@if (isset($book->content) && $book->content !== "")
 					<li class="collapsible-item">
 						<div class="collapsible-header">
 							<span class="icon-plus"></span> Descripción
 						</div>
 						<div class="collapsible-body">
-							{!! $book->description !!}
+							{!! $book->content !!}
+						</div>
+					</li>
+				@endif
+
+				<!--Book datasheet-->
+				@if (isset($book->datasheet))
+					<li class="collapsible-item">
+						<div class="collapsible-header">
+							<span class="icon-plus"></span> Ficha técnica
+						</div>
+						<div class="collapsible-body">
+
+							<table class="table">
+								<tbody>
+								@foreach ($book->datasheet as $key => $val)
+									<tr>
+										<th>{{ $key }}:</th>
+										<td>{{ $val }}</td>
+									</tr>
+								@endforeach
+								</tbody>
+							</table>
+
 						</div>
 					</li>
 				@endif
@@ -130,13 +153,46 @@
 				@endif
 				
 				<!--Book keypoints-->
-				@if (isset($book->keyPoints) && $book->keyPoints !== "")
+				@if (isset($book->keypoints) && $book->keypoints !== "")
 					<li class="collapsible-item">
 						<div class="collapsible-header">
 							<span class="icon-plus"></span> Puntos clave
 						</div>
 						<div class="collapsible-body">
-							{!! $book->keyPoints !!}
+							{!! $book->keypoints !!}
+						</div>
+					</li>
+				@endif
+
+				@if (isset($book->author) && count($book->author) > 0)
+					<li class="collapsible-item">
+						<div class="collapsible-header">
+							<span class="icon-plus"></span> Autor
+						</div>
+						<div class="collapsible-body">
+							<!--Authors loop-->
+							@foreach ($book->author as $author)
+							<div class="row author-item">
+								<!--Image-->
+								<div class="col s12 m3 l3 image">
+									<a href="/autor/{{$author->slug }}">
+										<img src="{{ $author->thumbnail }}" />
+									</a>
+								</div>
+								<!--Information-->
+								<div class="col s12 m9 l9 info">
+									<h3 class="name">{{ $author->title }}</h3>
+									<p class="description">
+										@if (isset($author->content))
+											{!! substr($author->content, 0, 100) !!}
+										@endif
+									</p>
+									<p>
+										<a routerLink="/autor/{{ $author->slug }}" class="button primary">Ver libros de este autor</a>
+									</p>
+								</div>
+							</div>
+							@endforeach
 						</div>
 					</li>
 				@endif

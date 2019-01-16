@@ -855,6 +855,29 @@ form.big-searcher {
         margin: 0;
     }
 
+/*Books page styles*/
+.main.book .row.author-item {
+    margin-bottom: 10px;
+}
+    .main.book .author-item .image img {
+        border-radius: 50%;
+        overflow: hidden;
+        height: auto;
+        max-width: 100%;
+    }
+    .main.book .author-item .name {
+        font-size: 25px;
+    }
+    .main.book .author-item .description {
+        margin: 10px auto;
+    }
+
+.main.book .related-products {
+    background-color: #fff;
+    position: relative;
+    z-index: 100;
+}
+
 /*Authors page styles*/
 .author-books .subtitle {
     color: #00396F;
@@ -905,6 +928,8 @@ form.big-searcher {
     font-family: Tahoma;
     line-height: normal;
     padding: 60px 5%;
+    position: relative;
+    z-index: 100;
 }
     .footer p {
         font-size: 16px;
@@ -975,6 +1000,8 @@ form.big-searcher {
     justify-content: flex-start;
     padding-left: 5%;
     padding-right: 5%;
+    position: relative;
+    z-index: 100;
 }
     #bottom-bar .item {
         padding: 17px 25px;

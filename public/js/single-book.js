@@ -42,33 +42,27 @@ const ScrollInteractionFunction = () => {
 
 	if(DistanciaScroll < ContenedorPrincipal) {
 
-		//Si el contenedor tiene la clase "waiting" removerla
-		if(ContenedorFoto.hasClass('scroll-waiting'))
-			ContenedorFoto.removeClass('scroll-waiting');
+		ContenedorFoto.css({
+          opacity: 1,
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 'auto'
+        }).removeClass('scroll-fixed').removeClass('scroll-waiting')
 
-		//Si el contenedor tiene la clase "fixed" removerla
-		if(ContenedorFoto.hasClass('scroll-fixed'))
-			ContenedorFoto.removeClass('scroll-fixed');
+        jQuery('.scroll-info').fadeOut();
 
-	} else if(DistanciaScroll > ContenedorPrincipal && DistanciaScroll < MaximoDeScroll) {
+	} else if(DistanciaScroll > ContenedorPrincipal) {
 
-		//Si el contenedor tiene la clase "waiting" removerla
-		if(ContenedorFoto.hasClass('scroll-waiting'))
-			ContenedorFoto.removeClass('scroll-waiting');
+		ContenedorFoto.css({
+          opacity: 1,
+          position: 'fixed',
+          left: '5%',
+          top: '160px',
+          bottom: '0px'
+        }).removeClass('scroll-waiting').addClass('scroll-fixed')
 
-		//Si el contenedor no tiene la clase "fixed" agregarla
-		if(!ContenedorFoto.hasClass('scroll-fixed'))
-			ContenedorFoto.addClass('scroll-fixed');
-
-	} else if(DistanciaScroll > ContenedorPrincipal && DistanciaScroll > MaximoDeScroll) {
-
-		//Si el contenedor tiene la clase "fixed" removerla
-		if(ContenedorFoto.hasClass('scroll-fixed'))
-			ContenedorFoto.removeClass('scroll-fixed');
-
-		//Si el contenedor no tiene la clase "waiting" agregarla
-		if(!ContenedorFoto.hasClass('scroll-waiting'))
-			ContenedorFoto.addClass('scroll-waiting');
+        jQuery('.scroll-info').fadeIn();
 
 	}
 }

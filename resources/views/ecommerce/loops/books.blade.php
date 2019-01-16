@@ -77,7 +77,7 @@
 
 				<!--Titulo del libro-->
 				<h3 class="name">
-					<a href="/{{ $book->slug }}">{{ $book->id }} {{ $book->title }}</a>
+					<a href="/{{ $book->slug }}">{{ $book->title }}</a>
 				</h3>
 
 				<!--Autores-->
@@ -96,24 +96,20 @@
 				</p>
 
 				<!--Acciones-->
-				@if ( isset($book->countries) && count($book->countries) > 0 )
-					<div class="actions">
-						@for ($c = 0; $c < count($book->countries); $c++)
-							
-							@php $country = $book->countries[$c]; @endphp
+				@if ( isset($book->inventory) && count($book->inventory) > 0 )
+					@for ($c = 0; $c < count($book->inventory); $c++)
+						
+						@php $inventory = $book->inventory[$c]; @endphp
 
-							@if ($country->name == env('APP_COUNTRY'))
-								@include('ecommerce.loops.partials.books.actions', ['show_price' => true, 'price' => $country->price])
-							@else
-								@include('ecommerce.loops.partials.books.actions', ['show_price' => false])
-							@endif
+						@if (strtoupper($inventory->country_name) == env('APP_COUNTRY'))
+							@include('ecommerce.loops.partials.books.actions', ['show_price' => true, 'price' => $inventory->price])
+						@else
+							@include('ecommerce.loops.partials.books.actions', ['show_price' => false])
+						@endif
 
-						@endfor
-					</div>
+					@endfor
 				@else
-					<div class="actions without-price">
-						@include('ecommerce.loops.partials.books.actions', ['show_price' => false])
-					</div>
+					@include('ecommerce.loops.partials.books.actions', ['show_price' => false])
 				@endif
 
 			</div>

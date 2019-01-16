@@ -21,6 +21,9 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
     width: auto;
 }
     .image-book img.active {
@@ -29,8 +32,13 @@
     }
 
 #image-container {
+    left: 0;
     overflow: hidden;
-    position: relative;
+    position: absolute;
+    top: 0;
+    max-width: -ms-calc(41.6666666667% - .75rem);
+    max-width: -o-calc(41.6666666667% - .75rem);
+    max-width: calc(41.6666666667% - .75rem);
     width: 100%;
     z-index: 100;
 }
@@ -50,17 +58,9 @@
 }
 
 #image-container.scroll-fixed {
-    left: 5%;
-    max-height: -webkit-calc(100vh - 180px);
-    max-height: -moz-calc(100vh - 180px);
-    max-height: -ms-calc(100vh - 180px);
-    max-height: calc(100vh - 180px);
-    max-width: -webkit-calc(41.6666666667% - 3.75rem);
-    max-width: -moz-calc(41.6666666667% - 3.75rem);
-    max-width: -ms-calc(41.6666666667% - 3.75rem);
-    max-width: calc(41.6666666667% - 3.75rem);
-    position: fixed;
-    top: 160px;
+    max-width: -ms-calc(37.5% - .75rem);
+    max-width: -o-calc(37.5% - .75rem);
+    max-width: calc(37.5% - .75rem);
 }
     #image-container.scroll-fixed img,
     #image-container.scroll-waiting img {
