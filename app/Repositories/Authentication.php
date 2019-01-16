@@ -30,14 +30,24 @@ class Authentication {
 
 			$headers = [
                 "Content-type" => "application/json",
-                "authorization" => "Bearer " . session('access_token')
+                "Authorization" => "Bearer " . $json->token
             ];
 
             // Get user info
             $user_req = $this->client->request('GET', '/users/me', ["headers" => $headers]);
             $user = $user_req->getBody()->getContents();
+            $user_json = json_decode($user);
 
 			$this->request->session()->put('user', json_decode($user));
+
+			// Get cart if this exists
+			$order_req = $this->client->request('GET', '/orders/user/' . $user_json->id);
+            $order = $order_req->getBody()->getContents();
+            $order_json = json_decode($order);
+
+            if(!isset($order_json->status)) {
+            	$this->request->session()->put('cart', json_decode($order));
+            }
 
 			return $resp;
 
@@ -46,7 +56,7 @@ class Authentication {
 			$response = $e->getResponse();
         	$responseBodyAsString = $response->getBody()->getContents();
 
-        	return $responseBodyAsString;
+        	return $response_json;
         	
 		}
 

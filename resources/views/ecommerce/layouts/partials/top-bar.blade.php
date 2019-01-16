@@ -22,7 +22,11 @@
 		<li>
 			<a class="waves-effect waves-light" id="cart-btn" routerlink="/carrito" href="/carrito">
 				<i class="icon-shopping-cart1"></i>
-				<span>$0.000</span>
+				@if (session('cart') === null)
+					<span>{{ COPMoney(0) }}</span>
+				@else
+					<span>{{ COPMoney(session('cart')->amount) }}</span>
+				@endif
 			</a>
 		</li>
 		@if ( session('user') === null )

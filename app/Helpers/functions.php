@@ -4,6 +4,10 @@ use App\Http\Models\Options;
 use App\Http\Models\Menus;
 use App\Http\Models\MenuItems;
 
+function COPMoney($money) {
+    return '$' . number_format($money, 0, ',', '.');
+}
+
 //Global function to get option of this single database
 function get_option($name) {
 	$option = Options::where('option_name', '=', $name)->first();
