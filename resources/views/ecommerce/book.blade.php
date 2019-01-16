@@ -65,6 +65,21 @@
 			@endforeach
 
 			<p class="shipping">¡Envío gratis a cualquier ciudad de Colombia!</p>
+			
+			<!--Specialties icons-->
+			<div class="cont-specialties">
+				<div class="label">Especialidades:</div>
+				<div class="items">
+					@foreach ($book->taxonomies as $taxonomy)
+						@if ($taxonomy->slug != 'medicina' && $taxonomy->slug != 'odontologia')
+						<p>
+							<img class="specialty-icon" src="{{ $taxonomy->icon_img }}" alt="{{ $taxonomy->title}} "> {{ $taxonomy->title }}
+						</p>
+						@endif
+					@endforeach
+				</div>
+			</div>
+
 			<div class="cont-versions">
 				<p class="versions">Disponible en: 
 

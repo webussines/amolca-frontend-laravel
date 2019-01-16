@@ -143,67 +143,88 @@
     margin: 20px 0px;
 }
 
+.summary-book .cont-specialties {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 16px;
+    font-weight: bold;
+    justify-content: flex-start;
+}
+    .summary-book .cont-specialties .label {
+        padding-right: 10px;
+        padding-top: 9px;
+    }
+    .summary-book .cont-specialties p {
+        display: inline-block;
+        margin: 0px 7px;
+    }
+        .summary-book .cont-specialties p img {
+            display: inline-block;
+            max-width: 43px;
+            vertical-align: middle;
+        }
+
 .summary-book .cont-versions {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: flex-start;
 }
-
-.summary-book .versions {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 20px 0px;
-}
-    .summary-book .version-btn {
-        color: #666;
-        display: inline-block;
-        margin-left: 10px;
-        vertical-align: middle;
-    }
-        .summary-book .version-btn span {
-            border-radius: 50%;
-            border: 1px solid #a5a5a5;
-            color: #00396f;
-            display: inline-block;
-            font-size: 20px;
-            height: 37px;
-            line-height: 35px;
-            text-align: center;
-            -webkit-transition: all 0.4s ease;
-            -o-transition: all 0.4s ease;
-            transition: all 0.4s ease;
-            vertical-align: inherit;
-            width: 37px;
-        }
-            .summary-book .version-btn span.icon-book {
-                font-size: 15px;
-            }
-
-        .summary-book .version-btn:hover span {
-            background-color: #00396f;
-            border-color: #00396f;
-            color: #fff;
-        }
-    .summary-book .shared {
-        align-items: center;
-        display: flex;
-        flex-flow: row nowrap;
+    .summary-book .versions {
         font-size: 16px;
-        margin: 0px 0px 0px 20px;
+        font-weight: bold;
+        margin: 20px 0px;
     }
-        .summary-book .shared a {
+        .summary-book .version-btn {
+            color: #666;
             display: inline-block;
-            color: #666666;
-            line-height: 47px;
-            margin: 0px 5px;
+            margin-left: 10px;
+            vertical-align: middle;
         }
-            .summary-book .shared img {
-                cursor: pointer;
-                display: block;
-                max-height: 37px;
-                margin: 0px;
+            .summary-book .version-btn span {
+                border-radius: 50%;
+                border: 1px solid #a5a5a5;
+                color: #00396f;
+                display: inline-block;
+                font-size: 20px;
+                height: 37px;
+                line-height: 35px;
+                text-align: center;
+                -webkit-transition: all 0.4s ease;
+                -o-transition: all 0.4s ease;
+                transition: all 0.4s ease;
+                vertical-align: inherit;
+                width: 37px;
             }
+                .summary-book .version-btn span.icon-book {
+                    font-size: 15px;
+                }
+
+            .summary-book .version-btn:hover span {
+                background-color: #00396f;
+                border-color: #00396f;
+                color: #fff;
+            }
+        .summary-book .shared {
+            align-items: center;
+            display: flex;
+            flex-flow: row nowrap;
+            font-size: 16px;
+            margin: 0px 0px 0px 20px;
+        }
+            .summary-book .shared a {
+                display: inline-block;
+                color: #666666;
+                line-height: 47px;
+                margin: 0px 5px;
+            }
+                .summary-book .shared img {
+                    cursor: pointer;
+                    display: block;
+                    max-height: 37px;
+                    margin: 0px;
+                }
 
 .main.book .add-to-cart {
     margin: 20px 10px 20px 0px;
