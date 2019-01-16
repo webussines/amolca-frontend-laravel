@@ -1,12 +1,6 @@
 @php
 	$type = (isset($type)) ? $type : 'loop';
-	$items_per_page = (isset($items_per_page)) ? $items_per_page : 8;
 	$items_per_row = (isset($items_per_row)) ? $items_per_row : 2;
-
-	//Paginator
-	if($type !== 'carousel') {
-		$total_pages = round($counter / $items_per_page, 0, PHP_ROUND_HALF_UP);
-	}
 @endphp
 
 @switch($type)
@@ -52,21 +46,5 @@
 </div>
 
 @if ($type !== 'carousel')
-<ul class="pagination">
-
-	<li class="waves-effect @if($active_page == 1) disabled @endif">
-		<a href="@if($active_page == $total_pages)  @else ?page={{$active_page - 1}} @endif">Anterior</a>
-	</li>
-
-	@for ($p = 1; $p < $total_pages + 1; $p++)
-	<li class="waves-effect @if ($active_page == $p) active @endif">
-		<a @if ($active_page == $p)  @else href="?page={{$p}}" @endif>{{ $p }}</a>
-	</li>
-	@endfor
-	
-	<li class="waves-effect @if($active_page == $total_pages) disabled @endif">
-		<a href="@if($active_page == $total_pages)  @else ?page={{$active_page + 1}} @endif">Siguiente</a>
-	</li>
-
-</ul>
+{{ $authors->links() }}
 @endif

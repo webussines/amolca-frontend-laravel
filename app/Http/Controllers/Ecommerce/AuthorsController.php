@@ -6,6 +6,8 @@ use App\Repositories\Authors;
 use App\Repositories\Books;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AuthorsController extends Controller
 {
@@ -29,17 +31,20 @@ class AuthorsController extends Controller
 		if($this->request->input('page')) {
 			$skip = $this->pagination_number * ($this->request->input('page') - 1);
 			$params .= '&skip=' . $skip;
-
-			$info_send['active_page'] = $this->request->input('page');
 		}
 
-		$authors = $this->authors->all($params);
+		$all = $this->authors->all($params);
 
-		$info_send['authors'] = $authors->posts;
-		$info_send['items_per_page'] = $this->pagination_number;
-		$info_send['counter'] = $authors->counter;
+		// Crear paginacion y arreglo con los posts
+		$authors = range(1, 100);
+		$pageName = 'page';
+		$page = Paginator::resolveCurrentPage($pageName);
+		$authors = new LengthAwarePaginator($all->posts, $all->counter, $this->pagination_number, $page, [
+	        'path' => Paginator::resolveCurrentPath(),
+	        'pageName' => $pageName,
+	    ]);
 
-		return view('ecommerce.authors.index', $info_send);
+		return view('ecommerce.authors.index', [ 'authors' => $authors ]);
 	}
 
 	public function show($slug) {
@@ -47,7 +52,16 @@ class AuthorsController extends Controller
 		$author = $this->authors->findBySlug($slug);
 
 		$params = "orderby=publication_year&order=-1";
-		$books = $this->books->author($author->id, $params);
+		$author_books = $this->books->author($author->id, $params);
+
+		// Crear paginacion y arreglo con los posts
+		$books = range(1, 100);
+		$pageName = 'page';
+		$page = Paginator::resolveCurrentPage($pageName);
+		$books = new LengthAwarePaginator($author_books->posts, $author_books->counter, $this->pagination_number, $page, [
+	        'path' => Paginator::resolveCurrentPath(),
+	        'pageName' => $pageName,
+	    ]);
 
 		return view('ecommerce.author', ["author" => $author, "books" => $books]);
 

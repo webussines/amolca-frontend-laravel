@@ -117,5 +117,5 @@
 </div>
 
 @if ($type !== 'carousel')
-{{ $posts->links() }}
+{{ $books->links() }}
 @endif
