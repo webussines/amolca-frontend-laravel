@@ -68,6 +68,10 @@ const UserLogin = (username, password, token) => {
 		let data = JSON.parse(resp);
 		let error = { show: false, msg: '' };
 
+		if(data.token !== null && data.token !== undefined) {
+			return window.location.href = '/mi-cuenta';
+		}
+
 		switch (data.status) {
 			case 500:
 					error.msg = 'Ha ocurrido un error, por favor intentelo más tarde.';
@@ -77,12 +81,9 @@ const UserLogin = (username, password, token) => {
 					error.msg = 'Este usuario no existe.';
 					error.show = true;
 				break;
-			case 403:
+			case 401:
 					error.msg = 'El usuario y la contraseña no coinciden.';
 					error.show = true;
-				break;
-			case 200:
-					return window.location.href = '/mi-cuenta';
 				break;
 			default:
 					error.msg = 'El usuario y la contraseña no coinciden.';

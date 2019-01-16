@@ -20,13 +20,24 @@ class Authentication {
 
 		try {
 
-			$req = $this->client->request('POST', 'login', [ "form_params" => ["username" => $user, "password" => $password] ]);
+			// Send user info to login
+			$req = $this->client->request('POST', '/users/login', [ "form_params" => ["email" => $user, "password" => $password] ]);
 			$resp = $req->getBody()->getContents();
 
 			$json = json_decode($resp);
 
-			$this->request->session()->put('access_token', $json->access_token);
-			$this->request->session()->put('user', $json->user);
+			$this->request->session()->put('access_token', $json->token);
+
+			$headers = [
+                "Content-type" => "application/json",
+                "authorization" => "Bearer " . session('access_token')
+            ];
+
+            // Get user info
+            $user_req = $this->client->request('GET', '/users/me', ["headers" => $headers]);
+            $user = $user_req->getBody()->getContents();
+
+			$this->request->session()->put('user', json_decode($user));
 
 			return $resp;
 
