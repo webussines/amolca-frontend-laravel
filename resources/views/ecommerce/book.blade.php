@@ -65,7 +65,8 @@
 			@endforeach
 
 			<p class="shipping">¡Envío gratis a cualquier ciudad de Colombia!</p>
-			<p class="versions">Disponible en:
+			<div class="cont-versions">
+				<p class="versions">Disponible en: 
 
 				@foreach ($book->version as $version)
 						
@@ -92,7 +93,14 @@
 
 				@endforeach
 
-			</p>
+				</p>
+				<p class="shared">
+					<a href="https://wa.me/?text=¡Hola!, echale un vistazo a este libro: {{Request::fullUrl()}}" target="_blank">
+						<img src="https://amolca.webussines.com/uploads/images/whatsapp-logo.png" alt="">
+					</a>
+					<a>Compartir</a>
+				</p>
+			</div>
 
 			@foreach ($book->inventory as $inventory)
 				@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")

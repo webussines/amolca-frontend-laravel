@@ -143,6 +143,13 @@
     margin: 20px 0px;
 }
 
+.summary-book .cont-versions {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .summary-book .versions {
     font-size: 16px;
     font-weight: bold;
@@ -178,6 +185,25 @@
             border-color: #00396f;
             color: #fff;
         }
+    .summary-book .shared {
+        align-items: center;
+        display: flex;
+        flex-flow: row nowrap;
+        font-size: 16px;
+        margin: 0px 0px 0px 20px;
+    }
+        .summary-book .shared a {
+            display: inline-block;
+            color: #666666;
+            line-height: 47px;
+            margin: 0px 5px;
+        }
+            .summary-book .shared img {
+                cursor: pointer;
+                display: block;
+                max-height: 37px;
+                margin: 0px;
+            }
 
 .main.book .add-to-cart {
     margin: 20px 10px 20px 0px;
