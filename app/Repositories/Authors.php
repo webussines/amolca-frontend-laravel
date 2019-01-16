@@ -15,19 +15,19 @@ class Authors extends GuzzleHttpRequest {
 	}
 
 	public function findBySlug($slug) {
-		return $this->get("authors/slug/{$slug}");
+		return $this->get("posts/slug/{$slug}");
 	}
 
 	public function create($body) {
-		return $this->post("authors", $body);
+		return $this->post("posts", $body);
 	}
 
 	public function updateById($id, $update) {
-		return $this->put("authors/{$id}", $update);
+		return $this->put("posts/{$id}", $update);
 	}
 
 	public function deleteById($id) {
-		return $this->delete("authors/{$id}");
+		return $this->delete("posts/{$id}");
 	}
 	
 }
