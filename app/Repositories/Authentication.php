@@ -56,7 +56,7 @@ class Authentication {
 			$response = $e->getResponse();
         	$responseBodyAsString = $response->getBody()->getContents();
 
-        	return $response_json;
+        	return $responseBodyAsString;
         	
 		}
 
