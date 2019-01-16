@@ -10,6 +10,10 @@ class Specialties extends GuzzleHttpRequest {
         return $this->get("taxonomies?{$params}");
 	}
 
+	public function findByTerm($term, $params = 'orderby=title') {
+		return $this->get("taxonomies/term/{$term}?{$params}");
+	}
+
 	public function findById($id) {
 		return $this->get("taxonomies/{$id}");
 	}

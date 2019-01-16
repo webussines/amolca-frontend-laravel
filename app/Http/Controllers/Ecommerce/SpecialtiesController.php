@@ -26,7 +26,9 @@ class SpecialtiesController extends Controller
 
 	public function index() {
 		
-        return view('ecommerce.specialty');
+		$specialties = $this->specialties->findByTerm('especialidades', 'orderby=title');
+
+        return view('ecommerce.specialties.index', [ 'specialties' => $specialties->taxonomies ]);
 	}
 
 	public function show($slug) {
