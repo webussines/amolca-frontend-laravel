@@ -48,4 +48,17 @@ class HomeController extends Controller
 
         }
     }
+
+    public function checkout() 
+    {
+
+        if (!session('cart')) {
+            return view('ecommerce.cart.empty');
+        } else {
+
+            $cart = session('cart');
+            return view('ecommerce.cart.checkout', [ 'cart' => $cart ]);
+
+        }
+    }
 }

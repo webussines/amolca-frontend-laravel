@@ -1,0 +1,48 @@
+.title {
+    border-bottom: 1px solid #A5A5A5;
+    color: #00396F;
+    font-family: 'Tahoma';
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+.terms-condition {
+    margin-bottom: 10px;
+}
+
+.checkoutform .button {
+    font-size: 20px;
+    line-height: 100%;
+    padding: 10px 10px 15px;
+    width: 100%;
+}
+
+/*Order col*/
+.col.order {
+    border-radius: 10px;
+    padding: 0px 30px 30px;
+}
+
+.col.order table {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+    .col.order table thead {
+        background-color: #eaeaea;
+    }
+
+    .col.order table tr td,
+    .col.order table tr th {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .col.order table th.qty,
+    .col.order table td.qty {
+        text-align: center;
+    }
