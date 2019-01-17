@@ -61,7 +61,7 @@ class SpecialtiesController extends Controller
 	        'pageName' => $pageName,
 	    ]);
 
-        return view('ecommerce.specialty', [ 'posts' => $posts, 'specialty' => $specialty ]);
+        return view('ecommerce.specialties.show', [ 'posts' => $posts, 'specialty' => $specialty ]);
 
 	}
 
