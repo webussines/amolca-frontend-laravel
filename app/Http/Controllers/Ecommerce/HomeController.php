@@ -19,8 +19,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $odontologic = $this->posts->all('skip=0&limit=8');
-        $medician = $this->posts->all('skip=8&limit=8');
+        $odontologic = $this->posts->all("book", 'orderby=title&skip=0&limit=8');
+        $medician = $this->posts->all("book", 'orderby=title&skip=8&limit=8');
 
         $authors = $this->authors->all('skip=0&limit=8&orderby=thumbnail&order=asc');
 
@@ -34,6 +34,18 @@ class HomeController extends Controller
 
     public function cart() 
     {
-        return view('ecommerce.cart');
+
+        if (!session('cart')) {
+            return view('ecommerce.cart.empty');
+        } else {
+
+            $cart = session('cart');
+
+            //Related posts
+            $related = $this->posts->all("book", "orderby=title&order=asc&limit=8&random=1")->posts;
+
+            return view('ecommerce.cart.index', [ 'cart' => $cart, 'related' => $related ]);
+
+        }
     }
 }

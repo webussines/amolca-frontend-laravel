@@ -1,0 +1,200 @@
+/*Input quantity*/
+table input {
+    text-align: center;
+}
+
+table {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/*THead styles*/
+table thead {
+    background-color: #F5F5F5;
+}
+
+table thead #price,
+table thead #total {
+    width: 140px;
+}
+table thead #qty,
+table thead #actions {
+    width: 100px;
+}
+
+table thead #image {
+    width: 200px;
+}
+
+/*TBody styles*/
+table .image {
+    max-width: 200px;
+    width: 200px;
+}
+    table .image img {
+        display: block;
+        margin: 0px auto;
+        max-height: 120px;
+        max-width: 90%;
+    }
+        img.materialboxed.active {
+            max-height: none !important;
+            max-width: none !important;
+            width: auto!important;
+        }
+
+table .price {
+    font-weight: bold;
+}
+table .total {
+    color: #00396F;
+    font-weight: bold;
+}
+
+table .actions button {
+    cursor: pointer;
+}
+table .actions .delete {
+    background-color: transparent;
+    border: none;
+    color: #E2231A;
+    font-size: 22px;
+}
+
+/*Info cart*/
+.info-cart {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    margin-top: 40px;
+}
+
+.info-cart .related-products {
+    padding-right: 50px;
+    width: 50%;
+}
+
+.related-products .title {
+    border-bottom: 1px solid #A5A5A5;
+    font-size: 35px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+/*Cart totals*/
+.cart-totals {
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    font-size: 18px;
+    overflow: hidden;
+    padding: 30px 50px;
+    width: 50%;
+}
+
+/*Cart coupons*/
+.coupon-contain {
+    margin-top: 10px;
+    text-align: right;
+}
+input#coupon {
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    width: 250px;
+}
+.coupon-contain .button {
+    padding: 15px 20px;
+}
+
+@media screen and (max-width: 768px) {
+.coupon-contain {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.info-cart {
+    display: column-reverse wrap;
+}
+    .info-cart .related-products, .info-cart .cart-totals {
+        width: 100%;
+    }
+
+.info-cart .related-products {
+    margin-top: 30px;
+    padding-right: 0px;
+}
+
+/*Cart totals*/
+.cart-totals {
+    font-size: 16px;
+    padding: 20px;
+}
+    .cart-totals td, .cart-totals th {
+        display: block;
+        padding: 10px;
+        text-align: left;
+        width: 100%;
+    }
+        .cart-totals #subtotal th,
+        .cart-totals #shipping th {
+            padding-bottom: 5px;
+        }
+        .cart-totals #subtotal td,
+        .cart-totals #shipping td {
+            padding-top: 0px;
+            padding-bottom: 10px;
+        }
+        .cart-totals #actions td {
+            padding-top: 10px;
+            text-align: left;
+        }
+        .cart-totals #total th {
+            padding-bottom: 5px;
+        }
+        .cart-totals #total #price {
+            padding-bottom: 10px;
+            padding-top: 0px;
+            text-align: left;
+        }
+}
+
+@media screen and (max-width: 568px) {
+    table.cart thead {
+        display: none;
+    }
+
+    table.cart tbody tr {
+        align-items: center;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+        table.cart tbody tr td {
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 100%;
+        }
+            table.cart tbody tr td.image {
+                max-width: 200px;
+            }
+            table.cart tbody tr td.price {
+                font-size: 25px;
+            }
+            table.cart tbody tr td.qty input {
+                width: 150px;
+            }
+            table.cart tbody tr td.total {
+                font-size: 25px;
+                text-align: left;
+                width: 75%;
+            }
+            table.cart tbody tr td.actions {
+                width: 25%;
+            }
+}

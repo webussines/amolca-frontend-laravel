@@ -1007,6 +1007,43 @@ form.big-searcher {
     margin: 60px auto 40px;
 }
 
+/*Page not (empty) found*/
+.main.not-found .title {
+    color: #666666;
+    font-size: 50px;
+    line-height: 100%;
+    margin-bottom: 40px;
+}
+    .main.not-found .content-not-found {
+        padding: 100px 5%;
+    }
+    
+    .main.not-found .social-list {
+        align-items: center;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+        .main.not-found .social-list li {
+            margin: 5px;
+        }
+            .main.not-found .social-list li a.social {
+                background-color: #00396f;
+                border-radius: 5px;
+                color: #fff;
+                display: flex;
+                flex-flow: column wrap;
+                font-size: 18px;
+                height: 42px;
+                justify-content: center;
+                line-height: 42px;
+                text-align: center;
+                -webkit-transition: all 0.4s ease;
+                -o-transition: all 0.4s ease;
+                transition: all 0.4s ease;
+                width: 42px;
+            }
+
 /*Footer styles*/
 .footer {
     background-color: #eaeaea;
