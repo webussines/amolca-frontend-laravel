@@ -37,7 +37,7 @@ class PostsController extends Controller
 				break;
 
 			case 'book':
-				return $this->books->show($post->id);
+				return $this->books->show($post->slug);
 				break;
 		}
 

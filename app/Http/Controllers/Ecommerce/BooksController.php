@@ -27,10 +27,6 @@ class BooksController extends Controller
 			return redirect('/');
 		}
 
-		if($book->type == 'author') {
-			return redirect('/autor/' . $book->slug);
-		}
-
 		$related_specialty = $book->taxonomies[0]->id;
 
 		if(count($book->taxonomies) > 1) {
@@ -41,7 +37,7 @@ class BooksController extends Controller
 
 		$related = $this->posts->taxonomies($related_specialty, $params)->posts;
 
-		return view('ecommerce.book', ["book" => $book, "related" => $related]);
+		return view('ecommerce.books.show', ["book" => $book, "related" => $related]);
 
 	}
 
