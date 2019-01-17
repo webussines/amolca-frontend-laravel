@@ -31,14 +31,14 @@
 		</li>
 		@if ( session('user') === null )
 			<li>
-				<a id="login-btn" routerlink="/iniciar-sesion" class="waves-effect waves-light normal" href="/iniciar-sesion">
+				<a id="login-btn" href="/iniciar-sesion">
 					<i class="icon-person"></i>
 					<span>Inicar sesión</span>
 				</a>
 			</li>
 		@else
 			<li>
-				<a id="login-btn dropdown-btn" class="dropdown-btn" data-target="user-menu-dropdown">
+				<a id="login-btn" class="dropdown-btn" data-target="user-menu-dropdown">
 					<i class="icon-person"></i>
 					<span>{{ session('user')->name }}</span>
 				</a>
@@ -48,6 +48,12 @@
 			    </ul>
 			</li>
 		@endif
+
+		<li>
+			<a id="contact" href="/contacto">
+				<span class="icon-envelope"></span> Contacto
+			</a>
+		</li>
 
 	</ul>
 </div>

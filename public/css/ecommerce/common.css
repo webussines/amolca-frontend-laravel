@@ -131,6 +131,10 @@ ul.social-networks.top {
                 font-size: 21px;
                 vertical-align: sub;
             }
+        #top-bar-btns li a#contact {
+            background-color: #a1b3c7;
+            border-left: 1px solid #00396f;
+        }
 
     ul#user-menu-dropdown {
         padding: 7px 0px;
@@ -335,16 +339,20 @@ ul.social-networks.top {
     margin: 7px auto;
 }
     .section-title {
-        background-image: url(/img/common/titles-bg.png);
+        background-image: url('/img/common/titles-bg.png');
         background-position: left center;
         background-size: cover;
         color: #fff;
         font-family: Tahoma;
         font-size: 30px;
         font-weight: 700;
-        margin-bottom: 40px;
         padding: 15px 5%;
     }
+        .section-title > * {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
     .main .subtitle {
         font-size: 30px;
     }
@@ -475,6 +483,11 @@ ul.social-networks.top {
         border: 1px solid #00396f !important;
         box-shadow: none !important;
     }
+
+.main textarea, 
+.main textarea.materialize-textarea  {
+    padding: 13px;
+}
 
 .main .error {
     color: #E2231A;
@@ -1043,6 +1056,35 @@ form.big-searcher {
                 transition: all 0.4s ease;
                 width: 42px;
             }
+
+/*Contact page*/
+.main.contact textarea, 
+.main.contact textarea.materialize-textarea {
+    height: 75px;
+}
+.main.contact .terms-condition {
+    line-height: 24px;
+    margin: 10px;
+    text-align: center;
+}
+    .main.contact .terms-condition span {
+        font-size: 16px;
+        font-family: Tahoma;
+    }
+
+.main.contact .btns-column {
+    padding-top: 20px;
+    position: relative;
+    text-align: center;
+}
+    .main.contact .btns-column .button {
+        font-size: 18px;
+        padding: 15px 30px;
+    }
+    .main.contact input {
+        margin: 0px 10px;
+        min-width: 200px;
+    }
 
 /*Footer styles*/
 .footer {
