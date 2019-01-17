@@ -1013,12 +1013,12 @@ form.big-searcher {
     color: #a5a5a5;
     font-family: Tahoma;
     line-height: normal;
-    padding: 60px 5%;
+    padding: 30px 5%;
     position: relative;
     z-index: 100;
 }
     .footer p {
-        font-size: 16px;
+        font-size: 15px;
         margin-bottom: 7px;
         margin-top: 7px;
     }
@@ -1030,8 +1030,8 @@ form.big-searcher {
             text-decoration: underline;
         }
     .footer .title {
-        color: #666;
-        font-size: 25px;
+        color: #666666;
+        font-size: 20px;
         font-weight: 700;
         margin-bottom: 20px;
         margin-top: 0;
@@ -1065,14 +1065,14 @@ form.big-searcher {
 
     .footer .block-contact #direction {
         display: block;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
     .footer .block-contact #mobile,
     .footer .block-contact #phone,
     .footer .block-contact #mobile a,
     .footer .block-contact #phone a {
         color: #666;
-        font-size: 25px;
+        font-size: 20px;
     }
 
 /*Bottom bar*/
