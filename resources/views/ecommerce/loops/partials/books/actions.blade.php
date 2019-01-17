@@ -1,6 +1,6 @@
 @if ($show_price)
 <div class="actions">
-	<p class="price">@COPMoney($price)</p>
+	<p class="price">{{ COPMoney($price) }}</p>
 	<p class="btns">
 		<a class="cart-btn tooltipped" data-position="top" data-tooltip="Añadir al carrito">
 			<span class="icon-add_shopping_cart"></span>

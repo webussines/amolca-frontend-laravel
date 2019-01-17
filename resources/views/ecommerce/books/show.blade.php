@@ -31,7 +31,7 @@
 				@foreach ($book->inventory as $inventory)
 					@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
 					<div class="scroll-info">
-						<p class="price">@COPMoney($inventory->price)</p>
+						<p class="price">{{ COPMoney($inventory->price) }}</p>
 						<div class="add-to-cart">
 							<input placeholder="Cantidad..." type="number">
 							<a class="button danger waves-effect waves-light">Añadir al carrito</a>
@@ -60,7 +60,7 @@
 
 			@foreach ($book->inventory as $inventory)
 				@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
-					<p class="price">@COPMoney($inventory->price)</p>
+					<p class="price">{{ COPMoney($inventory->price) }}</p>
 				@endif
 			@endforeach
 
