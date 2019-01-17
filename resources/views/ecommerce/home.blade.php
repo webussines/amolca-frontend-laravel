@@ -50,6 +50,10 @@
 	<div class="common-container">
 		@include('ecommerce.loops.authors.loop', ['authors' => $authors, 'type' => 'carousel', 'items_per_row' => 4])
 	</div>
+
+	<p class="btn-large-container">
+		<a class="button primary" href="/autores">Ver todos los autores</a>
+	</p>
 </div>
 
 <div class="content-block posts-block">
@@ -60,6 +64,10 @@
 	<div class="common-container">
 		@include('ecommerce.loops.posts.loop', ['posts' => $posts, 'type' => 'carousel', 'items_per_row' => 4])
 	</div>
+
+	<p class="btn-large-container">
+		<a class="button primary" href="/blog">Ver todas las publicaciones</a>
+	</p>
 </div>
 
 @endsection

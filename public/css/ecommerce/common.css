@@ -559,6 +559,9 @@ form.big-searcher {
     .main.home .books-block .title {
         font-size: 30px;
     }
+    .main.home .content-block .title {
+        font-size: 35px;
+    }
 
 .main.home .authors-block {
     background-color: #eaeaea;
@@ -570,6 +573,16 @@ form.big-searcher {
     margin-right: auto;
     width: 90%;
 }
+
+.main.home .content-block .btn-large-container {
+    text-align: center;
+}
+    .main.home .posts-block .btn-large-container {
+        margin-top: 30px;
+    }
+        .main.home .content-block .btn-large-container .button {
+            min-width: 300px;
+        }
 
 /*Material progress bar*/
 .loader.hidde {
