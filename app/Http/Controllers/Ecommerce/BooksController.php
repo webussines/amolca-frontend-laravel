@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
-use App\Repositories\Books;
+use App\Repositories\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class BooksController extends Controller
 {
 
-    protected $books;
+    protected $posts;
 
-    public function __construct(Books $books) {
-        $this->books = $books;
+    public function __construct(Posts $posts) {
+        $this->posts = $posts;
     }
     
 	public function index() {
@@ -20,11 +20,15 @@ class BooksController extends Controller
 
 	public function show($slug) {
 
-		$book = $this->books->findBySlug($slug);
+		$book = $this->posts->findBySlug($slug);
 
 		// Redirigir al home si el recurso no existe
 		if(!isset($book->id)) {
 			return redirect('/');
+		}
+
+		if($book->type == 'author') {
+			return redirect('/autor/' . $book->slug);
 		}
 
 		$related_specialty = $book->taxonomies[0]->id;
@@ -35,7 +39,7 @@ class BooksController extends Controller
 
 		$params = "orderby=title&order=asc&limit=12&random=1";
 
-		$related = $this->books->taxonomies($related_specialty, $params)->posts;
+		$related = $this->posts->taxonomies($related_specialty, $params)->posts;
 
 		return view('ecommerce.book', ["book" => $book, "related" => $related]);
 

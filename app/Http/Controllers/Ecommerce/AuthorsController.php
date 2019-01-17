@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Authors;
-use App\Repositories\Books;
+use App\Repositories\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
@@ -12,13 +12,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class AuthorsController extends Controller
 {
     protected $authors;
-    protected $books;
+    protected $posts;
     protected $request;
     protected $pagination_number = 16;
 
-    public function __construct(Authors $authors, Books $books, Request $request) {
+    public function __construct(Authors $authors, Posts $posts, Request $request) {
         $this->authors = $authors;
-        $this->books = $books;
+        $this->posts = $posts;
         $this->request = $request;
     }
     
@@ -57,7 +57,7 @@ class AuthorsController extends Controller
 		}
 
 		$params = "orderby=publication_year&order=-1";
-		$author_books = $this->books->author($author->id, $params);
+		$author_books = $this->posts->author($author->id, $params);
 
 		// Crear paginacion y arreglo con los posts
 		$books = range(1, 100);

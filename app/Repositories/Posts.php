@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use GuzzleHttp\Client;
 
-class Books extends GuzzleHttpRequest {
+class Posts extends GuzzleHttpRequest {
 
 	public $country = "COLOMBIA";
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
-use App\Repositories\Books;
+use App\Repositories\Posts;
 use App\Repositories\Authors;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,17 +10,17 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     
-    protected $books;
+    protected $posts;
 
-    public function __construct(Books $books, Authors $authors) {
-        $this->books = $books;
+    public function __construct(Posts $posts, Authors $authors) {
+        $this->posts = $posts;
         $this->authors = $authors;
     }
 
     public function index()
     {
-        $odontologic = $this->books->all('skip=0&limit=8');
-        $medician = $this->books->all('skip=8&limit=8');
+        $odontologic = $this->posts->all('skip=0&limit=8');
+        $medician = $this->posts->all('skip=8&limit=8');
 
         $authors = $this->authors->all('skip=0&limit=8&orderby=thumbnail&order=asc');
 
