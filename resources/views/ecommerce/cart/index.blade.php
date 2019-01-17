@@ -79,7 +79,7 @@
 				];
 			@endphp
 
-			@include('ecommerce.loops.books', $related_options)
+			@include('ecommerce.loops.books.loop', $related_options)
 		</div>
       
 		<div class="cart-totals">

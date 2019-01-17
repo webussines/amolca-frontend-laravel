@@ -33,7 +33,7 @@
 			];
 		@endphp
 
-		@include('ecommerce.loops.books', $books_options)
+		@include('ecommerce.loops.books.loop', $books_options)
 	</div>
 </div>
 @endsection

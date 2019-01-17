@@ -26,7 +26,7 @@
 				<span>Novedades</span> Médicas
 			</h2>
 
-			@include('ecommerce.loops.books', ['books' => $medician, 'type' => 'carousel'])
+			@include('ecommerce.loops.books.loop', ['books' => $medician, 'type' => 'carousel'])
 
 		</div>
 		<div class="col s12 l6 col-right">
@@ -34,7 +34,7 @@
 				<span>Novedades</span> odontológicas
 			</h2>
 
-			@include('ecommerce.loops.books', ['books' => $odontologic, 'type' => 'carousel'])
+			@include('ecommerce.loops.books.loop', ['books' => $odontologic, 'type' => 'carousel'])
 
 		</div>
 	</div>
@@ -46,7 +46,7 @@
 	</h2>
 
 	<div class="common-container">
-		@include('ecommerce.loops.authors', ['books' => $authors, 'type' => 'carousel', 'items_per_row' => 4])
+		@include('ecommerce.loops.authors.loop', ['books' => $authors, 'type' => 'carousel', 'items_per_row' => 4])
 	</div>
 </div>
 

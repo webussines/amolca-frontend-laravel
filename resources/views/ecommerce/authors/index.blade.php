@@ -6,7 +6,7 @@
 @section('content')
 <div class="content-container">
 
-	@include('ecommerce.loops.authors', ['authors' => $authors, 'type' => 'loop', 'items_per_row' => 4])
+	@include('ecommerce.loops.authors.loop', ['authors' => $authors, 'type' => 'loop', 'items_per_row' => 4])
 
 </div>
 @endsection

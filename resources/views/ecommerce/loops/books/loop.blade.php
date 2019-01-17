@@ -101,14 +101,14 @@
 						@php $inventory = $book->inventory[$c]; @endphp
 
 						@if (strtoupper($inventory->country_name) == env('APP_COUNTRY'))
-							@include('ecommerce.loops.partials.books.actions', ['show_price' => true, 'price' => $inventory->price])
+							@include('ecommerce.loops.books.actions', ['show_price' => true, 'price' => $inventory->price])
 						@else
-							@include('ecommerce.loops.partials.books.actions', ['show_price' => false])
+							@include('ecommerce.loops.books.actions', ['show_price' => false])
 						@endif
 
 					@endfor
 				@else
-					@include('ecommerce.loops.partials.books.actions', ['show_price' => false])
+					@include('ecommerce.loops.books.actions', ['show_price' => false])
 				@endif
 
 			</div>
