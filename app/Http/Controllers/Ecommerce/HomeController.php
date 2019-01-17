@@ -23,8 +23,16 @@ class HomeController extends Controller
         $medician = $this->posts->all("book", 'orderby=title&skip=8&limit=8');
 
         $authors = $this->authors->all('skip=0&limit=8&orderby=thumbnail&order=asc');
+        $posts = $this->posts->all("post", 'skip=0&limit=8&orderby=created_at&order=asc');
 
-        return view('ecommerce.home', [ 'medician' => $medician->posts, 'odontologic' => $odontologic->posts, 'authors' => $authors->posts ]);
+        $info_send = [
+            'medician' => $medician->posts,
+            'odontologic' => $odontologic->posts,
+            'authors' => $authors->posts,
+            'posts' => $posts->posts
+        ];
+
+        return view('ecommerce.home', $info_send);
     }
 
     public function login() 

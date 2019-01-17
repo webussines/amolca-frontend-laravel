@@ -3,8 +3,10 @@
 @section('title', 'Amolca Editorial Médica y Odontológica')
 
 @section('scripts')
+<script src="{{ asset('js/ecommerce/common.js') }}"></script>
 <script src="{{ asset('js/ecommerce/carousel-books.js') }}"></script>
 <script src="{{ asset('js/ecommerce/carousel-authors.js') }}"></script>
+<script src="{{ asset('js/ecommerce/carousel-posts.js') }}"></script>
 <script src="{{ asset('libs/slickslider/js/slick.min.js') }}"></script>
 @endsection
 
@@ -46,7 +48,17 @@
 	</h2>
 
 	<div class="common-container">
-		@include('ecommerce.loops.authors.loop', ['books' => $authors, 'type' => 'carousel', 'items_per_row' => 4])
+		@include('ecommerce.loops.authors.loop', ['authors' => $authors, 'type' => 'carousel', 'items_per_row' => 4])
+	</div>
+</div>
+
+<div class="content-block posts-block">
+	<h2 class="title">
+		Últimas publicaciones <span class="color-blue-light">de nuestro blog</span>
+	</h2>
+
+	<div class="common-container">
+		@include('ecommerce.loops.posts.loop', ['posts' => $posts, 'type' => 'carousel', 'items_per_row' => 4])
 	</div>
 </div>
 
