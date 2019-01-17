@@ -68,7 +68,7 @@ class AuthorsController extends Controller
 	        'pageName' => $pageName,
 	    ]);
 
-		return view('ecommerce.author', ["author" => $author, "books" => $books]);
+		return view('ecommerce.authors.show', ["author" => $author, "books" => $books]);
 
 	}
 }
