@@ -41,7 +41,7 @@ class PostsController extends Controller
 				break;
 		}
 
-		return view('ecommerce.post', ["post" => $post]);
+		return view('ecommerce.posts.show', ["post" => $post]);
 
 	}
 

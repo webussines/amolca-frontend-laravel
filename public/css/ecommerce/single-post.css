@@ -1,0 +1,12 @@
+.main .post-column {
+	padding-right: 40px;
+}
+
+.title {
+	font-size: 35px;
+	text-align: left;
+}
+
+.post-thumbnail img {
+	max-width: 100%;
+}
