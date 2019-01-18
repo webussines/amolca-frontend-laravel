@@ -41,7 +41,9 @@ class PostsController extends Controller
 				break;
 		}
 
-		return view('ecommerce.posts.show', ["post" => $post]);
+		$related = $this->posts->all("post", "limit=3&orderby=title&order=desc&random=1")->posts;
+
+		return view('ecommerce.posts.show', ["post" => $post, "related" => $related]);
 
 	}
 
