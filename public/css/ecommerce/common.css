@@ -357,6 +357,22 @@ ul.social-networks.top {
         font-size: 30px;
     }
 
+.main h1 {
+    font-size: 35px;
+}
+.main h2 {
+    font-size: 28px;
+}
+.main h3 {
+    font-size: 24px;
+}
+.main h4 {
+    font-size: 20px;
+}
+.main h5 {
+    font-size: 18px;
+}
+
 .content-container {
     margin-left: auto;
     margin-right: auto;
@@ -393,7 +409,7 @@ ul.social-networks.top {
 }
 
 /*Titles & subtitle*/
-.title {
+.main .title {
     color: #00396f;
     font-family: Tahoma;
     font-weight: 700;
@@ -401,7 +417,7 @@ ul.social-networks.top {
     margin-top: 0;
     text-align: center;
 }
-    .title span {
+    .main .title span {
         color: #55b9d4;
     }
 

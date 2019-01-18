@@ -2,6 +2,17 @@
 
 @section('title', "$post->title - Amolca Editorial Médica y Odontológica")
 
+<!--Add aditional posts meta tags-->
+@section('meta')
+<link rel="canonical" href="{{ Request::fullUrl() }}" >
+<!-- You can use Open Graph tags to customize link previews.-->
+<meta property="og:url"           content="{{ Request::fullUrl() }}" />
+<meta property="og:type"          content="website" />
+<meta property="og:title"         content="$post->title - Amolca Editorial Médica y Odontológica" />
+<meta property="og:description"   content="@if (isset($post->excerpt)) {!! substr($post->excerpt, 0, 100) !!} @else {!! substr($post->content, 0, 100) !!} @endif" />
+<meta property="og:image"         content="{{ $post->thumbnail }}" />
+@endsection
+
 <!--Add single books styles-->
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/ecommerce/single-post.css') }}">
