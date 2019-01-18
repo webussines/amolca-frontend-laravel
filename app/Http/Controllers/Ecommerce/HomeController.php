@@ -26,7 +26,7 @@ class HomeController extends Controller
         $odontologic = $this->posts->all("book", 'orderby=title&skip=0&limit=8');
         $medician = $this->posts->all("book", 'orderby=title&skip=8&limit=8');
 
-        $authors = $this->authors->all('skip=0&limit=8&orderby=thumbnail&order=asc');
+        $authors = $this->authors->all('random=1&limit=8&orderby=title&order=asc');
         $posts = $this->posts->all("post", 'skip=0&limit=8&orderby=created_at&order=asc');
         $slider = $this->sliders->find('home-slider');
 
