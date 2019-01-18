@@ -4,7 +4,6 @@
 
 <!--Add aditional posts meta tags-->
 @section('meta')
-<link rel="canonical" href="{{ Request::fullUrl() }}" >
 <!-- You can use Open Graph tags to customize link previews.-->
 <meta property="og:url"           content="{{ Request::fullUrl() }}" />
 <meta property="og:type"          content="website" />

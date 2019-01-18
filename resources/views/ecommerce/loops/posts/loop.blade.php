@@ -50,13 +50,13 @@
 
 					<div class="button">
 						<a class="social-share facebook tooltipped" 
-							href="http://www.facebook.com/sharer.php?u={{ Request::fullUrl() }}/{{ $post->slug }}"
+							href="http://www.facebook.com/sharer.php?u={{Request::root()}}/{{ $post->slug }}"
 							data-position="top" data-tooltip="Compartir en Facebook" title="Compartir en Facebook"
 						>
 				            <span class="icon-facebook"></span>
 				        </a>
 				        <a class="social-share twitter tooltipped" 
-							href="https://twitter.com/share?url={{Request::fullUrl() }}/{{ $post->slug }}"
+							href="https://twitter.com/share?url={{Request::root()}}/{{ $post->slug }}"
 							data-position="top" data-tooltip="Compartir en Twitter" title="Compartir en Twitter"
 						>
 				            <span class="icon-twitter"></span>

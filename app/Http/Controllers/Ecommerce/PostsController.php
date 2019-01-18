@@ -6,19 +6,45 @@ use App\Repositories\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Ecommerce\BooksController;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostsController extends Controller
 {
 
     protected $posts;
     protected $books;
+    protected $request;
+    protected $pagination_number = 16;
 
-    public function __construct(Posts $posts, BooksController $books) {
+    public function __construct(Request $request, Posts $posts, BooksController $books) {
+    	$this->request = $request;
         $this->posts = $posts;
         $this->books = $books;
     }
     
 	public function index() {
+
+		$params = 'orderby=created_at&order=desc&limit=' . $this->pagination_number;
+
+		if($this->request->input('page')) {
+			$skip = $this->pagination_number * ($this->request->input('page') - 1);
+			$params .= '&skip=' . $skip;
+		}
+
+		$all = $this->posts->all("post", $params);
+
+		// Crear paginacion y arreglo con los posts
+		$posts = range(1, 100);
+		$pageName = 'page';
+		$page = Paginator::resolveCurrentPage($pageName);
+		$posts = new LengthAwarePaginator($all->posts, $all->counter, $this->pagination_number, $page, [
+	        'path' => Paginator::resolveCurrentPath(),
+	        'pageName' => $pageName,
+	    ]);
+
+	    return view('ecommerce.posts.index', [ 'posts' => $posts ]);
+
 	}
 
 	public function show($slug) {
