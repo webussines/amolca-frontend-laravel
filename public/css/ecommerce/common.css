@@ -197,7 +197,10 @@ ul.social-networks.top {
     margin-right: 10px;
     width: 40px;
     text-align: center;
-}  
+} 
+    #login-btn.view-mobile i {
+        font-size: 39px;
+    }
     .mobile-btn span, .mobile-btn:after, .mobile-btn:before {
         background-color: #fff;
         border-radius: 3px;
@@ -208,6 +211,17 @@ ul.social-networks.top {
         transition: .4s;
         width: 100%;
     }
+        .mobile-btn:before {
+            top: 0px;
+        }
+        .mobile-btn span {
+            top: -ms-calc(50% - 2.5px);
+            top: -o-calc(50% - 2.5px);
+            top: calc(50% - 2.5px);
+        }
+        .mobile-btn:after {
+            bottom: 0px;
+        }
         .mobile-btn {
             background-color: transparent;
             cursor: pointer;
@@ -216,12 +230,6 @@ ul.social-networks.top {
             position: relative;
             width: 40px;
         }
-
-.mobile-btn span {
-    top: -ms-calc(50% - 2.5px);
-    top: -o-calc(50% - 2.5px);
-    top: calc(50% - 2.5px);
-}
 
 #nav-menu>ul {
     align-items: center;
@@ -622,8 +630,8 @@ form.big-searcher {
     flex-flow: row wrap;
     font-family: Tahoma;
     justify-content: left;
-    margin-left: -15px;
-    margin-right: -15px;
+    margin-left: 0px;
+    margin-right: 0px;
     width: 100%;
 }
     .books-loop .item {
@@ -781,8 +789,8 @@ form.big-searcher {
     flex-flow: row wrap;
     font-family: Tahoma;
     justify-content: left;
-    margin-left: -15px;
-    margin-right: -15px;
+    margin-left: 0px;
+    margin-right: 0px;
     width: 100%;
 }
     .authors-loop .item {

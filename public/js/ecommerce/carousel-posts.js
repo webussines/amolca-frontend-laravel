@@ -7,7 +7,21 @@ jQuery(function($) {
 		autoplaySpeed: 2000,
 		responsive: [
 			{
-				breakpoint: 600,
+				breakpoint: 990,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 760,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 550,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1

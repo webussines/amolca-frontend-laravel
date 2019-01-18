@@ -358,3 +358,68 @@
 .related-products .page-container {
     margin-bottom: 40px;
 }
+
+@media screen and (max-width: 992px) {
+    .image-book {
+        margin-bottom: 40px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    #image-container {
+        bottom: 0px !important;
+        left: 0px !important;
+        max-height: none !important;
+        max-width: none !important;
+        position: relative !important;
+        top: 0px !important;
+    }
+        #image-container.scroll-waiting,
+        #image-container.scroll-fixed {
+            left: 0px;
+            max-height: none;
+            max-width: none;
+            position: relative;
+            top: 0px;
+        }
+            #image-container.scroll-fixed img,
+            #image-container.scroll-waiting img {
+                max-height: none;
+            }
+        .scroll-info {
+            display: none !important;
+        }
+
+    .main.book .summary-book {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+        .name, .price {
+            font-size: 30px;
+        }
+        .author {
+            font-size: 20px;
+        }
+
+    .row.author-item {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main.book .add-to-cart {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+        .main.book .add-to-cart input {
+            width: -webkit-calc(35% - 10px);
+            width: -moz-calc(35% - 10px);
+            width: -ms-calc(35% - 10px);
+            width: calc(35% - 10px);
+        }
+        .main.book .add-to-cart .button {
+            width: -webkit-calc(65% - 15px);
+            width: -moz-calc(65% - 15px);
+            width: -ms-calc(65% - 15px);
+            width: calc(65% - 15px);
+        }
+}

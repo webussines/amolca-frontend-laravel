@@ -7,7 +7,7 @@
 	</div>
 
 	<div id="nav-menu">
-		<a id="login-btn" class="waves-effect waves-light view-mobile" href="/iniciar-sesion">
+		<a id="login-btn" class="waves-effect waves-light view-mobile" href="/mi-cuenta">
 			<i class="icon-person"></i>
 		</a>
 

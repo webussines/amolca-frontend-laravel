@@ -64,7 +64,7 @@ function get_nav_menu($slug, $class = 'hmenu', $id = 'hmenu') {
 
 				<?php if ( $item->childs && count($item->childs) > 0 ) { ?>
 
-				<ul class="submenu" id="submenu-<?php echo $item->id; ?>">
+				<ul class="submenu" id="submenu-item-<?php echo $item->id; ?>">
 					
 					<?php foreach ($item->childs as $child) { ?>
 
