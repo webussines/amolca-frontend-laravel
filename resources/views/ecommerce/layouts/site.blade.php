@@ -24,6 +24,13 @@
 		@include('ecommerce.layouts.partials.header')
 		
 		<div class="main @yield('contentClass')">
+
+			@if (Route::getCurrentRoute()->uri() !== '/')
+				<div class="content-container">
+					@include('ecommerce.layouts.partials.banner', ["show_searcher" => true])
+				</div>
+			@endif
+
 			@yield('content')
 		</div>
 
