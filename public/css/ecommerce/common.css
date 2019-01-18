@@ -573,6 +573,101 @@ form.big-searcher {
     }
 
 /*Home styles*/
+.main.home .big-slider img {
+    width: 100%;
+}
+
+.big-slider .slick-prev, .big-slider .slick-next {
+    top: -webkit-calc(50% - 35px);
+    top: -moz-calc(50% - 35px);
+    top: -ms-calc(50% - 35px);
+    top: calc(50% - 35px);
+}
+
+.big-slider .item {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+}
+
+.big-slider .bg-item {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0px;
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
+    left: 0px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 1;
+}
+
+.big-slider img.visible-img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    -webkit-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+    z-index: 2;
+}
+
+.big-slider img.hidden-img {
+    visibility: hidden;
+    opacity: 0;
+    width: 100%;
+}
+
+.big-slider .item-0 {
+    z-index: 3;
+}
+.big-slider .item-0 img.visible-img {
+    top: 100%;
+}
+    .big-slider .item-0.slick-current {
+        z-index: 3;
+    }
+        .big-slider .item-0.slick-current img.visible-img {
+            top: 0%;
+        }
+
+.item-1 img.visible-img {
+    left: 100%;
+}
+    .item-1.slick-current {
+        z-index: 3;
+    }
+        .item-1.slick-current img.visible-img {
+            left: 0%;
+        }
+
+.item-2 img.visible-img {
+    top: -100%;
+}
+    .item-2.slick-current {
+        z-index: 3;
+    }
+        .item-2.slick-current img.visible-img {
+            top: 0px;
+        }
+
+.item-3 img.visible-img {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(2);
+}
+    .item-3.slick-current {
+        z-index: 3;
+    }
+        .item-3.slick-current img.visible-img {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
 .main.home .searcher-block {
     background-color: #f5f5f5;
 }

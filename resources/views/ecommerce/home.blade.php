@@ -7,6 +7,7 @@
 <script src="{{ asset('js/ecommerce/carousel-books.js') }}"></script>
 <script src="{{ asset('js/ecommerce/carousel-authors.js') }}"></script>
 <script src="{{ asset('js/ecommerce/carousel-posts.js') }}"></script>
+<script src="{{ asset('js/ecommerce/slider.js') }}"></script>
 <script src="{{ asset('libs/slickslider/js/slick.min.js') }}"></script>
 @endsection
 
@@ -16,6 +17,10 @@
 
 @section('contentClass', 'home')
 @section('content')
+
+<div class="home-slider">
+	@include('ecommerce.layouts.partials.big-slider', [ "items" => $slider ])
+</div>
 
 <div class="searcher-block">
 	@include('ecommerce.layouts.partials.big-searcher')
