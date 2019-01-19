@@ -10,7 +10,7 @@ $(document).ready(function() {
 //Funcion para inicializar los editores tinymce
 const InitEditorBoxes = () => {
 	tinymce.init({
-	    selector: "textarea#description",
+	    selector: "textarea#content",
         theme: "modern",
         height: 180,
         plugins: [
@@ -67,23 +67,45 @@ const SaveAuthor = function() {
 		if($('.loader').hasClass('hidde'))
 			$('.loader').removeClass('hidde')
 
-		let name = $('#name').val();
-		let description = tinymce.activeEditor.getContent();
-		let image = $('#image-url').val();
+		let title = $('#title').val();
+		let content = tinymce.activeEditor.getContent();
+		let thumbnail = $('#image-url').val();
 		let specialties = GetCheckedSpecialties();
 
-		let metaTitle = $('#meta-title').val();
-		let metaDescription = $('#meta-description').val();
-		let metaTags = GetMetaTags();
+		let meta_title = $('#meta-title').val();
+		let meta_description = $('#meta-description').val();
+		let meta_tags = GetMetaTags();
 
 		let author = {
-			name: name,
-			description: description,
-			image: image,
-			specialty: specialties,
-			metaTitle: metaTitle,
-			metaDescription: metaDescription,
-			metaTags: metaTags
+			title: title,
+			content: content,
+			thumbnail: thumbnail		
+		}
+
+		//Ingresar los datos de las especialidades}
+		if(specialties.length > 0) {
+			author.taxonomies = specialties;
+		}
+
+		// Validar que hayan datos para insertar en la meta data
+		if( (meta_title !== '' && meta_title !== ' ') ||
+			(meta_description !== '' && meta_description !== ' ') ||
+			(meta_tags.length > 0 && meta_tags[0] !== '') ) {
+			author.meta = [];
+		}
+
+		//Insertar meta informacion 
+		if(meta_title !== '' && meta_title !== ' ') {
+			author.meta.push({ "key": "meta_title", "value": meta_title });
+		}
+
+		if(meta_description !== '' && meta_description !== ' ') {
+			author.meta.push({ "key": "meta_description", "value": meta_description });
+		}
+
+		if(meta_tags.length > 0 && meta_tags[0] !== '') {
+			let elem = { "key": "meta_tags", "value": '[' + meta_tags.join(',') + ']' };
+			author.meta.push(elem);
 		}
 
 		let ActionRoute;
@@ -123,20 +145,26 @@ const SaveAuthor = function() {
 
 				let data = JSON.parse(resp);
 
-				if(data._id !== undefined) {
+				if(data.error !== undefined) {
+					if (data.error == 'token_expired') {
+						window.location.href = '/am-admin/logout?redirect=';
+					}
+				}
+
+				if(data.post.id !== undefined) {
 					
 					switch(_action) {
 						case 'edit':
 							location.reload();
 						break;
 						case 'create':
-							window.location.href = '/am-admin/autores/' + data._id;
+							window.location.href = '/am-admin/autores/' + data.id;
 						break;
 					}
 
 				}
 			}).catch(function(err) {
-				console.log(err)
+				console.log(err);
 			})
 
 		} else {

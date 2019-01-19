@@ -1,22 +1,39 @@
 @extends('admin.layouts.account')
-
 @php
-    $id = (isset($author->_id)) ? $author->_id : '';
-    $name = (isset($author->name)) ? $author->name : '';
-    $image = (isset($author->image)) ? $author->image : 'https://amolca.webussines.com/uploads/authors/no-author-image.png';
-    $description = (isset($author->description)) ? $author->description : ' ';
-    $authorSpecialty = (isset($author->specialty)) ? $author->specialty : [];
+    $id = (isset($author->id)) ? $author->id : '';
+    $title = (isset($author->title)) ? $author->title : '';
+    $thumbnail = (isset($author->thumbnail)) ? $author->thumbnail : 'https://amolca.webussines.com/uploads/authors/no-author-image.png';
+    $content = (isset($author->content)) ? $author->content : ' ';
+    $authorTaxonomies = (isset($author->taxonomies)) ? $author->taxonomies : [];
 
-    $metaTitle = (isset($author->metaTitle)) ? $author->metaTitle : '';
-    $metaDescription = (isset($author->metaDescription)) ? $author->metaDescription : '';
-    $metaTags = (isset($author->metaTags)) ? $author->metaTags : [];
+    $meta_title = '';
+    $meta_description = '';
+    $meta_tags = [];
+
+    if(isset($author->meta)) {
+        for ($m = 0; $m < count($author->meta); $m++) { 
+            if($author->meta[$m]->key == 'meta_title') {
+                $meta_title = $author->meta[$m]->value;
+            }
+
+            if($author->meta[$m]->key == 'meta_tags') {
+                $tags = str_replace(str_split('[]'), '', $author->meta[$m]->value);
+                $meta_tags = explode(',', $tags);
+            }
+
+            if($author->meta[$m]->key == 'meta_description') {
+                $meta_description = $author->meta[$m]->value;
+            }
+        }
+    }
 @endphp
 
-@if ($name !== '')
-    @section('title', 'Autor: ' . $name . ' - Admin Amolca')
+@if ($title !== '')
+    @section('title', 'Autor: ' . $title . ' - Admin Amolca')
 @else
     @section('title', 'Crear nuevo autor - Admin Amolca')
 @endif
+
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/admin/single-author.css') }}">
@@ -48,24 +65,24 @@
     </div>
 
     <div class="row single section-header valign-wrapper">
-		<div class="col s12 m10 l10">
-			<p class="title">@if ($name !== '') {{$name}} @else Creando nuevo autor @endif</p>
-		</div>
-		<div class="col s12 m2 l2 actions">
+        <div class="col s12 m10 l10">
+            <p class="title">@if ($title !== '') {{$title}} @else Creando nuevo autor @endif</p>
+        </div>
+        <div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
                 <span class="icon-save1"></span>
             </a>
             <a class="btn-floating btn-large red go-all-resources" href="/am-admin/autores">
                 <span class="icon-cross"></span>
             </a>
-		</div>
-	</div>
+        </div>
+    </div>
 
     <form class="author-form" id="author-form" enctype="multipart/form-data">
 
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
         <input type="hidden" id="_action" value="{{ $action }}">
-        <input type="hidden" id="_user" value="{{ session('user')->_id }}">
+        <input type="hidden" id="_user" value="{{ session('user')->id }}">
         <input type="hidden" id="_id" value="{{ $id }}">
         <input type="hidden" id="_src" value="authors">
 
@@ -88,8 +105,8 @@
                 <div class="col s12 m5 col-image">
 
                     <div class="image-wrap">
-                        <img id="resource-image" src="{{ $image }}" alt="">
-                        <input type="hidden" id="image-url" name="image-url" value="{{ $image }}">
+                        <img id="resource-image" src="{{ $thumbnail }}" alt="">
+                        <input type="hidden" id="image-url" name="image-url" value="{{ $thumbnail }}">
 
                         <div class="circle-preloader preloader-wrapper big active">
                             <div class="spinner-layer spinner-green-only">
@@ -128,13 +145,13 @@
                 <div class="col s12 m7">
 
                     <div class="form-group col s12 m12">
-                        <label for="name"><span class="required">*</span> Nombre del autor:</label>
-                        <input type="text" name="name" id="name" class="required-field" placeholder="Nombre del autor..." value="{{ $name }}">
+                        <label for="title"><span class="required">*</span> Nombre del autor:</label>
+                        <input type="text" name="title" id="title" class="required-field" placeholder="Nombre del autor..." value="{{ $title }}">
                     </div>
 
                     <div class="form-group col s12 m12">
-                        <label for="description">Descripción:</label>
-                        <textarea name="description" id="description" placeholder="Descripción del autor...">{{ $description }}</textarea>
+                        <label for="content">Descripción:</label>
+                        <textarea name="content" id="content" placeholder="Descripción del autor...">{{ $content }}</textarea>
                     </div>
 
                 </div>
@@ -146,25 +163,25 @@
         <div id="especialidades" class="content-tabs">
             <div class="row specialties">
                 @foreach ($specialties as $specialty)
-                    @if ($specialty->top)
+                    @if ($specialty->parent_id == 0)
 
                         <div class="col s12 m6">
                             <div class="form-group parent">
 
-                                <label for="specialty-{{$specialty->_id}}">
+                                <label for="specialty-{{$specialty->id}}">
                                     @php $checked = ''; @endphp
                                     
-                                    @if (count($authorSpecialty) > 0)
-                                        @foreach ($authorSpecialty as $selected)
+                                    @if (count($authorTaxonomies) > 0)
+                                        @foreach ($authorTaxonomies as $selected)
                                             @php
-                                                if($selected->_id == $specialty->_id){
+                                                if($selected->id == $specialty->id){
                                                     $checked = 'checked="checked"';
                                                 }
                                             @endphp
                                         @endforeach
                                     @endif
 
-                                    <input type="checkbox" name="specialty" id="specialty-{{$specialty->_id}}"  {{$checked}} value="{{$specialty->_id}}">
+                                    <input type="checkbox" name="specialty" id="specialty-{{$specialty->id}}"  {{$checked}} value="{{$specialty->id}}">
 
                                     <span>{{$specialty->title}}</span>
                                 </label>
@@ -176,20 +193,20 @@
                                 @foreach ($specialty->childs as $child)
 
                                     <div class="form-group col s6 m6">
-                                        <label for="specialty-{{$child->_id}}">
+                                        <label for="specialty-{{$child->id}}">
                                             @php $checked = ''; @endphp
                                             
-                                            @if (count($authorSpecialty) > 0)
-                                                @foreach ($authorSpecialty as $selected)
+                                            @if (count($authorTaxonomies) > 0)
+                                                @foreach ($authorTaxonomies as $selected)
                                                     @php
-                                                        if($selected->_id == $child->_id){
+                                                        if($selected->id == $child->id){
                                                             $checked = 'checked="checked"';
                                                         }
                                                     @endphp
                                                 @endforeach
                                             @endif
 
-                                            <input type="checkbox" name="specialty" id="specialty-{{$child->_id}}"  {{$checked}} value="{{$child->_id}}">
+                                            <input type="checkbox" name="specialty" id="specialty-{{$child->id}}"  {{$checked}} value="{{$child->id}}">
 
                                             <span>{{$child->title}}</span>
                                         </label>
@@ -214,7 +231,7 @@
 
                 <div class="form-group col s12 m8">
                     <label for="meta-title">Meta titulo:</label>
-                    <input type="text" id="meta-title" name="meta-title" placeholder="Meta titulo del autor..." value="{{ $metaTitle }}">
+                    <input type="text" id="meta-title" name="meta-title" placeholder="Meta titulo del autor..." value="{{ $meta_title }}">
                 </div>
             </div>
 
@@ -225,7 +242,7 @@
 
                 <div class="form-group col s12 m8">
                     <label for="meta-description">Meta descripción:</label>
-                    <textarea rows="3" id="meta-description" name="meta-description" placeholder="Meta descripción del autor...">{{$metaDescription}}</textarea>
+                    <textarea rows="3" id="meta-description" name="meta-description" placeholder="Meta descripción del autor...">{{$meta_description}}</textarea>
                 </div>
             </div>
 
@@ -237,8 +254,8 @@
                 <div class="form-group col s12 m8">
                     <label for="meta-tags">Meta etiquetas:</label>
                     
-                        @if (count($metaTags) > 0)
-                            <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Meta etiquetas del autor...">@foreach ($metaTags as $tag){{$tag}}@endforeach</textarea>
+                        @if (count($meta_tags) > 0)
+                            <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Meta etiquetas del autor...">@foreach ($meta_tags as $tag){{$tag}},@endforeach</textarea>
                         @else
                             <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Separar cada etiqueta con una comma ( , )..."></textarea>
                         @endif

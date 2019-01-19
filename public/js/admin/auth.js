@@ -62,6 +62,10 @@ const sendLoginData = (username, password, token) => {
 		let data = JSON.parse(resp);
 		let error = { show: false, msg: '' };
 
+		if(data.token !== null && data.token !== undefined) {
+			return window.location.href = '/am-admin/libros';
+		}
+
 		switch (data.status) {
 			case 500:
 					error.msg = 'Ha ocurrido un error, por favor intentelo más tarde.';
@@ -71,12 +75,9 @@ const sendLoginData = (username, password, token) => {
 					error.msg = 'Este usuario no existe.';
 					error.show = true;
 				break;
-			case 403:
+			case 401:
 					error.msg = 'El usuario y la contraseña no coinciden.';
 					error.show = true;
-				break;
-			case 200:
-					return window.location.href = '/am-admin/libros';
 				break;
 			default:
 					error.msg = 'El usuario y la contraseña no coinciden.';

@@ -1,6 +1,21 @@
 jQuery(function($){
 	$(document).ready(function() {
 		createDataTable();
+		/*
+		$.ajax({
+	    	method: "GET",
+	    	url: '/am-admin/authors/all',
+	    	data: {
+	    		"limit": 800,
+				"skip": 0,
+				"inventory": 1,
+				"_token": $('#_token').val()
+	    	}
+	    }).done((resp) => {
+	    	console.log(resp)
+	    }).catch((err) => {
+	    	console.log(err)
+	    })*/
 	});
 });
 
@@ -34,36 +49,37 @@ const createDataTable = function() {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
 	    ajax: {
-	    	method: "POST",
+	    	method: "GET",
 	    	url: '/am-admin/authors/all',
 	    	data: {
 	    		"limit": 800,
 				"skip": 0,
+				"inventory": 1,
 				"_token": $('#_token').val()
 	    	}
 	    },
 	    columns: [
 	    	{ 
-	    		data: "image",
+	    		data: "thumbnail",
 	    		className: "image",
 	    		"render": function (data, type, JsonResultRow, meta) {
-	    			if(JsonResultRow.image !== null && JsonResultRow.image !== undefined) {
-                    	return '<img src="'+ JsonResultRow.image + '">';
+	    			if(JsonResultRow.thumbnail !== null) {
+                    	return '<img src="'+ JsonResultRow.thumbnail + '">';
                     } else {
                     	return '<img src="https://amolca.webussines.com/uploads/images/no-image.jpg">';
                     }
                 } 
             },
 	    	{ 	
-	    		data: "name",
+	    		data: "title",
 	    		className: "title"
 	    	},
 	    	{ 	
-	    		data: "specialty",
+	    		data: "taxonomies",
 	    		className: "specialty",
 	    		render: function(data, type, JsonResultRow, meta) {
-	    			if(JsonResultRow.specialty.length > 1) {
-	    				return JsonResultRow.specialty[1].title;
+	    			if(JsonResultRow.taxonomies !== null && JsonResultRow.taxonomies !== undefined && JsonResultRow.taxonomies.length > 1) {
+	    				return JsonResultRow.taxonomies[1].title;
 	    			} else {
 	    				return 'Sin especialidad';
 	    			}
@@ -73,7 +89,7 @@ const createDataTable = function() {
 	    		data: "_id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
-	    			let str = `<a class="edit" href="/am-admin/autores/${JsonResultRow._id}">
+	    			let str = `<a class="edit" href="/am-admin/autores/${JsonResultRow.id}">
 				                    <span class="icon-mode_edit"></span>
 				                </a>
 
@@ -99,7 +115,7 @@ const DeleteAuthor = function(tbody, table) {
 
 		let data = table.row($(this).parents("tr")).data();
 
-		let alerta = confirm('Seguro que deseas eliminar permanentemente el libro: ' + data.name);
+		let alerta = confirm('Seguro que deseas eliminar permanentemente el libro: ' + data.title);
 
 		if(alerta) {
 			if($('.loader').hasClass('hidde'))
@@ -107,7 +123,7 @@ const DeleteAuthor = function(tbody, table) {
 
 			$.ajax({
 				type: "DELETE",
-				url: "/am-admin/autores/" + data._id,
+				url: "/am-admin/autores/" + data.id,
 				data: { "_token": $('#_token').val() }
 			}).done(function(resp) {
 				console.log(resp)

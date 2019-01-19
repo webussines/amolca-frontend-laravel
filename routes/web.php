@@ -48,7 +48,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 		//Routes for get info "AUTORES"
 		Route::prefix('authors')->group(function(){
-			Route::post('/all', 'Admin\AdminAuthorsController@all');
+			Route::get('/all', 'Admin\AdminAuthorsController@all');
 			Route::post('/edit/{id}', 'Admin\AdminAuthorsController@edit');
 		});
 
