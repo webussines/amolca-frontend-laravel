@@ -12,7 +12,8 @@ class AppServiceProvider extends ServiceProvider
 {
 
     //protected $API_URL = 'http://localhost:3000/api/1.0/';
-    protected $API_URL = 'http://api.amolca.com/';
+    //protected $API_URL = 'http://api.amolca.com/';
+    protected $API_URL = 'http://localapi.amolca.com/';
     //protected $API_URL = 'https://amolca-backend.herokuapp.com/api/1.0/';
 
     public function boot()
