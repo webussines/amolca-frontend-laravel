@@ -1,7 +1,7 @@
 <ul class="nav-menu" id="nav-menu">
     <ul class="vmenu">
 
-        @if (session('user')->role[0] == 'SUPERADMIN')
+        @if (session('user')->role == 'SUPERADMIN')
             <li>
                 <a data-id="books">
                     <span class="icon icon-books"></span> <span class="text">Libros</span>
@@ -45,7 +45,7 @@
             </li>
         @endif
 
-        @if (session('user')->role[0] == 'SUPERADMIN' || session('user')->role[0] == 'ADMIN')
+        @if (session('user')->role == 'SUPERADMIN' || session('user')->role == 'ADMIN')
             <li>
                 <a data-id="coupons">
                     <span class="icon icon-price-tags"></span> <span class="text">Cupones</span>
@@ -92,7 +92,7 @@
             </li>
         @endif
 
-        @if (session('user')->role[0] == 'SUPERADMIN')
+        @if (session('user')->role == 'SUPERADMIN')
             <li>
                 <a data-id="users">
                     <span class="icon icon-users"></span> <span class="text">Usuarios</span>
@@ -113,7 +113,7 @@
             <ul class="submenu" data-menu="settings">
                 <li><a href="/am-admin/ajustes">Ajustes generales</a></li>
 
-                @if (session('user')->role[0] == 'SUPERADMIN')
+                @if (session('user')->role == 'SUPERADMIN')
                     <li><a>Plantilla</a></li>
                 @endif
             </ul>

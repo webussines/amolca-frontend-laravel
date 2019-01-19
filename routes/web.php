@@ -36,7 +36,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 		//Routes for get info "LIBOS"
 		Route::prefix('books')->group(function(){
-			Route::post('/all', 'Admin\AdminBooksController@getBooks');
+			Route::get('/', 'Admin\AdminBooksController@all');
 			Route::post('/edit/{id}', 'Admin\AdminBooksController@edit');
 		});
 

@@ -37,11 +37,11 @@ const createDataTable = function() {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
 	    ajax: {
-	    	method: "POST",
-	    	url: '/am-admin/books/all',
+	    	method: "GET",
+	    	url: '/am-admin/books',
 	    	data: {
-	    		"limit": 300,
-				"skip": 0,
+	    		"limit": 1200,
+	    		"inventory": 1,
 				"_token": $('#_token').val()
 	    	}
 	    },
@@ -49,8 +49,6 @@ const createDataTable = function() {
 		    let direction = e.aaSorting[0][1];
 		    let columnIndex = e.aaSorting[0][0];
 		    let columnName = e.aoColumns[columnIndex].sTitle;
-
-
 
 		    columnName = columnName.toLowerCase().replace(/:/gi, '').replace(/\./gi, '');
 
@@ -60,7 +58,7 @@ const createDataTable = function() {
 		    			SortColumn.column = 'title';
 		    			break;
 		    		case 'especialidad':
-		    			SortColumn.column = 'specialty.title';
+		    			SortColumn.column = 'taxonomies.title';
 		    			break;
 		    		case 'isbn':
 		    			SortColumn.column = 'isbn';
@@ -82,10 +80,10 @@ const createDataTable = function() {
 		},
 	    columns: [
 	    	{ 
-	    		data: "image",
+	    		data: "thumbnail",
 	    		className: "image",
 	    		"render": function (data, type, JsonResultRow, meta) {
-                    return '<img src="'+ JsonResultRow.image + '">';
+                    return '<img src="'+ JsonResultRow.thumbnail + '">';
                 } 
             },
 	    	{ 	
@@ -93,13 +91,13 @@ const createDataTable = function() {
 	    		className: "title"
 	    	},
 	    	{ 	
-	    		data: "specialty",
+	    		data: "taxonomies",
 	    		className: "specialty",
 	    		render: function(data, type, JsonResultRow, meta) {
-	    			if(JsonResultRow.specialty.length > 1) {
-	    				return JsonResultRow.specialty[1].title;
+	    			if(JsonResultRow.taxonomies.length > 1) {
+	    				return JsonResultRow.taxonomies[1].title;
 	    			} else {
-	    				return JsonResultRow.specialty[0].title;
+	    				return JsonResultRow.taxonomies[0].title;
 	    			}
 
 	    		}
@@ -109,8 +107,8 @@ const createDataTable = function() {
 	    		className: "isbn"
 	    	},
 	    	{ 	
-	    		data: "author[0].name",
-	    		className: "author",
+	    		data: "state",
+	    		className: "state",
 	    		"render": function (data, type, JsonResultRow, meta) {
                   	switch(JsonResultRow.state) {
                   		case 'PUBLISHED':
@@ -129,7 +127,7 @@ const createDataTable = function() {
                 } 
 	    	},
 	    	{ 	
-	    		data: "_id",
+	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
 	    			//console.log(JsonResultRow)
@@ -161,19 +159,6 @@ const createDataTable = function() {
 
 	$('#DataTables_Table_0_length select').formSelect();
 	$('.dataTables_filter input[type="search"]').attr('placeholder', 'Escribe una palabra clave para encontrar un libro');
-
-	let btnLoadMore = `<div class="cont-btn-load-more">
-							<label>Cargar más libros:</label>
-							<div>
-								<input id="btn-load-more" class="button primary" disabled="disabled" value="Cargar 300 libros más">
-							</div>
-						</div>`;
-
-	$('#DataTables_Table_0_length').before(btnLoadMore);
-
-	$('table.books').DataTable().on('draw', function() {
-		$('#btn-load-more').removeAttr('disabled');
-	})
 }
 
 const SingleBookRedirect = function(tbody, table, sort) {
@@ -209,7 +194,7 @@ const SingleBookRedirect = function(tbody, table, sort) {
 			SortParam = '&orderby=' + sort.column + '&order=' + sort.order;
 		}
 
-		let RedirectRoute = '/am-admin/libros/' + data._id + PreviousParam + NextParam + SortParam;
+		let RedirectRoute = '/am-admin/libros/' + data.id + PreviousParam + NextParam + SortParam;
 
 		window.location.href = RedirectRoute;
 	});

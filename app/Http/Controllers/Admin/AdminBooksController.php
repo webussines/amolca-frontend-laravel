@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Specialties;
 use App\Repositories\Authors;
-use App\Repositories\Books;
+use App\Repositories\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Response;
 
 class AdminBooksController extends Controller
 {
@@ -16,24 +17,31 @@ class AdminBooksController extends Controller
     protected $banners;
     protected $specialties;
     protected $books;
+    protected $request;
 
-    public function __construct(Specialties $specialties, Books $books, Authors $authors) {
+    public function __construct(Specialties $specialties, Posts $books, Authors $authors, Request $request) {
         $this->specialties = $specialties;
         $this->books = $books;
         $this->authors = $authors;
+        $this->request = $request;
     }
 
-    public function getBooks() {
+    public function all() {
+        $limit = (Input::get('limit')) ? Input::get('limit') : 2000 ;
+        $skip = (Input::get('skip')) ? Input::get('skip') : 0 ;
+        $inventory = (Input::get('inventory')) ? Input::get('inventory') : 0 ;
+        $params = "orderby=title&order=asc&limit={$limit}&skip={$skip}&inventory={$inventory}";
 
-        $limit = Input::post('limit');
-        $skip = Input::post('skip');
-        $params = "orderby=title&order=1&limit={$limit}&skip={$skip}";
+        $books = $this->books->all("book", $params);
 
-        $resp = [];
+        if($this->request->ajax()) {
+            $resp = [];
+            $resp['data'] = $books->posts;
 
-        $resp['data'] = $this->books->all($params);
+            return $resp;
+        }
 
-        return $resp;
+        return Response::json($books->posts);
     }
 
     /*Return all books view*/
