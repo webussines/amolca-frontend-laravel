@@ -99,3 +99,10 @@ Route::get('/blog', 'Ecommerce\PostsController@index');
 Route::get('/{slug}', 'Ecommerce\PostsController@show');
 
 Auth::routes();
+
+//Carts
+Route::group(['prefix' => 'carts'], function() {
+	Route::post('/', 'Ecommerce\CartsController@store');
+	Route::put('/', 'Ecommerce\CartsController@update');
+	Route::get('/{id}', 'Ecommerce\CartsController@show');
+});

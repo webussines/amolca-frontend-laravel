@@ -5,6 +5,7 @@
 		<title>@yield('title')</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<link rel="canonical" href="{{ Request::fullUrl() }}" >
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<link rel="icon" type="image/x-icon" href="{{ asset('img/common/favicon.ico') }}">
 		@yield('meta')
 
@@ -41,5 +42,6 @@
 	<script src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/common.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/responsive-menu.js') }}"></script>
+	<script src="{{ asset('js/ecommerce/cart.js') }}"></script>
 	<script src="{{ asset('js/common.js') }}"></script>
 	@yield('scripts')

@@ -29,3 +29,4 @@ Route::group(['prefix' => 'menus'], function() {
 	Route::put('/', 'Api\ApiMenusController@update');
 	Route::get('/{id}', 'Api\ApiMenusController@show');
 });
+
