@@ -76,7 +76,7 @@ class AdminAuthorsController extends Controller
 
         return view('admin.authors.single', [
             'action' => 'create',
-            'specialties' => $specialties
+            'specialties' => $specialties->taxonomies
         ]);
     }
 

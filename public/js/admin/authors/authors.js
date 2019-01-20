@@ -115,7 +115,7 @@ const DeleteAuthor = function(tbody, table) {
 
 		let data = table.row($(this).parents("tr")).data();
 
-		let alerta = confirm('Seguro que deseas eliminar permanentemente el libro: ' + data.title);
+		let alerta = confirm('Seguro que deseas eliminar permanentemente el autor: ' + data.title);
 
 		if(alerta) {
 			if($('.loader').hasClass('hidde'))
@@ -128,9 +128,23 @@ const DeleteAuthor = function(tbody, table) {
 			}).done(function(resp) {
 				console.log(resp)
 
+				let json = JSON.parse(resp);
+
+				if(json.error !== undefined) {
+					if (json.error == 'token_expired') {
+						let toastMsg = 'Su sesión ha expirado, en segundo será redirigido para iniciar sesión de nuevo.';
+						M.toast({html: toastMsg, classes: 'red accent-4 bottom'});
+						
+						setTimeOut(function() {
+							window.location.href = '/am-admin/logout?redirect=';
+						}, 5000);
+					}
+				}
+
 				$('.data-table').DataTable().ajax.reload();
 
 				$('table.authors').DataTable().on('draw', function() {
+
 					if(!$('.loader').hasClass('hidde'))
 						$('.loader').addClass('hidde')
 

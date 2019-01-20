@@ -2,6 +2,7 @@
 @php
     $id = (isset($author->id)) ? $author->id : '';
     $title = (isset($author->title)) ? $author->title : '';
+    $slug = (isset($author->slug)) ? $author->slug : '';
     $thumbnail = (isset($author->thumbnail)) ? $author->thumbnail : 'https://amolca.webussines.com/uploads/authors/no-author-image.png';
     $content = (isset($author->content)) ? $author->content : ' ';
     $authorTaxonomies = (isset($author->taxonomies)) ? $author->taxonomies : [];
@@ -147,6 +148,15 @@
                     <div class="form-group col s12 m12">
                         <label for="title"><span class="required">*</span> Nombre del autor:</label>
                         <input type="text" name="title" id="title" class="required-field" placeholder="Nombre del autor..." value="{{ $title }}">
+                    </div>
+
+                    <div class="form-group col s12 m12">
+                        <label for="slug"><span class="required">*</span> Slug:</label>
+                        @if ($slug !== '')
+                        {{$slug}}
+                        @else
+                        <input type="text" name="slug" id="slug" class="required-field" placeholder="Escribir el slug sin espacion ni carácteres comillas, tildes, puntos, etc...">
+                        @endif
                     </div>
 
                     <div class="form-group col s12 m12">

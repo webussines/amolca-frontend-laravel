@@ -77,9 +77,10 @@ const SaveAuthor = function() {
 		let meta_tags = GetMetaTags();
 
 		let author = {
+			type: 'author',
 			title: title,
 			content: content,
-			thumbnail: thumbnail		
+			thumbnail: thumbnail
 		}
 
 		//Ingresar los datos de las especialidades}
@@ -109,14 +110,19 @@ const SaveAuthor = function() {
 		}
 
 		let ActionRoute;
+		let data_send = { "_token": _token }
 	
 		switch(_action) {
 			case 'edit':
 				ActionRoute = '/am-admin/authors/edit/' + _id;
+				data_send.body = author
 			break;
 
 			case 'create':
 				ActionRoute = '/am-admin/autores';
+				author.slug = $('#slug').val();
+				data_send.body = [author]
+
 			break;
 		}
 
@@ -136,10 +142,7 @@ const SaveAuthor = function() {
 			$.ajax({
 				method: 'POST',
 				url: ActionRoute,
-				data: {
-					"body": author,
-					"_token": _token
-				}
+				data: data_send
 			}).done(function(resp) {
 				console.log(resp)
 
@@ -151,14 +154,14 @@ const SaveAuthor = function() {
 					}
 				}
 
-				if(data.post.id !== undefined) {
+				if(data.status !== undefined) {
 					
 					switch(_action) {
 						case 'edit':
 							location.reload();
 						break;
 						case 'create':
-							window.location.href = '/am-admin/autores/' + data.id;
+							window.location.href = '/am-admin/autores/' + data.posts_id[0];
 						break;
 					}
 
