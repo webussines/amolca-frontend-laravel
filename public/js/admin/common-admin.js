@@ -17,9 +17,10 @@ const ValidateImage = () => {
 
 		$('#image-error').css({ 'display': 'none' });
 
-		let types = [ "png", "jpg", "jpeg", "gif" ];
+		let types = [ "png", "jpg", "jpeg", "gif", "png" ];
 		let fileSize = $(this)[0].files[0].size;
 		let fileType = $(this)[0].files[0].type.split('/')[1];
+		console.log(fileType)
 
 		//Validar si el archivo pesa más de 25000000 kb (25mb)
 		if(fileSize > 25000000 ) {

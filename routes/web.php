@@ -54,8 +54,8 @@ Route::group(['prefix' => 'am-admin'], function() {
 		});
 
 		//Routes for get info "SLIDERS"
-		Route::prefix('sliders')->group(function(){
-			Route::post('/all', 'Admin\AdminSlidersController@all');
+		Route::prefix('api-sliders')->group(function(){
+			Route::get('/all', 'Admin\AdminSlidersController@all');
 			Route::post('/edit/{id}', 'Admin\AdminSlidersController@edit');
 		});
 

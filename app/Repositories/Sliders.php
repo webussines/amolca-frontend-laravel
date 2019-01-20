@@ -21,5 +21,9 @@ class Sliders extends GuzzleHttpRequest {
 	public function updateById($id, $update) {
 		return $this->put("sliders/{$id}", $update);
 	}
+
+	public function deleteById($id) {
+		return $this->delete("sliders/{$id}");
+	}
 	
 }

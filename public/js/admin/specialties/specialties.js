@@ -111,7 +111,7 @@ const DeleteBook = function(tbody, table) {
 						let toastMsg = 'Su sesión ha expirado, en segundo será redirigido para iniciar sesión de nuevo.';
 						M.toast({html: toastMsg, classes: 'red accent-4 bottom'});
 						
-						setTimeOut(function() {
+						setTimeout(function() {
 							window.location.href = '/am-admin/logout?redirect=';
 						}, 5000);
 					}

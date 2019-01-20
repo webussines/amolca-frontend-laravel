@@ -1,12 +1,13 @@
 @extends('admin.layouts.account')
 
 @php
+    $id = (isset($slider->id)) ? $slider->id : '';
     $title = (isset($slider->title)) ? $slider->title : '';
     $state = (isset($slider->state)) ? $slider->state : '';
-    $items = $slider->items;
+    $items = (isset($slider->items)) ? $slider->items : [];
 @endphp
 
-@section('title', 'Slider: ' . $slider->title . ' - Admin Amolca')
+@section('title', 'Slider: ' . $title . ' - Admin Amolca')
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/admin/single-slider.css') }}">
@@ -33,7 +34,7 @@
 
 	<div class="row single section-header valign-wrapper">
 		<div class="col s12 m10 l10">
-			<p class="title"> {{$slider->title}} </p>
+			<p class="title"> {{$title}} </p>
 		</div>
 		<div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
@@ -48,7 +49,7 @@
     <form id="slider-edit" class="slider-edit">
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
         <input type="hidden" id="_src" value="sliders">
-        <input type="hidden" id="id" value="{{ $slider->_id }}">
+        <input type="hidden" id="id" value="{{ $id }}">
 
         <ul class="tabs top-tabs">
             <li class="tab">
@@ -78,13 +79,18 @@
                                     <div class="item" style="background-image: url('{{$slide->image}}');">
                                         <div class="item-content">
                                             <input type="hidden" class="slide-url" value="{{$slide->image}}">
+                                            <input type="hidden" class="slide-id" value="{{$slide->id}}">
                                             <p class="options">
                                                 <a class="order">{{$slide->order}}</a>
                                                 <a class="edit"><span class="icon-mode_edit"></span></a>
+                                                <a class="delete"><span class="icon-trash"></span></a>
                                             </p>
                                         </div>
                                     </div>
                                 @endforeach
+                            </div>
+                            <div class="grid-footer">
+                                <button id="add-slide">Agregar slide</button>
                             </div>
                         </div>
                     @endif

@@ -35,12 +35,11 @@ const createDataTable = function() {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
 	    ajax: {
-	    	method: "POST",
-	    	url: '/am-admin/sliders/all',
+	    	method: "GET",
+	    	url: '/am-admin/api-sliders/all',
 	    	data: {
 	    		"limit": 800,
-				"skip": 0,
-				"_token": $('#_token').val()
+				"skip": 0
 	    	}
 	    },
 	    columns: [
@@ -83,7 +82,7 @@ const createDataTable = function() {
 	    		data: "_id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
-	    			let str = `<a class="edit" href="/am-admin/sliders/${JsonResultRow._id}">
+	    			let str = `<a class="edit" href="/am-admin/sliders/${JsonResultRow.id}">
 				                    <span class="icon-mode_edit"></span>
 				                </a>
 

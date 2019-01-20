@@ -7,10 +7,35 @@ jQuery(function($) {
 		$('.save-changes').on('click', SaveItemChanges);
 		$('.save-resource').on('click', SaveSlider);
 
+		$('#add-slide').on('click', AddNewItem);
+		$('.delete').on('click', function() {
+			DeleteItem($(this))
+		});
+
 	});
 });
 
 var GlobalActiveImage;
+
+const AddNewItem = (e) => {
+
+	e.preventDefault();
+
+	$('#add-slide').attr('disabled', 'disabled');
+	$('.save-changes').addClass('new-item');
+
+	$('.buttons').css({ 'display': 'flex' });
+
+}
+
+const DeleteItem = (elem) => {
+	let parent = $(elem).parent();
+	let index = $(parent).find('.order').html();
+	let grid = new Muuri('.grid');
+	grid.remove([index - 1],  {removeElements: true, layout: true});
+
+	let item = $(elem).parent().parent().parent('.item').css('display', 'none');
+}
 
 const GenerateGrid = () => {
 	const grid = new Muuri('.grid', {
@@ -49,37 +74,69 @@ const CancelEditSlideItem = () => {
 	$('#image-url').val('');
 
 	$('.buttons').css({ 'display': 'none' });
+
+	if($('#add-slide').attr('disabled') == 'disabled') {
+		$('#add-slide').removeAttr('disabled');
+	}
 }
 
 const SaveItemChanges = () => {
-	
-	$('.drag-grid .grid .item').each(function(elem) {
-		let child = $(this).children().children('.slide-url');
-		let newImg = localStorage.getItem('fileName');
 
-		if(child.val() == GlobalActiveImage) {
-			child.val(newImg)
-			$(this).css({ 'background-image': 'url(' + newImg + ')' })
+	if(!$('.save-changes').hasClass('new-item')) {
+		$('.drag-grid .grid .item').each(function(elem) {
+			let child = $(this).children().children('.slide-url');
+			let newImg = localStorage.getItem('fileName');
 
-			$('#resource-image').attr('src', 'https://amolca.webussines.com/uploads/sliders/slider-no-image.jpg');
-			$('#image-url').val('');
+			if(child.val() == GlobalActiveImage) {
+				child.val(newImg)
+				$(this).css({ 'background-image': 'url(' + newImg + ')' })
 
-			$('.save-changes').css({ 'display': 'none' });
-		}
-	});
+				$('#resource-image').attr('src', 'https://amolca.webussines.com/uploads/sliders/slider-no-image.jpg');
+				$('#image-url').val('');
 
+				$('.buttons').css({ 'display': 'none' });
+			}
+		});
+	} else {
+		let order = GetSliderItems().length + 1;
+		let tmp = `<div class="item" style="background-image: url('${localStorage.getItem('fileName')}');">
+				        <div class="item-content">
+				            <input type="hidden" class="slide-url" value="${localStorage.getItem('fileName')}">
+				            <p class="options">
+				                <a class="order">${order}</a>
+				                <a class="edit"><span class="icon-mode_edit"></span></a>
+				            </p>
+				        </div>
+				    </div>`;
+
+		$('.drag-grid .grid').append(tmp);
+		GenerateGrid();
+
+		$('#resource-image').attr('src', 'https://amolca.webussines.com/uploads/sliders/slider-no-image.jpg');
+		$('#image-url').val('');
+
+		$('.buttons').css({ 'display': 'none' });
+	}
+
+	if($('#add-slide').attr('disabled') == 'disabled') {
+		$('#add-slide').removeAttr('disabled');
+	}
 }
 
 const GetSliderItems = () => {
 
 	let items = [];
 
-	$('.drag-grid .item').each(function() {
+	$('.drag-grid .item.muuri-item').each(function() {
 
 		let elem = {};
 
 		elem.image = $(this).find('.slide-url').val();
 		elem.order = $(this).find('.order').html();
+
+		if($(this).find('.slide-id').val() !== undefined) {
+			elem.id = $(this).find('.slide-id').val();
+		}
 
 		if(typeof elem.order == 'string') {
 			elem.order = parseInt(elem.order)
@@ -106,11 +163,9 @@ const SaveSlider = () => {
 		items: GetSliderItems()
 	}
 
-	console.log(_id)
-
 	$.ajax({
 		method: 'POST',
-		url: '/am-admin/sliders/edit/' + _id,
+		url: '/am-admin/api-sliders/edit/' + _id,
 		data: {
 			"update": slider,
 			"_token": _token
@@ -120,11 +175,19 @@ const SaveSlider = () => {
 
 		let data = JSON.parse(resp);
 
-		if(data._id !== undefined) {
-			location.reload();
-		} else {
-			switch(data.status) {
+		if(data.error !== undefined) {
+			if (data.error == 'token_expired') {
+				let toastMsg = 'Su sesión ha expirado, en segundo será redirigido para iniciar sesión de nuevo.';
+				M.toast({html: toastMsg, classes: 'red accent-4 bottom'});
+				
+				setTimeout(function() {
+					window.location.href = '/am-admin/logout?redirect=';
+				}, 5000);
 			}
+		}
+
+		if(data.status !== undefined) {
+			location.reload();
 		}
 	}).catch(function(err) {
 		console.log(err)
