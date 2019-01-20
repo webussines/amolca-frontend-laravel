@@ -28,7 +28,6 @@
 				<th class="image">Img.</th>
 				<th class="title">Titulo:</th>
 				<th class="slug">Slug:</th>
-				<th class="specialty">Especialidad padre:</th>
 				<th class="actions">Acciones:</th>
 			</tr>
 		</thead>

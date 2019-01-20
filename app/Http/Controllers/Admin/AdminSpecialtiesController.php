@@ -18,13 +18,14 @@ class AdminSpecialtiesController extends Controller
 
     public function all() {
 
-        $limit = Input::post('limit');
-        $skip = Input::post('skip');
-        $params = "orderby=title&order=1&limit={$limit}&skip={$skip}";
+        $limit = (Input::post('limit')) ? Input::post('limit') : '10000';
+        $skip = (Input::post('skip')) ? Input::post('skip') : '0';
+        $inventory = (Input::post('inventory')) ? Input::post('inventory') : 0;
+        $params = "orderby=title&order=asc&limit={$limit}&skip={$skip}&inventory={$inventory}";
 
         $resp = [];
 
-        $resp['data'] = $this->specialties->all($params);
+        $resp['data'] = $this->specialties->all($params)->taxonomies;
 
         return $resp;
 
@@ -43,7 +44,11 @@ class AdminSpecialtiesController extends Controller
         $specialties = $this->specialties->all();
         $specialty = $this->specialties->findById($id);
 
-        return view('admin.specialties.edit', ['specialty' => $specialty, 'specialties' => $specialties]);
+        return view('admin.specialties.single', [
+            'specialty' => $specialty,
+            'specialties' => $specialties,
+            'action' => 'edit'
+        ]);
     }
 
     public function edit($id)
@@ -54,21 +59,19 @@ class AdminSpecialtiesController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.specialties.single', [
+            'action' => 'create'
+        ]);
     }
 
     public function store(Request $request)
     {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
+        $specialty = Input::post('body');
+        return $this->specialties->create($specialty);
     }
 
     public function destroy($id)
     {
-        //
+        return $this->specialties->deleteById($id);
     }
 }

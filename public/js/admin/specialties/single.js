@@ -39,70 +39,50 @@ const SaveSpecialtyInfo = function() {
 	let _token = $('#_token').val();
 	let _id = $('#_id').val();
 
-	let image = $('#image-url').val();
+	let thumbnail = $('#image-url').val();
 	let title = $('#title').val();
 	let description = $('#description').val();
-	let metaTitle = $('#meta-title').val();
-	let metaDescription = $('#meta-description').val();
-	let metaTags = $('#meta-tags').val();
 
 	let specialty = {
 		title: title,
 		description: description,
-		image: image,
-		metaTitle: metaTitle,
-		metaDescription: metaDescription,
-		metaTags: metaTags
+		thumbnail: thumbnail,
+		term_id: 2
 	}
 
-	const ApiRoute = '/am-admin/specialties';
+	let ApiRoute = '/am-admin/specialties';
+	let data_send = {
+		"_token": $('#_token').val()
+	}
 
 	switch(_action) {
 
 		case 'create':
-			$.ajax({
-				method: 'POST',
-				url: ApiRoute + '/create',
-				data: {
-					"body": specialty,
-					"_token": $('#_token').val()
-				}
-			}).done(function(resp) {
-				console.log(resp)
-
-				let data = JSON.parse(resp);
-
-				if(data.status == 200) {
-					location.reload();
-				} else {
-					TransformResponse(data)
-				}
-			})
+			specialty.slug = $('#slug').val();
+			data_send.body = [specialty];
 		break;
 		case 'edit':
-
-			$.ajax({
-				method: 'POST',
-				url: ApiRoute + '/edit/' + _id,
-				data: {
-					"update": specialty,
-					"_token": $('#_token').val()
-				}
-			}).done(function(resp) {
-				console.log(resp)
-
-				let data = JSON.parse(resp);
-
-				if(data._id !== undefined) {
-					location.reload();
-				} else {
-					TransformResponse(data)
-				}
-			})
-
+			data_send.update = specialty;
+			ApiRoute += '/edit/' + _id;
 		break;
 
 	}
+
+	$.ajax({
+		method: 'POST',
+		url: ApiRoute,
+		data: data_send
+	}).done((resp) => {
+		console.log(resp)
+
+		let data = JSON.parse(resp);
+
+		if(data.term.id) {
+			location.reload();
+		}
+	}).catch((err) => {
+		console.log(err)
+	})
 
 }
 

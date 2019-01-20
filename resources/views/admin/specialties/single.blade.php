@@ -1,6 +1,18 @@
+@php
+    $id = (isset($specialty->id)) ? $specialty->id : '';
+    $thumbnail = (isset($specialty->thumbnail)) ? $specialty->thumbnail : 'https://amolca.webussines.com/uploads/images/no-image.jpg';
+    $title = (isset($specialty->title)) ? $specialty->title : '';
+    $slug = (isset($specialty->slug)) ? $specialty->slug : '';
+    $description = (isset($specialty->description)) ? $specialty->description : '';
+@endphp
+
 @extends('admin.layouts.account')
 
-@section('title', 'Especialidad: ' . $specialty->title . ' - Admin Amolca')
+@if ($title !== '')
+    @section('title', 'Especialidad: ' . $title . ' - Admin Amolca')
+@else
+    @section('title', 'Crear nueva especialidad - Admin Amolca')
+@endif
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/admin/single-specialty.css') }}">
@@ -14,17 +26,6 @@
 @endsection
 
 @section('contentClass', 'single single-specialty')
-
-@php
-    $id = (isset($specialty->_id)) ? $specialty->_id : '';
-    $image = (isset($specialty->image)) ? $specialty->image : 'https://amolca.webussines.com/uploads/images/no-image.jpg';
-    $title = (isset($specialty->title)) ? $specialty->title : '';
-    $description = (isset($specialty->description)) ? $specialty->description : '';
-
-    $metaTitle = (isset($specialty->metaTitle)) ? $specialty->metaTitle : '';
-    $metaDescription = (isset($specialty->metaDescription)) ? $specialty->metaDescription : '';
-    $metaTags = (isset($specialty->metaTags)) ? $specialty->metaTags : [];
-@endphp
 
 @section('content')
 
@@ -45,7 +46,7 @@
 
     <div class="row single section-header valign-wrapper">
 		<div class="col s12 m10 l10">
-			<p class="title"> {{ $title }} </p>
+			<p class="title">@if ($title !== '') {{$title}} @else Creando nueva especialidad @endif</p>
 		</div>
 		<div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
@@ -61,14 +62,11 @@
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
         <input type="hidden" id="_id" value="{{ $id }}">
         <input type="hidden" id="_src" value="specialties">
-        <input type="hidden" id="_action" value="edit">
+        <input type="hidden" id="_action" value="{{ $action }}">
 
         <ul class="tabs top-tabs">
             <li class="tab">
                 <a class="active" href="#ajustes-basicos">Ajustes básicos</a>
-            </li>
-            <li class="tab">
-                <a href="#seo">SEO</a>
             </li>
         </ul>
 
@@ -78,8 +76,8 @@
                 <div class="col s12 m5 col-image">
 
                     <div class="image-wrap">
-                        <img id="resource-image" src="{{ $image }}" alt="">
-                        <input type="hidden" id="image-url" name="image-url" value="{{ $image }}">
+                        <img id="resource-image" src="{{ $thumbnail }}" alt="">
+                        <input type="hidden" id="image-url" name="image-url" value="{{ $thumbnail }}">
 
                         <div class="circle-preloader preloader-wrapper big active">
                             <div class="spinner-layer spinner-green-only">
@@ -123,6 +121,15 @@
                     </div>
 
                     <div class="form-group col s12 m12">
+                        <label for="slug"><span class="required">*</span> Slug:</label>
+                        @if ($slug !== '')
+                        {{$slug}}
+                        @else
+                        <input type="text" name="slug" id="slug">
+                        @endif
+                    </div>
+
+                    <div class="form-group col s12 m12">
                         <label for="description">Descripción:</label>
                         <textarea name="description" id="description">{{ $description }}</textarea>
                     </div>
@@ -133,46 +140,5 @@
 
         </div>
 
-        <div id="seo" class="content-tabs">
-            <div class="row valign-wrapper">
-                <div class="col s12 m4">
-                    <p class="subtitle">Meta titulo:</p>
-                </div>
-
-                <div class="form-group col s12 m8">
-                    <label for="meta-title">Meta titulo:</label>
-                    <input type="text" id="meta-title" name="meta-title" placeholder="Meta titulo del autor..." value="{{ $metaTitle }}">
-                </div>
-            </div>
-
-            <div class="row valign-wrapper">
-                <div class="col s12 m4">
-                    <p class="subtitle">Meta descripción:</p>
-                </div>
-
-                <div class="form-group col s12 m8">
-                    <label for="meta-description">Meta descripción:</label>
-                    <textarea rows="3" id="meta-description" name="meta-description" placeholder="Meta descripción del autor...">{{ $metaDescription }}</textarea>
-                </div>
-            </div>
-
-            <div class="row valign-wrapper">
-                <div class="col s12 m4">
-                    <p class="subtitle">Meta etiquetas:</p>
-                </div>
-
-                <div class="form-group col s12 m8">
-                    <label for="meta-tags">Meta etiquetas:</label>
-                    
-                        @if (count($metaTags) > 0)
-                            <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Meta etiquetas del autor...">@foreach ($metaTags as $tag)
-                                {{$tag}}
-                            @endforeach</textarea>
-                        @else
-                            <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Separar cada etiqueta con una comma ( , )..."></textarea>
-                        @endif
-                </div>
-            </div>
-        </div>
     </form>
 @endsection

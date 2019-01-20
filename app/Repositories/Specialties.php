@@ -22,8 +22,16 @@ class Specialties extends GuzzleHttpRequest {
 		return $this->get("taxonomies/slug/{$slug}");
 	}
 
+	public function create($body) {
+		return $this->post("taxonomies", $body);
+	}
+
 	public function updateById($id, $update) {
 		return $this->put("taxonomies/{$id}", $update);
+	}
+
+	public function deleteById($id) {
+		return $this->delete("taxonomies/{$id}");
 	}
 	
 }

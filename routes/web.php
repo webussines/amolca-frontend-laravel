@@ -42,7 +42,8 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 		//Routes for get info "ESPECIALIDADES"
 		Route::prefix('specialties')->group(function(){
-			Route::post('/all', 'Admin\AdminSpecialtiesController@all');
+			Route::get('/', 'Admin\AdminSpecialtiesController@all');
+			Route::post('/', 'Admin\AdminSpecialtiesController@store');
 			Route::post('/edit/{id}', 'Admin\AdminSpecialtiesController@edit');
 		});
 
