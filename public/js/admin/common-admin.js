@@ -81,7 +81,7 @@ const UploadImage = () => {
 			contentType: false,
 			processData: false,
 			enctype: 'multipart/form-data',
-			url: '/api/upload',
+			url: 'https://amolca.webussines.com/api/upload',
 			data: send
 		}).done(function(resp) {
 			console.log(resp)
