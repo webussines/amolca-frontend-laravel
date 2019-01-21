@@ -20,17 +20,17 @@ jQuery(function($) {
 
 const AddCartProdut = (added) => {
 
-	console.log(added)
+	//console.log(added)
 
 	$.ajax({
 		method: "POST",
 		url: '/carts',
-		data: added,
-		dataType: 'json'
+		data: added
 	}).done(function(resp) {
 
 		console.log(resp)
-		//let json = JSON.parse(resp);
+		let json = JSON.parse(resp);
+		console.log(json)
 
 	}).catch(function(err){
 		console.log(err)
