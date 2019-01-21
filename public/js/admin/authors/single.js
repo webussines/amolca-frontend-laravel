@@ -56,6 +56,12 @@ const ResetFormErrors = function() {
 
 const SaveAuthor = function() {
 
+	$('#title').on('blur', function() {
+		let slug = GenerateSlug($('#title').val());
+
+		$('span#slug span').html(slug);
+	});
+
 	$('.save-resource').on('click', function() {
 
 		let flag = true;
@@ -120,7 +126,7 @@ const SaveAuthor = function() {
 
 			case 'create':
 				ActionRoute = '/am-admin/autores';
-				author.slug = $('#slug').val();
+				author.slug = GenerateSlug(author.title);
 				data_send.body = [author]
 
 			break;

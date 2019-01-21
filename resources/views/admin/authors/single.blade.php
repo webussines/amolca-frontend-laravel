@@ -44,6 +44,7 @@
 @section('scripts')
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=1icfygu7db6ym5ibmufjkk2myppelx6v827sc9rq8xt1eo2n'></script>
 <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('js/admin/slug-generator.js') }}"></script>
 <script src="{{ asset('js/admin/authors/single.js') }}"></script>
 @endsection
 
@@ -152,11 +153,7 @@
 
                     <div class="form-group col s12 m12">
                         <label for="slug"><span class="required">*</span> Slug:</label>
-                        @if ($slug !== '')
-                        {{$slug}}
-                        @else
-                        <input type="text" name="slug" id="slug" class="required-field" placeholder="Escribir el slug sin espacion ni carácteres comillas, tildes, puntos, etc...">
-                        @endif
+                        <span id="slug">{{Request::root()}}/autor/<span>{{$slug}}</span></span>
                     </div>
 
                     <div class="form-group col s12 m12">

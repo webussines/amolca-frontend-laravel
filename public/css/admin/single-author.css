@@ -92,6 +92,10 @@
 		right: 0;
 	}
 
+span#slug span {
+	font-weight: bold;
+}
+
 /*Specialties*/
 .row.specialties > .col:first-child {
 	border-right: 1px solid #ccc;
