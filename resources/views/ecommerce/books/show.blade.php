@@ -33,8 +33,10 @@
 					<div class="scroll-info">
 						<p class="price">{{ COPMoney($inventory->price) }}</p>
 						<div class="add-to-cart">
-							<input placeholder="Cantidad..." type="number">
-							<a class="button danger waves-effect waves-light">Añadir al carrito</a>
+							<input type="hidden" class="book-id" value="{{ $book->id }}">
+							<input type="hidden" class="book-price" value="{{ $inventory->price }}">
+							<input class="qty" placeholder="Cantidad..." type="number">
+							<button class="add-btn button danger waves-effect waves-light">Añadir al carrito</button>
 						</div>
 					</div>
 					@endif
@@ -120,9 +122,12 @@
 			@foreach ($book->inventory as $inventory)
 				@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
 					<div class="add-to-cart">
-						<input placeholder="Cantidad..." type="number">
-						<a class="button danger waves-effect waves-light">Añadir al carrito</a>
+						<input type="hidden" class="book-id" value="{{ $book->id }}">
+						<input type="hidden" class="book-price" value="{{ $inventory->price }}">
+						<input class="quantity" placeholder="Cantidad..." type="number" value="1">
+						<button class="add-btn button danger waves-effect waves-light">Añadir al carrito</button>
 					</div>
+					<div class="error-cart error"></div>
 				@endif
 			@endforeach
 

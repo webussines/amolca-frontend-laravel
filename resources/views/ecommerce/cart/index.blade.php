@@ -32,7 +32,7 @@
 		</thead>
 		<tbody>
 			@foreach ($cart->products as $product)
-				<tr>
+				<tr id="{{ $product->object_id }}">
 					<td class="image">
 						<img class="materialboxed" src="{{ $product->thumbnail }}">
 					</td>
@@ -49,6 +49,8 @@
 						{{ COPMoney($product->quantity * $product->price) }}
 					</td>
 					<td class="actions">
+						<input type="hidden" class="book-id" value="{{ $product->object_id }}">
+						<input type="hidden" class="book-price" value="{{ $product->price }}">
 						<button class="delete" mattooltip="Eliminar">
 							<span class="icon-trash-o"></span>
 						</button>
@@ -100,7 +102,7 @@
 				</tr>
 				<tr id="actions">
 					<td colspan="2">
-						<a class="button primary" routerLink="/finalizar-compra">Finalizar compra</a>
+						<a class="button primary" href="/finalizar-compra">Finalizar compra</a>
 					</td>
 				</tr>
 			</table>

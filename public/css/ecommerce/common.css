@@ -448,6 +448,10 @@ ul.social-networks.top {
         background-color: #fff;
         color: #00396f;
     }
+    .button.gray {
+        background-color: #A5A5A5;
+        color: #fff;
+    }
     .button.danger {
         background-color: #e2231a;
         color: #fff;
@@ -727,10 +731,52 @@ form.big-searcher {
             min-width: 300px;
         }
 
+/*Notifications modal*/
+#notification-modal {
+    max-height: 90%;
+    text-align: center;
+}
+#notification-modal #resp-icon a {
+    background-color: #000;
+    border-radius: 100%;
+    color: #fff;
+    display: inline-block;
+    font-size: 60px;
+    height: 100px;
+    line-height: 100px;
+    width: 100px;
+}
+    #notification-modal #resp-icon a.check {
+        background-color: #55b9d4;
+    }
+    #notification-modal #resp-icon a.error {
+        background-color: red;
+    }
+
+    #notification-modal #resp-text {
+        font-size: 20px;
+    }
+    #notification-modal #resp-desc {
+        color: #666;
+        font-style: italic;
+        font-size: 14px;
+    }
+
+#notification-modal .modal-footer {
+    text-align: center;
+}
+
 /*Material progress bar*/
 .loader.hidde {
     display: none;
 }
+    .loader.fixed {
+        left: 0px;
+        position: fixed;
+        right: 0px;
+        top: 132px;
+        z-index: 1000;
+    }
     .progress {
         background-color: #85d2ff !important;
     }

@@ -237,7 +237,13 @@
         vertical-align: middle;
     }
     .main.book .add-to-cart .button {
+        font-family: 'Tahoma';
+        font-weight: bold;
+        padding: 11px 20px;
         text-align: center;
+    }
+    .main.book .error-cart {
+        margin-bottom: 20px;
     }
 
 /*Collapsible*/

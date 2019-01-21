@@ -16,3 +16,9 @@
 		<?php get_nav_menu('menu-principal', 'hmenu'); ?>
 	</div>
 </header>
+
+<div class="loader hidde fixed">
+	<div class="progress">
+		<div class="indeterminate"></div>
+	</div>
+</div>

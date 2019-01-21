@@ -23,11 +23,6 @@ class CartsController extends Controller
     public function store() {
 
         $add = $this->request->all();
-        $update = true;
-
-        $object_id = $add['object_id'];
-        $quantity = $add['quantity'];
-        $price = $add['price'];
 
         if(session('cart') === null) {
 
@@ -41,6 +36,8 @@ class CartsController extends Controller
                 $order_session = date('Ymdi');
             }
 
+            $this->request->session()->put('session_id', $order_session);
+
             $order['user_id'] = $order_session;
             $order['country_id'] = 48;
             $order['state'] = 'CART';
@@ -48,32 +45,88 @@ class CartsController extends Controller
 
             $resp = $this->orders->create($order);
 
-            return Response::json($resp);
+            // Decodificar la respuesta
+            $json = json_encode(json_decode($resp));
+
+            // Convertir la respuesta en un JSON
+            $order = json_decode($json);
+
+            $this->request->session()->put('cart', $order);
+
+            $send = session('cart');
+            if($this->request->ajax()) {
+                $send->amountstring = COPMoney($send->amount);
+                return Response::json($send);
+            }
+
+            return Response::json($send);
 
         } else {
 
             $cart = session('cart');
 
-            for ($i=0; $i < count($cart->products); $i++) { 
+            $update = true;
+
+            $action = $add['action'];
+            $object_id = $add['object_id'];
+            $quantity = $add['quantity'];
+            $price = $add['price'];
+
+            for ($i = 0; $i < count($cart->products); $i++) { 
                 $product = json_decode(json_encode($cart->products[$i]));
 
                 if ($product->object_id == $object_id) {
-                    $product->quantity = $product->quantity + $quantity;
+
+                    switch ($action) {
+                        case 'update':
+                            $product->quantity = $quantity;
+                            break;
+
+                        case 'delete':
+                            unset($cart->products[$i]);
+                            $cart->products = array_values($cart->products);
+                            break;
+                        
+                        default:
+                            $product->quantity = $product->quantity + $quantity;
+                            break;
+                    }
+
                     $update = false;
                 }
 
-                $cart->products[$i] = $product;
+                if($action !== 'delete') {
+                    $cart->products[$i] = $product;
+                }
             }
-
-            return Response::json(session('cart'));
 
             if($update) {
                 array_push($cart->products, [ "object_id" => $object_id, "quantity" => $quantity, "price" => $price ]);
             }
 
-            $this->request->session()->put('cart', json_decode(json_encode($cart)));
+            $resp = $this->orders->updateById($cart->id, $cart);
 
-            return Response::json(session('cart'));
+            // Decodificar la respuesta
+            $json = json_encode(json_decode($resp));
+
+            // Convertir la respuesta en un JSON
+            $order = json_decode($json);
+
+            $this->request->session()->put('cart', $order);
+
+            $send = session('cart');
+            if($this->request->ajax()) {
+                $send->amountstring = COPMoney($send->amount);
+
+                for ($sp = 0; $sp < count($send->products); $sp++) { 
+                    $send->products[$sp]->pricestring = COPMoney($send->products[$sp]->price);
+                    $send->products[$sp]->totalstring = COPMoney($send->products[$sp]->price * $send->products[$sp]->quantity);
+                }
+
+                return Response::json($send);
+            }
+
+            return Response::json($send);
         }
 
     }
