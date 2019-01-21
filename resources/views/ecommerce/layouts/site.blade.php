@@ -37,7 +37,7 @@
 		
 		<div class="main @yield('contentClass')">
 
-			@if (Route::getCurrentRoute()->uri() !== '/')
+			@if (Route::getCurrentRoute()->uri() !== '/' && Route::getCurrentRoute()->uri() !== 'iniciar-sesion')
 				<div class="content-container">
 					@include('ecommerce.layouts.partials.banner', ["show_searcher" => true])
 				</div>

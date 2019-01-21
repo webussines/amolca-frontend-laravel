@@ -1406,7 +1406,7 @@ form.big-searcher {
         font-size: 18px;
         padding: 15px 30px;
     }
-    .main.contact input {
+    .main.contact .contact-form input {
         margin: 0px 10px;
         min-width: 200px;
     }
