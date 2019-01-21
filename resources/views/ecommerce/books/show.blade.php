@@ -29,7 +29,7 @@
 
 				<!--Countries loop for scroll info interaction-->
 				@foreach ($book->inventory as $inventory)
-					@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
+					@if (strtoupper($inventory->country_name) == "COLOMBIA" && $inventory->price > 0 && $inventory->state == "STOCK")
 					<div class="scroll-info">
 						<p class="price">{{ COPMoney($inventory->price) }}</p>
 						<div class="add-to-cart">
@@ -61,7 +61,7 @@
 			</h3>
 
 			@foreach ($book->inventory as $inventory)
-				@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
+				@if (strtoupper($inventory->country_name) == "COLOMBIA" && $inventory->price > 0 && $inventory->state == "STOCK")
 					<p class="price">{{ COPMoney($inventory->price) }}</p>
 				@endif
 			@endforeach
@@ -120,7 +120,7 @@
 			</div>
 
 			@foreach ($book->inventory as $inventory)
-				@if (strtoupper($inventory->country_name) == env('APP_COUNTRY') && $inventory->price > 0 && $inventory->state == "STOCK")
+				@if (strtoupper($inventory->country_name) == "COLOMBIA" && $inventory->price > 0 && $inventory->state == "STOCK")
 					<div class="add-to-cart">
 						<input type="hidden" class="book-id" value="{{ $book->id }}">
 						<input type="hidden" class="book-price" value="{{ $inventory->price }}">
