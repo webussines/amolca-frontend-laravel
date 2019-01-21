@@ -131,4 +131,23 @@ class CartsController extends Controller
 
     }
 
+    public function create_order() {
+
+        $cart = session('cart');
+
+        $address = $this->request->all();
+
+        $resp = $this->orders->createPending($cart->id, $address);
+
+        $json = json_encode(json_decode($resp));
+        $order = json_decode($json);
+        
+        if($order->address) {
+            $this->request->session()->pull('cart');
+        }
+
+        return Response::json($order);
+
+    }
+
 }

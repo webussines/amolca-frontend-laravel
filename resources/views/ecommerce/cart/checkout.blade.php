@@ -7,6 +7,12 @@
 <link rel="stylesheet" href="{{ asset('css/ecommerce/checkout.css') }}">
 @endsection
 
+<!--Add single books scripts-->
+@section('scripts')
+<script src="{{ asset('js/payments/tucompra/redirect.js') }}"></script>
+<script src="{{ asset('js/payments/tucompra/payment.js') }}"></script>
+@endsection
+
 @section('contentClass', 'page-container order')
 @section('content')
 <div class="content-container">
@@ -23,19 +29,22 @@
 					<!--Name column-->
 					<div class="col s12 m6 l6">
 						<label for="name"><span class="required">*</span> Nombres:</label>
-						<input type="text" name="name" id="name" placeholder="Escribe tu nombre...">
+						<input type="text" name="name" class="required-field" id="name" placeholder="Escribe tu nombre...">
+						<p id="error-name" class="error"></p>
 					</div>
 
 					<!--Lastname column-->
 					<div class="col s12 m6 l6">
 						<label for="lastname"><span class="required">*</span> Apellidos:</label>
-						<input type="text" name="lastname" id="lastname" placeholder="Escribe tus apellidos...">
+						<input type="text" name="lastname" class="required-field" id="lastname" placeholder="Escribe tus apellidos...">
+						<p id="error-lastname" class="error"></p>
 					</div>
 
 					<!--Mobile column-->
 					<div class="col s12 m6 l6">
 						<label for="mobile"><span class="required">*</span> Teléfono celular:</label>
-						<input type="text" name="mobile" id="mobile" placeholder="Escribe tu número de celular...">
+						<input type="text" name="mobile" class="required-field" id="mobile" placeholder="Escribe tu número de celular...">
+						<p id="error-mobile" class="error"></p>
 					</div>
 
 					<!--Phone column-->
@@ -47,31 +56,34 @@
 					<!--Email column-->
 					<div class="col s12 m12 l12">
 						<label for="email"><span class="required">*</span> Correo electrónico:</label>
-						<input type="email" name="email" id="email" placeholder="Escribe tu correo electrónico...">
+						<input type="email" name="email" class="required-field" id="email" placeholder="Escribe tu correo electrónico...">
+						<p id="error-email" class="error"></p>
 					</div>
 
 					<!--City column-->
 					<div class="col s12 m6 l6">
 						<label for="city"><span class="required">*</span> Ciudad:</label>
-						<input type="text" name="city" id="city" placeholder="Escribe la ciudad de envío...">
+						<input type="text" name="city" class="required-field" id="city" placeholder="Escribe la ciudad de envío...">
+						<p id="error-city" class="error"></p>
 					</div>
 
 					<!--Address column-->
 					<div class="col s12 m6 l6">
 						<label for="address"><span class="required">*</span> Dirección:</label>
-						<input type="text" name="address" id="address" placeholder="Escribe tu dirección...">
+						<input type="text" name="address" class="required-field" id="address" placeholder="Escribe tu dirección...">
+						<p id="error-address" class="error"></p>
 					</div>
 
 					<!--Aditionals column-->
 					<div class="col s12 m6 l6">
-						<label for="aditionals">Extra (oficina, interior, etc):</label>
-						<input type="text" name="aditionals" id="aditionals" placeholder="Extra (oficina, interior, etc)...">
+						<label for="extra_address">Extra (oficina, interior, etc):</label>
+						<input type="text" name="extra_address" id="extra_address" placeholder="Extra (oficina, interior, etc)...">
 					</div>
 
 					<!--Postal code column-->
 					<div class="col s12 m6 l6">
-						<label for="postalCode">Código postal:</label>
-						<input type="text" name="postalCode" id="postalCode" placeholder="Escribe tu código postal...">
+						<label for="postal_code">Código postal:</label>
+						<input type="text" name="postal_code" id="postal_code" placeholder="Escribe tu código postal...">
 					</div>
 
 					<!--Notes column-->
@@ -83,9 +95,13 @@
 					<!--Terms and conditions column-->
 					<div class="col s12 m12 l12 terms-condition">
 						<label>
-							<input type="checkbox" />
+							<input type="checkbox" id="terms" />
 							<span>He leído y acepto los <a href="/terminos-y-condiciones">Términos y condiciones y Políticas de privacidad</a></span>
 						</label>
+					</div>
+
+					<div class="col s12 m12 l12 global-error error">
+						
 					</div>
 
 					<!--Button column-->

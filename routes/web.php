@@ -104,6 +104,7 @@ Auth::routes();
 //Carts
 Route::group(['prefix' => 'carts'], function() {
 	Route::post('/', 'Ecommerce\CartsController@store');
+	Route::post('/checkout', 'Ecommerce\CartsController@create_order');
 	Route::put('/', 'Ecommerce\CartsController@update');
 	Route::get('/{id}', 'Ecommerce\CartsController@show');
 });

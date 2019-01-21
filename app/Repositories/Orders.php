@@ -36,6 +36,10 @@ class Orders extends GuzzleHttpRequest {
 		return $this->put("orders/{$id}", $update);
 	}
 
+	public function createPending($id, $address) {
+		return $this->put("orders/pending/{$id}", $address);
+	}
+
 	public function deleteById($id) {
 		return $this->delete("orders/{$id}");
 	}
