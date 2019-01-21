@@ -57,6 +57,18 @@
         </div>
     </div>
 
+    <div class="single-navigation">
+
+        @if (isset($prev))
+            <a class="btn-navigation previous" href="/am-admin/autores/{{$prev}}"><span class="icon-arrow-left2"></span> Anterior</a>
+        @endif
+
+        @if (isset($next))
+            <a class="btn-navigation next" href="/am-admin/autores/{{$next}}">Siguiente <span class="icon-arrow-right2"></span></a>
+        @endif
+
+    </div>
+
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large green save-resource">
             <span class="icon-save1"></span>

@@ -54,14 +54,24 @@ class AdminAuthorsController extends Controller
 
     public function show($id)
     {
-        $specialties = $this->specialties->all();
-        $author = $this->authors->findById($id);
+        $author = $this->authors->inventory($id);
 
-        return view('admin.authors.single', [
-            'action' => 'edit',
-            'author' => $author,
-            'specialties' => $specialties->taxonomies
-        ]);
+        $send_info = [];
+
+        $send_info['specialties'] = $this->specialties->all()->taxonomies;
+        $send_info['action'] = 'edit';
+
+        $send_info['author'] = $author->post;
+
+        if(isset($author->prev)) {
+            $send_info['prev'] = $author->prev;
+        }
+
+        if(isset($author->next)) {
+            $send_info['next'] = $author->next;
+        }
+
+        return view('admin.authors.single', $send_info);
     }
 
     public function edit($id)

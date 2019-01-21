@@ -57,34 +57,27 @@ class AdminBooksController extends Controller
     public function show($id)
     {
 
-        $params = '?orderby=' . Input::get('orderby') . '&order=' . Input::get('order');
-        $navigation = [];
-
         $authors = $this->authors->all();
         $specialties = $this->specialties->all();
-        $book = $this->books->navigation($id, $params);
+        $book = $this->books->inventory($id, "book");
 
+        $send_info = [];
 
-        if( isset($book->prev) && isset($book->next) ) {
-            $navigation['prev'] = $book->prev;
-            $navigation['next'] = $book->next;
+        $send_info['specialties'] = $specialties->taxonomies;
+        $send_info['authors'] = $authors->posts;
+        $send_info['action'] = 'edit';
+
+        $send_info['book'] = $book->post;
+
+        if(isset($book->prev)) {
+            $send_info['prev'] = $book->prev;
         }
 
-        if( !isset($book->next) && isset($book->prev) ) {
-            $navigation['next'] = $book->prev;
+        if(isset($book->next)) {
+            $send_info['next'] = $book->next;
         }
 
-        $navigation['orderby'] = Input::get('orderby');
-        $navigation['order'] = Input::get('order');
-
-        return view('admin.books.single', [
-            'action' => 'edit',
-            'var' => $book,
-            'book' => $book->selected,
-            'specialties' => $specialties,
-            'authors' => $authors,
-            'navigation' => $navigation
-        ]);
+        return view('admin.books.single', $send_info);
     }
 
     /*Editar*/

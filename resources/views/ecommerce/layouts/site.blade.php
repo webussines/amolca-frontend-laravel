@@ -50,6 +50,7 @@
 	@include('ecommerce.layouts.partials.bottom-bar')
 
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+	<script src="{{ asset('js/geolocalization.js') }}"></script>
 	<script src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/common.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/responsive-menu.js') }}"></script>

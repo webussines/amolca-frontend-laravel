@@ -7,17 +7,17 @@ jQuery(function($){
 
 const language = {
     "sProcessing":     "Procesando...",
-    "sLengthMenu":     "Autores por pagina _MENU_",
+    "sLengthMenu":     "Sliders por pagina _MENU_",
     "sZeroRecords":    "No se encontraron resultados",
     "sEmptyTable":     "Ningún dato disponible en esta tabla",
-    "sInfo":           "Mostrando autores del _START_ al _END_ de un total de _TOTAL_ autores",
-    "sInfoEmpty":      "Mostrando autores del 0 al 0 de un total de 0 autores",
-    "sInfoFiltered":   "(filtrado de un total de _MAX_ autores)",
+    "sInfo":           "Mostrando sliders del _START_ al _END_ de un total de _TOTAL_ sliders",
+    "sInfoEmpty":      "Mostrando sliders del 0 al 0 de un total de 0 sliders",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ sliders)",
     "sInfoPostFix":    "",
-    "sSearch":         "Buscar autores:",
+    "sSearch":         "Buscar sliders:",
     "sUrl":            "",
     "sInfoThousands":  ",",
-    "sLoadingRecords": "Cargando autores...",
+    "sLoadingRecords": "Cargando sliders...",
     "oPaginate": {
         "sFirst":    "Primero",
         "sLast":     "Último",

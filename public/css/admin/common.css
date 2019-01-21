@@ -415,3 +415,33 @@ code {
     background: #eaeaea;
     background: rgba(0,0,0,.07);
 }
+
+/*Navigations*/
+.single-navigation {
+    bottom: 23px;
+    left: -webkit-calc(20% + 10px);
+    left: -moz-calc(20% + 10px);
+    left: -ms-calc(20% + 10px);
+    left: calc(20% + 10px);
+    position: fixed;
+    right: auto;
+    z-index: 1000;
+}
+
+a.btn-navigation {
+    background-color: #000;
+    border-radius: 35px;
+    color: #fff;
+    display: inline-block;
+    padding: 17px 20px;
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+}
+    a.btn-navigation.previous {
+        background-color: #4193a9;
+    }
+    a.btn-navigation.next {
+        background-color: #00396F;
+    }

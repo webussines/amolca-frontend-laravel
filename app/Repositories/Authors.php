@@ -18,6 +18,10 @@ class Authors extends GuzzleHttpRequest {
 		return $this->get("posts/slug/{$slug}");
 	}
 
+	public function inventory($id) {
+		return $this->get("posts/inventory/{$id}?type=author");
+	}
+
 	public function create($body) {
 		return $this->post("posts", $body);
 	}
