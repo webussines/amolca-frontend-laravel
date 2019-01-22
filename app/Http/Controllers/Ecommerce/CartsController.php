@@ -136,8 +136,18 @@ class CartsController extends Controller
         $cart = session('cart');
 
         $address = $this->request->all();
+        $mailer['name'] = mailer_get_name();
+        $mailer['from'] = mailer_get_me();
+        $mailer['cc'] = mailer_get_cc() . ', ' . mailer_get_me();
+        //$mailer['cc'] = 'mstiven013@gmail.com';
+        $mailer['domain'] = mailer_get_domain();
 
-        $resp = $this->orders->createPending($cart->id, $address);
+        $send = [
+            "address" => $address,
+            "mailer" => $mailer
+        ];
+
+        $resp = $this->orders->createPending($cart->id, $send);
 
         $json = json_encode(json_decode($resp));
         $order = json_decode($json);

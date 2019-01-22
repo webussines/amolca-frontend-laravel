@@ -8,6 +8,27 @@ function COPMoney($money) {
     return '$' . number_format($money, 0, ',', '.');
 }
 
+/*Mailer*/
+function mailer_get_country() {
+    return "COLOMBIA";
+}
+
+function mailer_get_domain() {
+    return "www.amolca.com.co";
+}
+
+function mailer_get_name() {
+    return "Amolca Colombia";
+}
+
+function mailer_get_me() {
+    return "mstiven013@gmail.com";
+}
+
+function mailer_get_cc() {
+	return "stivenlopezan@hotmail.com";
+}
+
 //Global function to get option of this single database
 function get_option($name) {
 	$option = Options::where('option_name', '=', $name)->first();
