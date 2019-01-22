@@ -26,7 +26,7 @@ function mailer_get_me() {
 }
 
 function mailer_get_cc() {
-	return "gerencia@amolca.com.co, asistentepresidencia@amolca.us";
+	return ["gerencia@amolca.com.co", "asistentepresidencia@amolca.us", "contacto@amolca.com"];
 }
 
 //Global function to get option of this single database
