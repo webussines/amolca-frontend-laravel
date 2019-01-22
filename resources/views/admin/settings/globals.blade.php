@@ -148,7 +148,7 @@
 
 			<tr class="options">
 				<td class="option_name">
-					<label for="amolca_phone"><b>Teléfono</b> de Amolca <b>{{ env('APP_COUNTRY') }}</b>:</label>
+					<label for="amolca_phone"><b>Celular</b> de Amolca <b>{{ env('APP_COUNTRY') }}</b>:</label>
 				</td>
 				<td class="option_value">
 					<input type="text" id="amolca_phone" value="@if(get_option('amolca_phone') !== 'NULL'){{ get_option('amolca_phone') }}@endif" placeholder="Teléfono de Amolca {{ env('APP_COUNTRY') }}...">
@@ -161,6 +161,24 @@
 				</td>
 				<td class="option_value">
 					<input type="text" id="amolca_phone_link" value="@if(get_option('amolca_phone_link') !== 'NULL'){{ get_option('amolca_phone_link') }}@endif" placeholder="Link de llamada para Amolca {{ env('APP_COUNTRY') }}...">
+				</td>
+			</tr>
+			
+			<tr class="options">
+				<td class="option_name">
+					<label for="amolca_phone_fixed"><b>Teléfono fijo</b> de Amolca <b>{{ env('APP_COUNTRY') }}</b>:</label>
+				</td>
+				<td class="option_value">
+					<input type="text" id="amolca_phone_fixed" value="@if(get_option('amolca_phone_fixed') !== 'NULL'){{ get_option('amolca_phone_fixed') }}@endif" placeholder="Teléfono fijo de Amolca {{ env('APP_COUNTRY') }}...">
+				</td>
+			</tr>
+
+			<tr class="options">
+				<td class="option_name">
+					<label for="amolca_phone_fixed_link">Link de teléfono fijo para Amolca <b>{{ env('APP_COUNTRY') }}</b>:</label>
+				</td>
+				<td class="option_value">
+					<input type="text" id="amolca_phone_fixed_link" value="@if(get_option('amolca_phone_fixed_link') !== 'NULL'){{ get_option('amolca_phone_fixed_link') }}@endif" placeholder="Link de teléfono fijo Amolca {{ env('APP_COUNTRY') }}...">
 				</td>
 			</tr>
 

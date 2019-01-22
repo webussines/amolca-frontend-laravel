@@ -34,7 +34,7 @@ class SpecialtiesController extends Controller
 	public function show($slug) {
 
 		$info_send = [];
-		$params = 'orderby=publication_year&order=asc&limit=' . $this->pagination_number;
+		$params = 'orderby=publication_year&order=desc&limit=' . $this->pagination_number;
 		$info_send['active_page'] = 1;
 
 		if($this->request->input('page')) {

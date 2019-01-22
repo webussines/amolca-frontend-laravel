@@ -15,7 +15,7 @@
 		<!--Information column-->
 		<div class="col s12 m9 l9 information">
 			<h2 class="name">{{$author->title}}</h2>
-			<div class="description">{!! $author->description !!}</div>
+			<div class="description">{!! $author->content !!}</div>
 		</div>
 	</div>
 

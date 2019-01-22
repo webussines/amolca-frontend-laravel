@@ -2,17 +2,17 @@
 	<div id="social-top-bar">
 		<ul class="social-networks top">
 			<li >
-				<a target="_blank" href="#" class="waves-effect waves-light bg-blue">
+				<a target="_blank" href="https://www.facebook.com/EdAmolca/" class="waves-effect waves-light bg-blue">
 					<i class="icon-facebook1"></i>
 				</a>
 			</li>
 			<li >
-				<a target="_blank" href="#" class="waves-effect waves-light bg-blue">
+				<a target="_blank" href="https://www.instagram.com/amolcacolombia/" class="waves-effect waves-light bg-blue">
 					<i class="icon-instagram1"></i>
 				</a>
 			</li>
 			<li >
-				<a target="_blank" href="#" class="waves-effect waves-light bg-blue">
+				<a target="_blank" href="https://twitter.com/EAmolca" class="waves-effect waves-light bg-blue">
 					<i class="icon-twitter1"></i>
 				</a>
 			</li>
@@ -22,10 +22,10 @@
 		<li>
 			<a class="waves-effect waves-light" id="cart-btn" routerlink="/carrito" href="/carrito">
 				<i class="icon-shopping-cart1"></i>
-				@if (session('cart') === null)
-					<span>{{ COPMoney(0) }}</span>
-				@else
+				@if (session('cart') !== null)
 					<span>{{ COPMoney(session('cart')->amount) }}</span>
+				@else
+					<span>{{ COPMoney(0) }}</span>
 				@endif
 			</a>
 		</li>
@@ -33,7 +33,7 @@
 			<li>
 				<a id="login-btn" href="/iniciar-sesion">
 					<i class="icon-person"></i>
-					<span>Inicar sesión</span>
+					<span>Iniciar sesi&oacute;n</span>
 				</a>
 			</li>
 		@else
@@ -44,7 +44,7 @@
 				</a>
 				<ul id="user-menu-dropdown" class="user-menu dropdown-content">
 			        <li><a href="/mi-cuenta">Mi cuenta</a></li>
-			        <li><a href="/logout">Cerrar sesión</a></li>
+			        <li><a href="/logout">Cerrar sesi&oacute;n</a></li>
 			    </ul>
 			</li>
 		@endif

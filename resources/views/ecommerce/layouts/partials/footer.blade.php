@@ -7,11 +7,13 @@
 						{!! get_option('casa_matriz_address') !!}
 					</a>
 				</span></p>
+				@if(get_option('casa_matriz_phone') !== null && get_option('casa_matriz_phone') !== 'NULL')
 				<p><span id="mobile">
 					<a href="{{ get_option('casa_matriz_phone_link') }}">
 						{!! get_option('casa_matriz_phone') !!}
 					</a>
 				</span></p>
+				@endif
 				<p><span id="email">
 					<a href="mailto:{{ get_option('casa_matriz_email') }}">
 						{!! get_option('casa_matriz_email') !!}
@@ -70,6 +72,13 @@
 							</a>
 						</span>
 					</p>
+					@if(get_option('amolca_phone_fixed') !== null && get_option('amolca_phone_fixed') !== 'NULL')
+    				<p><span id="mobile">
+    					<a href="{{ get_option('amolca_phone_fixed_link') }}">
+    						{!! get_option('amolca_phone_fixed') !!}
+    					</a>
+    				</span></p>
+    				@endif
 					<p>
 						<span id="email">
 							<a href="mailto:{{ get_option('amolca_email') }}">

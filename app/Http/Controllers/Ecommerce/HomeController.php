@@ -23,10 +23,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        $odontologic = $this->posts->all("book", 'orderby=title&skip=0&limit=8');
-        $medician = $this->posts->all("book", 'orderby=title&skip=8&limit=8');
+        $odontologic = $this->posts->taxonomies(2, 'orderby=publication_year&order=desc&limit=8');
+        $medician = $this->posts->taxonomies(1, 'orderby=publication_year&order=desc&limit=8');
 
-        $authors = $this->authors->all('random=1&limit=8&orderby=title&order=asc');
+        $authors = $this->authors->all('limit=8&orderby=thumbnail&order=asc');
         $posts = $this->posts->all("post", 'skip=0&limit=8&orderby=created_at&order=asc');
         $slider = $this->sliders->find('home-slider');
 

@@ -284,7 +284,7 @@ jQuery(function($) {
 
         case 'COLOMBIA':
           if (window.location.href.indexOf("amolca.com.co") < 1) {
-            window.location.href = 'http://www.amolca.com.co'
+            //window.location.href = 'http://www.amolca.com.co'
           }
           return console.log('COLOMBIA')
           break;
