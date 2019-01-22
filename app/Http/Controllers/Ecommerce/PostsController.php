@@ -73,4 +73,17 @@ class PostsController extends Controller
 
 	}
 
+	public function searcher() {
+
+		$query = '';
+
+		if($this->request->input('s')) {
+			$query = $this->request->input('s');
+		}
+
+		$posts = $this->posts->searcher($query);
+
+	    return view('ecommerce.books.search', [ 'posts' => $posts->posts, 'links' => 'without' ]);
+	}
+
 }

@@ -1,19 +1,20 @@
 @php
-	$loopType = (isset($type)) ? $type : 'loop';
-	$itemsPerRow = (isset($items_per_row)) ? $items_per_row : 2;
+	$type = (isset($type)) ? $type : 'loop';
+	$items_per_row = (isset($items_per_row)) ? $items_per_row : 2;
+	$show_links = (isset($show_links)) ? $show_links : 'si';
 @endphp
 
-@switch($loopType)
+@switch($type)
     @case('loop')
-		<div class="books-loop items-per-page-{{ $itemsPerRow }}">
+		<div class="books-loop items-per-page-{{ $items_per_row }}">
 		@break
 
 	@case('carousel')
-		<div class="books-loop books-carousel" data-slick='{ "slidesToShow": {{ $itemsPerRow }} }'>
+		<div class="books-loop books-carousel" data-slick='{ "slidesToShow": {{ $items_per_row }} }'>
 		@break
 
 	@default
-		<div class="books-loop items-per-page-{{ $itemsPerRow }}">
+		<div class="books-loop items-per-page-{{ $items_per_row }}">
 @endswitch
 
 	@for ($i = 0; $i < count($books); $i++)
@@ -116,6 +117,6 @@
 	@endfor
 </div>
 
-@if ($type !== 'carousel')
+@if ($show_links !== 'no' && $type !== 'carousel' )
 {{ $books->links() }}
 @endif

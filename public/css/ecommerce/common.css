@@ -675,7 +675,7 @@ form.big-searcher {
 /*Common banners*/
 .common-banner {
     align-items: center;
-    background: url('https://amolca.com.co/assets/img/banner/banner-example-02.jpg');
+    background: url('/img/banner/banner-example-02.jpg');
     background-color: #00396F;
     background-position: center;
     background-size: cover;
@@ -1227,6 +1227,15 @@ form.big-searcher {
             padding: 0 10px;
             line-height: 30px;
         }
+
+/*Search page*/
+.search-page .header-page {
+    background-color: #F5F5F5;
+    font-size: 25px;
+    padding: 30px 5% 0px;
+    position: relative;
+    text-align: center;
+}
 
 /*Specialty page styles*/
 .specialty-title {

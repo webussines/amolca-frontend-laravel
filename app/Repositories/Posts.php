@@ -24,6 +24,10 @@ class Posts extends GuzzleHttpRequest {
 		return $this->get("posts/slug/{$slug}");
 	}
 
+	public function searcher($query) {
+		return $this->get("searcher?query={$query}");
+	}
+
 	public function meta($id, $data) {
 		return $this->get("posts/{$id}/{$data}");
 	}

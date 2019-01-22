@@ -9,7 +9,7 @@
 
 .page-container.auth {
     background-color: #55B9D4;
-    /*background-image: url('https://www.amolca.com/assets/img/common/example-library.jpg');*/
+    background-image: url('/img/common/example-library.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

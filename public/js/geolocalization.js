@@ -254,23 +254,6 @@ jQuery(function($) {
 
       let search = country.filter(c => c.code == response.country);
       let active = search[0].name.toUpperCase();
-    
-      /*
-      //Redirecciones COLOMBIA
-      if(active === 'ARGENTINA' && window.location.href.indexOf("amolca.com.co") > 0) {
-        window.location.href = 'http://www.amolca.com.ar';
-      } else if(active === 'PERU' && window.location.href.indexOf("amolca.com.co") > 0) {
-        window.location.href = 'http://www.amolca.com.pe';
-      } else if(active === 'DOMINICAN REPUBLIC' && window.location.href.indexOf("amolca.com.co") > 0) {
-        window.location.href = 'http://www.amolca.com.do';
-      } else if(active === 'PANAMA' && window.location.href.indexOf("amolca.com.pa") > 0) {
-        window.location.href = 'http://www.amolca.com.pa';
-      } else if(active === 'COLOMBIA' && window.location.href.indexOf("amolca.com.co") > 0) {
-        return true;
-      } else {
-        window.location.href = 'http://www.amolca.com';
-      }
-      */
 
       switch (active) {
         case 'ARGENTINA':
@@ -301,7 +284,7 @@ jQuery(function($) {
 
         case 'COLOMBIA':
           if (window.location.href.indexOf("amolca.com.co") < 1) {
-            //window.location.href = 'http://www.amolca.com.co'
+            window.location.href = 'http://www.amolca.com.co'
           }
           return console.log('COLOMBIA')
           break;

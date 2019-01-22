@@ -98,6 +98,7 @@ Route::get('/autor', function() { return redirect('/autores'); });
 Route::get('/autor/{slug}', 'Ecommerce\AuthorsController@show');
 
 Route::get('/blog', 'Ecommerce\PostsController@index');
+Route::get('/buscar', 'Ecommerce\PostsController@searcher');
 Route::get('/{slug}', 'Ecommerce\PostsController@show');
 
 Auth::routes();

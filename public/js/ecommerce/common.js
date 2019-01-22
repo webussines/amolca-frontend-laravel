@@ -10,3 +10,13 @@ function myPopup() {
 for (var i = 0; i < lba.length; i++) {
     lba[i].addEventListener("click", myPopup, false);
 }
+
+$(document).ready(function() {
+	$('form#big-searcher').on('submit', function(e) {
+		e.preventDefault();
+		if($('form#big-searcher input[type="text"]').val() !== '' && $('form#big-searcher input[type="text"]').val() !== '') {
+			rute = '/buscar?s=' + $('form#big-searcher input[type="text"]').val();
+			window.location.href = rute;
+		}
+	});
+})
