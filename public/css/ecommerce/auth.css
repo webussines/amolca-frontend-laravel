@@ -97,6 +97,13 @@
     text-align: center;
 }
 
+#register-form .error {
+    text-align: left;
+}
+#register-form .global-error {
+    text-align: center;
+}
+
 @media screen and (max-width: 578px) {
     .content {
         width: 85%;

@@ -18,6 +18,19 @@ class AuthController extends Controller
 		$this->request = $request;
 	}
 
+    public function register() {
+
+        $user = $this->request->all();
+
+        $mailer['name'] = mailer_get_name();
+        $mailer['cc'] = mailer_get_cc() . ', ' . mailer_get_me();
+        //$mailer['cc'] = 'mstiven013@gmail.com';
+        $mailer['domain'] = mailer_get_domain();
+        $mailer['country'] = mailer_get_country();
+
+        return $this->authentication->register($user, $mailer);
+    }
+
     public function login() {
 
     	$username = Input::get('username');

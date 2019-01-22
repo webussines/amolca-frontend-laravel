@@ -54,27 +54,37 @@
 		</div>
 
 		<div id="register" class="content-tabs">
+			<div class="loader hidde">
+			    <div class="progress">
+			        <div class="indeterminate"></div>
+			    </div>
+			</div>
 			<form id="register-form">
 				<div class="row">
 					<div class="col s12 m6 l6">
 						<label for="name">Nombres:</label>
-						<input autocomplete="off" id="name" placeholder="Escribe tu nombre..." type="text">
+						<input autocomplete="off" class="required-field" id="name" placeholder="Escribe tu nombre..." type="text">
+						<p id="error-name" class="error"></p>
 					</div>
 					<div class="col s12 m6 l6">
 						<label for="lastname">Apellidos:</label>
-						<input autocomplete="off" id="lastname" placeholder="Escribe tu apellido..." type="text">
+						<input autocomplete="off" class="required-field" id="lastname" placeholder="Escribe tu apellido..." type="text">
+						<p id="error-lastname" class="error"></p>
 					</div>
 					<div class="col s12 m12 l12">
 						<label for="email">Correo electrónico:</label>
-						<input autocomplete="off" id="email" placeholder="Escribe tu correo electrónico..." type="email">
+						<input autocomplete="off" class="required-field" id="email" placeholder="Escribe tu correo electrónico..." type="email">
+						<p id="error-email" class="error"></p>
 					</div>
 					<div class="col s12 m12 l12">
 						<label for="password">Contraseña:</label>
-						<input id="password" placeholder="Escribe tu contraseña..." type="password">
+						<input id="password" class="required-field" placeholder="Escribe tu contraseña..." type="password">
+						<p id="error-password" class="error"></p>
 					</div>
 					<div class="col s12 m12 l12">
 						<label for="repassword">Confirmar contraseña:</label>
-						<input id="repassword" placeholder="Confirma tu contraseña..." type="password">
+						<input id="repassword" class="required-field" placeholder="Confirma tu contraseña..." type="password">
+						<p id="error-repassword" class="error"></p>
 					</div>
 					<div class="col s12 m12 l12 terms-condition">
 						<label>

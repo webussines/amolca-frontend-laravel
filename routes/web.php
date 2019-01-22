@@ -11,6 +11,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 	//Login & logout
 	Route::get('/login', 'AuthController@login');
+	Route::post('/register', 'AuthController@register');
 	Route::get('/logout', 'AuthController@AdminLogout');
 
 	Route::group(['middleware' => 'admin'], function() {
