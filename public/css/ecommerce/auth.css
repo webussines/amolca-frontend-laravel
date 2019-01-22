@@ -43,8 +43,9 @@
     color: #ffffff;
     font-family: 'Tahoma';
     font-size: 16px;
-    font-weight: normal;
+    font-weight: bold;
     opacity: 1;
+    text-transform: inherit;
 }
     .tabs .tab a:hover, .tabs .tab a:focus, .tabs .tab a:focus.active, .tabs .tab a.active {
         background-color: #00396F;
@@ -105,11 +106,17 @@
 }
 
 @media screen and (max-width: 578px) {
+    .col.terms-condition {
+        text-align: left;
+    }
+    .auth-container {
+        width: 90%;
+    }
     .content {
-        width: 85%;
+        width: 100%;
     }
     
     .content-tabs {
-        padding: 30px 20px;
+        padding: 20px 15px;
     }
 }

@@ -49,11 +49,11 @@
     max-height: -webkit-calc(100vh - 180px);
     max-height: -moz-calc(100vh - 180px);
     max-height: -ms-calc(100vh - 180px);
-	max-height: calc(100vh - 180px);
-	max-width: -webkit-calc(41.6666666667% - 0.75rem);
-	max-width: -moz-calc(41.6666666667% - 0.75rem);
-	max-width: -ms-calc(41.6666666667% - 0.75rem);
-	max-width: calc(41.6666666667% - 0.75rem);
+    max-height: calc(100vh - 180px);
+    max-width: -webkit-calc(41.6666666667% - 0.75rem);
+    max-width: -moz-calc(41.6666666667% - 0.75rem);
+    max-width: -ms-calc(41.6666666667% - 0.75rem);
+    max-width: calc(41.6666666667% - 0.75rem);
     position: absolute;
 }
 
@@ -64,10 +64,10 @@
 }
     #image-container.scroll-fixed img,
     #image-container.scroll-waiting img {
-    	max-height: -webkit-calc(100vh - 340px);
-	    max-height: -moz-calc(100vh - 340px);
-	    max-height: -ms-calc(100vh - 340px);
-	    max-height: calc(100vh - 340px);
+        max-height: -webkit-calc(100vh - 340px);
+        max-height: -moz-calc(100vh - 340px);
+        max-height: -ms-calc(100vh - 340px);
+        max-height: calc(100vh - 340px);
     }
         #image-container.scroll-fixed img.active,
         #image-container.scroll-waiting img.active {
@@ -366,6 +366,10 @@
 }
 
 @media screen and (max-width: 992px) {
+    .content-container#single-book {
+        padding-top: 0px !important;
+    }
+    
     .image-book {
         margin-bottom: 40px;
         padding-left: 0px;
@@ -405,6 +409,10 @@
         .author {
             font-size: 20px;
         }
+    
+    .summary-book .name {
+        font-size: 26px;
+    }
 
     .row.author-item {
         text-align: center;
@@ -412,6 +420,27 @@
 }
 
 @media screen and (max-width: 768px) {
+    .summary-book .cont-specialties {
+        display: flex;
+        flex-flow: column wrap;
+    }
+        .summary-book .cont-specialties .items {
+            margin-top: 10px;
+        }
+        
+    .summary-book .cont-versions {
+        flex-flow: column;
+        align-items: flex-start;
+    }
+    
+    .summary-book .versions {
+        margin: 20px 0px 5px;
+    }
+    
+    .summary-book .shared {
+        margin-left: 0px;
+    }
+    
     .main.book .add-to-cart {
         margin-left: 0px;
         margin-right: 0px;

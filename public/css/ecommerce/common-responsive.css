@@ -58,14 +58,14 @@
             flex-flow: column nowrap;
             justify-content: flex-start;
             left: 100%;
-            height: -webkit-calc(100% - 140px);
-            height: -moz-calc(100% - 140px);
-            height: -ms-calc(100% - 140px);
-            height: calc(100% - 140px);
+            height: -webkit-calc(100% - 120px);
+            height: -moz-calc(100% - 120px);
+            height: -ms-calc(100% - 120px);
+            height: calc(100% - 120px);
             overflow-x: hidden;
             overflow-y: auto;
             position: fixed;
-            top: 140px;
+            top: 120px;
             -webkit-transition: all 0.4s ease;
             -o-transition: all 0.4s ease;
             transition: all 0.4s ease;
@@ -167,9 +167,35 @@
         #bottom-bar .item:last-child {
             padding-right: 10px;
         }
+        
+    .books-loop .item,
+    .books-loop.items-per-page-2 .item,
+    .books-loop.items-per-page-4 .item {
+        max-width: -webkit-calc(50% - 30px);
+        max-width: -moz-calc(50% - 30px);
+        max-width: -ms-calc(50% - 30px);
+        max-width: calc(50% - 30px);
+        width: 50%;
+    }
 }
 
 @media screen and (max-width: 768px) {
+
+    .main h1 {
+        font-size: 26px;
+    }
+
+    .main h2 {
+        font-size: 22px;
+    }
+    
+    .common-banner p {
+        font-size: 16px;
+    }
+    
+    .big-searcher-content {
+        padding: 20px 0px;
+    }
 
     /*Error 404 page not found*/
     .page-not-found img {
@@ -188,7 +214,7 @@
     .big-searcher-content {
         width: 100%;
     }
-
+    
     /*Loops*/
     .leftRs, .rightRs {
         height: 40px;
@@ -208,6 +234,11 @@
 }
 
 @media screen and (max-width: 576px) {
+    /*Top bar*/
+    .top-bar {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 
     /*Nav menu*/
     #nav-menu > ul > li > .submenu {
@@ -236,9 +267,20 @@
             padding-bottom: 0px;
             padding-right: 10px;
         }
+    
+    .books-loop .item,
+    .books-loop.items-per-page-2 .item,
+    .books-loop.items-per-page-4 .item {
+        max-width: -webkit-calc(100% - 30px);
+        max-width: -moz-calc(100% - 30px);
+        max-width: -ms-calc(100% - 30px);
+        max-width: calc(100% - 30px);
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 480px) {
+    
     /*Header*/
     .header {
         background-color: #fff;
