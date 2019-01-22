@@ -22,11 +22,11 @@ function mailer_get_name() {
 }
 
 function mailer_get_me() {
-    return "mstiven013@gmail.com";
+    return "ventas@amolca.com.co";
 }
 
 function mailer_get_cc() {
-	return "stivenlopezan@hotmail.com";
+	return "gerencia@amolca.com.co, asistentepresidencia@amolca.us";
 }
 
 //Global function to get option of this single database
