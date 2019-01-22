@@ -5,6 +5,10 @@
 	width: 100%;
 }
 
+span#slug span {
+	font-weight: bold;
+}
+
 /*Versions*/
 .col-versions {
     display: flex;

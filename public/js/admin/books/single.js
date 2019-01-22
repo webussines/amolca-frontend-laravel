@@ -275,20 +275,57 @@ const SaveBookInfo = function() {
 
 	let book = {
 		title: title,
-		isbn: isbn,
-		author: author,
 		state: state,
-		index: index,
-		description: description,
-		keyPoints: keyPoints,
-		version: versions,
-		attributes: attributes,
-		specialty: specialties,
-		countries: countries,
-		publicationYear: publication,
-		numberPages: pages,
-		volume: volumes,
-		userId: _user
+		content: description,
+		taxonomies: specialties,
+		iventory: countries,
+		user_id: _user,
+		meta: [
+			{
+				"key": "isbn",
+				"value": isbn
+			},
+			{
+				"key": "key_points",
+				"value": keyPoints
+			},
+			{
+				"key": "publication_year",
+				"value": publication
+			},
+			{
+				"key": "number_pages",
+				"value": pages
+			},
+			{
+				"key": "volumes",
+				"value": volumes
+			},
+			{
+				"key": "impresion",
+				"value": $('#impresion').val()
+			},
+			{
+				"key": "formato",
+				"value": $('#formato').val()
+			},
+			{
+				"key": "tapa",
+				"value": $('#tapa').val()
+			},
+			{
+				"key": "author",
+				"value": '[' + author.join(',') + ']'
+			},
+			{
+				"key": "version",
+				"value": '[' + versions.join(',') + ']'
+			},
+			{
+				"key": "interest",
+				"value": '[' + specialties.join(',') + ']'
+			}
+		]
 	}
 
 	let ActionRoute;
@@ -296,6 +333,7 @@ const SaveBookInfo = function() {
 	switch(_action) {
 		case 'edit':
 			ActionRoute = '/am-admin/books/edit/' + id;
+			book.slug = GenerateSlug(book.title);
 		break;
 
 		case 'create':
@@ -332,14 +370,14 @@ const SaveBookInfo = function() {
 
 			let data = JSON.parse(resp);
 
-			if(data._id !== undefined) {
+			if(data.post.id !== undefined) {
 				
 				switch(_action) {
 					case 'edit':
 						location.reload();
 					break;
 					case 'create':
-						window.location.href = '/am-admin/libros/' + data._id;
+						window.location.href = '/am-admin/libros/' + data.post.id;
 					break;
 				}
 

@@ -2,6 +2,7 @@
 
 @php
     $title = (isset($book->title)) ? $book->title : '';
+    $slug = (isset($book->slug)) ? $book->slug : '';
     $id = (isset($book->id)) ? $book->id : '';
     $thumbnail = (isset($book->thumbnail)) ? $book->thumbnail : 'https://amolca.webussines.com/uploads/images/no-image.jpg';
     $isbn = (isset($book->datasheet->isbn)) ? $book->datasheet->isbn : '';
@@ -22,7 +23,7 @@
     $tapa = (isset($book->datasheet->tapa)) ? $book->datasheet->tapa : 0;
 
     $attributes = (isset($book->attributes)) ? $book->attributes : [];
-    $countries = (isset($book->countries)) ? $book->countries : [];
+    $inventory = (isset($book->inventory)) ? $book->inventory : [];
 
 @endphp
 
@@ -36,6 +37,7 @@
 @section('scripts')
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=1icfygu7db6ym5ibmufjkk2myppelx6v827sc9rq8xt1eo2n'></script>
 <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('js/admin/slug-generator.js') }}"></script>
 <script src="{{ asset('js/admin/books/single.js') }}"></script>
 @endsection
 
@@ -135,6 +137,11 @@
                     <div class="form-group col s12 m12">
                         <label for="title"><span class="required">*</span> Título del libro:</label>
                         <input type="text" name="title" id="title" class="required-field" placeholder="Título del libro..." value="{{ $title }}">
+                    </div>
+
+                    <div class="form-group col s12 m12">
+                        <label for="slug"><span class="required">*</span> Slug:</label>
+                        <span id="slug">{{Request::root()}}/<span>{{$slug}}</span></span>
                     </div>
 
                     <div class="form-group col s12 m6">
@@ -389,14 +396,14 @@
         </div>
         <div id="precios" class="content-tabs">
             
-            @if (count($countries) > 0)
-                @foreach ($countries as $country)
+            @if (count($inventory) > 0)
+                @foreach ($inventory as $country)
                     
                     <div class="row row-country">
                         
                         <div class="col s12 m4">
                             <label for="name"><span class="required">*</span> País:</label>
-                            <input type="text" readonly class="country-name" id="name" name="name" value="{{ $country->name }}">
+                            <input type="text" readonly class="country-name" id="name" name="name" value="{{ $country->country_name }}">
                         </div>
                         <div class="col s12 m2">
                             <label for="price"><span class="required">*</span> Precio:</label>
