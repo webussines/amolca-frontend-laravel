@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::post('upload', 'Api\ApiArchivesController@upload_file');
+Route::post('upload', 'Api\ApiArchivesController@upload_file')->middleware('cors');
 
 //Options
 Route::group(['prefix' => 'options'], function() {
