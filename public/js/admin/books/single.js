@@ -338,11 +338,11 @@ const SaveBookInfo = function() {
 	switch(_action) {
 		case 'edit':
 			ActionRoute = '/am-admin/books/edit/' + id;
-			book.slug = GenerateSlug(book.title);
 		break;
 
 		case 'create':
 			ActionRoute = '/am-admin/libros';
+			book.slug = GenerateSlug(book.title);
 		break;
 	}
 

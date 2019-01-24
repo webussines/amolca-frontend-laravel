@@ -403,7 +403,8 @@
                         
                         <div class="col s12 m4">
                             <label for="name"><span class="required">*</span> País:</label>
-                            <input type="text" readonly class="country-name" id="name" name="name" value="{{ $country->country_name }}">
+                            <input type="text" readonly class="country-title" id="name" name="name" value="{{ $country->country_name }}">
+                            <input type="hidden" readonly class="country-name" id="name" name="name" value="{{ $country->country_id }}">
                         </div>
                         <div class="col s12 m2">
                             <label for="price"><span class="required">*</span> Precio:</label>
