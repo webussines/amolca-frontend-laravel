@@ -73,7 +73,7 @@
 				<div class="label">Especialidades:</div>
 				<div class="items">
 					@foreach ($book->taxonomies as $taxonomy)
-						@if ($taxonomy->slug != 'medicina' && $taxonomy->slug != 'odontologia')
+						@if ($taxonomy->slug != 'medicina' && $taxonomy->slug != 'odontologia' && $taxonomy->icon_img != NULL)
 						<p>
 							<img class="specialty-icon" src="{{ $taxonomy->icon_img }}" alt="{{ $taxonomy->title}} "> {{ $taxonomy->title }}
 						</p>
