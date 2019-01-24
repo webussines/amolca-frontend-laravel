@@ -97,7 +97,8 @@ const GetPrices = function() {
 
 		//Definiendo elemento recorrido
 		let elem = {};
-		elem.name = $(this).find('.country-name').val();
+		elem.post_id = $('#id').val();
+		elem.country_id = $(this).find('.country-name').val();
 		elem.state = $(this).find('.country-state').val();
 		elem.price = 0;
 		elem.quantity = 0;
@@ -175,27 +176,31 @@ const AddNewCountry = function() {
 					</div>`;
 
 		let lastRow = $('.content-tabs#precios .row-country:last');
-
-		lastRow.after(newRow);
+		
+		if(lastRow.length > 0) {
+		    lastRow.after(newRow);
+		} else {
+		    $('.content-tabs#precios .row').before(newRow);
+		}
 
 		//Agregar opciones a la lista 
 		for (let i = 0; i < countries.length; i++) {
 
-			let name = countries[i].name.toUpperCase();
-			let o = new Option(name, name);
+			let title = countries[i].title.toUpperCase();
+			let o = new Option(countries[i].title, countries[i].id);
 			let select = `.${rowClass} .country-name`;
 
 			let flag = true;
 
 			for (let j = 0; j < prices.length; j++) {
-				if(prices[j].name == name) {
+				if(prices[j].country_name == title) {
 					flag = false;
 				}
 			}
 
 			/// jquerify the DOM object 'o' so we can use the html method
 			if(flag) {
-				$(o).html(name);
+				$(o).html(title);
 				$(select).append(o);
 			}
 
@@ -278,7 +283,7 @@ const SaveBookInfo = function() {
 		state: state,
 		content: description,
 		taxonomies: specialties,
-		iventory: countries,
+		inventory: countries,
 		user_id: _user,
 		meta: [
 			{
