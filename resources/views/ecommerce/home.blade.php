@@ -1,6 +1,10 @@
 @extends('ecommerce.layouts.site')
 
-@section('title', 'Amolca Editorial Médica y Odontológica')
+@if (get_option('sitename') && get_option('sitename') !== 'NULL')
+	@section('title', get_option('sitename'))
+@else
+	@section('title', 'Amolca Editorial Médica y Odontológica')
+@endif
 
 @section('scripts')
 <script src="{{ asset('js/ecommerce/common.js') }}"></script>
