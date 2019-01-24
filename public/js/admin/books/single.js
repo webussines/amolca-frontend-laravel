@@ -374,6 +374,12 @@ const SaveBookInfo = function() {
 			console.log(resp)
 
 			let data = JSON.parse(resp);
+			
+			if(data.error !== undefined) {
+				if (data.error == 'token_expired') {
+					window.location.href = '/am-admin/logout';
+				}
+			}
 
 			if(data.post.id !== undefined) {
 				
