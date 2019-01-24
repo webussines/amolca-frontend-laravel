@@ -55,6 +55,14 @@ class HomeController extends Controller
 
             $cart = session('cart');
 
+            if(!isset(session('cart')->products)) {
+                return view('ecommerce.cart.empty');
+            }
+
+            if(count(session('cart')->products) < 1) {
+                return view('ecommerce.cart.empty');
+            }
+
             //Related posts
             $related = $this->posts->all("book", "orderby=title&order=asc&limit=8&random=1")->posts;
 

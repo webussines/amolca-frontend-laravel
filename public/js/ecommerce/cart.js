@@ -178,6 +178,11 @@ const DeleteCartProduct = (deleted, page) => {
 
 		//console.log(resp)
 
+		if(resp.products === undefined || resp.products === null || resp.products.length < 1) {
+		    //console.log('reload')
+			window.location.href = window.location.href;
+		}
+
 		$('.top-bar #cart-btn span').html(resp.amountstring);
 
 		switch (page) {

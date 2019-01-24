@@ -72,32 +72,36 @@ class CartsController extends Controller
             $quantity = $add['quantity'];
             $price = $add['price'];
 
-            for ($i = 0; $i < count($cart->products); $i++) { 
-                $product = json_decode(json_encode($cart->products[$i]));
+            if(isset($cart->products)) {
+                for ($i = 0; $i < count($cart->products); $i++) { 
+                    $product = json_decode(json_encode($cart->products[$i]));
 
-                if ($product->object_id == $object_id) {
+                    if ($product->object_id == $object_id) {
 
-                    switch ($action) {
-                        case 'update':
-                            $product->quantity = $quantity;
-                            break;
+                        switch ($action) {
+                            case 'update':
+                                $product->quantity = $quantity;
+                                break;
 
-                        case 'delete':
-                            unset($cart->products[$i]);
-                            $cart->products = array_values($cart->products);
-                            break;
-                        
-                        default:
-                            $product->quantity = $product->quantity + $quantity;
-                            break;
+                            case 'delete':
+                                unset($cart->products[$i]);
+                                $cart->products = array_values($cart->products);
+                                break;
+                            
+                            default:
+                                $product->quantity = $product->quantity + $quantity;
+                                break;
+                        }
+
+                        $update = false;
                     }
 
-                    $update = false;
+                    if($action !== 'delete') {
+                        $cart->products[$i] = $product;
+                    }
                 }
-
-                if($action !== 'delete') {
-                    $cart->products[$i] = $product;
-                }
+            } else {
+                $cart->products = [];
             }
 
             if($update) {
@@ -114,19 +118,21 @@ class CartsController extends Controller
 
             $this->request->session()->put('cart', $order);
 
-            $send = session('cart');
-            if($this->request->ajax()) {
-                $send->amountstring = COPMoney($send->amount);
+            if($add['action'] != 'delete') {
+                $send = session('cart');
+                if($this->request->ajax()) {
+                    $send->amountstring = COPMoney($order->amount);
 
-                for ($sp = 0; $sp < count($send->products); $sp++) { 
-                    $send->products[$sp]->pricestring = COPMoney($send->products[$sp]->price);
-                    $send->products[$sp]->totalstring = COPMoney($send->products[$sp]->price * $send->products[$sp]->quantity);
+                    for ($sp = 0; $sp < count($order->products); $sp++) { 
+                        $order->products[$sp]->pricestring = COPMoney($order->products[$sp]->price);
+                        $order->products[$sp]->totalstring = COPMoney($order->products[$sp]->price * $order->products[$sp]->quantity);
+                    }
+
+                    return Response::json($order);
                 }
-
-                return Response::json($send);
             }
 
-            return Response::json($send);
+            return Response::json($order);
         }
 
     }
