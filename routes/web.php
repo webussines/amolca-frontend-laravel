@@ -86,6 +86,7 @@ Route::get('/', 'Ecommerce\HomeController@index');
 Route::get('/carrito', 'Ecommerce\HomeController@cart');
 Route::get('/finalizar-compra', 'Ecommerce\HomeController@checkout');
 Route::get('/contacto', 'Ecommerce\HomeController@contact');
+Route::get('/terminos-y-condiciones', 'Ecommerce\HomeController@termsandconditions');
 
 //Especialidades
 Route::get('/especialidad/{slug}', 'Ecommerce\SpecialtiesController@show');

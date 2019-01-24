@@ -23,34 +23,34 @@
 			<div class="custom-col" id="block-about">
 				<p class="title">Acerca de</p>
 				<p>
-					<a href="/amolca">Amolca</a>
+					<a>Amolca</a>
 				</p>
 				<p>
-					<a href="/novedades">Novedades</a>
+					<a>Novedades</a>
 				</p>
 				<p>
-					<a href="/eventos">Eventos</a>
+					<a>Eventos</a>
 				</p>
 				<p>
 					<a href="/terminos-y-condiciones">Términos y condiciones</a>
 				</p>
 				<p>
-					<a href="/politicas-de-privacidad">Políticas de privacidad</a>
+					<a href="/terminos-y-condiciones#privacidad">Políticas de privacidad</a>
 				</p>
 			</div>
 			<div class="custom-col" id="block-help">
 					<p class="title">Ayuda</p>
 					<p>
-						<a href="/como-comprar">¿Cómo comprar?</a>
+						<a>¿Cómo comprar?</a>
 					</p>
 					<p>
-						<a href="/preguntas-frecuentes">Preguntas frecuentes</a>
+						<a>Preguntas frecuentes</a>
 					</p>
 					<p>
-						<a href="/terminos-y-condiciones/%23envios">Información de envío</a>
+						<a href="/terminos-y-condiciones#envios">Información de envío</a>
 					</p>
 					<p>
-						<a href="/terminos-y-condiciones/%23pagos">Medios de pago</a>
+						<a href="/terminos-y-condiciones#pagos">Medios de pago</a>
 					</p>
 					<p>
 						<a href="/contacto">Contacto</a>

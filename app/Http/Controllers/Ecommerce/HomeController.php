@@ -88,4 +88,9 @@ class HomeController extends Controller
     {
         return view('ecommerce.contact');
     }
+
+    public function termsandconditions() 
+    {
+        return view('ecommerce.terms-and-conditions');
+    }
 }

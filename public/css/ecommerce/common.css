@@ -1237,6 +1237,17 @@ form.big-searcher {
     text-align: center;
 }
 
+/*Terms and conditions page*/
+.main.terms-and-conditions .subtitle {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.main.terms-and-conditions .fragment-id {
+    position: absolute;
+    margin-top: -140px;
+}
+
 /*Specialty page styles*/
 .specialty-title {
     background-image: url('/img/common/titles-bg.png');
