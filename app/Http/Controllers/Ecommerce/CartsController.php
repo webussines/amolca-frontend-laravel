@@ -141,10 +141,14 @@ class CartsController extends Controller
 
         $cart = session('cart');
 
+        $cc = mailer_get_cc();
+        $me = mailer_get_me();
+        array_push($cc, $me);
+
         $address = $this->request->all();
         $mailer['name'] = mailer_get_name();
         $mailer['from'] = mailer_get_me();
-        $mailer['cc'] = mailer_get_cc() . ', ' . mailer_get_me();
+        $mailer['cc'] = $cc;
         //$mailer['cc'] = 'mstiven013@gmail.com';
         $mailer['domain'] = mailer_get_domain();
 
