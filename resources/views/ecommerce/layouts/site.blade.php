@@ -37,7 +37,11 @@
 		
 		<div class="main @yield('contentClass')">
 
-			@if (Route::getCurrentRoute()->uri() !== '/' && Route::getCurrentRoute()->uri() !== 'iniciar-sesion' && Route::getCurrentRoute()->uri() !== 'buscar')
+			@php
+				$pages_not_banner = ["/", "iniciar-sesion", "buscar", "carrito", "finalizar-compra", "mi-cuenta"];
+			@endphp
+
+			@if (!in_array(Route::getCurrentRoute()->uri(), $pages_not_banner))
 				<div class="content-container">
 					@include('ecommerce.layouts.partials.banner', ["show_searcher" => true])
 				</div>
