@@ -43,6 +43,11 @@ class HomeController extends Controller
 
     public function login() 
     {
+
+        if(session('user')) {
+            return redirect('mi-cuenta');
+        }
+
         return view('ecommerce.login');
     }
 

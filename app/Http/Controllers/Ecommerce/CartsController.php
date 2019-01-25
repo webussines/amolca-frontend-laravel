@@ -20,6 +20,23 @@ class CartsController extends Controller
         $this->orders = $orders;
     }
 
+    public function get_orders($id) {
+
+        $orders = $this->orders->findByUser($id);
+
+        if($this->request->ajax()) {
+
+            $resp = [];
+            $orders->amountstring = COPMoney($orders->amount);
+            $resp['data'] = [$orders];
+
+            return $resp;
+
+        }
+
+        return Response::json($data);
+    }
+
     public function store() {
 
         $add = $this->request->all();

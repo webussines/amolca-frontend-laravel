@@ -16,20 +16,12 @@ class Orders extends GuzzleHttpRequest {
 		return $this->get("orders/{$id}");
 	}
 
-	public function navigation($id, $params) {
-		return $this->get("orders/navigation/{$id}{$params}");
-	}
-
-	public function findBySlug($slug) {
-		return $this->get("orders/slug/{$slug}");
-	}
-
-	public function meta($id, $data) {
-		return $this->get("orders/{$id}/{$data}");
-	}
-
 	public function create($body) {
 		return $this->post("orders", $body);
+	}
+
+	public function findByUser($id) {
+		return $this->get("orders/user/{$id}");
 	}
 
 	public function updateById($id, $update) {
@@ -42,14 +34,6 @@ class Orders extends GuzzleHttpRequest {
 
 	public function deleteById($id) {
 		return $this->delete("orders/{$id}");
-	}
-
-	public function author($id, $params = '') {
-		return $this->get("authors/{$id}/orders?{$params}");
-	}
-
-	public function taxonomies($id, $params = '') {
-		return $this->get("taxonomies/{$id}/orders?{$params}");
 	}
 	
 }

@@ -1,0 +1,56 @@
+/*Nav menu*/
+.vmenu {
+    margin: 0px;
+}
+    .vmenu li a {
+        background-color: #00396F;
+        align-items: center;
+        color: #ffffff;
+        cursor: pointer;
+        display: flex;
+        flex-flow: row wrap;
+        font-family: "Tahoma";
+        font-size: 15px;
+        font-weight: normal;
+        justify-content: flex-start;
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 20px;
+        text-decoration: none;
+        transition: all 0.4s ease;
+    }
+    	.vmenu li a:hover,
+    	.vmenu li a:focus,
+    	.vmenu li a:active,
+    	.vmenu li.active a {
+    	    background-color: #55B9D4;
+    	}
+
+    	.vmenu li a span {
+    	    font-size: 18px;
+    	    margin-right: 10px;
+    	}
+
+/*Content*/
+.main .title {
+    font-size: 30px;
+    margin-bottom: 15px;
+    text-align: left;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.dataTables_length, #DataTables_Table_0_filter {
+    display: none;
+}
+
+.main table.dataTable thead th,
+.main table.dataTable thead td,
+.main table.dataTable.no-footer {
+    border-color: #ccc;
+}
+
+.main table.dataTable tbody th,
+.main table.dataTable tbody td {
+    padding: 18px 10px;
+}

@@ -1,16 +1,11 @@
-@extends('ecommerce.layouts.site')
+@extends('ecommerce.layouts.account')
 
-@section('title', "Mi cuenta $user->name - Amolca Editorial Médica y Odontológica")
+@section('title', "$user->name: Mi cuenta - Amolca Editorial M&eacute;dica y Odontol&oacute;gica")
 
-@section('contentClass', 'page-container my-account')
-@section('content')
-<div class="section-title">
-	<h2>{{ $user->name }}</h2>
-</div>
+@section('information')
+<p class="title">&#161;Hola, <span>{{ $user->name }} @if ($user->lastname !== null) {{ $user->lastname }} @endif</span>&#33;</p>
 
-<div class="content-container">
+<p>Desde el panel de administraci&oacute;n de tu cuenta puedes ver tus <a>pedidos</a>, administrar tus <a>direcciones de env&iacute;o y facturaci&oacute;n</a> y editar tu <a>contrase&ntilde;a e informaci&oacute;n personal</a>.</p>
 
-	Mi cuenta {{ $user->name }}
-
-</div>
+<p><a class="button primary" href="/logout">Cerrar sesi&oacute;n</a></p>
 @endsection

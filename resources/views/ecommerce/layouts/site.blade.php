@@ -38,10 +38,13 @@
 		<div class="main @yield('contentClass')">
 
 			@php
+				$complete = explode('\\', Route::getCurrentRoute()->getActionName());
+				$controller = $complete[count($complete) - 1];
+				$active_controller = explode('@', $controller)[0];
 				$pages_not_banner = ["/", "iniciar-sesion", "buscar", "carrito", "finalizar-compra", "mi-cuenta"];
 			@endphp
 
-			@if (!in_array(Route::getCurrentRoute()->uri(), $pages_not_banner))
+			@if (!in_array(Route::getCurrentRoute()->uri(), $pages_not_banner) && $active_controller !== 'AccountController')
 				<div class="content-container">
 					@include('ecommerce.layouts.partials.banner', ["show_searcher" => true])
 				</div>

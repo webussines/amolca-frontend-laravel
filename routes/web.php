@@ -79,6 +79,9 @@ Route::get('/logout', 'AuthController@EcommerceLogout');
 
 Route::group(['middleware' => 'ecommerce', 'prefix' => 'mi-cuenta'], function() {
 	Route::get('/', 'Ecommerce\AccountController@account');
+	Route::get('/pedidos', 'Ecommerce\AccountController@orders');
+	Route::get('/direccion', 'Ecommerce\AccountController@direction');
+	Route::get('/informacion', 'Ecommerce\AccountController@information');
 });
 
 //Rutas simples
@@ -110,4 +113,5 @@ Route::group(['prefix' => 'carts'], function() {
 	Route::post('/checkout', 'Ecommerce\CartsController@create_order');
 	Route::put('/', 'Ecommerce\CartsController@update');
 	Route::get('/{id}', 'Ecommerce\CartsController@show');
+	Route::get('/{id}', 'Ecommerce\CartsController@get_orders');
 });
