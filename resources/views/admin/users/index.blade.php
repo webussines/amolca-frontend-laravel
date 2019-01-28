@@ -21,6 +21,7 @@
 	</div>
 
 	<input type="hidden" id="_token" value="{{ csrf_token() }}">
+	<input type="hidden" id="_src" value="{{ $action }}">
 
 	<table class="table data-table users">
 		<thead>

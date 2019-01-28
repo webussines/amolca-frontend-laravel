@@ -22,9 +22,14 @@ class AuthController extends Controller
 
         $user = $this->request->all();
 
+        $cc = mailer_get_cc();
+        $me = mailer_get_me();
+        array_push($cc, $me);
+
         $mailer['name'] = mailer_get_name();
-        $mailer['cc'] = mailer_get_cc() . ', ' . mailer_get_me();
-        //$mailer['cc'] = 'mstiven013@gmail.com';
+        $mailer['from'] = mailer_get_me();
+        //$mailer['cc'] = $cc;
+        $mailer['cc'] = 'mstiven013@gmail.com';
         $mailer['domain'] = mailer_get_domain();
         $mailer['country'] = mailer_get_country();
 

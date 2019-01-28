@@ -39,7 +39,23 @@ class AdminUsersController extends Controller
         $params = "orderby=title&order=1&limit=100&skip=0";
         $users = $this->users->all($params);
 
-        return view('admin.users.index', ['users' => $users]);
+        return view('admin.users.index', ['users' => $users, 'action' => 'all']);
+    }
+
+    public function clients()
+    {
+        $users = $this->users->clients();
+
+        return view('admin.users.index', ['users' => $users, 'action' => 'clients']);
+    }
+
+    public function getclients()
+    {
+        $resp = [];
+
+        $resp['data'] = $this->users->clients();
+
+        return $resp;
     }
 
     public function create()
@@ -60,7 +76,7 @@ class AdminUsersController extends Controller
 
     public function show($id)
     {
-        $user = $this->users->findById($id);
+        $user = $this->users->me();
         $countries = $this->countries->all();
 
         return view('admin.users.single', [

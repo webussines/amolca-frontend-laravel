@@ -64,19 +64,7 @@
 
                 <ul class="submenu" data-menu="orders">
                     <li><a>Ver pedidos</a></li>
-                    <li><a>Facturas</a></li>
                     <li><a>Carritos de compra</a></li>
-                </ul>
-            </li>
-
-            <li>
-                <a data-id="clients">
-                    <span class="icon icon-user-tie"></span> <span class="text">Clientes</span>
-                </a>
-
-                <ul class="submenu" data-menu="clients">
-                    <li><a>Ver clientes</a></li>
-                    <li><a>Direcciones</a></li>
                 </ul>
             </li>
 
@@ -100,6 +88,8 @@
 
                 <ul class="submenu" data-menu="users">
                     <li><a href="/am-admin/usuarios">Ver todos los usuarios</a></li>
+                    <li><a href="/am-admin/clientes">Ver clientes</a></li>
+                    <li><a>Direcciones</a></li>
                     <li><a href="/am-admin/usuarios/create">Añadir usuario</a></li>
                 </ul>
             </li>

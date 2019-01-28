@@ -248,7 +248,7 @@ const country = [
 
 
 jQuery(function($) {
-  
+  /*
   $.get("https://ipinfo.io", function(response) {
       //console.log(response);
 
@@ -295,5 +295,6 @@ jQuery(function($) {
       }
 
     }, "jsonp");
+    */
 
 });

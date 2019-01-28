@@ -6,8 +6,16 @@ use GuzzleHttp\Client;
 
 class Users extends GuzzleHttpRequest {
 
-	public function all($params) {
+	public function all($params = null) {
         return $this->getAuthenticated("users");
+	}
+
+	public function clients($params = null) {
+        return $this->getAuthenticated("users/clients");
+	}
+
+	public function me($params = null) {
+        return $this->getAuthenticated("users/me");
 	}
 
 	public function findById($id) {

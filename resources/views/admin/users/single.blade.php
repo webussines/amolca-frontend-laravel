@@ -1,13 +1,13 @@
 @extends('admin.layouts.account')
 
 @php
-    $id = (isset($user->_id)) ? $user->_id : '';
+    $id = (isset($user->id)) ? $user->id : '';
     $name = (isset($user->name)) ? $user->name : '';
     $lastname = (isset($user->lastname)) ? $user->lastname : '';
     $fullName = $name . ' ' . $lastname;
 
     $email = (isset($user->email)) ? $user->email : '';
-    $role = (isset($user->role)) ? $user->role : [];
+    $role = (isset($user->role)) ? $user->role : '';
     $country = (isset($user->country)) ? $user->country : '';
 
     $mobile = (isset($user->mobile)) ? $user->mobile : '';
@@ -114,7 +114,6 @@
                     <div class="form-group col s6 m6">
                         <label for="role"><span class="required">*</span> Rol de usuario:</label>
                         <select name="role" id="role" class="normal-select">
-                            @php $selected = ''; @endphp
 
                             @php
                                 $superadmin = false;
@@ -123,38 +122,33 @@
                                 $autor = false;
                                 $editor = false;
                                 $cliente = false;
+
+                                switch ($role) {
+                                    case 'SUPERADMIN':
+                                        $superadmin = true;
+                                        break;
+                                    
+                                    case 'ADMIN':
+                                        $admin = true;
+                                        break;
+
+                                    case 'SELLER':
+                                        $vendedor = true;
+                                        break;
+
+                                    case 'AUTHOR':
+                                        $autor = true;
+                                        break;
+
+                                    case 'EDITOR':
+                                        $editor = true;
+                                        break;
+
+                                    case 'CLIENT':
+                                        $cliente = true;
+                                        break;
+                                }
                             @endphp
-
-                            @foreach ($role as $rol)
-                                @php
-
-                                    switch ($rol) {
-                                        case 'SUPERADMIN':
-                                            $superadmin = true;
-                                            break;
-                                        
-                                        case 'ADMIN':
-                                            $admin = true;
-                                            break;
-
-                                        case 'SELLER':
-                                            $vendedor = true;
-                                            break;
-
-                                        case 'AUTHOR':
-                                            $autor = true;
-                                            break;
-
-                                        case 'EDITOR':
-                                            $editor = true;
-                                            break;
-
-                                        case 'CLIENT':
-                                            $cliente = true;
-                                            break;
-                                    }
-                                @endphp
-                            @endforeach
 
                             <option @if ($superadmin) selected="selected" @endif value="SUPERADMIN">Superadmin</option>
                             <option @if ($admin) selected="selected" @endif value="ADMIN">Admin</option>
@@ -169,7 +163,7 @@
                         <label for="country"><span class="required">*</span> País:</label>
                         <select name="country" id="country" class="select2-normal">
                             @foreach ($countries as $pais)
-                                <option value="{{ $pais['name'] }}" @if ($country == strtoupper($pais['name'])) selected="selected" @endif>{{ $pais['name'] }}</option>
+                                <option value="{{ $pais['title'] }}" @if ($country == strtoupper($pais['title'])) selected="selected" @endif>{{ $pais['title'] }}</option>
                             @endforeach
                         </select>
                     </div>

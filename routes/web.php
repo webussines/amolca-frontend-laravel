@@ -27,6 +27,9 @@ Route::group(['prefix' => 'am-admin'], function() {
 		//Custom routes for "LIBROS"
 		Route::get('libros/inventario', 'Admin\AdminBooksController@inventory');
 
+		//Custom routes for "Usuarios"
+		Route::get('clientes', 'Admin\AdminUsersController@clients');
+
 		Route::resources([
 		    'libros' => 'Admin\AdminBooksController',
 		    'especialidades' => 'Admin\AdminSpecialtiesController',
@@ -62,7 +65,8 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 		//Routes for get info "USERS"
 		Route::prefix('users')->group(function(){
-			Route::post('/all', 'Admin\AdminUsersController@all');
+			Route::get('/all', 'Admin\AdminUsersController@all');
+			Route::get('/clients', 'Admin\AdminUsersController@getclients');
 			Route::post('/edit/{id}', 'Admin\AdminUsersController@edit');
 		});
 

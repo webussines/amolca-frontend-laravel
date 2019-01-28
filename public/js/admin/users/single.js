@@ -57,31 +57,40 @@ const SaveUser = function() {
 	let phone = $('#phone').val();
 	let company = $('#company').val();
 	let description = tinymce.activeEditor.getContent();
-	let image = $('#image-url').val();
+	let avatar = $('#image-url').val();
 
 	let password = $('#password').val();
 	let repassword = $('#repassword').val();
 
-	let dataSend = {
-		user: {
-			name: name,
-			lastname: lastname,
-			email: email,
-			role: [role],
-			country: country,
-			mobile: mobile,
-			phone: phone,
-			company: company,
-			description: description,
-			image: image,
-			password: password
-		},
-		mailer: {
-	        to: email,
-	        cc: 'contacto@amolca.com, asistentepresidencia@amolca.us',
-	        from: 'Amolca Casa Matriz <ventas@amolca.com.co>',
-	        domain: 'www.amolca.com.co'
-	    }
+	let user = {
+		name: name,
+		lastname: lastname,
+		email: email,
+		role: role,
+		country: country,
+		document_id: Math.floor((Math.random() * 10000) + 1),
+		password: password,
+		_token: _token
+	}
+
+	if(mobile !== '' && mobile !== ' ') {
+		user.mobile = mobile
+	}
+
+	if(phone !== '' && phone !== ' ') {
+		user.phone = phone
+	}
+
+	if(company !== '' && company !== ' ') {
+		user.company = company
+	}
+
+	if(description !== '' && description !== ' ') {
+		user.description = description
+	}
+
+	if(avatar !== '' && avatar !== ' ') {
+		user.avatar = avatar
 	}
 
 	let ActionRoute;
@@ -92,7 +101,7 @@ const SaveUser = function() {
 		break;
 
 		case 'create':
-			ActionRoute = '/am-admin/usuarios';
+			ActionRoute = '/am-admin/register';
 		break;
 	}
 
@@ -133,30 +142,54 @@ const SaveUser = function() {
 		$.ajax({
 			method: 'POST',
 			url: ActionRoute,
-			data: {
-				"body": dataSend,
-				"_token": _token
-			}
+			data: user
 		}).done(function(resp) {
 			console.log(resp)
 
 			let data = JSON.parse(resp);
-
-			if(data.user._id !== undefined) {
-				
+			if(data.token !== null && data.token !== undefined) {
 				switch(_action) {
 					case 'edit':
-					console.log('Hola')
+						//console.log('Hola')
 						location.reload();
 					break;
 					case 'create':
-						window.location.href = '/am-admin/usuarios/' + data.user._id;
+						window.location.href = '/am-admin/usuarios/' + data.user.id;
 					break;
 				}
-
 			}
+
+			switch (data.status) {
+				case 500:
+						error.msg = 'Ha ocurrido un error, por favor intentelo más tarde.';
+						error.show = true;
+					break;
+				case 404:
+						error.msg = 'Este usuario no existe.';
+						error.show = true;
+					break;
+				case 401:
+						error.msg = 'El usuario y la contraseña no coinciden.';
+						error.show = true;
+					break;
+				case 400:
+						if(data.errors.email !== undefined) {
+							let msg = data.errors.email;
+							M.toast({html: msg, classes: 'red accent-4 bottom left'});
+						}
+					break;
+				default:
+						error.msg = 'El usuario y la contraseña no coinciden.';
+						error.show = true;
+					break;
+			}
+
+			if(!$('.loader').hasClass('hidde'))
+				$('.loader').addClass('hidde')
 		}).catch(function(err) {
 			console.log(err)
+			if(!$('.loader').hasClass('hidde'))
+				$('.loader').addClass('hidde')
 		})
 
 	}

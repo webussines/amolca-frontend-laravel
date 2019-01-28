@@ -2,6 +2,7 @@ jQuery(function($){
 	$(document).ready(function() {
 
 		createDataTable();
+
 	});
 });
 
@@ -31,17 +32,40 @@ const language = {
 };
 
 const createDataTable = function() {
-	var table = $('table.users').dataTable( {
+
+	let src = $('#_src').val();
+	let route = '/am-admin/users/all';
+
+	switch (src) {
+		case 'clients':
+			route = '/am-admin/users/clients';
+			break;
+	}
+
+	$.fn.dataTable.ext.errMode = (e, textStatus, errorThrown) => {
+		console.log(e.jqXHR.responseJSON)
+		if( typeof e.jqXHR.responseJSON.data !== 'object') {
+			let error = JSON.parse(e.jqXHR.responseJSON.data);
+
+	        if(error.error !== undefined) {
+	        	switch (error.error) {
+	        		case 'token_expired':
+	        			window.location.href = '/logout';
+	        			break;
+	        		default:
+	        			window.location.href = '/logout';
+	        			break;
+	        	}
+	        }
+		}
+    }
+
+	var table = $('table.users').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todos"]],
 	    ajax: {
-	    	method: "POST",
-	    	url: '/am-admin/users/all',
-	    	data: {
-	    		"limit": 1000,
-				"skip": 0,
-				"_token": $('#_token').val()
-	    	}
+	    	method: "GET",
+	    	url: route
 	    },
 	    columns: [
 	    	{ 	
@@ -61,24 +85,29 @@ const createDataTable = function() {
 	    	},
 	    	{ 	
 	    		data: "role",
-	    		className: "role"
+	    		className: "role",
+	    		"render":  function (data, type, JsonResultRow, meta) {
+	    			switch (JsonResultRow.role) {
+	    				case 'CLIENT':
+	    					return 'Cliente';
+	    					break;
+	    				default:
+	    					return JsonResultRow.role;
+	    					break;
+	    			}
+                }
 	    	},
 	    	{ 	
 	    		data: "country",
 	    		className: "country"
 	    	},
 	    	{ 	
-	    		data: "_id",
+	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
-	    			let str = `<a class="edit" href="/am-admin/usuarios/${JsonResultRow._id}">
+	    			let str = `<a class="edit" href="/am-admin/usuarios/${JsonResultRow.id}">
 				                    <span class="icon-mode_edit"></span>
-				                </a>
-
-				                <a class="delete">
-				                    <span class="icon-trash"></span>
-				                </a>
-		                  	`;
+				                </a>`;
                   	return str;
                 }
 	    	}
