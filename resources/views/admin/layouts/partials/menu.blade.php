@@ -74,8 +74,8 @@
                 </a>
 
                 <ul class="submenu" data-menu="blog">
-                    <li><a>Ver publicaciones</a></li>
-                    <li><a>Categorías</a></li>
+                    <li><a href="/am-admin/blog">Ver publicaciones</a></li>
+                    <li><a href="/am-admin/blog/create">Añadir publicación</a></li>
                 </ul>
             </li>
         @endif

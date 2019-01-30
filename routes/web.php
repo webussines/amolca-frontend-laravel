@@ -35,13 +35,20 @@ Route::group(['prefix' => 'am-admin'], function() {
 		    'especialidades' => 'Admin\AdminSpecialtiesController',
 		    'autores' => 'Admin\AdminAuthorsController',
 		    'sliders' => 'Admin\AdminSlidersController',
-		    'usuarios' => 'Admin\AdminUsersController'
+		    'usuarios' => 'Admin\AdminUsersController',
+		    'blog' => 'Admin\AdminBlogsController',
 		]);
 
 		//Routes for get info "LIBOS"
 		Route::prefix('books')->group(function(){
 			Route::get('/', 'Admin\AdminBooksController@all');
 			Route::post('/edit/{id}', 'Admin\AdminBooksController@edit');
+		});
+
+		//Routes for get info "BLOGS"
+		Route::prefix('blogs')->group(function(){
+			Route::get('/', 'Admin\AdminBlogsController@all');
+			Route::post('/edit/{id}', 'Admin\AdminBlogsController@edit');
 		});
 
 		//Routes for get info "ESPECIALIDADES"

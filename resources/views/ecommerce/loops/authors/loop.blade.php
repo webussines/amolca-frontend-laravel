@@ -28,11 +28,11 @@
 				</div>
 				<div class="info">
 					<h3 class="name">
-						<a href="/autor/{{$author->slug}}">{{$author->title}}</a>
+						<a href="/autor/{{$author->slug}}">{!! $author->title !!}</a>
 					</h3>
-					@if (isset($author->content))
+					@if (isset($author->excerpt))
 						<div class="description">
-							{!! substr($author->content, 0, 100) !!}...
+							{{ substr($author->excerpt, 0, 100) }}...
 						</div>
 					@endif
 					<p>
@@ -46,5 +46,5 @@
 </div>
 
 @if ($type !== 'carousel')
-{{ $authors->links() }}
+{!! $authors->links() !!}
 @endif
