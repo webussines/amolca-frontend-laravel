@@ -37,6 +37,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		    'sliders' => 'Admin\AdminSlidersController',
 		    'usuarios' => 'Admin\AdminUsersController',
 		    'blog' => 'Admin\AdminBlogsController',
+		    'pedidos' => 'Admin\AdminOrdersController',
 		]);
 
 		//Routes for get info "LIBOS"
@@ -75,6 +76,12 @@ Route::group(['prefix' => 'am-admin'], function() {
 			Route::get('/all', 'Admin\AdminUsersController@all');
 			Route::get('/clients', 'Admin\AdminUsersController@getclients');
 			Route::post('/edit/{id}', 'Admin\AdminUsersController@edit');
+		});
+
+		//Routes for get info "PEDIDOS"
+		Route::prefix('orders')->group(function(){
+			Route::get('/', 'Admin\AdminOrdersController@all');
+			Route::post('/edit/{id}', 'Admin\AdminOrdersController@edit');
 		});
 
 		//Routes for get info "PAISES"
