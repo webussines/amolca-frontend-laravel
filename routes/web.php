@@ -82,6 +82,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::prefix('orders')->group(function(){
 			Route::get('/', 'Admin\AdminOrdersController@all');
 			Route::post('/edit/{id}', 'Admin\AdminOrdersController@edit');
+			Route::post('/{id}/states/store', 'Admin\AdminOrdersController@store_state');
 		});
 
 		//Routes for get info "PAISES"

@@ -1,5 +1,34 @@
 @extends('admin.layouts.account')
 
+@php
+    switch($order->state) {
+        case 'PENDING':
+            $state_text = 'Pendiente';
+        break;
+        case 'QUEUED_PAYMENT':
+            $state_text = 'Pago pendiente';
+        break;
+        case 'PROCESSING':
+            $state_text = 'En proceso';
+        break;
+        case 'COMPLETED':
+            $state_text = 'Completado';
+        break;
+        case 'CANCELLED':
+            $state_text = 'Cancelado';
+        break;
+        case 'FAILED':
+            $state_text = 'Fallido';
+        break;
+        case 'REFUNDED':
+            $state_text = 'Reembolsado';
+        break;
+        case 'FAILED':
+            $state_text = 'Fallido';
+        break;
+    }
+@endphp
+
 @if ($order->id !== '')
     @section('title', 'Pedido #' . $order->id . ' - Admin Amolca')
 @else
@@ -16,7 +45,7 @@
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=1icfygu7db6ym5ibmufjkk2myppelx6v827sc9rq8xt1eo2n'></script>
 <script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('js/admin/slug-generator.js') }}"></script>
-<script src="{{ asset('js/admin/authors/single.js') }}"></script>
+<script src="{{ asset('js/admin/orders/single.js') }}"></script>
 @endsection
 
 @section('contentClass', 'single single-order')
@@ -25,6 +54,48 @@
     <div class="loader top hidde">
         <div class="progress">
             <div class="indeterminate"></div>
+        </div>
+    </div>
+
+    <div id="order-modal" class="modal open">
+        <div class="modal-content">
+
+            <div class="loader top hidde">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
+
+            <p class="title">Estado del pedido #{{ $order->id }}</p>
+            <p>El estado actual del pedido es: <span class="state {{ strtolower($order->state) }}">{{ $state_text }}</span></p>
+
+            <p class="subtitle">Selecciónar nuevo estado:</p>
+            <select class="normal-select" name="order-state" id="order-state">
+                <option @if($order->state == 'PENDING') selected="selected" @endif value="PENDING">Pendiente</option>
+                <option @if($order->state == 'QUEUED_PAYMENT') selected="selected" @endif value="QUEUED_PAYMENT">Pago pendiente</option>
+                <option @if($order->state == 'PROCESSING') selected="selected" @endif value="PROCESSING">En proceso</option>
+                <option @if($order->state == 'COMPLETED') selected="selected" @endif value="COMPLETED">Completado</option>
+                <option @if($order->state == 'CANCELLED') selected="selected" @endif value="CANCELLED">Cancelado</option>
+                <option @if($order->state == 'FAILED') selected="selected" @endif value="FAILED">Fallido</option>
+                <option @if($order->state == 'REFUNDED') selected="selected" @endif value="REFUNDED">Reembolsado</option>
+                <option @if($order->state == 'FAILED') selected="selected" @endif value="FAILED">Fallido</option>
+            </select>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="add-notes" value="add-notes" />
+                    <span>Agregar una nota adicional</span>
+                </label>
+
+                <textarea name="notes-state" id="notes-state" placeholder="Agregar una nota a este cambio de estado indicando la razón de este cambio..."></textarea>
+                <p id="notes-state-error" class="error"></p>
+            </div>
+
+            <p class="desc"><b>Importante:</b> Al actualizar el estado de un pedido, se le enviará un correo al titular del pedido para notificarle el cambio.</p>
+        </div>
+        <div class="modal-footer">
+            <input type="hidden" id="actual-state" value="{{ $order->state }}">
+            <p id="resp-buttons"><a class="change-state button primary">Actualizar estado</a> <a class="modal-close button gray">Cerrar modal</a></p>
         </div>
     </div>
 
@@ -63,11 +134,11 @@
                     <table class="table products">
                         <thead>
                             <tr>
-                                <th id="thumbnail"></th>
-                                <th id="name">Título</th>
-                                <th id="price">Precio</th>
-                                <th id="qty">Cantidad</th>
-                                <th id="total">Total</th>
+                                <th class="thumbnail"></th>
+                                <th class="name">Título</th>
+                                <th class="price">Precio</th>
+                                <th class="qty">Cantidad</th>
+                                <th class="total">Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,6 +161,10 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            <tr class="totals">
+                                <th colspan="4">Precio total del pedido:</th>
+                                <td class="total">{{ COPMoney($order->amount) }}</td>
+                            </tr>
                         </tbody>
                     </table>
 
@@ -166,6 +241,15 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="col s12 m12 l4">
+                <div class="box order-states">
+                    <p class="title">Estado del pedido</p>
+                    <p>El estado de este pedido es:</p>
+                    <p class="state {{ strtolower($order->state) }}">{!! $state_text !!}</p>
+                    <p><a class="button primary modal-trigger" href="#order-modal">Cambiar estado</a></p>
+                </div>
             </div>
 
         </div>

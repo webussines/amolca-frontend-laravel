@@ -85,10 +85,14 @@ const createDataTable = function() {
 	    		className: "country"
 	    	},
 	    	{ 	
-	    		data: "products",
+	    		data: "id",
 	    		className: "products",
 	    		render: function(data, type, JsonResultRow, meta) {
-	    			return JsonResultRow.products.length;
+	    			if(JsonResultRow.products !== undefined) {
+	    				return JsonResultRow.products.length;
+	    			} else {
+	    				return 0;
+	    			}
 	    		}
 	    	},
 	    	{ 	

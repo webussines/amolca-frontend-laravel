@@ -20,6 +20,10 @@ class Orders extends GuzzleHttpRequest {
 		return $this->post("orders", $body);
 	}
 
+	public function create_state($id, $body) {
+		return $this->post("orders/{$id}/states", $body);
+	}
+
 	public function findByUser($id) {
 		return $this->get("orders/user/{$id}");
 	}

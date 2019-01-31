@@ -24,7 +24,7 @@
 		<div class="col s12 l5 image-book">
 			<div id="image-container">
 				<div class="material-placeholder">
-					<img alt="{{ $book->title }}" title="{{ $book->title }}" class="materialboxed" src="{{ $book->thumbnail }}">
+					<img alt="{!! $book->title !!}" title="{!! $book->title !!}" class="materialboxed" src="{{ $book->thumbnail }}">
 				</div>
 
 				<!--Countries loop for scroll info interaction-->
@@ -46,7 +46,7 @@
 		</div>
 		<div class="col s12 l7 summary-book">
 			<h1 class="name">
-				{{$book->title}}
+				{!! $book->title !!}
 			</h1>
 
 			<h3 class="author">
@@ -54,7 +54,7 @@
 				<!--Authors loop-->
 				@foreach ($book->author as $author)
 					<span>
-						<a href="/autor/{{ $author->slug }}"> {{ $author->title }} </a>
+						<a href="/autor/{{ $author->slug }}"> {!! $author->title !!} </a>
 					</span>
 				@endforeach
 
@@ -75,7 +75,7 @@
 					@foreach ($book->taxonomies as $taxonomy)
 						@if ($taxonomy->slug != 'medicina' && $taxonomy->slug != 'odontologia' && $taxonomy->icon_img != NULL)
 						<p>
-							<img class="specialty-icon" src="{{ $taxonomy->icon_img }}" alt="{{ $taxonomy->title}} "> {{ $taxonomy->title }}
+							<img class="specialty-icon" src="{{ $taxonomy->icon_img }}" alt="{!! $taxonomy->title!!} "> {!! $taxonomy->title !!}
 						</p>
 						@endif
 					@endforeach
@@ -156,9 +156,33 @@
 							<table class="table">
 								<tbody>
 								@foreach ($book->datasheet as $key => $val)
+									@php
+										$key_title = '';
+
+										switch ($key) {
+											case 'publication_year':
+												$key_title = 'Año de publicación';
+												break;
+											case 'number_pages':
+												$key_title = 'Número de páginas';
+												break;
+											case 'impresion':
+												$key_title = 'Impresión';
+												break;
+											case 'tapa':
+												$key_title = 'Tapa';
+												break;
+											case 'formato':
+												$key_title = 'Formato';
+												break;
+											case 'isbn':
+												$key_title = 'ISBN';
+												break;
+										}
+									@endphp
 									<tr>
-										<th>{{ $key }}:</th>
-										<td>{{ $val }}</td>
+										<th>{!! $key_title !!}:</th>
+										<td>{!! $val !!}</td>
 									</tr>
 								@endforeach
 								</tbody>

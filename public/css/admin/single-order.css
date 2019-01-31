@@ -1,3 +1,108 @@
+/*Modal Loader*/
+#order-modal .loader.top {
+    top: -7px;
+    left: 0px;
+}
+
+/*State colors*/
+.state.pending {
+	background: #f5e200;
+}
+.state.completed {
+	background: #01a439;
+	color: #fff;
+}
+.state.processing {
+	background: #F5F5F5;
+}
+.state.failed {
+	background: #F44336;
+	color: #fff;
+}
+.state.cancelled {
+	background: #fb00ff;
+	color: #fff;
+}
+.state.refunded {
+	background: #85d2ff;
+	color: #fff;
+} 
+.state.queued_payment {
+	background: #00396F;
+	color: #fff;
+} 
+
+/*Modal*/
+.modal#order-modal {
+	max-height: -webkit-calc(100% - 100px);
+	max-height: -moz-calc(100% - 100px);
+	max-height: -ms-calc(100% - 100px);
+	max-height: calc(100% - 100px);
+	height: auto;
+	top: 75px !important;
+}
+	.modal#order-modal p {
+		text-align: center;
+	}
+	.modal#order-modal .title {
+		border-bottom: 1px solid #ccc;
+		font-size: 30px;
+		font-weight: bold;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+	}
+	.modal#order-modal .state {
+		border-radius: 4px;
+		font-weight: bold;
+		margin-left: 10px;
+	    padding: 5px 15px;
+	}
+
+	.modal#order-modal .subtitle {
+		font-size: 18px;
+		font-weight: bold;
+		margin: 20px auto 10px;
+	}
+
+	.modal#order-modal .select-wrapper {
+		margin: auto;
+		text-align: center;
+		width: 50%;
+	}
+	.modal#order-modal .select-wrapper input.select-dropdown {
+		padding-left: 0px !important;
+		text-align: center !important;
+	}
+
+	.modal#order-modal .form-group {
+		margin-top: 20px;
+		text-align: center;
+	}
+		.modal#order-modal .form-group textarea {
+			display: none;
+			min-height: 70px;
+			height: 70px;
+			margin-top: 10px;
+			text-align: center;
+			max-width: 100%;
+			min-width: 100%;
+			width: 100%;
+		}
+
+	.modal#order-modal .desc {
+        color: #666;
+        font-style: italic;
+        font-size: 14px;
+        margin: 15px auto 0px;
+        width: 80%;
+    }
+
+	.modal#order-modal .modal-footer {
+		height: auto;
+		padding: 0 20px 20px;
+		text-align: center;
+	}
+
 .order-form {
 	padding: 30px 20px 70px;
 }
@@ -47,4 +152,29 @@ table.products .thumbnail {
 }
 table.products .name {
 	width: 50%;
+}
+
+table.products .price,
+table.products .qty,
+table.products .total {
+	text-align: center;
+}
+
+table.products .totals th {
+	text-align: right;
+}
+
+.box.order-states .title {
+	margin-bottom: 10px;
+}
+
+.box.order-states .state {
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px auto 20px;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
 }
