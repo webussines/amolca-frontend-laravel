@@ -27,10 +27,10 @@
 			<tr>
 				<th class="image">ID.</th>
 				<th class="user">Nombre completo:</th>
-				<th class="email">Correo electrónico:</th>
-				<th class="country">País:</th>
+				<th class="email">Correo electr&oacute;nico:</th>
+				<th class="country">Pa&iacute;s:</th>
+				<th class="products"># de productos:</th>
 				<th class="state">Estado:</th>
-				<th class="phone"># de productos:</th>
 				<th class="actions"></th>
 			</tr>
 		</thead>

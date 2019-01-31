@@ -63,8 +63,8 @@
                 </a>
 
                 <ul class="submenu" data-menu="orders">
-                    <li><a>Ver pedidos</a></li>
-                    <li><a>Carritos de compra</a></li>
+                    <li><a href="/am-admin/pedidos">Ver pedidos</a></li>
+                    <li><a href="/am-admin/carritos">Carritos de compra</a></li>
                 </ul>
             </li>
 
