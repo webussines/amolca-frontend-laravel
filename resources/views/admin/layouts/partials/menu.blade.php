@@ -78,6 +78,16 @@
                     <li><a href="/am-admin/blog/create">Añadir publicación</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a data-id="form">
+                    <span class="icon icon-contacts"></span> <span class="text">Formularios</span>
+                </a>
+
+                <ul class="submenu" data-menu="form">
+                    <li><a href="/am-admin/formularios">Ver formularios</a></li>
+                </ul>
+            </li>
         @endif
 
         @if (session('user')->role == 'SUPERADMIN')

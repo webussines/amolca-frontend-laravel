@@ -38,6 +38,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		    'usuarios' => 'Admin\AdminUsersController',
 		    'blog' => 'Admin\AdminBlogsController',
 		    'pedidos' => 'Admin\AdminOrdersController',
+		    'formularios' => 'Admin\AdminFormsController',
 		]);
 
 		//Routes for get info "LIBOS"
@@ -83,6 +84,11 @@ Route::group(['prefix' => 'am-admin'], function() {
 			Route::get('/', 'Admin\AdminOrdersController@all');
 			Route::post('/edit/{id}', 'Admin\AdminOrdersController@edit');
 			Route::post('/{id}/states/store', 'Admin\AdminOrdersController@store_state');
+		});
+
+		//Routes for get info "PEDIDOS"
+		Route::prefix('forms')->group(function(){
+			Route::get('/', 'Admin\AdminFormsController@all');
 		});
 
 		//Routes for get info "PAISES"
