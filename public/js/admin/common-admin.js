@@ -13,6 +13,32 @@ $(document).ready(function(){
 	UploadImage();
 });
 
+//Datepicker internationalization
+const DatePickerOptions = {
+	format: 'yyyy-mm-dd',
+	i18n: {
+		cancel: 'Cancelar',
+		done: 'Seleccionar',
+		months: [
+			"Enero", "Febrero", "Marzo",
+			"Abril", "Mayo", "Junio", "Julio",
+			"Agosto", "Septiembre", "Octubre",
+			"Noviembre", "Diciembre"
+		],
+		monthsShort: [
+			'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 
+			'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+		],
+		weekdays: [
+			'Domingo', 'Lunes', 'Martes', 'Miércoles', 
+			'Jueves', 'Viernes', 'Sábado'
+		],
+		weekdaysShort: [ 'Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vier', 'Sab' ],
+		weekdaysAbbrev: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ]
+	}
+}
+
+//FormattingDates in javascript
 const FormattingDate = (date) => {
 	var monthNames = [
 		"Enero", "Febrero", "Marzo",
