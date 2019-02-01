@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Orders;
+use App\Repositories\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -14,11 +15,13 @@ class AdminOrdersController extends Controller
     protected $orders;
     protected $request;
     protected $response;
+    protected $users;
 
-    public function __construct(Request $request, Response $response, Orders $orders) {
+    public function __construct(Request $request, Response $response, Orders $orders, Users $users) {
         $this->orders = $orders;
         $this->response = $response;
         $this->request = $request;
+        $this->users = $users;
     }
 
     public function all() {
@@ -37,6 +40,24 @@ class AdminOrdersController extends Controller
         }
 
         return Response::json($orders->posts);
+    }
+
+    public function all_carts() {
+
+        $orders = $this->orders->all_carts();
+
+        if($this->request->ajax()) {
+            $resp = [];
+            $resp['data'] = $orders;
+
+            return $resp;
+        }
+
+        return Response::json($orders->posts);
+    }
+
+    public function carts() {
+        return view('admin.orders.carts');
     }
 
     /**
@@ -101,8 +122,25 @@ class AdminOrdersController extends Controller
     {
 
         $order = $this->orders->findById($id);
+        $user = $this->users->findById($order->user_id);
 
-        return view('admin.orders.single', [ 'order' => $order ]);
+        $send_data = [];
+        $send_data['order'] = $order;
+
+        //or if you want to be more accurate 
+        if(is_object($user)){
+
+            if(isset($user->id)) {
+                $send_data['user'] = $user;
+            }
+
+        }
+
+        if($order->state == 'CART') {
+            return view('admin.orders.single-cart', $send_data);
+        }
+
+        return view('admin.orders.single', $send_data);
     }
 
     /**

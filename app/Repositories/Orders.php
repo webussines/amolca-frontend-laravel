@@ -12,6 +12,10 @@ class Orders extends GuzzleHttpRequest {
         return $this->get("orders?{$params}");
 	}
 
+	public function all_carts($params = 'limit=30') {
+        return $this->get("orders/carts?{$params}");
+	}
+
 	public function findById($id) {
 		return $this->get("orders/{$id}");
 	}

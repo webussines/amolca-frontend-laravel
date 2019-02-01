@@ -112,7 +112,7 @@
 	margin: 10px auto;
 	padding: 15px 20px;
 }
-	.order-info .title,
+	.order-form .title,
 	.box .title {
 		border-bottom: 1px solid #666666;
 		color: #666666;
@@ -178,3 +178,12 @@ table.products .totals th {
     text-transform: uppercase;
     width: 100%;
 }
+
+/*Cart page*/
+table.cart-info {
+	margin-bottom: 40px;
+}
+	table.cart-info .important-note {
+		color: #666666;
+		font-style: italic;
+	}
