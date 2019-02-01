@@ -6,6 +6,8 @@ $(document).ready(function(){
 	$('.modal').modal();
 	$('.normal-select').formSelect();
 
+	$('.datepicker').datepicker(DatePickerOptions);
+
 	//Images
 	ValidateImage();
 	UploadImage();

@@ -8,8 +8,16 @@ class Posts extends GuzzleHttpRequest {
 
 	public $country = "COLOMBIA";
 
-	public function all($type = 'post', $params = 'limit=30') {
+	public function all($type = 'post', $params = 'limit=3000') {
         return $this->get("posts?type={$type}&{$params}");
+	}
+
+	public function list($type = 'post', $params = 'limit=3000') {
+        return $this->get("posts?type={$type}&{$params}");
+	}
+
+	public function inventory($id, $type) {
+		return $this->get("posts/inventory/{$id}?type={$type}");
 	}
 
 	public function findById($id) {

@@ -460,6 +460,7 @@ a.btn-navigation {
     background-color: #000;
     border-radius: 35px;
     color: #fff;
+    cursor: pointer;
     display: inline-block;
     padding: 17px 20px;
     max-width: 350px;
@@ -473,3 +474,7 @@ a.btn-navigation {
     a.btn-navigation.next {
         background-color: #00396F;
     }
+
+span#slug span {
+    font-weight: bold;
+}

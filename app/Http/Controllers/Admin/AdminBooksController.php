@@ -106,8 +106,8 @@ class AdminBooksController extends Controller
 
         return view('admin.books.single', [
             'action' => 'create',
-            'specialties' => $specialties,
-            'authors' => $authors,
+            'specialties' => $specialties->taxonomies,
+            'authors' => $authors->posts,
             'navigation' => null
         ]);
     }

@@ -1,4 +1,4 @@
-+@extends('admin.layouts.account')
+@extends('admin.layouts.account')
 
 @if ($form->id !== '')
     @section('title', 'Formulario ID: #' . $form->id . ' - Admin Amolca')
