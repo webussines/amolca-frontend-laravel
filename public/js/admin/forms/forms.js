@@ -52,15 +52,16 @@ const createDataTable = function() {
 	    		data: "id",
 	    		className: "from",
 	    		render: function(data, type, JsonResultRow, meta) {
-	    			return `${JsonResultRow.name} < ${JsonResultRow.from} >`;
+	    			return `<b>${JsonResultRow.name}</b> - [${JsonResultRow.from}]`;
 	    		}
 	    	},
 	    	{ 	
 	    		data: "created_at",
 	    		className: "date",
-	    		render: function(data, type, JsonResultRow, meta) {
-	    			return JsonResultRow.created_at;
-	    		}
+	    		render: function (data, type, JsonResultRow, meta) {
+	    			let date = new Date(JsonResultRow.created_at);
+                  	return FormattingDate(date);
+                } 
 	    	},
 	    	{ 	
 	    		data: "to",

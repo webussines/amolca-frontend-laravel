@@ -399,12 +399,24 @@
                 transition: all 0.4s ease;
                 width: 20px;
             }
-                .data-table td.actions > a.edit:hover {
-                    color: #55b9d4;
+                .data-table td.actions > a.see {
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    background: #00396f;
+                    border-radius: 5px;
+                    color: #fff;
+                    width: auto;
+                    padding: 7px 15px;
                 }
-                .data-table td.actions > a.delete:hover {
-                    color: #E2231A;
-                }
+                    .data-table td.actions > a.see:hover {
+                        background-color: #55b9d4;
+                    }
+                    .data-table td.actions > a.edit:hover {
+                        color: #55b9d4;
+                    }
+                    .data-table td.actions > a.delete:hover {
+                        color: #E2231A;
+                    }
 
 .mce-notification-warning {
     display: none !important;
