@@ -16,10 +16,6 @@ class Posts extends GuzzleHttpRequest {
         return $this->get("posts?type={$type}&{$params}");
 	}
 
-	public function inventory($id, $type) {
-		return $this->get("posts/inventory/{$id}?type={$type}");
-	}
-
 	public function findById($id) {
 		return $this->get("posts/{$id}");
 	}
