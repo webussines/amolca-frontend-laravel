@@ -98,7 +98,7 @@ const ValidateImage = () => {
 			return false;
 		}
 
-		if(types.indexOf(fileType) < 1) {
+		if(types.indexOf(fileType) < 0) {
 			$('#image-error').html(`Los formatos permitidos son: <b>${types.join(', ')}</b>.`).css({ 'display': 'block' });
 			return false;
 		}

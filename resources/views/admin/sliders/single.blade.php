@@ -4,6 +4,7 @@
     $id = (isset($slider->id)) ? $slider->id : '';
     $title = (isset($slider->title)) ? $slider->title : '';
     $state = (isset($slider->state)) ? $slider->state : '';
+    $link = (isset($slider->link)) ? $slider->link : '';
     $items = (isset($slider->items)) ? $slider->items : [];
 @endphp
 
@@ -32,19 +33,19 @@
         </div>
     </div>
 
-	<div class="row single section-header valign-wrapper">
-		<div class="col s12 m10 l10">
-			<p class="title"> {{$title}} </p>
-		</div>
-		<div class="col s12 m2 l2 actions">
+    <div class="row single section-header valign-wrapper">
+        <div class="col s12 m10 l10">
+            <p class="title"> {{$title}} </p>
+        </div>
+        <div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
                 <span class="icon-save1"></span>
             </a>
             <a class="btn-floating btn-large red go-all-resources" href="/am-admin/libros">
                 <span class="icon-cross"></span>
             </a>
-		</div>
-	</div>
+        </div>
+    </div>
 
     <form id="slider-edit" class="slider-edit">
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
@@ -78,6 +79,7 @@
                                 @foreach ($items as $slide)
                                     <div class="item" style="background-image: url('{{$slide->image}}');">
                                         <div class="item-content">
+                                            <input type="hidden" class="slide-link" value="{{$slide->link}}">
                                             <input type="hidden" class="slide-url" value="{{$slide->image}}">
                                             <input type="hidden" class="slide-id" value="{{$slide->id}}">
                                             <p class="options">
@@ -127,6 +129,12 @@
                         </p>
 
                         <div class="buttons">
+                            <div class="form-group">
+                                <label for="link">Link del slide:</label>
+                                <input type="text" name="image-link" id="image-link" value="{{ $link }}" placeholder="Ejemplo de URL: /novedades/medicina">
+                                <span><b>Importante:</b> En el link del slide no poner el dominio. Solo poner la url relativa como por ejemplo: "/medicina"</span>
+                            </div>
+                            
                             <a class="save-changes">¡Listo!</a>
 
                             <input type="button" id="save-file-btn" class="save" value="Subir imagen">

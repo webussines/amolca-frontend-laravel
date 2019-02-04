@@ -32,6 +32,8 @@ const DeleteItem = (elem) => {
 	let parent = $(elem).parent();
 	let index = $(parent).find('.order').html();
 	let grid = new Muuri('.grid');
+	
+	//return console.log(index)
 	grid.remove([index - 1],  {removeElements: true, layout: true});
 
 	let item = $(elem).parent().parent().parent('.item').css('display', 'none');
@@ -59,11 +61,14 @@ const EditSlideItem = (e) => {
 	let parent = $(e.target).parent().parent().parent()[0];
 	
 	//Define slide info
+	let imgLink = $(parent).children('.slide-link');
+	console.log($(imgLink).val())
 	let imgElement = $(parent).children('.slide-url');
 	let image = $(imgElement).val();
 
 	$('#resource-image').attr('src', image);
 	$('#image-url').val(image);
+	$('#image-link').val($(imgLink).val());
 
 	GlobalActiveImage = image;
 
@@ -72,6 +77,7 @@ const EditSlideItem = (e) => {
 const CancelEditSlideItem = () => {
 	$('#resource-image').attr('src', 'https://amolca.webussines.com/uploads/sliders/slider-no-image.jpg');
 	$('#image-url').val('');
+	$('#image-link').val('');
 
 	$('.buttons').css({ 'display': 'none' });
 
@@ -85,14 +91,23 @@ const SaveItemChanges = () => {
 	if(!$('.save-changes').hasClass('new-item')) {
 		$('.drag-grid .grid .item').each(function(elem) {
 			let child = $(this).children().children('.slide-url');
+			let link = $(this).children().children('.slide-link');
 			let newImg = localStorage.getItem('fileName');
 
 			if(child.val() == GlobalActiveImage) {
-				child.val(newImg)
-				$(this).css({ 'background-image': 'url(' + newImg + ')' })
+				
+				if(newImg !== null) {
+				    child.val(newImg)
+				    $(this).css({ 'background-image': 'url(' + newImg + ')' })
+				} else {
+				    child.val(GlobalActiveImage)
+				    $(this).css({ 'background-image': 'url(' + GlobalActiveImage + ')' })
+				}
+				link.val($('#image-link').val())
 
 				$('#resource-image').attr('src', 'https://amolca.webussines.com/uploads/sliders/slider-no-image.jpg');
 				$('#image-url').val('');
+				$('#image-link').val('');
 
 				$('.buttons').css({ 'display': 'none' });
 			}
@@ -101,6 +116,7 @@ const SaveItemChanges = () => {
 		let order = GetSliderItems().length + 1;
 		let tmp = `<div class="item" style="background-image: url('${localStorage.getItem('fileName')}');">
 				        <div class="item-content">
+				            <input type="hidden" class="slide-link" value="${$('#image-link').val()}">
 				            <input type="hidden" class="slide-url" value="${localStorage.getItem('fileName')}">
 				            <p class="options">
 				                <a class="order">${order}</a>
@@ -130,7 +146,8 @@ const GetSliderItems = () => {
 	$('.drag-grid .item.muuri-item').each(function() {
 
 		let elem = {};
-
+    
+        elem.link = $(this).find('.slide-link').val();
 		elem.image = $(this).find('.slide-url').val();
 		elem.order = $(this).find('.order').html();
 
@@ -177,7 +194,7 @@ const SaveSlider = () => {
 
 		if(data.error !== undefined) {
 			if (data.error == 'token_expired') {
-				let toastMsg = 'Su sesión ha expirado, en segundo será redirigido para iniciar sesión de nuevo.';
+				let toastMsg = 'Su sesi贸n ha expirado, en segundo ser谩 redirigido para iniciar sesi贸n de nuevo.';
 				M.toast({html: toastMsg, classes: 'red accent-4 bottom'});
 				
 				setTimeout(function() {

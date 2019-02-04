@@ -145,6 +145,15 @@
   position: relative;
   width: 100%;
 }
+    .buttons .form-group {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+        .buttons .form-group span {
+            font-size: 13px;
+            font-style: italic;
+        }
+    
   .buttons a {
     border: 2px solid;
     cursor: pointer;
@@ -161,14 +170,16 @@
     transition: all 0.4s ease;
   }
     .buttons a.save-changes {
-      left: 0px;
-      position: absolute;
+        bottom: 0px;
+        left: 0px;
+        margin-left: 0px;
+        position: absolute;
     }
     .buttons a.cancel {
-      background-color: red;
-      border-color: red;
-      color: #fff;
+        background-color: red;
+        border-color: red;
+        color: #fff;
     }
-  .file-upload-wrapper, .buttons .save {
-    width: 250px !important;
-  }
+    .file-upload-wrapper, .buttons .save {
+        width: 250px !important;
+    }
