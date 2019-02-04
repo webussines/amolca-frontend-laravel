@@ -17,7 +17,7 @@
 		<link rel="stylesheet" href="{{ asset('libs/icomoon/icomoon.css') }}">
 		@yield('styles')
 
-		<!-- Facebook Pixel Code -->
+		<!-- Facebook Pixel Code
 		<script>
 			!function(f,b,e,v,n,t,s)
 			{if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -37,9 +37,10 @@
 			src="https://www.facebook.com/tr?id=942229042628428&ev=PageView
 			&noscript=1"/>
 		</noscript>
+		-->
 		<!-- End Facebook Pixel Code -->
 
-		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<!-- Global site tag (gtag.js) - Google Analytics
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132350648-1"></script>
 		<script>
 		  window.dataLayer = window.dataLayer || [];
@@ -47,7 +48,7 @@
 		  gtag('js', new Date());
 
 		  gtag('config', 'UA-132350648-1');
-		</script>
+		</script> -->
 
 	</head>
 	<body>
