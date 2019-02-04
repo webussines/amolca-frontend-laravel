@@ -40,6 +40,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		    'pedidos' => 'Admin\AdminOrdersController',
 		    'formularios' => 'Admin\AdminFormsController',
 		    'lotes' => 'Admin\AdminLotsController',
+		    'cupones' => 'Admin\AdminCouponsController',
 		]);
 
 		Route::get('carritos', 'Admin\AdminOrdersController@carts');
@@ -100,6 +101,12 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::prefix('lots')->group(function(){
 			Route::get('/', 'Admin\AdminLotsController@all');
 			Route::post('/edit/{id}', 'Admin\AdminLotsController@edit');
+		});
+
+		//Routes for get info "LOTES"
+		Route::prefix('coupons')->group(function(){
+			Route::get('/', 'Admin\AdminCouponsController@all');
+			Route::post('/edit/{id}', 'Admin\AdminCouponsController@edit');
 		});
 
 		//Routes for get info "PAISES"

@@ -70,8 +70,8 @@
                 </a>
 
                 <ul class="submenu" data-menu="coupons" style="@if ($active == 'AdminCouponsController') {{$submenu_show}} @endif">
-                    <li><a>Todos los cupones</a></li>
-                    <li><a>Añadir cupón</a></li>
+                    <li><a href="/am-admin/cupones">Todos los cupones</a></li>
+                    <li><a href="/am-admin/cupones/create">Añadir cupón</a></li>
                 </ul>
             </li>
             
