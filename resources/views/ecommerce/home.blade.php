@@ -1,5 +1,10 @@
 @extends('ecommerce.layouts.site')
 
+@section('fbPixel')
+fbq('track', 'AddToCart');
+fbq('track', 'AddToWishlist');
+@endsection
+
 @if (get_option('sitename') && get_option('sitename') !== 'NULL')
 	@section('title', get_option('sitename'))
 @else

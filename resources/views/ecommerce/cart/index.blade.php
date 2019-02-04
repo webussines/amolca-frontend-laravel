@@ -1,5 +1,10 @@
 @extends('ecommerce.layouts.site')
 
+@section('fbPixel')
+fbq('track', 'AddToCart');
+fbq('track', 'AddToWishlist');
+@endsection
+
 @section('title', 'Mi carrito - Amolca Editorial Médica y Odontológica')
 
 <!--Add single books styles-->

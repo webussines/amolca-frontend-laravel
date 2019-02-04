@@ -1,5 +1,11 @@
 @extends('ecommerce.layouts.site')
 
+@section('fbPixel')
+fbq('track', 'AddToCart');
+fbq('track', 'AddToWishlist');
+fbq('track', 'Search');
+@endsection
+
 @section('title', "Resultados de busqueda - Amolca Editorial M&eacute;dica y Odontol&oacute;gica")
 
 @section('contentClass', 'page-container search-page')

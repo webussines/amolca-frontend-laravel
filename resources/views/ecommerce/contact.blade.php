@@ -1,5 +1,10 @@
 @extends('ecommerce.layouts.site')
 
+@section('fbPixel')
+fbq('track', 'Lead');
+fbq('track', 'Contact');
+@endsection
+
 @section('title', 'Contáctenos - Amolca Editorial Médica y Odontológica')
 
 @section('scripts')

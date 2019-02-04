@@ -1,5 +1,11 @@
 @extends('ecommerce.layouts.site')
 
+@section('fbPixel')
+fbq('track', 'AddToCart');
+fbq('track', 'AddToWishlist');
+fbq('track', 'Lead');
+@endsection
+
 @section('title', "$book->title - Amolca Editorial Médica y Odontológica")
 
 <!--Add single books scripts-->
