@@ -32,6 +32,10 @@ class Orders extends GuzzleHttpRequest {
 		return $this->get("orders/user/{$id}");
 	}
 
+	public function findAllByUser($id) {
+		return $this->get("orders/user/{$id}/all");
+	}
+
 	public function updateById($id, $update) {
 		return $this->put("orders/{$id}", $update);
 	}

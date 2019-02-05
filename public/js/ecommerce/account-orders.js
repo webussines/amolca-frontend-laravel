@@ -47,72 +47,84 @@ const CreateDataTable = () => {
 	    		data: "id",
 	    		className: "id",
 	    		"render": function (data, type, JsonResultRow, meta) {
-            return '#'+ JsonResultRow.id;
-          }
-        },
+                    return '#' + JsonResultRow.id;
+                }
+            },
 	    	{ 	
 	    		data: "products",
 	    		className: "products",
 	    		"render": function (data, type, JsonResultRow, meta) {
-              return JsonResultRow.products.length;
-          } 
+                    if(JsonResultRow.products !== undefined) {
+                        return JsonResultRow.products.length;
+                    } else {
+                        return 0;
+                    }
+                } 
 	    	},
 	    	{ 	
 	    		data: "state",
 	    		className: "state",
 	    		"render": function (data, type, JsonResultRow, meta) {
-            	switch(JsonResultRow.state) {
-            		case 'CART':
-            			return 'Carrito';
-            		break;
-            		case 'PENDING':
-            			return 'Pendiente';
-            		break;
-            		case 'QUEUED_PAYMENT':
-            			return 'Pago en espera';
-            		break;
-            		case 'PROCESSING':
-            			return 'En proceso';
-            		break;
-            		case 'COMPLETED':
-            			return 'Completado';
-            		break;
-            		case 'CANCELLED':
-            			return 'Cancelado';
-            		break;
-            		case 'FAILED':
-            			return 'Fallido';
-            		break;
-            		case 'REFUNDED':
-            			return 'Reembolsado';
-            		break;
-            		case 'EXPIRED':
-            			return 'Expirado';
-            		break;
-            	}
-          } 
+                	switch(JsonResultRow.state) {
+                		case 'CART':
+                			return 'Carrito';
+                		break;
+                		case 'PENDING':
+                			return 'Pendiente';
+                		break;
+                		case 'QUEUED_PAYMENT':
+                			return 'Pago en espera';
+                		break;
+                		case 'PROCESSING':
+                			return 'En proceso';
+                		break;
+                		case 'COMPLETED':
+                			return 'Completado';
+                		break;
+                		case 'CANCELLED':
+                			return 'Cancelado';
+                		break;
+                		case 'FAILED':
+                			return 'Fallido';
+                		break;
+                		case 'REFUNDED':
+                			return 'Reembolsado';
+                		break;
+                		case 'EXPIRED':
+                			return 'Expirado';
+                		break;
+                	}
+                } 
 	    	},
 	    	{ 	
 	    		data: "created_at",
 	    		className: "date",
 	    		"render": function (data, type, JsonResultRow, meta) {
-              return JsonResultRow.created_at;
-          } 
+                    let date = new Date(JsonResultRow.created_at);
+                    return FormattingDate(date);
+                }
 	    	},
 	    	{ 	
-	    		data: "amountstring",
-	    		className: "amount"
+	    		data: "amount",
+	    		className: "amount",
+                "render": function (data, type, JsonResultRow, meta) {
+                    if(JsonResultRow.amount !== undefined) {
+                        return FormatMoney(JsonResultRow.amount, 0, ',', '.', '$', 'before');
+                    } else {
+                        return 0;
+                    }
+                }
 	    	},
 	    	{ 	
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
-            let str = `<a class="edit">
-	                    <span class="icon-mode_edit"></span>
-	                </a>`;
-	                
-            return str;
-          }
+                    let str = `<a class="edit">
+                                    <span class="icon-mode_edit"></span>
+                                </a>`;
+
+                    return str;
+                }
 	    	},
 	    ]
 	});

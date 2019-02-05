@@ -12,7 +12,6 @@ fbq('track', 'AddToWishlist');
 @endif
 
 @section('scripts')
-<script src="{{ asset('js/ecommerce/common.js') }}"></script>
 <script src="{{ asset('js/ecommerce/carousel-books.js') }}"></script>
 <script src="{{ asset('js/ecommerce/carousel-authors.js') }}"></script>
 <script src="{{ asset('js/ecommerce/carousel-posts.js') }}"></script>

@@ -22,19 +22,17 @@ class CartsController extends Controller
 
     public function get_orders($id) {
 
-        $orders = $this->orders->findByUser($id);
+        $orders = $this->orders->findAllByUser($id);
 
         if($this->request->ajax()) {
 
-            $resp = [];
-            $orders->amountstring = COPMoney($orders->amount);
-            $resp['data'] = [$orders];
+            $resp['data'] = $orders;
 
             return $resp;
 
         }
 
-        return Response::json($data);
+        return Response::json($orders);
     }
 
     public function store() {

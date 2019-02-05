@@ -20,3 +20,69 @@ $(document).ready(function() {
 		}
 	});
 })
+
+//Datepicker internationalization
+const DatePickerOptions = {
+	format: 'yyyy-mm-dd',
+	i18n: {
+		cancel: 'Cancelar',
+		done: 'Seleccionar',
+		months: [
+			"Enero", "Febrero", "Marzo",
+			"Abril", "Mayo", "Junio", "Julio",
+			"Agosto", "Septiembre", "Octubre",
+			"Noviembre", "Diciembre"
+		],
+		monthsShort: [
+			'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 
+			'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+		],
+		weekdays: [
+			'Domingo', 'Lunes', 'Martes', 'Miércoles', 
+			'Jueves', 'Viernes', 'Sábado'
+		],
+		weekdaysShort: [ 'Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vier', 'Sab' ],
+		weekdaysAbbrev: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ]
+	}
+}
+
+//Formatting currencies
+const FormatMoney = (n, c, d, t, sym, sympos) => {
+  var c = isNaN(c = Math.abs(c)) ? 2 : c,
+  	sym = sym == undefined ? "$" : sym,
+  	sympos = sympos == undefined ? "before" : sympos,
+    d = d == undefined ? "," : d,
+    t = t == undefined ? "." : t,
+    s = n < 0 ? "-" : "",
+    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+    j = (j = i.length) > 3 ? j % 3 : 0;
+
+  let formatted = s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+
+  switch(sympos) {
+  	case 'before':
+  		formatted = sym + formatted;
+  		break;
+  	case 'after':
+  		formatted = formatted + sym;
+  		break;
+  }
+
+  return formatted;
+};
+
+//FormattingDates in javascript
+const FormattingDate = (date) => {
+	var monthNames = [
+		"Enero", "Febrero", "Marzo",
+		"Abril", "Mayo", "Junio", "Julio",
+		"Agosto", "Septiembre", "Octubre",
+		"Noviembre", "Diciembre"
+	];
+
+	var day = date.getDate();
+	var monthIndex = date.getMonth();
+	var year = date.getFullYear();
+
+	return day + ' de ' + monthNames[monthIndex] + ', ' + year;
+}
