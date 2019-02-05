@@ -42,15 +42,73 @@ const DeleteItem = (elem) => {
 const GenerateGrid = () => {
 	const grid = new Muuri('.grid', {
 		dragEnabled: true,
-		items: '.item'
+		items: '.item',
+		layout: function(items, gridWidth, gridHeight) {
+		    
+		    var layout = {
+              // The layout's item slots (left/top coordinates).
+              slots: [],
+              // The layout's total width.
+              width: 0,
+              // The layout's total height.
+              height: 0,
+              // Should Muuri set the grid's width after layout?
+              setWidth: true,
+              // Should Muuri set the grid's height after layout?
+              setHeight: true
+            };
+            
+            // Calculate the slots.
+            var item;
+            var m;
+            
+            var y = 0;
+            
+            var h = 0;
+            for (var i = 0; i < items.length; i++) {
+                var w = 0;
+                var x = 0;
+                item = items[i];
+                x += w;
+                y += h;
+                m = item.getMargin();
+                w = item.getWidth() + m.left + m.right;
+                h = item.getHeight() + m.top + m.bottom;
+                layout.slots.push(x, y);
+            }
+        
+            // Calculate the layout's total width and height. 
+            layout.width = x + w;
+            layout.height = y + h;
+            
+            for(let i = 0; i < items.length; i++) {
+		        console.log(items[i], i)
+    			items[i].getElement().setAttribute('data-id', i);
+    			items[i].getElement().querySelector('.order').innerHTML = i;
+		    }
+        
+            return layout;
+		},
+		layoutOnResize: true
+	})
+	
+	/*
+	grid.getItems().each(function (item, i) {
+    	console.log(item, i)
+		item.getElement().setAttribute('data-id', i);
+		item.getElement().querySelector('.order').innerHTML = i;
 	});
-
+	*/
+		
+	/*
 	grid.on('move', function (item, event) {
-		grid.getItems().forEach(function (item, i) {
+		grid.getItems().each(function (item, i) {
+		    console.log(item, i)
 			item.getElement().setAttribute('data-id', i);
 			item.getElement().querySelector('.order').innerHTML = i;
 		});
 	});
+	*/
 }
 
 const EditSlideItem = (e) => {
