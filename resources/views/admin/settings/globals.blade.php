@@ -36,15 +36,22 @@
 </div>
 
 <ul class="tabs top-tabs">
+	@if (session('user')->role == 'SUPERADMIN')
     <li class="tab">
         <a class="active" href="#ajustes-basicos">Ajustes básicos</a>
     </li>
+    @endif
+
     <li class="tab">
         <a href="#country">Información {{env('APP_COUNTRY')}}</a>
     </li>
-    <li class="tab">
-        <a href="#casa-matriz">Información Casa Matriz</a>
-    </li>
+
+
+    @if (session('user')->role == 'SUPERADMIN')
+	    <li class="tab">
+	        <a href="#casa-matriz">Información Casa Matriz</a>
+	    </li>
+    @endif
 </ul>
 
 <div class="error-panel card-panel grey lighten-2">
@@ -65,6 +72,7 @@
 	</p>
 </div>
 
+@if (session('user')->role == 'SUPERADMIN')
 <div id="ajustes-basicos" class="content-tabs">
 
 	<table class="settings-table">
@@ -132,6 +140,7 @@
 	</table>
 
 </div>
+@endif
 
 <div id="country" class="content-tabs">
 
@@ -210,6 +219,7 @@
 
 </div>
 
+@if (session('user')->role == 'SUPERADMIN')
 <div id="casa-matriz" class="content-tabs">
 
 	<table class="settings-table">
@@ -267,6 +277,7 @@
 	</table>
 
 </div>
+@endif
 
 <div class="fixed-bottom-btns">
     <div class="float-right">

@@ -18,6 +18,9 @@ class AdminOrdersController extends Controller
     protected $users;
 
     public function __construct(Request $request, Response $response, Orders $orders, Users $users) {
+
+        $this->middleware('superadmin', [ "only" => [ "create" ] ]);
+
         $this->orders = $orders;
         $this->response = $response;
         $this->request = $request;

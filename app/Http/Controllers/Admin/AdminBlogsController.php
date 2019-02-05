@@ -16,6 +16,9 @@ class AdminBlogsController extends Controller
     protected $response;
 
     public function __construct(Posts $blog, Request $request, Response $response) {
+
+        $this->middleware('superadmin');
+
         $this->blog = $blog;
         $this->request = $request;
         $this->response = $response;

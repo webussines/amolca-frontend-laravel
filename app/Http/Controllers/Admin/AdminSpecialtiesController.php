@@ -13,6 +13,9 @@ class AdminSpecialtiesController extends Controller
     protected $specialties;
 
     public function __construct(Specialties $specialties) {
+
+        $this->middleware('superadmin');
+        
         $this->specialties = $specialties;
     }
 

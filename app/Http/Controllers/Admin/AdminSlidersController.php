@@ -13,6 +13,9 @@ class AdminSlidersController extends Controller
     protected $sliders;
 
     public function __construct(Sliders $sliders) {
+
+        $this->middleware('superadmin');
+        
         $this->sliders = $sliders;
     }
 

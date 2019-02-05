@@ -9,18 +9,22 @@
 <ul class="nav-menu" id="nav-menu">
     <ul class="vmenu">
 
-        @if (session('user')->role == 'SUPERADMIN')
+        @if (session('user')->role == 'SUPERADMIN' || session('user')->role == 'ADMIN')
             <li>
                 <a data-id="books" @if ($active == 'AdminBooksController') class="actived" @endif>
                     <span class="icon icon-books"></span> <span class="text">Libros</span>
                 </a>
 
                 <ul class="submenu" data-menu="books" style="@if ($active == 'AdminBooksController') {{$submenu_show}} @endif">
-                    <li><a href="/am-admin/libros">Todos los libros</a></li>
-                    <li><a href="/am-admin/libros/create">Añadir libro</a></li>
+                    @if (session('user')->role == 'SUPERADMIN')
+                        <li><a href="/am-admin/libros">Todos los libros</a></li>
+                        <li><a href="/am-admin/libros/create">Añadir libro</a></li>
+                    @endif
                     <li><a href="/am-admin/libros/inventario">Inventario</a></li>
                 </ul>
             </li>
+        @endif
+        @if (session('user')->role == 'SUPERADMIN')
             <li>
                 <a data-id="lots" @if ($active == 'AdminLotsController') class="actived" @endif>
                     <span class="icon icon-list-alt"></span> <span class="text">Lotes de novedades</span>
@@ -85,7 +89,9 @@
                     <li><a href="/am-admin/carritos">Carritos de compra</a></li>
                 </ul>
             </li>
+        @endif
 
+        @if (session('user')->role == 'SUPERADMIN')
             <li>
                 <a data-id="blog" @if ($active == 'AdminBlogsController') class="actived" @endif>
                     <span class="icon icon-newspaper"></span> <span class="text">Blog</span>
@@ -96,7 +102,9 @@
                     <li><a href="/am-admin/blog/create">Añadir publicación</a></li>
                 </ul>
             </li>
+        @endif
 
+        @if (session('user')->role == 'SUPERADMIN' || session('user')->role == 'ADMIN')
             <li>
                 <a data-id="form" @if ($active == 'AdminFormsController') class="actived" @endif>
                     <span class="icon icon-contacts"></span> <span class="text">Formularios</span>
@@ -130,10 +138,6 @@
 
             <ul class="submenu" data-menu="settings" style="@if ($active == 'AdminSettingsController') {{$submenu_show}} @endif">
                 <li><a href="/am-admin/ajustes">Ajustes generales</a></li>
-
-                @if (session('user')->role == 'SUPERADMIN')
-                    <li><a>Plantilla</a></li>
-                @endif
             </ul>
         </li>
 

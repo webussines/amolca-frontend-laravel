@@ -20,6 +20,9 @@ class AdminBooksController extends Controller
     protected $request;
 
     public function __construct(Specialties $specialties, Posts $books, Authors $authors, Request $request) {
+
+        $this->middleware('superadmin', [ "only" => [ "create", "index", "edit" ] ]);
+
         $this->specialties = $specialties;
         $this->books = $books;
         $this->authors = $authors;

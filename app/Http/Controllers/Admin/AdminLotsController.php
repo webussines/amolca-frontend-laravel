@@ -18,6 +18,9 @@ class AdminLotsController extends Controller
     protected $response;
 
     public function __construct(Request $request, Posts $posts, Lots $lots, Response $response) {
+
+        $this->middleware('superadmin');
+        
         $this->posts = $posts;
         $this->lots = $lots;
         $this->request = $request;
