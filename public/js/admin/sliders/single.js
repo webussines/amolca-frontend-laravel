@@ -31,12 +31,12 @@ const AddNewItem = (e) => {
 const DeleteItem = (elem) => {
 	let parent = $(elem).parent();
 	let index = $(parent).find('.order').html();
+
+	let item = $(elem).parent().parent().parent('.item').removeClass('muuri-item muuri-item-shown').css('display', 'none');
 	let grid = new Muuri('.grid');
 	
 	//return console.log(index)
-	grid.remove([index - 1],  {removeElements: true, layout: true});
-
-	let item = $(elem).parent().parent().parent('.item').css('display', 'none');
+	grid.remove([index],  {removeElements: true, layout: true});
 }
 
 const GenerateGrid = () => {
@@ -143,7 +143,7 @@ const GetSliderItems = () => {
 
 	let items = [];
 
-	$('.drag-grid .item.muuri-item').each(function() {
+	$('.drag-grid .item.muuri-item-shown').each(function() {
 
 		let elem = {};
     

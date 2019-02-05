@@ -4,11 +4,13 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('libs/datatables/css/jquery.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('libs/select2/css/select2.min.css') }}">
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/admin/settings/globals.js') }}"></script>
 <script src="{{ asset('libs/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('libs/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('js/admin/settings/globals.js') }}"></script>
 @endsection
 
 @section('contentClass', 'all-books')
@@ -72,6 +74,19 @@
 			<tr class="subtitle">
 				<td colspan="2">Ajustes básicos del sitio</td>
 			</tr>
+
+			@if (session('user')->role == 'SUPERADMIN')
+			<tr class="options">
+				<td class="option_name">
+					<label for="sitecountry">País activo:</label>
+				</td>
+				<td class="option_value">
+					<select name="sitecountry" id="sitecountry" class="select2-normal">
+						@if(get_option('sitecountry') !== 'NULL')<option value="{{get_option('sitecountry')}}">{{ get_option('sitecountry') }}</option>@endif
+					</select>
+				</td>
+			</tr>
+			@endif
 
 			<tr class="options">
 				<td class="option_name">

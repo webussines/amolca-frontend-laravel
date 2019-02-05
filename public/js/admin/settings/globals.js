@@ -10,7 +10,44 @@ jQuery(function($) {
 
 	});
 
+	$('.select2-normal').select2();
+	GetCountriesData();
+
 });
+
+const GetCountriesData = () => {
+	$.ajax({
+		method: "GET",
+		url: '/am-admin/countries/all',
+		data: {
+			"_token": $('#_token').val()
+		}
+	}).done((resp) => {
+
+		//console.log(resp)
+
+		let countries = JSON.parse(resp);
+		let selected = $('#sitecountry').val();
+
+		//Agregar opciones a la lista 
+		for (let i = 0; i < countries.length; i++) {
+
+			let title = countries[i].title.toUpperCase();
+			let o = new Option(countries[i].title, title);
+
+			/// jquerify the DOM object 'o' so we can use the html method
+			if(title !== selected) {
+				$(o).html(title);
+				$('#sitecountry').append(o);
+			}
+
+		}
+
+		$('.select2-normal').select2();
+	}).catch((err) => {
+		console.log(err)
+	})
+}
 
 const SendFormSettings = () => {
 
@@ -28,6 +65,8 @@ const SendFormSettings = () => {
 		data: send
 	}).done(function(resp) {
 
+		//console.log(resp)
+
 		switch(resp.status) {
 			case 200:
 				location.reload();
@@ -35,6 +74,8 @@ const SendFormSettings = () => {
 		}
 
 	}).catch(function(err) {
+
+		//console.log(err)
 
 		if(!$('.loader').hasClass('hidde'))
 			$('.loader').addClass('hidde')
@@ -60,6 +101,10 @@ const GetFormFields = () => {
 
 		let column = $(this).find('.option_value');
 		let input = $(column).find('input');
+
+		if (input.length < 1) {
+			input = $(column).find('select')
+		}
 
 		let key = $(input).attr('id');
 		let val = $(input).val();
