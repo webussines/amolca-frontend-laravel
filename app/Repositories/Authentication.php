@@ -5,6 +5,7 @@ namespace App\Repositories;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
+use Response;
 
 class Authentication extends GuzzleHttpRequest {
 
@@ -56,7 +57,13 @@ class Authentication extends GuzzleHttpRequest {
 			$response = $e->getResponse();
         	$responseBodyAsString = $response->getBody()->getContents();
 
-        	return $responseBodyAsString;
+        	$resp_decode = json_decode($responseBodyAsString);
+
+        	if($resp_decode->src == 'order') {
+        		return "{'token': session('access_token') }";
+        	} else {
+        		return $responseBodyAsString;
+        	}
         	
 		}
 
