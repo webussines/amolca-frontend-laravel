@@ -16,6 +16,10 @@
 @section('contentClass', 'books-inventory')
 @section('content')
 
+	<input type="hidden" id="user_id" value="{{ session('user')->id }}">
+	<input type="hidden" id="user_role" value="{{ session('user')->role }}">
+	<input type="hidden" id="user_country" value="{{ session('user')->country }}">
+
 	<!-- Modal Structure -->
 	<div id="book-modal" class="modal modal-fixed-footer">
 		<div class="modal-content">
@@ -35,9 +39,6 @@
 		            <li class="tab">
 		                <a class="active" href="#precios">Precios</a>
 		            </li>
-		            <li class="tab">
-		                <a href="#ficha">Ficha técnica</a>
-		            </li>
 		        </ul>
 
 		        <div id="precios" class="content-tabs">
@@ -46,15 +47,14 @@
 						<div class="last-row-country"></div>
 					</div>
 
-					<div class="row">
-		                <div class="col s12">
-		                    <input type="button" id="add-country" class="button primary" value="Agregar un país">
-		                </div>
-		            </div>
+					@if (session('user')->role == 'SUPERADMIN')
+						<div class="row">
+			                <div class="col s12">
+			                    <input type="button" id="add-country" class="button primary" value="Agregar un país">
+			                </div>
+			            </div>
+					@endif
 
-		        </div>
-
-		        <div id="ficha" class="content-tabs">
 		        </div>
 
 			</form>

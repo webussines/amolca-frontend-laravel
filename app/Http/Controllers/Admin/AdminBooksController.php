@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Specialties;
+use App\Repositories\Inventories;
 use App\Repositories\Authors;
 use App\Repositories\Posts;
 use Illuminate\Http\Request;
@@ -17,14 +18,16 @@ class AdminBooksController extends Controller
     protected $banners;
     protected $specialties;
     protected $books;
+    protected $inventories;
     protected $request;
 
-    public function __construct(Specialties $specialties, Posts $books, Authors $authors, Request $request) {
+    public function __construct(Specialties $specialties, Posts $books, Authors $authors, Request $request, Inventories $inventories) {
 
         $this->middleware('superadmin', [ "only" => [ "create", "index", "edit" ] ]);
 
         $this->specialties = $specialties;
         $this->books = $books;
+        $this->inventories = $inventories;
         $this->authors = $authors;
         $this->request = $request;
     }
@@ -33,7 +36,7 @@ class AdminBooksController extends Controller
         $limit = (Input::get('limit')) ? Input::get('limit') : 2000 ;
         $skip = (Input::get('skip')) ? Input::get('skip') : 0 ;
         $inventory = (Input::get('inventory')) ? Input::get('inventory') : 0 ;
-        $params = "orderby=title&order=asc&limit={$limit}&skip={$skip}&inventory={$inventory}";
+        $params = "type=book&orderby=title&order=asc&limit={$limit}&skip={$skip}&inventory={$inventory}";
 
         $books = $this->books->all("book", $params);
 
@@ -97,6 +100,13 @@ class AdminBooksController extends Controller
         $books = $this->books->all($params);
 
         return view('admin.books.inventory', ['books' => $books]);
+    }
+
+    public function update_inventory() {
+
+        $inventories = $this->request->post('body');
+        return $this->inventories->updateAll($inventories);
+
     }
 
     /**/

@@ -1,7 +1,6 @@
 jQuery(function($){
 	$(document).ready(function() {
 		createDataTable();
-		GetMoreBooks();
 
 		$('.book-form #add-country').on('click', function() {
 			AddNewCountry();
@@ -58,11 +57,11 @@ const createDataTable = function() {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
 	    ajax: {
-	    	method: "POST",
-	    	url: '/am-admin/books/all',
+	    	method: "GET",
+	    	url: '/am-admin/books',
 	    	data: {
-	    		"limit": 300,
-				"skip": 0,
+	    		"limit": 1200,
+	    		"inventory": 1,
 				"_token": $('#_token').val()
 	    	}
 	    },
@@ -76,20 +75,20 @@ const createDataTable = function() {
 	    		className: "isbn"
 	    	},
 	    	{ 	
-	    		data: "countries",
+	    		data: "inventory",
 	    		className: "countries",
 	    		render: function(data, type, JsonResultRow, meta) {
-	    			if(JsonResultRow.countries.length > 0) {
-	    				let names = [];
+	    			if(JsonResultRow.inventory.length > 0) {
+	    				let titles = [];
 
-	    				for (let i = 0; i < JsonResultRow.countries.length; i++) {
-	    					let name = JsonResultRow.countries[i].name;
-	    					name = name.charAt(0).toUpperCase() + name.slice(1);
+	    				for (let i = 0; i < JsonResultRow.inventory.length; i++) {
+	    					let title = JsonResultRow.inventory[i].country_name;
+	    					title = title.charAt(0).toUpperCase() + title.slice(1);
 
-	    					names.push(name);
+	    					titles.push(title);
 	    				}
 
-	    				return names.join();
+	    				return titles.join();
 	    			} else {
 	    				return 0;
 	    			}
@@ -134,19 +133,6 @@ const createDataTable = function() {
 	$('#DataTables_Table_0_length select').formSelect();
 	$('.dataTables_filter input[type="search"]').attr('placeholder', 'Escribe una palabra clave para encontrar un libro');
 
-	let btnLoadMore = `<div class="cont-btn-load-more">
-							<label>Cargar más libros:</label>
-							<div>
-								<input id="btn-load-more" class="button primary" disabled="disabled" value="Cargar 300 libros más">
-							</div>
-						</div>`;
-
-	$('#DataTables_Table_0_length').before(btnLoadMore);
-
-	$('table.inventory').DataTable().on('draw', function() {
-		$('#btn-load-more').removeAttr('disabled');
-	});
-
 	UpdateBook('.data-table tbody', table);
 }
 
@@ -154,85 +140,137 @@ const UpdateBook = function(tbody, table) {
 
 	$(tbody).on('click', '.edit-book', function() {
 
-		var data = table.row($(this).parents("tr")).data();
+		let data = table.row($(this).parents("tr")).data();
+
+		let user = {
+			id: $('#user_id').val(),
+			role: $('#user_role').val(),
+			country: $('#user_country').val()
+		}
 
 		//console.log(data)
-		var _id = $('#_id').val(data._id);
+
+		var _id = $('#_id').val(data.id);
 		var title = $('#book-title').html(data.title);
-		var country = data.countries;
+		var country = data.inventory;
 
 		let number = $('.row-country').length + 1;
 		let rowClass = 'country-' + number;
+			
+		let prices = GetPrices();
 
-		$.ajax({
-			method: "GET",
-			url: '/am-admin/countries/all',
-			data: {
-				"_token": $('#_token').val()
+		for (let c = 0; c < country.length; c++) {
+			let co = country[c];
+			let state = {};
+
+			if(co.state !== undefined && co.state !== null) {
+
+				switch (co.state) {
+					case 'STOCK':
+							state.stock = 'selected';
+						break;
+					case 'RESERVED':
+							state.reserved = 'selected';
+						break;
+					case 'SPENT':
+							state.spent = 'selected';
+						break;
+					default:
+						state.stock = '';
+						state.reserved = '';
+						state.spent = '';
+						break;
+				}
+
 			}
-		}).done(function(resp) {
-			//console.log(resp)
-			let countries = JSON.parse(resp);
-			let prices = GetPrices();
 
-			for (let c = 0; c < country.length; c++) {
-				let co = country[c];
-				let state = {};
+			let data_tmp = {
+				row_class: rowClass,
+				ud: co.country_id,
+				name: co.country_name,
+				state_stock: state.stock,
+				state_reserved: state.reserved,
+				state_spent: state.spent,
+				post_id: co.post_id,
+				quantity: co.quantity
+			}
 
-				if(co.state == 'STOCK') {
-					state.stock = 'selected';
-				} else {
-					state.stock = '';
-				}
+			let newRow = `<div class="row row-country ${rowClass}">
+						<div class="col s12 m4">
+					        <label for="name"><span class="required">*</span> País:</label>
+					        <input type="hidden" readonly name="country-id" class="country-id" id="country-id" value="${co.country_id}">
+					        <input type="text" readonly name="country-name" class="country-name" id="country-name" value="${co.country_name}">
+					    </div>
+					    <div class="col s12 m3">
+					        <label for="price"><span class="required">*</span> Precio:</label>
+					        <input type="text" class="country-price" id="price" name="price" placeholder="Precio sin espacios ni caracteres especiales..."  value="${co.price}">
+					    </div>
+					    <div class="col s12 m3">
+					        <label for="country-state">Estado:</label>
+					        <select class="country-state normal-select" name="country-state" id="country-state">
+	                            <option value="STOCK" ${state.stock}>Disponible</option>
+				                <option value="RESERVED" ${state.reserved}>Reservado</option>
+				                <option value="SPENT" ${state.spent}>Agotado</option>
+	                        </select>
+					    </div>
+					    <div class="col s12 m2">
+					        <label for="quantity">Cantidad:</label>
+					        <input type="hidden" readonly name="post-id" class="post-id" id="post-id" value="${co.post_id}">
+					        <input type="text" class="country-quantity" id="quantity" name="quantity" placeholder="Escriba la cantidad de libros que hay disponibles" value="${co.quantity}">
+					    </div>
+					</div>`;
 
-				if(co.state == 'RESERVED') {
-					state.reserved = 'selected';
-				} else {
-					state.reserved = '';
-				}
+			let lastRow = $('.book-form .countries .last-row-country');
 
-				if(co.state == 'SPENT') {
-					state.spent = 'selected';
-				} else {
-					state.spent = '';
-				}
-
-				let newRow = `<div class="row row-country ${rowClass}">
-							<div class="col s12 m4">
-						        <label for="name"><span class="required">*</span> País:</label>
-						        <input type="text" readonly name="country-name" class="country-name" id="country-name" value="${co.name}">
-						    </div>
-						    <div class="col s12 m3">
-						        <label for="price"><span class="required">*</span> Precio:</label>
-						        <input type="text" class="country-price" id="price" name="price" placeholder="Precio sin espacios ni caracteres especiales..."  value="${co.price}">
-						    </div>
-						    <div class="col s12 m3">
-						        <label for="country-state">Estado:</label>
-						        <select class="country-state normal-select" name="country-state" id="country-state">
-		                            <option value="STOCK" ${state.stock}>Disponible</option>
-					                <option value="RESERVED" ${state.reserved}>Reservado</option>
-					                <option value="SPENT" ${state.spent}>Agotado</option>
-		                        </select>
-						    </div>
-						    <div class="col s12 m2">
-						        <label for="quantity">Cantidad:</label>
-						        <input type="text" class="country-quantity" id="quantity" name="quantity" placeholder="Escriba la cantidad de libros que hay disponibles" value="${co.quantity}">
-						    </div>
-						</div>`;
-
-				let lastRow = $('.book-form .countries .last-row-country');
-
+			if(user.country == co.country_name.toUpperCase()) {
+				console.log(co.country_name.toUpperCase())
 				lastRow.after(newRow);
 			}
+		}
 
-			$('#ficha').html(SetDataSheet(data));
+		/*
+		if(country.length) {
 
-			$('.modal').modal('open');
-			$('.normal-select').formSelect();
-			$('.select2-normal').select2();
-		});
+			let newRow = CountryRowTemplate(data_tmp);
+
+			let lastRow = $('.book-form .countries .last-row-country');
+		}
+		*/
+
+		$('.modal').modal('open');
+		$('.normal-select').formSelect();
+		$('.select2-normal').select2();
 
 	});
+}
+
+const CountryRowTemplate = function (data) {
+	let tmp = `<div class="row row-country ${data.row_class}">
+					<div class="col s12 m4">
+				        <label for="name"><span class="required">*</span> País:</label>
+				        <input type="hidden" readonly name="country-id" class="country-id" id="country-id" value="${data.country_id}">
+				        <input type="text" readonly name="country-name" class="country-name" id="country-name" value="${data.country_name}">
+				    </div>
+				    <div class="col s12 m3">
+				        <label for="price"><span class="required">*</span> Precio:</label>
+				        <input type="text" class="country-price" id="price" name="price" placeholder="Precio sin espacios ni caracteres especiales..."  value="${data.price}">
+				    </div>
+				    <div class="col s12 m3">
+				        <label for="country-state">Estado:</label>
+				        <select class="country-state normal-select" name="country-state" id="country-state">
+			                <option value="STOCK" ${data.state_stock}>Disponible</option>
+			                <option value="RESERVED" ${data.state_reserved}>Reservado</option>
+			                <option value="SPENT" ${data.state_spent}>Agotado</option>
+			            </select>
+				    </div>
+				    <div class="col s12 m2">
+				        <label for="quantity">Cantidad:</label>
+				        <input type="hidden" readonly name="post-id" class="post-id" id="post-id" value="${data.post_id}">
+				        <input type="text" class="country-quantity" id="quantity" name="quantity" placeholder="Escriba la cantidad de libros que hay disponibles" value="${data.quantity}">
+				    </div>
+				</div>`;
+
+	return tmp;
 }
 
 //Function de agregar columna para poner precio en un país nuevo
@@ -251,6 +289,8 @@ const AddNewCountry = function() {
 		//console.log(resp)
 		let countries = JSON.parse(resp);
 		let prices = GetPrices();
+		let postId = $('#_id').val();
+		console.log(postId)
 
 		let newRow = `<div class="row row-country ${rowClass}">
 						<div class="col s12 m4">
@@ -272,6 +312,7 @@ const AddNewCountry = function() {
 					    </div>
 					    <div class="col s12 m2">
 					        <label for="quantity">Cantidad:</label>
+					        <input type="hidden" readonly name="post-id" class="post-id" id="post-id" value="${postId}">
 					        <input type="text" class="country-quantity" id="quantity" name="quantity" placeholder="Escriba la cantidad de libros que hay disponibles" value="0">
 					    </div>
 					</div>`;
@@ -288,14 +329,14 @@ const AddNewCountry = function() {
 		//Agregar opciones a la lista 
 		for (let i = 0; i < countries.length; i++) {
 
-			let name = countries[i].name.toUpperCase();
-			let o = new Option(name, name);
+			let name = countries[i].title.toUpperCase();
+			let o = new Option(name, countries[i].id);
 			let select = `.${rowClass} .country-name`;
 
 			let flag = true;
 
 			for (let j = 0; j < prices.length; j++) {
-				if(prices[j].name == name) {
+				if(prices[j].country_id == countries[i].id) {
 					flag = false;
 				}
 			}
@@ -311,113 +352,6 @@ const AddNewCountry = function() {
 		$('.normal-select').formSelect();
 		$('.select2-normal').select2();
 	});
-
-}
-
-const SetDataSheet = function(data) {
-	//Agregar "Ficha tecnica"
-	let publication = 0;
-	let pages = 0;
-	let volumes = 0;
-
-	if(data.publicationYear) {
-		publication = data.publicationYear;
-	}
-
-	if(data.numberPages) {
-		pages = data.numberPages;
-	}
-
-	if(data.volume) {
-		volumes = data.volume;
-	}
-
-	let version = {};
-
-	if(data.version == 'VIDEO') {
-		version.video = 'checked="checked"';
-	} else {
-		version.video = '';
-	}
-
-	if(data.version == 'PAPER') {
-		version.paper = 'checked="checked"';
-	} else {
-		version.paper = '';
-	}
-
-	if(data.version == 'EBOOK') {
-		version.ebook = 'checked="checked"';
-	} else {
-		version.ebook = '';
-	}
-
-	let datasheet = `<div class="row">
-						<div class="col s12 col-versions">
-				            <div class="version">
-				                <p>Versiones:</p>
-				            </div>
-
-				            <div class="version">
-				                <label for="version-paper">
-				                    <input type="checkbox" name="version" id="version-paper" ${version.paper} value="PAPER">
-				                    <span>Papel</span>
-				                </label>
-				            </div>
-
-				            <div class="version">
-				                <label for="version-video">
-				                    <input type="checkbox" name="version" id="version-video" ${version.video} value="VIDEO">
-				                    <span>Vídeo</span>
-				                </label>
-				            </div>
-
-				            <div class="version">
-				                <label for="version-ebook">
-				                    <input type="checkbox" name="version" id="version-ebook" ${version.ebook} value="EBOOK">
-				                    <span>Ebook</span>
-				                </label>
-				            </div>
-				        </div>
-				    </div>`;
-
-	datasheet += `<div class="row">
-		                <div class="col s6">
-		                    <label for="publication-year"><span class="required">*</span> Año de publicación:</label>
-		                    <input type="text" readonly id="publication-year-name" name="publication-year-name" value="Año de publicación">
-		                </div>
-		                <div class="col s6">
-		                    <label for="publication-year"><span class="required">*</span> Valor:</label>
-		                    <input type="number" id="publication-year" name="publication-year" value="${publication}">
-		                </div>
-		            </div>
-		            
-		            <div class="row">
-		                <div class="col s6">
-		                    <label for="number-pages"><span class="required">*</span> Número de páginas:</label>
-		                    <input type="text" readonly id="number-pages-name" name="number-pages-name" value="Número de páginas">
-		                </div>
-		                <div class="col s6">
-		                    <label for="number-pages"><span class="required">*</span> Valor:</label>
-		                    <input type="number" id="number-pages" name="number-pages" value="${pages}">
-		                </div>
-		            </div>
-
-		            <div class="row">
-		                <div class="col s6">
-		                    <label for="number-volumes"><span class="required">*</span> Número de tomos:</label>
-		                    <input type="text" readonly id="volumes-name" name="volumes-name" value="Número de tomos">
-		                </div>
-		                <div class="col s6">
-		                    <label for="number-volumes"><span class="required">*</span> Valor:</label>
-		                    <input type="number" id="number-volumes" name="number-volumes" value="${volumes}">
-		                </div>
-		            </div>`;
-
-		return datasheet;
-}
-
-const SetAttributes = function(data) {
 
 }
 
@@ -444,10 +378,16 @@ const GetPrices = function() {
 
 		//Definiendo elemento recorrido
 		let elem = {};
-		elem.name = $(this).find('.country-name').val();
+		elem.post_id = $(this).find('.post-id').val();
+		elem.country_name = $(this).find('.country-name').val();
+		elem.country_id = $(this).find('.country-id').val();
 		elem.state = $(this).find('.country-state').val();
 		elem.price = 0;
 		elem.quantity = 0;
+
+		if(elem.country_id === undefined) {
+			elem.country_id = $(this).find('.country-name').val();
+		}
 
 		//Condicional para parsear el "precio" si es una variable tipo "string"
 		if(typeof price == 'string' && price !== '' && price !== ' ') {
@@ -474,83 +414,6 @@ const GetPrices = function() {
 	return prices;
 }
 
-const GetMoreBooks = function() {
-
-	$('#btn-load-more').on('click', function() {
-		
-		$('#btn-load-more').attr('disabled', 'disabled');
-
-		let table = $('.table').DataTable();
-
-		let skip = table.rows().count();
-
-		if($('.loader').hasClass('hidde'))
-			$('.loader').removeClass('hidde')
-
-		$.ajax({
-			type: "POST",
-			url: "/am-admin/books/all",
-			data: {
-				"limit": 300,
-				"skip": skip,
-				"_token": $('#_token').val()
-			}
-		}).done(function(resp) {
-
-			if(!$('.loader').hasClass('hidde'))
-				$('.loader').addClass('hidde')
-			
-			if(resp.data.length > 0) {
-
-				for (var i = 0; i < resp.data.length; i++) {
-					let el = resp.data[i];
-					let state = 'Publicado';
-
-					if(el.state == 'PUBLISHED') 
-						state = 'Publicado';
-
-					if(el.state == 'DRAFT')
-						state = 'Borrador';
-
-					if(el.state == 'TRASH') 
-						state = 'En papelera';
-
-					let actionStr = `<a class="edit" href="/am-admin/libros/${el._id}">
-					                    <span class="icon-mode_edit"></span>
-					                </a>`;
-
-					$('.table').DataTable().row.add({
-						"title": el.title,
-						"isbn": el.isbn,
-						"countries": el.countries,
-						"version": el.version,
-						"publicationYear": el.publicationYear,
-						"numberPages": el.numberPages,
-						"volume": el.volume,
-						"actions": actionStr,
-						"_id": el._id,
-					}).draw();
-				}
-
-				$('#btn-load-more').removeAttr('disabled');
-
-				let toastMsg = 'Se agregaron ' + resp.data.length + ' libros más.';
-				M.toast({html: toastMsg, classes: 'green accent-4 bottom'});
-
-			} else {
-
-				let toastMsg = 'Ya se cargaron todos los libros.';
-				M.toast({html: toastMsg, classes: 'amber accent-4 bottom'});
-
-			}
-				
-		});
-
-
-	});
-
-}
-
 const SaveBookInfo = function() {
 
 	if($('.loader').hasClass('hidde'))
@@ -558,49 +421,27 @@ const SaveBookInfo = function() {
 
 	//Unique values
 	let id = $('#_id').val();
-	let publication = $('#publication-year').val();
-	let pages = $('#number-pages').val();
-	let volumes = $('#number-volumes').val();
 
-	//Multiple values
-	let versions = GetCheckedVersions();
 	let countries = GetPrices();
 
-	//Formateando valores numericos
-	if(typeof pages == 'string') {
-		pages = parseInt(pages);
-	}
+	let inventory = countries;
 
-	if(typeof volumes == 'string') {
-		volumes = parseInt(volumes);
-	}
-
-	if(typeof publication == 'string') {
-		publication = parseInt(publication);
-	}
-
-	let book = {
-		version: versions,
-		countries: countries,
-		publicationYear: publication,
-		numberPages: pages,
-		volume: volumes
-	}
+	//return console.log(inventory);
 
 	$.ajax({
 		method: 'POST',
-		url: '/am-admin/books/edit/' + id,
+		url: '/am-admin/books/inventory',
 		data: {
-			"update": book,
+			"body": inventory,
 			"_token": $('#_token').val()
 		}
-	}).done(function(resp) {
+	}).done((resp) => {
 		console.log(resp)
 
 		let data = JSON.parse(resp);
 		//console.log(data)
 
-		if(data._id !== undefined) {
+		if(data.createds !== undefined) {
 
 			$('.modal').modal('close');
 
@@ -613,5 +454,7 @@ const SaveBookInfo = function() {
 
 		} else {
 		}
+	}).catch((err) => {
+		console.log(err)
 	})
 }

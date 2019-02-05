@@ -50,6 +50,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::prefix('books')->group(function(){
 			Route::get('/', 'Admin\AdminBooksController@all');
 			Route::post('/edit/{id}', 'Admin\AdminBooksController@edit');
+			Route::post('/inventory', 'Admin\AdminBooksController@update_inventory');
 		});
 
 		//Routes for get info "BLOGS"
