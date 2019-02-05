@@ -60,7 +60,7 @@ class Authentication extends GuzzleHttpRequest {
         	$resp_decode = json_decode($responseBodyAsString);
 
         	if($resp_decode->src == 'order') {
-        		return "{'token': session('access_token') }";
+        		return '{"token": "' . session('access_token') . '" }';
         	} else {
         		return $responseBodyAsString;
         	}
