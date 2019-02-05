@@ -101,7 +101,7 @@
 						
 						@php $inventory = $book->inventory[$c]; @endphp
 
-						@if (strtoupper($inventory->country_name) == "COLOMBIA")
+						@if (strtoupper($inventory->country_name) == get_option('sitecountry'))
 							@include('ecommerce.loops.books.actions', ['show_price' => true, 'price' => $inventory->price])
 						@else
 							@include('ecommerce.loops.books.actions', ['show_price' => false])
