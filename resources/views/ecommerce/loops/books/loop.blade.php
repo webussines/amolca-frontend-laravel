@@ -77,7 +77,7 @@
 
 				<!--Titulo del libro-->
 				<h3 class="name">
-					<a href="/{{ $book->slug }}">{{ $book->title }}</a>
+					<a href="/{{ $book->slug }}">{!! $book->title !!}</a>
 				</h3>
 
 				<!--Autores-->
@@ -88,7 +88,7 @@
 
 							@if ($a < 4)
 								<span><a href="/autor/{{$author->slug}}">
-									{{ $author->title }}@if($a < 3 && count($book->author) > 4 ), @elseif( $a == 3 && count($book->author) > 4 )... @endif
+									{!! $author->title !!}@if($a < 3 && count($book->author) > 4 ), @elseif( $a == 3 && count($book->author) > 4 )... @endif
 								</a></span>
 							@endif
 						@endfor
@@ -118,5 +118,5 @@
 </div>
 
 @if ($show_links !== 'no' && $type !== 'carousel' )
-{{ $books->links() }}
+{!! $books->links() !!}
 @endif
