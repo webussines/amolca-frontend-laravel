@@ -70,8 +70,26 @@ class AdminUsersController extends Controller
 
     public function store(Request $request)
     {
-        $user = $request->post('body');
-        return $this->users->create($user);
+        $user = $request->all();
+
+        $cc = mailer_get_cc();
+        $me = mailer_get_me();
+        array_push($cc, $me);
+
+        $mailer['name'] = mailer_get_name();
+        $mailer['from'] = mailer_get_me();
+        //$mailer['cc'] = $cc;
+        $mailer['cc'] = 'mstiven013@gmail.com';
+        $mailer['domain'] = mailer_get_domain();
+        $mailer['country'] = mailer_get_country();
+        $mailer['send_mail'] = false;
+
+        $send = [
+            "user" => $user,
+            "mailer" => $mailer
+        ];
+
+        return $this->users->create($send);
     }
 
     public function show($id)
@@ -88,7 +106,7 @@ class AdminUsersController extends Controller
 
     public function edit($id)
     {
-        $body = Input::post('body');
+        $body = $this->request->all();
         return $this->users->updateById($id, $body);
     }
 

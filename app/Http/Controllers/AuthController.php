@@ -32,6 +32,7 @@ class AuthController extends Controller
         $mailer['cc'] = 'mstiven013@gmail.com';
         $mailer['domain'] = mailer_get_domain();
         $mailer['country'] = mailer_get_country();
+        $mailer['send_mail'] = true;
 
         return $this->authentication->register($user, $mailer);
     }

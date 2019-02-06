@@ -101,7 +101,7 @@ const SaveUser = function() {
 		break;
 
 		case 'create':
-			ActionRoute = '/am-admin/register';
+			ActionRoute = '/am-admin/usuarios';
 		break;
 	}
 
@@ -159,29 +159,12 @@ const SaveUser = function() {
 				}
 			}
 
-			switch (data.status) {
-				case 500:
-						error.msg = 'Ha ocurrido un error, por favor intentelo más tarde.';
-						error.show = true;
+			if(data.id !== null && data.id !== undefined) {
+				switch(_action) {
+					case 'edit':
+						location.reload();
 					break;
-				case 404:
-						error.msg = 'Este usuario no existe.';
-						error.show = true;
-					break;
-				case 401:
-						error.msg = 'El usuario y la contraseña no coinciden.';
-						error.show = true;
-					break;
-				case 400:
-						if(data.errors.email !== undefined) {
-							let msg = data.errors.email;
-							M.toast({html: msg, classes: 'red accent-4 bottom left'});
-						}
-					break;
-				default:
-						error.msg = 'El usuario y la contraseña no coinciden.';
-						error.show = true;
-					break;
+				}
 			}
 
 			if(!$('.loader').hasClass('hidde'))

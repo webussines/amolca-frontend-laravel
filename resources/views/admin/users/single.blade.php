@@ -17,6 +17,8 @@
     $avatar = (isset($user->avatar)) ? $user->avatar : 'https://amolca.webussines.com/uploads/images/no-image.jpg';
     $description = (isset($user->description)) ? $user->description : ' ';
 
+    $countries = (isset($countries)) ? $countries : [];
+
 @endphp
 
 @if ($name !== '')
@@ -149,9 +151,12 @@
                                         break;
                                 }
                             @endphp
-
-                            <option @if ($superadmin) selected="selected" @endif value="SUPERADMIN">Superadmin</option>
-                            <option @if ($admin) selected="selected" @endif value="ADMIN">Admin</option>
+                            
+                            @if (session('user')->role == 'SUPERADMIN')
+                                <option @if ($superadmin) selected="selected" @endif value="SUPERADMIN">Superadmin</option>
+                                <option @if ($admin) selected="selected" @endif value="ADMIN">Admin</option>
+                            @endif
+                            
                             <option @if ($vendedor) selected="selected" @endif value="SELLER">Vendedor</option>
                             <option @if ($autor) selected="selected" @endif value="AUTHOR">Autor</option>
                             <option @if ($editor) selected="selected" @endif value="EDITOR">Editor</option>
@@ -163,7 +168,7 @@
                         <label for="country"><span class="required">*</span> País:</label>
                         <select name="country" id="country" class="select2-normal">
                             @foreach ($countries as $pais)
-                                <option value="{{ $pais['title'] }}" @if ($country == strtoupper($pais['title'])) selected="selected" @endif>{{ $pais['title'] }}</option>
+                                <option value="{{ $pais->title }}" @if ($country == strtoupper($pais->title)) selected="selected" @endif>{{ $pais->title }}</option>
                             @endforeach
                         </select>
                     </div>

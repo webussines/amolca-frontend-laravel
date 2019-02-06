@@ -23,7 +23,7 @@ class Users extends GuzzleHttpRequest {
 	}
 
 	public function create($body) {
-		return $this->post("register", $body);
+		return $this->post("users/register", $body);
 	}
 
 	public function updateById($id, $update) {
