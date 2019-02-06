@@ -39,6 +39,7 @@ jQuery(function($) {
 		if($(this).val() >= 1){
 			AddCartProdut(item, 'cart', $(row.parent()).find('.actions'));
 		} else if($(this).val() < 1) {
+			item.action = 'delete';
 			DeleteCartProduct(item, 'cart');
 		}
 
@@ -121,12 +122,14 @@ const AddCartProdut = (added, page, actions = null) => {
 
 		//console.log(resp)
 
-		$('.top-bar #cart-btn span').html(resp.amountstring);
+		let amount_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');
+
+		$('.top-bar #cart-btn span').html(amount_converted);
 		$('.cart-btn').removeAttr('disabled');
 
 		if(page == 'cart') {
-			$('.cart-totals tr#subtotal td').html(resp.amountstring);
-			$('.cart-totals tr#total #price').html(resp.amountstring);
+			$('.cart-totals tr#subtotal td').html(amount_converted);
+			$('.cart-totals tr#total #price').html(amount_converted);
 
 			$('table.cart tbody tr td.actions').each(function() {
 
@@ -135,8 +138,10 @@ const AddCartProdut = (added, page, actions = null) => {
 				let book_id = actions.find('.book-id').val();
 				let result = resp.products.filter(product => product.object_id == added.object_id);
 
-				let price = result[0].pricestring;
-				let total = result[0].totalstring;
+				let price = FormatMoney(result[0].price, 0, ',', '.', '$', 'before');
+
+				let get_total = result[0].price * result[0].quantity;
+				let total = FormatMoney(get_total, 0, ',', '.', '$', 'before');
 
 				let price_col = $('tr#' + result[0].object_id).find('td.price');
 				let total_col = $('tr#' + result[0].object_id).find('td.total');

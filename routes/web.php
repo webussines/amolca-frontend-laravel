@@ -158,4 +158,12 @@ Route::group(['prefix' => 'carts'], function() {
 	Route::put('/', 'Ecommerce\CartsController@update');
 	Route::get('/{id}', 'Ecommerce\CartsController@show');
 	Route::get('/{id}', 'Ecommerce\CartsController@get_orders');
+
+	Route::post('/amount', 'Ecommerce\CartsController@change_amount');
+	Route::get('/coupons/{code}', 'Ecommerce\CartsController@validate_coupon');
+});
+
+//Books
+Route::group(['prefix' => 'books'], function() {
+	Route::get('/{id}', 'Ecommerce\PostsController@post_info');
 });

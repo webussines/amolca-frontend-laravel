@@ -15,6 +15,7 @@ fbq('track', 'AddToWishlist');
 
 <!--Add single books scripts-->
 @section('scripts')
+<script src="{{ asset('js/ecommerce/coupons.js') }}"></script>
 <script src="{{ asset('js/ecommerce/carousel-books.js') }}"></script>
 <script src="{{ asset('libs/slickslider/js/slick.min.js') }}"></script>
 @endsection
@@ -67,8 +68,9 @@ fbq('track', 'AddToWishlist');
 	
 	<!--Coupons container-->
 	<div class="coupon-contain">
-      <input type="text" id="coupon" maxlength="10" placeholder="Escribe aquí el código de tu cupón">
+      <input type="text" id="coupon" placeholder="Escribe aquí el código de tu cupón">
       <button class="button primary">Aplicar cupón</button>
+      <p id="coupon-error" class="error"></p>
     </div>
 	
 	<!--Info cart-->

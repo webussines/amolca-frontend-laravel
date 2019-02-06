@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Ecommerce\BooksController;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Response;
 
 class PostsController extends Controller
 {
@@ -70,6 +71,12 @@ class PostsController extends Controller
 		$related = $this->posts->all("post", "limit=3&orderby=title&order=desc&random=1")->posts;
 
 		return view('ecommerce.posts.show', ["post" => $post, "related" => $related]);
+
+	}
+
+	public function post_info($id) {
+
+		return Response::json($this->posts->findById($id));
 
 	}
 

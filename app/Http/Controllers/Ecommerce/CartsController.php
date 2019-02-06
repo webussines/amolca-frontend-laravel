@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Orders;
+use App\Repositories\Coupons;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
@@ -14,10 +15,12 @@ class CartsController extends Controller
 
     protected $request;
     protected $orders;
+    protected $coupons;
 
-    public function __construct(Request $request, Orders $orders) {
+    public function __construct(Request $request, Orders $orders, Coupons $coupons) {
         $this->request = $request;
         $this->orders = $orders;
+        $this->coupons = $coupons;
     }
 
     public function get_orders($id) {
@@ -69,10 +72,6 @@ class CartsController extends Controller
             $this->request->session()->put('cart', $order);
 
             $send = session('cart');
-            if($this->request->ajax()) {
-                $send->amountstring = COPMoney($send->amount);
-                return Response::json($send);
-            }
 
             return Response::json($send);
 
@@ -182,6 +181,33 @@ class CartsController extends Controller
         }
 
         return Response::json($order);
+
+    }
+
+    public function validate_coupon($code) {
+
+        return Response::json($this->coupons->findByCode($code));
+
+    }
+
+    public function change_amount() {
+
+        if(!(session('coupon'))) {
+
+            $new_total = $this->request->get('total');
+            $coupon = $this->request->get('coupon');
+
+            session('cart')->amount = $new_total;
+
+            $this->request->session()->put('coupon', $coupon);
+
+            return Response::json([session('cart')]);
+
+        } else {
+
+            return Response::json([ "status" => 209 ], 209 );
+
+        }
 
     }
 
