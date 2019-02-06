@@ -153,13 +153,13 @@ const UpdateBook = function(tbody, table) {
 		var _id = $('#_id').val(data.id);
 		var title = $('#book-title').html(data.title);
 		var country = data.inventory;
-
-		let number = $('.row-country').length + 1;
-		let rowClass = 'country-' + number;
 			
 		let prices = GetPrices();
 
 		for (let c = 0; c < country.length; c++) {
+
+			let number = $('.row-country').length + 1;
+			let rowClass = 'country-' + number;
 			let co = country[c];
 			let state = {};
 
@@ -222,14 +222,18 @@ const UpdateBook = function(tbody, table) {
 
 			let lastRow = $('.book-form .countries .last-row-country');
 
-			if(user.country == co.country_name.toUpperCase()) {
-				console.log(co.country_name.toUpperCase())
+			if(user.role != 'SUPERADMIN') {
+				if(user.country == co.country_name.toUpperCase()) {
+					//console.log(co.country_name.toUpperCase())
+					lastRow.after(newRow);
+				}
+			} else {
 				lastRow.after(newRow);
 			}
 		}
 
 		/*
-		if(country.length) {
+		if(country.length < 1) {
 
 			let newRow = CountryRowTemplate(data_tmp);
 
