@@ -95,7 +95,11 @@ fbq('track', 'AddToWishlist');
 			<table>
 				<tr id="subtotal">
 					<th>Subtotal:</th>
-					<td>{{ COPMoney($cart->amount) }}</td>
+					@if ( isset($cart->subtotal) )
+						<td>{{ COPMoney($cart->subtotal) }}</td>
+					@else
+						<td>{{ COPMoney($cart->amount) }}</td>
+					@endif
 				</tr>
 				<tr id="shipping">
 					<th>Envío:</th>
@@ -103,6 +107,26 @@ fbq('track', 'AddToWishlist');
 						<td>Envío gratuito a cualquier lugar de Colombia</td>
 					@endif
 				</tr>
+				@if ( session('coupon') )
+					@php
+						$amount = '';
+
+						switch (session('coupon')['discount_type']) {
+							case 'FIXED':
+								$amount = COPMoney(session('coupon')['discount_amount']);
+								break;
+							
+							case 'PERCENTAGE':
+								$amount = session('coupon')['discount_amount'] . '%';
+								break;
+						}
+					@endphp
+
+					<tr id="coupon">
+						<th>Descuento:</th>
+						<td><b>{{ $amount }}</b> - {{ session('coupon')['code'] }}</td>
+					</tr>
+				@endif
 				<tr id="total">
 					<th>Total:</th>
 					<th id="price">{{ COPMoney($cart->amount) }}</th>

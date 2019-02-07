@@ -24,11 +24,24 @@ const GetUserId = () => {
 
 }
 
+// Habilitar el botón y ocultar el loader
+const CommonResponseAction = () => {
+	$('.coupon-contain button').removeAttr('disabled');
+
+	if(!$('.loader.fixed').hasClass('hidde')) {
+		$('.loader.fixed').addClass('hidde');
+	}
+}
+
 // Validando la existencia del cupon ingresado
 const ValidateCouponExists = (e) => {
 
 	e.preventDefault();
 	$('.coupon-contain button').attr('disabled', 'disabled');
+
+	if($('.loader.fixed').hasClass('hidde')) {
+		$('.loader.fixed').removeClass('hidde');
+	}
 
 	let flag = true;
 
@@ -37,7 +50,7 @@ const ValidateCouponExists = (e) => {
 	if(coupon == '' || coupon == ' ') {
 		$('#coupon-error').html('Debes ingresar el c&oacute;digo de tu cup&oacute;n').css('display', 'block')
 		flag = false;
-		$('.coupon-contain button').removeAttr('disabled');
+		CommonResponseAction();
 	}
 
 	if(flag) {
@@ -53,6 +66,7 @@ const ValidateCouponExists = (e) => {
 			if(typeof resp == 'object') {
 
 				return ValidateOrderInfo(resp);
+
 			}
 
 			let json = JSON.parse(resp);
@@ -61,22 +75,21 @@ const ValidateCouponExists = (e) => {
 				$('#coupon-error').html('El cup&oacute;n que ingresaste no existe.').css('display', 'block')
 			}
 
-			$('.coupon-contain button').removeAttr('disabled');
+			CommonResponseAction();
 
 
 		}).catch((err) => {
 			console.log(err)
 		})
 
-
-		console.log(coupon)
 	}
 
 }
 
 const ValidateOrderInfo = (coupon) => {
 
-	console.log(coupon)
+	// console.log(coupon)
+	let flag = true;
 
 	switch (coupon.affected) {
 
@@ -84,25 +97,46 @@ const ValidateOrderInfo = (coupon) => {
 		case 'USER':
 			
 				if(GetUserId() == 0) {
-					return $('#coupon-error').html('Este cup&oacute;n es v&aacute;lido solo para usuarios registrados. Por favor iniciar sesi&oacute;n.').css('display', 'block')
+					$('#coupon-error').html('Este cup&oacute;n es v&aacute;lido solo para usuarios registrados. Por favor iniciar sesi&oacute;n.').css('display', 'block')
+					flag = false;
 				}
 
 				if(coupon.objects[0].id !== GetUserId()) {
-					return $('#coupon-error').html('Este cup&oacute;n no es v&aacute;lido para su pedido.').css('display', 'block')
+					$('#coupon-error').html('Este cup&oacute;n no es v&aacute;lido para su pedido.').css('display', 'block')
+					flag = false;
 				}
 
-				if(coupon.discount_type == 'FIXED') {
+				// Si hay algún error
+				if(!flag) {
 
-					let total_str = $('.cart-totals #price').html();
+					CommonResponseAction();
 
-					let sc = /[' '’_,.%$#¬|/¡!¿?*=""\/\\( )[\]:;]/gi; // Special chars to replace in str
-    				let total = total_str.replace(sc, '');
+				}
 
-    				if(typeof total == 'string') {
-    					total = parseInt(total);
-    				}
+				// Convertir el total del carrito actual a una variable tipo numero
+				let total_str = $('.cart-totals #price').html();
+
+				let sc = /[' '’_,.%$#¬|/¡!¿?*=""\/\\( )[\]:;]/gi; // Special chars to replace in str
+				let total = total_str.replace(sc, '');
+
+				if(typeof total == 'string') {
+					total = parseInt(total);
+				}
+
+				// Si no hay errores y el cupon es de tipo FIXED
+				if(flag && coupon.discount_type == 'FIXED') {
 
     				let changed = total - coupon.discount_amount;
+
+					ChangeTotalCart(coupon, changed)
+
+				}
+
+				// Si no hay errores y el cupon es de tipo FIXED
+				if(flag && coupon.discount_type == 'PERCENTAGE') {
+
+					let discount = (total * coupon.discount_amount) / 100;
+					let changed = total - discount;
 
 					ChangeTotalCart(coupon, changed)
 
@@ -140,11 +174,34 @@ const ChangeTotalCart = (coupon, total) => {
 			"_token": $('meta[name="csrf-token"]').attr('content')
 		}
 	}).done((resp) => {
-		console.log('Resp', resp)
+		console.log(resp)
 
 		if(resp.status !== undefined && resp.status == 209) {
 			return ErrorCouponInStorage();
 		}
+
+		let amount_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');
+		let tmp = DiscountRowTmp(coupon);
+
+		$('.cart-totals tr#total').before(tmp);
+
+		$('.top-bar #cart-btn span').html(amount_converted);
+		$('.cart-totals tr#total #price').html(amount_converted);
+
+		// Mostrar mensaje de aplicación correcta
+
+		if($('#coupon-error').hasClass('error')) {
+			$('#coupon-error').removeClass('error').addClass('check')
+		}
+		$('#coupon-error').html('El cup&oacute;n se aplic&oacute; correctamente a tu pedido.').css('display', 'block')
+
+		CommonResponseAction();
+
+		setTimeout(() => {
+			if($('#coupon-error').hasClass('check')) {
+				$('#coupon-error').removeClass('check').addClass('error').css('display', 'none')
+			}
+		}, 2500)
 
 	}).catch((err) => {
 		console.log('Error', err)
@@ -155,5 +212,7 @@ const ChangeTotalCart = (coupon, total) => {
 const ErrorCouponInStorage = () => {
 
 	$('#coupon-error').html('A este pedido ya se le aplicó un cupón. Los cupones no son acumulables.').css('display', 'block')
+
+	CommonResponseAction();
 
 }

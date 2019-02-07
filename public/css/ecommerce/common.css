@@ -524,6 +524,13 @@ ul.social-networks.top {
     margin: 0 auto 8px;
 }
 
+.main .check {
+    color: #00396f;
+    display: none;
+    font-size: 14px;
+    margin: 0 auto 8px;
+}
+
 /*Big searcher styles*/
 .big-searcher-content {
     font-family: Tahoma;

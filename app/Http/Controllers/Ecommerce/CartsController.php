@@ -130,6 +130,27 @@ class CartsController extends Controller
             // Convertir la respuesta en un JSON
             $order = json_decode($json);
 
+            if( session('coupon') ) {
+
+                switch (session('coupon')['discount_type']) {
+                    case 'FIXED':
+                            $order->subtotal = $order->amount;
+                            $order->amount = $order->amount - session('coupon')['discount_amount'];
+                        break;
+                    
+                    case 'PERCENTAGE':
+                            $order->subtotal = $order->amount;
+                            $discount = ( $order->amount * session('coupon')['discount_amount'] ) / 100;
+                            $order->amount = $order->amount - $discount;
+                        break;
+                }
+
+                if($order->amount < 0) {
+                    $order->amount = 0;
+                }
+
+            }
+
             $this->request->session()->put('cart', $order);
 
             if($add['action'] != 'delete') {
@@ -197,11 +218,12 @@ class CartsController extends Controller
             $new_total = $this->request->get('total');
             $coupon = $this->request->get('coupon');
 
+            session('cart')->subtotal = session('cart')->amount;
             session('cart')->amount = $new_total;
 
             $this->request->session()->put('coupon', $coupon);
 
-            return Response::json([session('cart')]);
+            return Response::json(session('cart'));
 
         } else {
 

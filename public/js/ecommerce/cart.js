@@ -123,12 +123,17 @@ const AddCartProdut = (added, page, actions = null) => {
 		//console.log(resp)
 
 		let amount_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');
+		let subtotal_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');
+
+		if(resp.subtotal !== undefined && resp.subtotal !== null) {
+			subtotal_converted = FormatMoney(resp.subtotal, 0, ',', '.', '$', 'before');
+		}
 
 		$('.top-bar #cart-btn span').html(amount_converted);
 		$('.cart-btn').removeAttr('disabled');
 
 		if(page == 'cart') {
-			$('.cart-totals tr#subtotal td').html(amount_converted);
+			$('.cart-totals tr#subtotal td').html(subtotal_converted);
 			$('.cart-totals tr#total #price').html(amount_converted);
 
 			$('table.cart tbody tr td.actions').each(function() {
@@ -185,7 +190,8 @@ const DeleteCartProduct = (deleted, page) => {
 
 		if(resp.products === undefined || resp.products === null || resp.products.length < 1) {
 		    //console.log('reload')
-			window.location.href = window.location.href;
+		    $('.top-bar #cart-btn span').html(0);
+			return window.location.href = window.location.href;
 		}
 
 		$('.top-bar #cart-btn span').html(resp.amountstring);
