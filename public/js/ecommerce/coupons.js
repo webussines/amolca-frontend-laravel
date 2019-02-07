@@ -209,6 +209,29 @@ const ChangeTotalCart = (coupon, total) => {
 
 }
 
+const DiscountRowTmp = (coupon) => {
+
+	console.log(coupon)
+
+	let amount_converted = '';
+
+	switch (coupon.discount_type) {
+		case 'FIXED':
+			amount_converted = FormatMoney(coupon.discount_amount, 0, ',', '.', '$', 'before');
+			break;
+		case 'PERCENTAGE':
+			amount_converted = coupon.discount_amount + '%';
+			break;
+	}
+
+	let str = `<tr id="coupon">
+					<th>Descuento:</th>
+					<td><b>${amount_converted}</b> - ${coupon.code}</td>
+				</tr>`;
+
+	return str;
+}
+
 const ErrorCouponInStorage = () => {
 
 	$('#coupon-error').html('A este pedido ya se le aplicó un cupón. Los cupones no son acumulables.').css('display', 'block')
