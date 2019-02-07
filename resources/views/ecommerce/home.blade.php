@@ -43,6 +43,10 @@ fbq('track', 'AddToWishlist');
 
 			@include('ecommerce.loops.books.loop', ['books' => $medician, 'type' => 'carousel'])
 
+			<p class="btn-large-container">
+				<a class="button primary" href="/novedades/medicina">Ver todas</a>
+			</p>
+
 		</div>
 		<div class="col s12 l6 col-right">
 			<h2 class="title">
@@ -50,6 +54,10 @@ fbq('track', 'AddToWishlist');
 			</h2>
 
 			@include('ecommerce.loops.books.loop', ['books' => $odontologic, 'type' => 'carousel'])
+
+			<p class="btn-large-container">
+				<a class="button primary" href="/novedades/odontologia">Ver todas</a>
+			</p>
 
 		</div>
 	</div>

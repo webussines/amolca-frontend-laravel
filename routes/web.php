@@ -135,6 +135,9 @@ Route::get('/finalizar-compra', 'Ecommerce\HomeController@checkout');
 Route::get('/contacto', 'Ecommerce\HomeController@contact');
 Route::get('/terminos-y-condiciones', 'Ecommerce\HomeController@termsandconditions');
 
+//Novedades
+Route::get('/novedades/{slug}', 'Ecommerce\BooksController@news');
+
 //Especialidades
 Route::get('/especialidad/{slug}', 'Ecommerce\SpecialtiesController@show');
 Route::get('/especialidad', function() { return redirect('/especialidades'); });
