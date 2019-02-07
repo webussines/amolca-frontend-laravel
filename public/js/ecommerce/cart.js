@@ -127,6 +127,8 @@ const AddCartProdut = (added, page, actions = null) => {
 
 		if(resp.subtotal !== undefined && resp.subtotal !== null) {
 			subtotal_converted = FormatMoney(resp.subtotal, 0, ',', '.', '$', 'before');
+		} else {
+			$('table.cart-totals #coupon').remove();
 		}
 
 		$('.top-bar #cart-btn span').html(amount_converted);
@@ -151,8 +153,19 @@ const AddCartProdut = (added, page, actions = null) => {
 				let price_col = $('tr#' + result[0].object_id).find('td.price');
 				let total_col = $('tr#' + result[0].object_id).find('td.total');
 
+				let total_tmp = `<span class="normal-price">${total}</span>`;
+
+				if(result[0].discount !== undefined && result[0].discount !== null) {
+
+					let with_discount = FormatMoney(result[0].discount, 0, ',', '.', '$', 'before');;
+
+					total_tmp = `<span class="normal-price">${with_discount}</span>
+									<span class="without-discount">${total}</span>`;
+
+				}
+
 				$(price_col).html(price);
-				$(total_col).html(total);
+				$(total_col).html(total_tmp);
 
 			});
 		} else {
@@ -194,13 +207,24 @@ const DeleteCartProduct = (deleted, page) => {
 			return window.location.href = window.location.href;
 		}
 
-		$('.top-bar #cart-btn span').html(resp.amountstring);
+		let amount_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');
+		let subtotal_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');
+
+		if(resp.subtotal !== undefined && resp.subtotal !== null) {
+			subtotal_converted = FormatMoney(resp.subtotal, 0, ',', '.', '$', 'before');
+		}
+
+		$('.top-bar #cart-btn span').html(amount_converted);
 
 		switch (page) {
 			case 'cart':
 
-				$('.cart-totals tr#subtotal td').html(resp.amountstring);
-				$('.cart-totals tr#total #price').html(resp.amountstring);
+				if(resp.subtotal == undefined || resp.subtotal == null) {
+					$('.cart-totals tr#coupon').remove();
+				}
+
+				$('.cart-totals tr#subtotal td').html(subtotal_converted);
+				$('.cart-totals tr#total #price').html(amount_converted);
 				$('tr#' + deleted.object_id).remove();
 
 				break;

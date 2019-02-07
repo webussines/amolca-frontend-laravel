@@ -52,7 +52,12 @@ fbq('track', 'AddToWishlist');
 						<input class="qty" value="{{ $product->quantity }}" mattooltip="Cantidad" type="number">
 					</td>
 					<td class="total">
-						{{ COPMoney($product->quantity * $product->price) }}
+						@if ( isset($product->discount) )
+							<span class="normal-price">{{ COPMoney($product->discount) }}</span>
+							<span class="without-discount">{{ COPMoney($product->quantity * $product->price) }}</span>
+						@else
+							<span class="normal-price">{{ COPMoney($product->quantity * $product->price) }}</span>
+						@endif
 					</td>
 					<td class="actions">
 						<input type="hidden" class="book-id" value="{{ $product->object_id }}">
@@ -107,7 +112,7 @@ fbq('track', 'AddToWishlist');
 						<td>Envío gratuito a cualquier lugar de Colombia</td>
 					@endif
 				</tr>
-				@if ( session('coupon') )
+				@if ( isset($cart->subtotal) && session('coupon') )
 					@php
 						$amount = '';
 

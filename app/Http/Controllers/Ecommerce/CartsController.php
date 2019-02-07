@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Orders;
+use App\Repositories\Posts;
 use App\Repositories\Coupons;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,11 +17,13 @@ class CartsController extends Controller
     protected $request;
     protected $orders;
     protected $coupons;
+    protected $posts;
 
-    public function __construct(Request $request, Orders $orders, Coupons $coupons) {
+    public function __construct(Request $request, Orders $orders, Coupons $coupons, Posts $posts) {
         $this->request = $request;
         $this->orders = $orders;
         $this->coupons = $coupons;
+        $this->posts = $posts;
     }
 
     public function get_orders($id) {
@@ -36,6 +39,31 @@ class CartsController extends Controller
         }
 
         return Response::json($orders);
+    }
+
+    public function index() 
+    {
+
+        if (!session('cart')) {
+            return view('ecommerce.cart.empty');
+        } else {
+
+            $cart = session('cart');
+
+            if(!isset(session('cart')->products)) {
+                return view('ecommerce.cart.empty');
+            }
+
+            if(count(session('cart')->products) < 1) {
+                return view('ecommerce.cart.empty');
+            }
+
+            //Related posts
+            $related = $this->posts->all("book", "orderby=title&order=asc&limit=8&random=1")->posts;
+
+            return view('ecommerce.cart.index', [ 'cart' => $cart, 'related' => $related ]);
+
+        }
     }
 
     public function store() {
@@ -130,24 +158,133 @@ class CartsController extends Controller
             // Convertir la respuesta en un JSON
             $order = json_decode($json);
 
+            $coupon_objects_affected = [];
+
             if( session('coupon') ) {
 
-                switch (session('coupon')['discount_type']) {
-                    case 'FIXED':
-                            $order->subtotal = $order->amount;
-                            $order->amount = $order->amount - session('coupon')['discount_amount'];
+                switch ( session('coupon')['affected'] ) {
+                    case 'PRODUCT':
+                        
+                        for ($i = 0; $i < count( session('coupon')['objects'] ); $i++) { 
+
+                            $id = session('coupon')['objects'][$i]['id']; // Objeto afectado por el cupon
+                            
+                            for ($o = 0; $o < count( $order->products ); $o++) {
+                                
+                                // Si el producto y el objeto coinciden
+                                if($order->products[$o]->object_id == $id) {
+
+                                    //Si el cupon es de monto fijo
+                                    if( session('coupon')['discount_type'] == 'FIXED' ) {
+                                        $order->products[$o]->discount = ($order->products[$o]->price * $order->products[$o]->quantity) - session('coupon')['discount_amount'];
+                                    }
+
+                                    //Si el cupon es de monto fijo
+                                    if( session('coupon')['discount_type'] == 'PERCENTAGE' ) {
+                                        $total = $order->products[$o]->price * $order->products[$o]->quantity;
+                                        $order->products[$o]->discount = ( $total * session('coupon')['discount_amount'] ) / 100;
+                                    }
+
+                                    array_push($coupon_objects_affected, $id);
+                                }
+
+                            }
+
+                        }
+
                         break;
                     
-                    case 'PERCENTAGE':
-                            $order->subtotal = $order->amount;
-                            $discount = ( $order->amount * session('coupon')['discount_amount'] ) / 100;
-                            $order->amount = $order->amount - $discount;
+                    case 'USER':
+
+                        for ($i = 0; $i < count( session('coupon')['objects'] ); $i++) { 
+
+                            $id = session('coupon')['objects'][$i]['id'];
+                                
+                            // Si el id del usuario y el objeto coinciden
+                            if(session('user')->id == $id) {
+                                array_push($coupon_objects_affected, $id);
+                            }
+
+                        }
+
+                        break;
+
+                    default:
+                        # code...
                         break;
                 }
 
                 if($order->amount < 0) {
                     $order->amount = 0;
                 }
+
+            }
+
+            if(count($coupon_objects_affected) > 0) {
+
+                switch (session('coupon')['discount_type']) {
+                    case 'FIXED':
+                            $order->subtotal = $order->amount;
+
+                            switch (session('coupon')['affected']) {
+                                case 'USER':
+                                    $discount = ( $order->amount * session('coupon')['discount_amount'] ) / 100;
+                                    $order->amount = $order->amount - $discount;
+                                    break;
+                                
+                                case 'PRODUCT':
+                                    $products_amount = 0;
+
+                                    for ($i = 0; $i < count( $order->products ); $i++) {
+                                        if( isset($order->products[$i]->discount) ) {
+                                            $products_amount += $order->products[$i]->discount;
+                                        } else {
+                                            $products_amount += $order->products[$i]->price * $order->products[$i]->quantity;
+                                        }
+                                    }
+
+                                    $order->amount = $products_amount;
+                                    break;
+                            }
+                        break;
+                    
+                    case 'PERCENTAGE':
+                            $order->subtotal = $order->amount;
+
+                            switch (session('coupon')['affected']) {
+                                case 'USER':
+                                    $discount = ( $order->amount * session('coupon')['discount_amount'] ) / 100;
+                                    $order->amount = $order->amount - $discount;
+                                    break;
+                                
+                                case 'PRODUCT':
+                                    $products_amount = 0;
+
+                                    for ($i = 0; $i < count( $order->products ); $i++) {
+                                        if( isset($order->products[$i]->discount) ) {
+                                            $products_amount += $order->products[$i]->discount;
+                                        } else {
+                                            $products_amount += $order->products[$i]->price * $order->products[$i]->quantity;
+                                        }
+                                    }
+
+                                    $order->amount = $products_amount;
+                                    break;
+                            }
+
+                        break;
+                }
+
+            } else {
+
+                $normal_amount = 0;
+
+                for ($i = 0; $i < count( $order->products ); $i++) {
+                    $normal_amount += $order->products[$i]->price * $order->products[$i]->quantity;
+                }
+
+                $order->amount = $normal_amount;
+                $this->request->session()->forget('coupon');
 
             }
 

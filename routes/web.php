@@ -130,7 +130,7 @@ Route::group(['middleware' => 'ecommerce', 'prefix' => 'mi-cuenta'], function() 
 
 //Rutas simples
 Route::get('/', 'Ecommerce\HomeController@index');
-Route::get('/carrito', 'Ecommerce\HomeController@cart');
+Route::get('/carrito', 'Ecommerce\CartsController@index');
 Route::get('/finalizar-compra', 'Ecommerce\HomeController@checkout');
 Route::get('/contacto', 'Ecommerce\HomeController@contact');
 Route::get('/terminos-y-condiciones', 'Ecommerce\HomeController@termsandconditions');

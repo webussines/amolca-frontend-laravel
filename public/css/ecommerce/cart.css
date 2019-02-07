@@ -50,6 +50,12 @@ table .total {
     color: #00396F;
     font-weight: bold;
 }
+    table .total span.without-discount {
+        color: #666;
+        font-size: 12px;
+        font-style: italic;
+        text-decoration: line-through;
+    }
 
 table .actions button {
     cursor: pointer;

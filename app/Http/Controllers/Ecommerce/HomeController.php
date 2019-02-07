@@ -51,31 +51,6 @@ class HomeController extends Controller
         return view('ecommerce.login');
     }
 
-    public function cart() 
-    {
-
-        if (!session('cart')) {
-            return view('ecommerce.cart.empty');
-        } else {
-
-            $cart = session('cart');
-
-            if(!isset(session('cart')->products)) {
-                return view('ecommerce.cart.empty');
-            }
-
-            if(count(session('cart')->products) < 1) {
-                return view('ecommerce.cart.empty');
-            }
-
-            //Related posts
-            $related = $this->posts->all("book", "orderby=title&order=asc&limit=8&random=1")->posts;
-
-            return view('ecommerce.cart.index', [ 'cart' => $cart, 'related' => $related ]);
-
-        }
-    }
-
     public function checkout() 
     {
 

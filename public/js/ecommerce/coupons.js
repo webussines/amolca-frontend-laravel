@@ -90,6 +90,7 @@ const ValidateOrderInfo = (coupon) => {
 
 	// console.log(coupon)
 	let flag = true;
+	const sc = /[' '’_,.%$#¬|/¡!¿?*=""\/\\( )[\]:;]/gi; // Special chars to replace in str
 
 	switch (coupon.affected) {
 
@@ -116,7 +117,6 @@ const ValidateOrderInfo = (coupon) => {
 				// Convertir el total del carrito actual a una variable tipo numero
 				let total_str = $('.cart-totals #price').html();
 
-				let sc = /[' '’_,.%$#¬|/¡!¿?*=""\/\\( )[\]:;]/gi; // Special chars to replace in str
 				let total = total_str.replace(sc, '');
 
 				if(typeof total == 'string') {
@@ -143,6 +143,144 @@ const ValidateOrderInfo = (coupon) => {
 				}
 
 			break;
+
+		// Realizar acción si el cupon es valido para producto
+		case 'PRODUCT':
+
+				let productsInCart = [];
+
+				//Get total cart
+				let TotalCart = $('.cart-totals #price').html();
+				TotalCart = TotalCart.replace(sc, '');
+
+				$('table.cart td.actions .book-id').each(function() {
+
+					let id = $(this).val();
+					let parent = $(this).parent('td').parent('tr');
+
+					// Convertir el total del carrito actual a una variable tipo numero
+					let total_str = $(parent).find('td.total').html();
+
+					//Recorrer objetos del cupon para saber si hay alguno en el carrito
+					for (let i = 0; i < coupon.objects.length; i++) {
+						if(id == coupon.objects[i].id) {
+
+							let total = total_str.replace(sc, '');
+							total = total.replace(/\s/g, '');
+
+							let obj = { id: id, total: total }
+
+							productsInCart.push(obj);
+						}
+					}
+				});
+
+				// Devolver error si no coinciden los productos del carrito con los del cupon
+				if(productsInCart.length < 1) {
+					$('#coupon-error').html('Este cup&oacute;n no es v&aacute;lido para su pedido.').css('display', 'block')
+					return CommonResponseAction();
+				}
+
+				// Si no hay errores y el cupon es de tipo FIXED
+				if(coupon.discount_type == 'FIXED') {
+
+					for (let i = 0; i < productsInCart.length; i++) {
+
+						$('table.cart td.actions .book-id').each(function() {
+
+							let id = $(this).val();
+							
+							if(id == productsInCart[i].id) {
+								let parent = $(this).parent('td').parent('tr');
+								let total_column = $(parent).find('td.total');
+								let total_normal = $(total_column).find('.normal-price');
+
+								let without_discount = total_normal.html();
+								let with_discount = without_discount.replace(sc, '') - coupon.discount_amount;
+								with_discount = FormatMoney(with_discount, 0, ',', '.', '$', 'before');
+
+								let tmp = `<span class="normal-price">${with_discount}</span>
+											<span class="without-discount">${without_discount}</span>`;
+
+								total_column.html(tmp)
+							}
+
+						});
+
+					}
+
+					let changed = 0;
+
+					$('table.cart td.total .normal-price').each(function() {
+
+						let str = $(this).html();
+						let number = str.replace(sc, '');
+
+						if(typeof number == 'string') {
+							number = parseInt(number);
+						}
+
+						changed += number;
+
+					});
+
+					ChangeTotalCart(coupon, changed)
+
+				}
+
+				// Si no hay errores y el cupon es de tipo FIXED
+				if(coupon.discount_type == 'PERCENTAGE') {
+
+					for (let i = 0; i < productsInCart.length; i++) {
+
+						$('table.cart td.actions .book-id').each(function() {
+
+							let id = $(this).val();
+							
+							if(id == productsInCart[i].id) {
+								let parent = $(this).parent('td').parent('tr');
+								let total_column = $(parent).find('td.total');
+								let total_normal = $(total_column).find('.normal-price');
+
+								let without_discount = total_normal.html();
+
+								let without_discount_number = parseInt(without_discount.replace(sc, ''));
+								let discount = ( without_discount_number * coupon.discount_amount ) / 100;
+								let with_discount = without_discount_number - discount;
+
+								with_discount = FormatMoney(with_discount, 0, ',', '.', '$', 'before');
+
+								let tmp = `<span class="normal-price">${with_discount}</span>
+											<span class="without-discount">${without_discount}</span>`;
+
+								total_column.html(tmp)
+							}
+
+						});
+
+					}
+
+					let changed = 0;
+
+					$('table.cart td.total .normal-price').each(function() {
+
+						let str = $(this).html();
+						let number = str.replace(sc, '');
+
+						if(typeof number == 'string') {
+							number = parseInt(number);
+						}
+
+						changed += number;
+
+					});
+
+					ChangeTotalCart(coupon, changed)
+
+				}
+
+			break;
+			
 		default:
 			// statements_def
 			break;
@@ -189,6 +327,7 @@ const ChangeTotalCart = (coupon, total) => {
 		$('.cart-totals tr#total #price').html(amount_converted);
 
 		// Mostrar mensaje de aplicación correcta
+		$('.coupon-contain #coupon').val('')
 
 		if($('#coupon-error').hasClass('error')) {
 			$('#coupon-error').removeClass('error').addClass('check')
