@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<link rel="canonical" href="{{ Request::fullUrl() }}" >
 		<meta name="csrf-token" content="{{ csrf_token() }}">
+		<meta name="country-active" content="{{ get_option('sitecountry') }}">
 		<meta name="user-id" content="@if (session('user')) {{ session('user')->id }} @else 0 @endif">
 		<link rel="icon" type="image/x-icon" href="{{ asset('img/common/favicon.ico') }}">
 		@yield('meta')
