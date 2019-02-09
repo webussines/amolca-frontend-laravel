@@ -77,7 +77,7 @@
 
             <div class="col s12 m12 l10 offset-l1">
                 <div class="form-group col s12 m12">
-                    <label for="title"><span class="required">*</span> Título del libro:</label>
+                    <label for="title"><span class="required">*</span> Nombre del lote:</label>
                     <input type="text" name="title" id="title" class="required-field" placeholder="Título del libro..." value="{{ $title }}">
                     <p id="title-error" class="error"></p>
                 </div>
@@ -108,7 +108,7 @@
                                 @endforeach
                             @endif
 
-                            <option {{ $checked }} value="{{ $book->id }}">{{ $book->title }}</option>
+                            <option {{ $checked }} value="{{ $book->id }}">{!! $book->title !!}</option>
                         @endforeach
                     </select>
                 </div>

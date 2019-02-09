@@ -26,7 +26,7 @@
 
 			<!--Portada del libro-->
 			<a class="contain-img" href="/{{ $book->slug }}">
-				<img src="{{ $book->thumbnail }}" alt="{{ $book->title }}" title="{{ $book->title }}">
+				<img src="{{ $book->thumbnail }}" alt="{!! $book->title !!}" title="{!! $book->title !!}">
 			</a>
 
 			<!--Versiones-->
