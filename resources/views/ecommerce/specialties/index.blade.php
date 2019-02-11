@@ -7,7 +7,7 @@
 
 	@foreach ($specialties as $specialty)
 	<div class="specialty-title">
-		<h2>{{ $specialty->title }}</h2>
+		<h2>{!! $specialty->title !!}</h2>
 	</div>
 
 	<div class="content-container">
@@ -22,12 +22,12 @@
 			</a>
 			@else
 			<a href="/especialidad/{{ $child->slug }}">
-				<img class="specialty-image" src="https://amolca.webussines.com/uploads/images/no-image.jpg" alt="">
+				<img class="specialty-image" src="https://amolca.webussines.com/uploads/images/no-image.jpg" alt="{!! $child->title !!}" title="{!! $child->title !!}">
 			</a>
 			@endif
 
 			<p class="title">
-				<a href="/especialidad/{{ $child->slug }}">{{ $child->title }}</a>
+				<a href="/especialidad/{{ $child->slug }}">{!! $child->title !!}</a>
 			</p>
 		</div>
 		@endforeach

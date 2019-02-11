@@ -23,7 +23,7 @@
 	<div class="row">
 
 		<div class="col s12 m12 l9 post-column">
-			<h2 class="title">{{ $post->title }}</h2>
+			<h2 class="title">{!! $post->title !!}</h2>
 
 			<div class="post-meta">
 				<div class="date">
@@ -53,7 +53,7 @@
 			
 			@if ($post->thumbnail !== null)
 				<div class="post-thumbnail">
-					<img src="{{ $post->thumbnail }}" title="{{ $post->title }}" alt="{{ $post->title }}">
+					<img src="{{ $post->thumbnail }}" title="{!! $post->title !!}" alt="{!! $post->title !!}">
 				</div>
 			@endif
 
@@ -87,10 +87,10 @@
 				@foreach ($related as $rel)
 					<div class="post-related">
 						<div class="related-thumbnail">
-							<img src="{{ $rel->thumbnail }}" alt="{{ $rel->title }}">
+							<img src="{{ $rel->thumbnail }}" alt="{!! $rel->title !!}">
 						</div>
 						<p class="related-title">
-							<a href="{{ $rel->slug }}">{{ $rel->title }}</a>
+							<a href="{{ $rel->slug }}">{!! $rel->title !!}</a>
 						</p>
 						<div class="related-excerpt">
 							@if (isset($rel->excerpt))

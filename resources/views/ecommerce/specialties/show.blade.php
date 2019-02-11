@@ -6,12 +6,12 @@ fbq('track', 'AddToWishlist');
 fbq('track', 'Lead');
 @endsection
 
-@section('title', "Libros de $specialty->title - Amolca Editorial Médica y Odontológica")
+@section('title', "Libros de $specialty->title - Amolca Editorial M&eacute;dica y Odontol&oacute;gica")
 
 @section('contentClass', 'page-container specialty')
 @section('content')
 <div class="specialty-title">
-	<h2>{{ $specialty->title }}</h2>
+	<h2>{!! $specialty->title !!}</h2>
 </div>
 
 <div class="content-container">

@@ -25,14 +25,14 @@
 
 			<!--Portada del libro-->
 			<a class="contain-img" href="/{{ $post->slug }}">
-				<img src="{{ $post->thumbnail }}" alt="{{ $post->title }}" title="{{ $post->title }}">
+				<img src="{{ $post->thumbnail }}" alt="{!! $post->title !!}" title="{!! $post->title !!}">
 			</a>
 			
 			<div class="info">
 
 				<!--Titulo del libro-->
 				<h3 class="name">
-					<a href="/{{ $post->slug }}">{{ $post->title }}</a>
+					<a href="/{{ $post->slug }}">{!! $post->title !!}</a>
 				</h3>
 
 				<div class="excerpt">
