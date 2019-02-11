@@ -2,56 +2,58 @@ jQuery(function($) {
 
   let country = AllCountries();
 
+  /*
   $.get("https://ipinfo.io", function(response) {
-      //console.log(response);
+    //console.log(response);
 
-      let search = country.filter(c => c.code == response.country);
-      let active = search[0].name.toUpperCase();
+    let search = country.filter(c => c.code == response.country);
+    let active = search[0].name.toUpperCase();
 
-      switch (active) {
-        case 'ARGENTINA':
-          if (window.location.href.indexOf("amolca.com.co") > 0) {
-            window.location.href = 'http://www.amolca.com.ar'
-          }
+    switch (active) {
+      case 'ARGENTINA':
+        if (window.location.href.indexOf("amolca.com.co") > 0) {
+          window.location.href = 'http://www.amolca.com.ar'
+        }
 
-          break;
+        break;
 
-        case 'PERU':
-          if (window.location.href.indexOf("amolca.com.co") > 0) {
-            window.location.href = 'http://www.amolca.com.pe'
-          }
-          break;
+      case 'PERU':
+        if (window.location.href.indexOf("amolca.com.co") > 0) {
+          window.location.href = 'http://www.amolca.com.pe'
+        }
+        break;
 
-        case 'DOMINICAN REPUBLIC':
-          if (window.location.href.indexOf("amolca.com.co") > 0) {
-            window.location.href = 'http://www.amolca.com.do'
-          }
+      case 'DOMINICAN REPUBLIC':
+        if (window.location.href.indexOf("amolca.com.co") > 0) {
+          window.location.href = 'http://www.amolca.com.do'
+        }
 
-          break;
+        break;
 
-        case 'PANAMA':
-          if (window.location.href.indexOf("amolca.com.co") > 0) {
-            window.location.href = 'http://www.amolca.com.pa'
-          }
-          break;
+      case 'PANAMA':
+        if (window.location.href.indexOf("amolca.com.co") > 0) {
+          window.location.href = 'http://www.amolca.com.pa'
+        }
+        break;
 
-        case 'COLOMBIA':
-          if (window.location.href.indexOf("amolca.com.co") < 1) {
-            //window.location.href = 'http://www.amolca.com.co'
-          }
-          return console.log('COLOMBIA')
-          break;
+      case 'COLOMBIA':
+        if (window.location.href.indexOf("amolca.com.co") < 1) {
+          //window.location.href = 'http://www.amolca.com.co'
+        }
+        return console.log('COLOMBIA')
+        break;
 
-        default:
-          window.location.href = 'http://www.amolca.com';
-          break;
-      }
-
-    }, "jsonp").fail(function(jqXHR, exception) {
-      if (window.location.href.indexOf("amolca.com.co") < 1) {
+      default:
         window.location.href = 'http://www.amolca.com';
-      }
-      return console.log('ARGENTINA')
-    });
+        break;
+    }
+
+  }, "jsonp").fail(function(jqXHR, exception) {
+    if (window.location.href.indexOf("amolca.com.co") < 1) {
+      window.location.href = 'http://www.amolca.com';
+    }
+    return console.log('ARGENTINA')
+  });
+    */
 
 });

@@ -20,7 +20,7 @@ fbq('track', 'Lead');
 		</div>
 		<!--Information column-->
 		<div class="col s12 m9 l9 information">
-			<h2 class="name">{{$author->title}}</h2>
+			<h2 class="name">{!! $author->title !!}</h2>
 			<div class="description">{!! $author->content !!}</div>
 		</div>
 	</div>
@@ -28,7 +28,7 @@ fbq('track', 'Lead');
 	<div class="common-separator"></div>
 
 	<div class="author-books">
-		<p class="subtitle">Libros de <b>{{$author->title}}</b></p>
+		<p class="subtitle">Libros de <b>{!! $author->title !!}</b></p>
 
 		@php
 			$books_options = [ 

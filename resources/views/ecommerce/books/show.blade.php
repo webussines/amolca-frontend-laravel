@@ -71,8 +71,10 @@ fbq('track', 'Lead');
 					<p class="price">{{ COPMoney($inventory->price) }}</p>
 				@endif
 			@endforeach
-
-			<p class="shipping">¡Envío gratis a cualquier ciudad de Colombia!</p>
+			
+			@if (get_option('sitecountry') == 'COLOMBIA')
+				<p class="shipping">¡Envío gratis a cualquier ciudad de Colombia!</p>
+			@endif
 			
 			<!--Specialties icons-->
 			<div class="cont-specialties">

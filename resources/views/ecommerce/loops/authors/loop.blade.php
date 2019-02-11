@@ -23,7 +23,7 @@
 			<div class="content">
 				<div class="image">
 					<a href="/autor/{{$author->slug}}">
-						<img src="{{$author->thumbnail}}" title="{{$author->title}}" alt="{{$author->title}}">
+						<img src="{{$author->thumbnail}}" title="{!! $author->title !!}" alt="{!! $author->title !!}">
 					</a>
 				</div>
 				<div class="info">

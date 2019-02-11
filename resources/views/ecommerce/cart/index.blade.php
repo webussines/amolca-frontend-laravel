@@ -108,7 +108,7 @@ fbq('track', 'AddToWishlist');
 				</tr>
 				<tr id="shipping">
 					<th>Envío:</th>
-					@if (env('APP_COUNTRY') == 'COLOMBIA')
+					@if (get_option('sitecountry') == 'COLOMBIA')
 						<td>Envío gratuito a cualquier lugar de Colombia</td>
 					@endif
 				</tr>

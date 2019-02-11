@@ -106,7 +106,7 @@
 
 					<!--Button column-->
 					<div class="col s12 m12 l12">
-						<input type="hidden" id="country" name="country" value="{{ env('APP_COUNTRY') }}">
+						<input type="hidden" id="country" name="country" value="{{ get_option('sitecountry') }}">
 						<input type="submit" class="button primary" value="¡Pagar ahora!">
 					</div>
 
@@ -147,7 +147,7 @@
 				</tr>
 				<tr id="shipping">
 					<th>Envío:</th>
-					@if (env('APP_COUNTRY') == 'COLOMBIA')
+					@if (get_option('sitecountry') == 'COLOMBIA')
 						<td>Envío gratuito a cualquier lugar de Colombia</td>
 					@endif
 				</tr>
