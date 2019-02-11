@@ -28,6 +28,7 @@
 				<th class="title">Titulo:</th>
 				<th class="slug">Slug:</th>
 				<th class="specialty">Número de ítems:</th>
+				<th class="country">País:</th>
 				<th class="specialty">Estado:</th>
 				<th class="actions">Acciones:</th>
 			</tr>

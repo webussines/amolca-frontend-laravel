@@ -59,6 +59,10 @@ const createDataTable = function() {
 	    		}
 	    	},
 	    	{ 	
+	    		data: "country_name",
+	    		className: "country"
+	    	},
+	    	{ 	
 	    		data: "state",
 	    		className: "state",
 	    		"render": function (data, type, JsonResultRow, meta) {
