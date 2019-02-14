@@ -103,14 +103,16 @@ const GetPrices = function() {
 		elem.price = 0;
 		elem.quantity = 0;
 
+		
 		//Condicional para parsear el "precio" si es una variable tipo "string"
+		/*
 		if(typeof price == 'string' && price !== '' && price !== ' ') {
 			elem.price = parseInt($(this).find('.country-price').val());
 		} else if(price == '' || price == ' ') {
 			elem.price = 0;
-		} else {
-			elem.price = $(this).find('.country-price').val();
 		}
+		*/
+		elem.price = $(this).find('.country-price').val();
 
 		//Condicional para parsear el "cantidad" si es una variable tipo "string"
 		if(typeof quantity == 'string' && quantity !== '' && quantity !== ' ') {
@@ -361,6 +363,8 @@ const SaveBookInfo = function() {
 		$('.select2-selection--multiple').addClass('field-error');
 		flag = false;
 	}
+
+	// return console.log(book.inventory);
 
 	if(flag) {
 		$.ajax({

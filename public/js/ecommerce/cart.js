@@ -120,7 +120,7 @@ const AddCartProdut = (added, page, actions = null) => {
 		data: added
 	}).done(function(resp) {
 
-		//console.log(resp)
+		//console.log('order', resp)
 
 		let amount_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');
 		let subtotal_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');

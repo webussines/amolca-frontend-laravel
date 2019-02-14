@@ -1,4 +1,7 @@
 @extends('ecommerce.layouts.site')
+@section('meta')
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+@endsection
 
 @section('title', 'Finalizar compra - Amolca Editorial Médica y Odontológica')
 
@@ -9,8 +12,8 @@
 
 <!--Add single books scripts-->
 @section('scripts')
-<script src="{{ asset('js/payments/tucompra/redirect.js') }}"></script>
-<script src="{{ asset('js/payments/tucompra/payment.js') }}"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AX1NFLhCijJRNeF0LSe3WxowryHscT4IuMcjLt6YbTxsAVeN67Vvaw36YkNG4nZryi747-DcJPGPCYt2"></script>
+<script src="{{ asset('js/payments/paypal/payment.js') }}"></script>
 @endsection
 
 @section('contentClass', 'page-container order')
@@ -82,8 +85,9 @@
 
 					<!--Postal code column-->
 					<div class="col s12 m6 l6">
-						<label for="postal_code">Código postal:</label>
-						<input type="text" name="postal_code" id="postal_code" placeholder="Escribe tu código postal...">
+						<label for="postal_code"><span class="required">*</span> Código postal:</label>
+						<input type="text" name="postal_code" class="required-field" id="postal_code" placeholder="Escribe tu código postal...">
+						<p id="error-postal_code" class="error"></p>
 					</div>
 
 					<!--Notes column-->
@@ -107,7 +111,8 @@
 					<!--Button column-->
 					<div class="col s12 m12 l12">
 						<input type="hidden" id="country" name="country" value="{{ get_option('sitecountry') }}">
-						<input type="submit" class="button primary" value="¡Pagar ahora!">
+						<input type="hidden" id="total-amount" name="total-amount" value="{{ $cart->amount }}">
+						<div id="paypal-button-container"></div>
 					</div>
 
 				</div> 
@@ -145,12 +150,12 @@
 						<td>{{ COPMoney($cart->amount) }}</td>
 					@endif
 				</tr>
-				<tr id="shipping">
-					<th>Envío:</th>
-					@if (get_option('sitecountry') == 'COLOMBIA')
+				@if (get_option('sitecountry') == 'COLOMBIA')
+					<tr id="shipping">
+						<th>Envío:</th>
 						<td>Envío gratuito a cualquier lugar de Colombia</td>
-					@endif
-				</tr>
+					</tr>
+				@endif
 				@if ( session('coupon') )
 					@php
 						$amount = '';

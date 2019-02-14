@@ -112,7 +112,7 @@ const UpdateOrder = (data) => {
 const RedirectFunction = (user, order) => {
 
 	//Cambiar el valor en el botón del carrito en el header
-	$('.top-bar #cart-btn span').html("$0");
+	$('.top-bar #cart-btn span').html("$0 COP");
 
 	//const service = 'https://demover3-1.tucompra.net/tc/app/inputs/compra.jsp';
 	const service = 'https://gateway2.tucompra.com.co/tc/app/inputs/compra.jsp';

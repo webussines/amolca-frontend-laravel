@@ -106,12 +106,12 @@ fbq('track', 'AddToWishlist');
 						<td>{{ COPMoney($cart->amount) }}</td>
 					@endif
 				</tr>
-				<tr id="shipping">
-					<th>Envío:</th>
-					@if (get_option('sitecountry') == 'COLOMBIA')
+				@if (get_option('sitecountry') == 'COLOMBIA')
+					<tr id="shipping">
+						<th>Envío:</th>
 						<td>Envío gratuito a cualquier lugar de Colombia</td>
-					@endif
-				</tr>
+					</tr>
+				@endif
 				@if ( isset($cart->subtotal) && session('coupon') )
 					@php
 						$amount = '';

@@ -279,8 +279,10 @@ class CartsController extends Controller
 
                 $normal_amount = 0;
 
-                for ($i = 0; $i < count( $order->products ); $i++) {
-                    $normal_amount += $order->products[$i]->price * $order->products[$i]->quantity;
+                if(isset($order->products) && count($order->products) > 0) {
+                    for ($i = 0; $i < count( $order->products ); $i++) {
+                        $normal_amount += $order->products[$i]->price * $order->products[$i]->quantity;
+                    }
                 }
 
                 $order->amount = $normal_amount;

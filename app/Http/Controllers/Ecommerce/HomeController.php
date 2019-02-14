@@ -8,6 +8,7 @@ use App\Repositories\Authors;
 use App\Repositories\Sliders;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {

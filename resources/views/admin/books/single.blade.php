@@ -408,7 +408,7 @@
                         </div>
                         <div class="col s12 m2">
                             <label for="price"><span class="required">*</span> Precio:</label>
-                            <input type="text" class="country-price" id="price" name="price" value="{{ $country->price }}">
+                            <input type="number" class="country-price" id="price" name="price" value="{{ $country->price }}">
                         </div>
                         <div class="col s12 m2">
                             <label for="country-state">Estado:</label>

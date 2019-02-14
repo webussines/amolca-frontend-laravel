@@ -5,7 +5,20 @@ use App\Http\Models\Menus;
 use App\Http\Models\MenuItems;
 
 function COPMoney($money) {
-    return '$' . number_format($money, 0, ',', '.');
+
+	switch (get_option('sitecountry')) {
+		case 'COLOMBIA':
+			return '$' . number_format($money, 0, ',', '.') . ' COP';
+			break;
+
+		case 'PANAMA':
+			return '$' . number_format($money, 2, '.', ',') . ' USD';
+			break;
+		
+		default:
+			# code...
+			break;
+	}
 }
 
 /*Mailer*/

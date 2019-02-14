@@ -43,6 +43,11 @@ Route::group(['prefix' => 'am-admin'], function() {
 		    'cupones' => 'Admin\AdminCouponsController',
 		]);
 
+		//Routes for payments settings
+		Route::get('pagos', 'Admin\AdminPaymentsController@index');
+		Route::get('pagos/tu-compra', 'Admin\AdminPaymentsController@tucompra');
+		Route::get('pagos/paypal', 'Admin\AdminPaymentsController@paypal');
+
 		Route::get('carritos', 'Admin\AdminOrdersController@carts');
 		Route::get('carritos/{id}', 'Admin\AdminOrdersController@show');
 
