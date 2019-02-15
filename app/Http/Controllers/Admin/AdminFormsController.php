@@ -21,9 +21,14 @@ class AdminFormsController extends Controller
     }
 
     public function all() {
+        
         $params = "";
 
-        $forms = $this->forms->all($params);
+        if( session('user')->role != ('SUPERADMIN') ) {
+            $params = 'country=' . session('user')->country;
+        }
+
+        $forms = $this->forms->all('contact', $params);
 
         if($this->request->ajax()) {
             $resp = [];

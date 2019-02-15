@@ -782,7 +782,7 @@ form.big-searcher {
         position: fixed;
         right: 0px;
         top: 132px;
-        z-index: 1000;
+        z-index: 100000;
     }
     .progress {
         background-color: #85d2ff !important;
@@ -888,7 +888,7 @@ form.big-searcher {
         }
 
     .books-loop .item .info {
-        padding: 15px 30px 20px;
+        padding: 15px 25px 20px;
         position: relative;
         text-align: left;
     }
@@ -924,23 +924,22 @@ form.big-searcher {
             .books-loop .item .actions .price {
                 color: #00396f;
                 font-weight: 700;
-                font-size: 20px;
+                font-size: 18px;
             }
             .books-loop .item .actions a {
                 cursor: pointer;
                 display: inline-block;
-                height: 36px;
-                line-height: 43px;
+                height: 30px;
+                line-height: 35px;
                 text-align: center;
                 text-decoration: none;
-                width: 35px;
+                width: 30px;
             }
                 .books-loop .item .actions .cart-btn {
                     color: #00396f;
                 }
                 .books-loop .item .actions .hearth-btn {
                     color: #e2231a;
-                    margin-left: 5px;
                 }
         .books-loop .item .actions.without-price {
             justify-content: flex-start;

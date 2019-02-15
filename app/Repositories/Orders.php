@@ -8,11 +8,11 @@ class Orders extends GuzzleHttpRequest {
 
 	public $country = "COLOMBIA";
 
-	public function all($params = 'limit=30') {
+	public function all($params = 'limit=1000') {
         return $this->get("orders?{$params}");
 	}
 
-	public function all_carts($params = 'limit=30') {
+	public function all_carts($params = 'limit=1000') {
         return $this->get("orders/carts?{$params}");
 	}
 

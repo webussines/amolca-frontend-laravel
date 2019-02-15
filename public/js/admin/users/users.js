@@ -60,6 +60,8 @@ const createDataTable = function() {
 		}
     }
 
+    console.log(route)
+
 	var table = $('table.users').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todos"]],
@@ -98,7 +100,7 @@ const createDataTable = function() {
                 }
 	    	},
 	    	{ 	
-	    		data: "country",
+	    		data: "country_name",
 	    		className: "country"
 	    	},
 	    	{ 	

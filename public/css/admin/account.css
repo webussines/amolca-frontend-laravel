@@ -328,13 +328,16 @@
 .data-table {
     width: 100% !important;
 }
-    .dataTables_wrapper .cont-btn-load-more {
+
+    .dataTables_wrapper .dt-buttons {
         float: left;
-        margin-right: 30px;
+        margin-top: 22px;
+        margin-right: 15px;
     }
-        .dataTables_wrapper .cont-btn-load-more .button {
-            padding-bottom: 10.5px;
-            padding-top: 10.5px;
+        .dataTables_wrapper .dt-buttons .button,
+        .dataTables_wrapper .dt-buttons button.button {
+            padding-bottom: 13.5px !important;
+            padding-top: 13.5px !important;
         }
 
     .data-table thead th {
@@ -480,6 +483,7 @@ div#book-modal {
     position: fixed;
     right: 0px;
     top: 42px;
+    z-index: 100000;
 }
 
 .col.col-image {

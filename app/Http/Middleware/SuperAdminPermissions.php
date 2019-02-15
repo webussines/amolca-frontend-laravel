@@ -46,6 +46,10 @@ class SuperAdminPermissions
             case 'AdminOrdersController':
                 $route_to_redirect = '/am-admin/pedidos';
                 break;
+
+            case 'AdminUsersController':
+                $route_to_redirect = '/am-admin/clientes';
+                break;
             
             default:
                 $route_to_redirect = '/am-admin/libros';

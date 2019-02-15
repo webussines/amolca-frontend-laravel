@@ -22,6 +22,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		//Custom routes for "Setting"
 		Route::prefix('ajustes')->group(function(){
 			Route::get('/', 'Admin\AdminSettingsController@settings');
+			Route::get('/tienda', 'Admin\AdminSettingsController@shop');
 		});
 
 		//Custom routes for "LIBROS"

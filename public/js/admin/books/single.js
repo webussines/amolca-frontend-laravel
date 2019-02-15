@@ -103,7 +103,6 @@ const GetPrices = function() {
 		elem.price = 0;
 		elem.quantity = 0;
 
-		
 		//Condicional para parsear el "precio" si es una variable tipo "string"
 		/*
 		if(typeof price == 'string' && price !== '' && price !== ' ') {
@@ -112,7 +111,7 @@ const GetPrices = function() {
 			elem.price = 0;
 		}
 		*/
-		elem.price = $(this).find('.country-price').val();
+		elem.price = $(this).find('.country-price').val().replace(/,/gi, ".");
 
 		//Condicional para parsear el "cantidad" si es una variable tipo "string"
 		if(typeof quantity == 'string' && quantity !== '' && quantity !== ' ') {
@@ -251,14 +250,15 @@ const SaveBookInfo = function() {
 	//Unique values
 	let id = $('#id').val();
 	let title = $('#title').val();
+	let thumbnail = $('#image-url').val();
 	let isbn = $('#isbn').val();
 	let state = $('#state').val();
 	let publication = $('#publication-year').val();
 	let pages = $('#number-pages').val();
 	let volumes = $('#number-volumes').val();
-	let description = $('#description').val().replace(/"/gi, "'");
-	let index = $('#index').val().replace(/"/gi, "'");
-	let keyPoints = $('#key-points').val().replace(/"/gi, "'");
+	let description = tinyMCE.get('description').getContent().replace(/"/gi, "'");
+	let index = tinyMCE.get('index').getContent().replace(/"/gi, "'");
+	let keyPoints = tinyMCE.get('key-points').getContent().replace(/"/gi, "'");
 	let author = $('#autores').val();
 
 	//Multiple values
@@ -266,11 +266,6 @@ const SaveBookInfo = function() {
 	let attributes = GetAttributes();
 	let specialties = GetCheckedSpecialties(); 
 	let countries = GetPrices();
-
-	//Formateando valores numericos
-	if(typeof pages == 'string') {
-		pages = parseInt(pages);
-	}
 
 	if(typeof volumes == 'string') {
 		volumes = parseInt(volumes);
@@ -284,13 +279,19 @@ const SaveBookInfo = function() {
 		title: title,
 		state: state,
 		content: description,
+		thumbnail: thumbnail,
 		taxonomies: specialties,
 		inventory: countries,
 		user_id: _user,
+		type: 'book',
 		meta: [
 			{
 				"key": "isbn",
 				"value": isbn
+			},
+			{
+				"key": "index",
+				"value": index
 			},
 			{
 				"key": "key_points",
@@ -336,15 +337,18 @@ const SaveBookInfo = function() {
 	}
 
 	let ActionRoute;
+	let send;
 	
 	switch(_action) {
 		case 'edit':
+		    send = book;
 			ActionRoute = '/am-admin/books/edit/' + id;
 		break;
 
 		case 'create':
 			ActionRoute = '/am-admin/libros';
 			book.slug = GenerateSlug(book.title);
+			send = [ book ];
 		break;
 	}
 
@@ -364,14 +368,12 @@ const SaveBookInfo = function() {
 		flag = false;
 	}
 
-	// return console.log(book.inventory);
-
 	if(flag) {
 		$.ajax({
 			method: 'POST',
 			url: ActionRoute,
 			data: {
-				"body": book,
+				"body": send,
 				"_token": _token
 			}
 		}).done(function(resp) {
@@ -385,7 +387,7 @@ const SaveBookInfo = function() {
 				}
 			}
 
-			if(data.post.id !== undefined) {
+			if(data.post !== undefined && data.post.id !== undefined) {
 				
 				switch(_action) {
 					case 'edit':
@@ -396,6 +398,10 @@ const SaveBookInfo = function() {
 					break;
 				}
 
+			}
+			
+			if(data.posts_id !== undefined && data.posts_id.length > 0) {
+			    window.location.href = '/am-admin/libros/' + data.posts_id[0];
 			}
 		}).catch(function(err) {
 			console.log(err)

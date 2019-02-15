@@ -106,14 +106,18 @@
 
         @if (session('user')->role == 'SUPERADMIN' || session('user')->role == 'ADMIN')
             <li>
-                <a data-id="form" @if ($active == 'AdminFormsController') class="actived" @endif>
+                <a @if ($active == 'AdminFormsController') class="actived" @endif href="/am-admin/formularios">
                     <span class="icon icon-contacts"></span> <span class="text">Formularios</span>
                 </a>
-
-                <ul class="submenu" data-menu="form" style="@if ($active == 'AdminFormsController') {{$submenu_show}} @endif">
-                    <li><a href="/am-admin/formularios">Ver formularios</a></li>
-                </ul>
             </li>
+        @endif
+
+        @if( session('user')->role == 'ADMIN' )
+        <li>
+            <a @if ($active == 'AdminUsersController') class="actived" @endif href="/am-admin/clientes">
+                <span class="icon icon-users"></span> <span class="text">Clientes</span>
+            </a>
+        </li>
         @endif
 
         @if (session('user')->role == 'SUPERADMIN')
@@ -125,17 +129,15 @@
                 <ul class="submenu" data-menu="users" style="@if ($active == 'AdminUsersController') {{$submenu_show}} @endif">
                     <li><a href="/am-admin/usuarios">Ver todos los usuarios</a></li>
                     <li><a href="/am-admin/clientes">Ver clientes</a></li>
-                    <li><a>Direcciones</a></li>
                     <li><a href="/am-admin/usuarios/create">Añadir usuario</a></li>
                 </ul>
             </li>
-
             <li>
-                <a data-id="users" @if ($active == 'AdminPaymentsController') class="actived" @endif>
+                <a data-id="payments" @if ($active == 'AdminPaymentsController') class="actived" @endif>
                     <span class="icon icon-payment"></span> <span class="text">Medios de pago</span>
                 </a>
 
-                <ul class="submenu" data-menu="users" style="@if ($active == 'AdminPaymentsController') {{$submenu_show}} @endif">
+                <ul class="submenu" data-menu="payments" style="@if ($active == 'AdminPaymentsController') {{$submenu_show}} @endif">
                     @switch(get_option('payment_method'))
                         @case('TUCOMPRA')
                             <li><a href="/am-admin/pagos/tu-compra">Tu compra</a></li>
@@ -160,6 +162,9 @@
             </a>
 
             <ul class="submenu" data-menu="settings" style="@if ($active == 'AdminSettingsController') {{$submenu_show}} @endif">
+                @if (session('user')->role == 'SUPERADMIN')
+                    <li><a href="/am-admin/ajustes/tienda">Tienda</a></li>
+                @endif
                 <li><a href="/am-admin/ajustes">Ajustes generales</a></li>
             </ul>
         </li>

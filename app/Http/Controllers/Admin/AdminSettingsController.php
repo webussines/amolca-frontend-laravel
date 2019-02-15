@@ -12,4 +12,8 @@ class AdminSettingsController extends Controller
 		return view('admin.settings.globals');
 	}
 
+	public function shop() {
+		return view('admin.settings.shop');
+	}
+
 }

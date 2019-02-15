@@ -97,7 +97,7 @@ jQuery(function($) {
 			"quantity": parent.find('.quantity').val(),
 			"price": parent.find('.book-price').val(),
 			"_token": $('meta[name="csrf-token"]').attr('content'),
-			"action": "update"
+			"action": "update_book_page"
 		};
 
 		AddCartProdut(item, 'book');
@@ -120,7 +120,7 @@ const AddCartProdut = (added, page, actions = null) => {
 		data: added
 	}).done(function(resp) {
 
-		//console.log('order', resp)
+		console.log('order', resp)
 
 		let amount_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');
 		let subtotal_converted = FormatMoney(resp.amount, 0, ',', '.', '$', 'before');

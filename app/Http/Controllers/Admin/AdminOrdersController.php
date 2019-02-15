@@ -33,6 +33,10 @@ class AdminOrdersController extends Controller
         $cart = (Input::get('cart')) ? Input::get('cart') : 0 ;
         $params = "carts={$cart}";
 
+        if( session('user')->role != ('SUPERADMIN') ) {
+            $params .= '&country=' . session('user')->country;
+        }
+
         $orders = $this->orders->all($params);
 
         if($this->request->ajax()) {
@@ -47,7 +51,13 @@ class AdminOrdersController extends Controller
 
     public function all_carts() {
 
-        $orders = $this->orders->all_carts();
+        $params = "";
+
+        if( session('user')->role != ('SUPERADMIN') ) {
+            $params = 'country=' . session('user')->country;
+        }
+
+        $orders = $this->orders->all_carts($params);
 
         if($this->request->ajax()) {
             $resp = [];

@@ -14,9 +14,21 @@ function COPMoney($money) {
 		case 'PANAMA':
 			return '$' . number_format($money, 2, '.', ',') . ' USD';
 			break;
-		
-		default:
-			# code...
+
+		case 'ARGENTINA':
+			return '$' . number_format($money, 2, ',', '.') . ' ARS';
+			break;
+
+		case 'MEXICO':
+			return '$' . number_format($money, 2, '.', ',') . ' MXN';
+			break;
+
+		case 'PERU':
+			return 'S/ ' . number_format($money, 2, '.', ',');
+			break;
+
+		case 'DOMINICAN REPUBLIC':
+			return 'DOP$ ' . number_format($money, 2, ',', '.');
 			break;
 	}
 }

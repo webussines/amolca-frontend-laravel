@@ -7,11 +7,11 @@ use GuzzleHttp\Client;
 class Users extends GuzzleHttpRequest {
 
 	public function all($params = null) {
-        return $this->getAuthenticated("users");
+        return $this->getAuthenticated("users?{$params}");
 	}
 
-	public function clients($params = null) {
-        return $this->getAuthenticated("users/clients");
+	public function clients($params = 'limit=1000') {
+        return $this->getAuthenticated("users/clients?{$params}");
 	}
 
 	public function me($params = null) {

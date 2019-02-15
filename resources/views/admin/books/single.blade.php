@@ -16,7 +16,7 @@
     $bookAuthor = (isset($book->author)) ? $book->author : [];
     $publication_year = (isset($book->datasheet->publication_year)) ? $book->datasheet->publication_year : 0;
     $number_pages = (isset($book->datasheet->number_pages)) ? $book->datasheet->number_pages : 0;
-    $volume = (isset($book->datasheet->volume)) ? $book->datasheet->volume : 0;
+    $volumes = (isset($book->datasheet->volumes)) ? $book->datasheet->volumes : 0;
 
     $formato = (isset($book->datasheet->formato)) ? $book->datasheet->formato : 0;
     $impresion = (isset($book->datasheet->impresion)) ? $book->datasheet->impresion : 0;
@@ -51,15 +51,15 @@
     </div>
 
     <div class="row single section-header valign-wrapper">
-        <div class="col s12 m10 l10">
-            <p class="title"> @if ($title !== '') {{$title}} @else Creando nuevo libro @endif  </p>
+        <div class="col s12 m7 l7">
+            <p class="title"> @if ($title !== '') {!! $title !!} @else Creando nuevo libro @endif  </p>
         </div>
-        <div class="col s12 m2 l2 actions">
-            <a class="btn-floating btn-large green save-resource">
-                <span class="icon-save1"></span>
+        <div class="col s12 m5 l5 actions">
+            <a class="btn-navigation green save-resource">
+                Guardar libro
             </a>
-            <a class="btn-floating btn-large red go-all-resources" href="/am-admin/libros">
-                <span class="icon-cross"></span>
+            <a class="btn-navigation red previous" href="/am-admin/libros">
+                Ver todos los libros
             </a>
         </div>
     </div>
@@ -136,7 +136,7 @@
 
                     <div class="form-group col s12 m12">
                         <label for="title"><span class="required">*</span> Título del libro:</label>
-                        <input type="text" name="title" id="title" class="required-field" placeholder="Título del libro..." value="{{ $title }}">
+                        <input type="text" name="title" id="title" class="required-field" placeholder="Título del libro..." value="{!! $title !!}">
                     </div>
 
                     <div class="form-group col s12 m12">
@@ -146,7 +146,7 @@
 
                     <div class="form-group col s12 m6">
                         <label for="isbn"><span class="required">*</span> ISBN del libro:</label>
-                        <input type="text" name="isbn" id="isbn" class="required-field" placeholder="ISBN del libro..." value="{{ $isbn }}">
+                        <input type="text" name="isbn" id="isbn" class="required-field" placeholder="ISBN del libro..." value="{!! $isbn !!}">
                     </div>
 
                     <div class="form-group col s12 m6">
@@ -174,7 +174,7 @@
                                         @endphp
                                     @endforeach
                                 @endif
-                                <option {{ $checked }} value="{{ $aut->id }}">{{ $aut->title }}</option>
+                                <option {{ $checked }} value="{{ $aut->id }}">{!! $aut->title !!}</option>
                             @endforeach
 
                         </select>
@@ -246,12 +246,12 @@
 
                 <div id="indice" class="content-tabs subtab">
                     <div class="form-group">
-                        <textarea name="index" id="index" class="common-editor">{{ $index }}</textarea>
+                        <textarea name="index" id="index" class="common-editor">{!! $index !!}</textarea>
                     </div>
                 </div>
                 <div id="puntos-clave" class="content-tabs subtab">
                     <div class="form-group">
-                        <textarea name="key-points" id="key-points" class="common-editor">{{ $keypoints }}</textarea>
+                        <textarea name="key-points" id="key-points" class="common-editor">{!! $keypoints !!}</textarea>
                     </div>
                 </div>
 
@@ -282,7 +282,7 @@
 
                                     <input type="checkbox" name="specialty" id="specialty-{{$specialty->id}}"  {{$checked}} value="{{$specialty->id}}">
 
-                                    <span>{{$specialty->title}}</span>
+                                    <span>{!! $specialty->title !!}</span>
                                 </label>
 
                             </div>
@@ -307,7 +307,7 @@
 
                                             <input type="checkbox" name="specialty" id="specialty-{{$child->id}}"  {{$checked}} value="{{$child->id}}">
 
-                                            <span>{{$child->title}}</span>
+                                            <span>{!! $child->title !!}</span>
                                         </label>
                                     </div>
                                     
@@ -330,7 +330,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="publication-year"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="publication-year" name="publication-year" value="{{ $publication_year }}">
+                    <input type="number" id="publication-year" name="publication-year" value="{!! $publication_year !!}">
                 </div>
             </div>
 
@@ -341,7 +341,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="number-pages"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="number-pages" name="number-pages" value="{{ $number_pages }}">
+                    <input type="text" id="number-pages" name="number-pages" value="{!! $number_pages !!}">
                 </div>
             </div>
 
@@ -352,7 +352,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="number-volumes"><span class="required">*</span> Valor:</label>
-                    <input type="number" id="number-volumes" name="number-volumes" value="{{ $volume }}">
+                    <input type="number" id="number-volumes" name="number-volumes" value="{!! $volumes !!}">
                 </div>
             </div>
 
@@ -367,7 +367,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="impresion"><span class="required">*</span> Valor:</label>
-                    <input type="text" id="impresion" name="impresion" value="{{ $impresion }}">
+                    <input type="text" id="impresion" name="impresion" value="{!! $impresion !!}">
                 </div>
             </div>
 
@@ -378,7 +378,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="formato"><span class="required">*</span> Valor:</label>
-                    <input type="text" id="formato" name="formato" value="{{ $formato }}">
+                    <input type="text" id="formato" name="formato" value="{!! $formato !!}">
                 </div>
             </div>
 
@@ -389,7 +389,7 @@
                 </div>
                 <div class="col s6 m5">
                     <label for="tapa"><span class="required">*</span> Valor:</label>
-                    <input type="text" id="tapa" name="tapa" value="{{ $tapa }}">
+                    <input type="text" id="tapa" name="tapa" value="{!! $tapa !!}">
                 </div>
             </div>
 
@@ -408,7 +408,7 @@
                         </div>
                         <div class="col s12 m2">
                             <label for="price"><span class="required">*</span> Precio:</label>
-                            <input type="number" class="country-price" id="price" name="price" value="{{ $country->price }}">
+                            <input type="text" class="country-price" id="price" name="price" value="{{ $country->price }}">
                         </div>
                         <div class="col s12 m2">
                             <label for="country-state">Estado:</label>
@@ -455,11 +455,11 @@
         </div>
 
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large green save-resource">
-                <span class="icon-save1"></span>
+            <a class="btn-navigation green save-resource">
+                Guardar libro
             </a>
-            <a class="btn-floating btn-large red go-all-resources" href="/am-admin/libros">
-                <span class="icon-cross"></span>
+            <a class="btn-navigation red previous" href="/am-admin/libros">
+                Ver todos los libros
             </a>
         </div>
 

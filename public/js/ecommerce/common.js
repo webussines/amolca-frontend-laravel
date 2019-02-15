@@ -68,8 +68,45 @@ const FormatMoney = (n, c, d, t, sym, sympos) => {
 			d = '.';
 			break;
 
+		case 'ARGENTINA':
+			c = 2;
+			sym = '$';
+			sympos = 'before';
+			code = 'ARS';
+			d = ',';
+			break;
+
+		case 'MEXICO':
+			c = 2;
+			sym = '$';
+			sympos = 'before';
+			code = 'MXN';
+			t = ',';
+			d = '.';
+			break;
+
+		case 'PERU':
+			c = 2;
+			sym = 'S/ ';
+			sympos = 'before';
+			t = ',';
+			d = '.';
+			break;
+
+		case 'DOMINICAN REPUBLIC':
+			c = 2;
+			sym = 'DOP$ ';
+			sympos = 'before';
+			t = '.';
+			d = ',';
+			break;
+
 		default:
-			// statements_def
+			c = 2;
+			sym = '$';
+			sympos = 'before';
+			code = 'USD';
+			d = '.';
 			break;
 	}
 

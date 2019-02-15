@@ -16,6 +16,9 @@ class AdminUsersController extends Controller
     protected $countries;
 
     public function __construct(Users $users, Request $request, Countries $countries) {
+
+        $this->middleware('superadmin', [ "except" => [ "clients", "getclients" ] ]);
+
         $this->users = $users;
         $this->request = $request;
         $this->countries = $countries;
@@ -36,7 +39,12 @@ class AdminUsersController extends Controller
 
     public function index()
     {
-        $params = "orderby=title&order=1&limit=100&skip=0";
+        $params = '';
+
+        if( session('user')->role != ('SUPERADMIN') ) {
+            $params = 'country=' . session('user')->country;
+        }
+
         $users = $this->users->all($params);
 
         return view('admin.users.index', ['users' => $users, 'action' => 'all']);
@@ -44,16 +52,29 @@ class AdminUsersController extends Controller
 
     public function clients()
     {
-        $users = $this->users->clients();
+
+        $params = '';
+
+        if( session('user')->role !== ('SUPERADMIN') ) {
+            $params = 'country=' . session('user')->country;
+        }
+
+        $users = $this->users->clients($params);
 
         return view('admin.users.index', ['users' => $users, 'action' => 'clients']);
     }
 
     public function getclients()
     {
-        $resp = [];
 
-        $resp['data'] = $this->users->clients();
+        $params = '';
+
+        if( session('user')->role !== ('SUPERADMIN') ) {
+            $params = 'country=' . session('user')->country;
+        }
+
+        $resp = [];
+        $resp['data'] = $this->users->clients($params);
 
         return $resp;
     }

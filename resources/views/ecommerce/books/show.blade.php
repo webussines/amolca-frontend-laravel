@@ -1,5 +1,18 @@
 @extends('ecommerce.layouts.site')
 
+@php
+	$showaddtocart = true;
+	$showprices = true;
+
+	if (get_option('shop_catalog_mode') == 'SI') {
+		$showaddtocart = false;
+	}
+
+	if (get_option('shop_show_prices') == 'NO') {
+		$showprices = false;
+	}
+@endphp
+
 @section('fbPixel')
 fbq('track', 'AddToCart');
 fbq('track', 'AddToWishlist');
@@ -37,13 +50,17 @@ fbq('track', 'Lead');
 				@foreach ($book->inventory as $inventory)
 					@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK")
 					<div class="scroll-info">
-						<p class="price">{{ COPMoney($inventory->price) }}</p>
-						<div class="add-to-cart">
-							<input type="hidden" class="book-id" value="{{ $book->id }}">
-							<input type="hidden" class="book-price" value="{{ $inventory->price }}">
-							<input class="qty" placeholder="Cantidad..." type="number">
-							<button class="add-btn button danger waves-effect waves-light">Añadir al carrito</button>
-						</div>
+						@if ($showprices)
+							<p class="price">{{ COPMoney($inventory->price) }}</p>
+						@endif
+						@if ($showaddtocart)
+							<div class="add-to-cart">
+								<input type="hidden" class="book-id" value="{{ $book->id }}">
+								<input type="hidden" class="book-price" value="{{ $inventory->price }}">
+								<input class="qty" placeholder="Cantidad..." type="number">
+								<button class="add-btn button danger waves-effect waves-light">Añadir al carrito</button>
+							</div>
+						@endif
 					</div>
 					@endif
 				@endforeach
@@ -67,7 +84,7 @@ fbq('track', 'Lead');
 			</h3>
 
 			@foreach ($book->inventory as $inventory)
-				@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK")
+				@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showprices)
 					<p class="price">{{ COPMoney($inventory->price) }}</p>
 				@endif
 			@endforeach
@@ -128,7 +145,7 @@ fbq('track', 'Lead');
 			</div>
 
 			@foreach ($book->inventory as $inventory)
-				@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK")
+				@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showaddtocart)
 					<div class="add-to-cart">
 						<input type="hidden" class="book-id" value="{{ $book->id }}">
 						<input type="hidden" class="book-price" value="{{ $inventory->price }}">

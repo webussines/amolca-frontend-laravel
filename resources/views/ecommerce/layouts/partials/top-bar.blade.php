@@ -19,16 +19,18 @@
 		</ul>
 	</div>
 	<ul id="top-bar-btns">
-		<li>
-			<a class="waves-effect waves-light" id="cart-btn" routerlink="/carrito" href="/carrito">
-				<i class="icon-shopping-cart1"></i>
-				@if (session('cart') !== null)
-					<span>{{ COPMoney(session('cart')->amount) }}</span>
-				@else
-					<span>{{ COPMoney(0) }}</span>
-				@endif
-			</a>
-		</li>
+		@if ( get_option('show_top_cart_btn') !== 'NO' && get_option('shop_catalog_mode') !== 'SI' )
+			<li>
+				<a class="waves-effect waves-light" id="cart-btn" routerlink="/carrito" href="/carrito">
+					<i class="icon-shopping-cart1"></i>
+					@if (session('cart') !== null)
+						<span>{{ COPMoney(session('cart')->amount) }}</span>
+					@else
+						<span>{{ COPMoney(0) }}</span>
+					@endif
+				</a>
+			</li>
+		@endif
 		@if ( session('user') === null )
 			<li>
 				<a id="login-btn" href="/iniciar-sesion">

@@ -168,7 +168,7 @@
                         <label for="country"><span class="required">*</span> País:</label>
                         <select name="country" id="country" class="select2-normal">
                             @foreach ($countries as $pais)
-                                <option value="{{ $pais->title }}" @if ($country == strtoupper($pais->title)) selected="selected" @endif>{{ $pais->title }}</option>
+                                <option value="{{ $pais->id }}" @if ($country == strtoupper($pais->id)) selected="selected" @endif>{{ $pais->title }}</option>
                             @endforeach
                         </select>
                     </div>

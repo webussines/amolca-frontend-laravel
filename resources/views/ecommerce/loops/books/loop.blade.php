@@ -99,9 +99,23 @@
 				@if ( isset($book->inventory) && count($book->inventory) > 0 )
 					@for ($c = 0; $c < count($book->inventory); $c++)
 						
-						@php $inventory = $book->inventory[$c]; @endphp
+						@php 
+							$inventory = $book->inventory[$c]; 
+							$activeds = [];
 
-						@if (strtoupper($inventory->country_name) == get_option('sitecountry'))
+							$showactions = true;
+
+							if (get_option('shop_catalog_mode') == 'SI' && get_option('shop_show_prices') !== 'NO') {
+								$showactions = true;
+							} else if(get_option('shop_catalog_mode') == 'SI' && get_option('shop_show_prices') == 'NO') {
+								$showactions = false;
+							}
+						@endphp
+
+						@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $showactions)
+							@php
+								array_push($activeds, $inventory->country_name); 
+							@endphp
 							@include('ecommerce.loops.books.actions', ['show_price' => true, 'price' => $inventory->price])
 						@else
 							@include('ecommerce.loops.books.actions', ['show_price' => false])
