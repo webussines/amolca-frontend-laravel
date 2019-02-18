@@ -152,7 +152,9 @@
                     <div class="form-group col s12 m6">
                         <label for="state"><span class="required">*</span> Estado:</label>
                         <select name="state" id="state" class="normal-select">
-                            <option @if ($state == 'PUBLISHED') selected @endif value="PUBLISHED">Publicado</option>
+                            <option @if ($state == 'PUBLISHED') selected @endif value="PUBLISHED">Stock</option>
+                            <option @if ($state == 'RELEASE') selected @endif value="RELEASE">Novedad</option>
+                            <option @if ($state == 'SPENT') selected @endif value="SPENT">Agotado</option>
                             <option @if ($state == 'DRAFT') selected @endif value="DRAFT">Borrador</option>
                             <option @if ($state == 'TRASH') selected @endif value="TRASH">En papelera</option>
                         </select>
@@ -400,16 +402,22 @@
                 @foreach ($inventory as $country)
                     
                     <div class="row row-country">
+
+                        <div class="col s12">
+                            <p class="title">Precios de <span>{!! $country->country_name !!}</span>:</p>
+                        </div>
                         
                         <div class="col s12 m4">
                             <label for="name"><span class="required">*</span> País:</label>
-                            <input type="text" readonly class="country-title" id="name" name="name" value="{{ $country->country_name }}">
+                            <input type="text" readonly class="country-title" id="name" name="name" value="{!! $country->country_name !!}">
                             <input type="hidden" readonly class="country-name" id="name" name="name" value="{{ $country->country_id }}">
                         </div>
+
                         <div class="col s12 m2">
                             <label for="price"><span class="required">*</span> Precio:</label>
                             <input type="text" class="country-price" id="price" name="price" value="{{ $country->price }}">
                         </div>
+
                         <div class="col s12 m2">
                             <label for="country-state">Estado:</label>
                             <select class="country-state normal-select" name="country-state" id="country-state">
@@ -418,15 +426,30 @@
                                 <option value="SPENT" @if ($country->state == "SPENT") selected @endif>Agotado</option>
                             </select>
                         </div>
+
                         <div class="col s12 m2">
                             <label for="quantity">Cantidad:</label>
                             <input type="text" class="country-quantity" id="quantity" name="quantity" value="{{ $country->quantity }}">
                         </div>
+
                         <div class="col s12 m2">
                             <label>Acciones:</label>
                             <div>
-                                <button class="button primary delete-attribute">Borrar</button>
+                                <input type="button" class="button primary delete-country" value="Borrar">
                             </div>
+                        </div>
+
+                        <div class="col s4">
+                            <label for="active_offer">Activar oferta:</label>
+                            <select name="country-active_offer" id="country-active_offer" class="country-active_offer normal-select">
+                                <option @if ($country->active_offer == '1') selected @endif value="1">Activa</option>
+                                <option @if ($country->active_offer == '0') selected @endif value="0">Inactiva</option>
+                            </select>
+                        </div>
+
+                        <div class="col s4">
+                            <label for="offer_price">Precio en oferta:</label>
+                            <input type="text" class="country-offer_price" id="offer_price" name="offer_price" value="{{ $country->offer_price }}">
                         </div>
 
                     </div>

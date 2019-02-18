@@ -14,7 +14,7 @@ class AdminAuth
     {
         if(!session('access_token')) {
             if(!session('user') || !in_array(session('user')->role, $roles)) {
-            	return redirect('/am-admin');
+            	return redirect('/am-admin?redirect=' . $request->url());
             }
         }
 

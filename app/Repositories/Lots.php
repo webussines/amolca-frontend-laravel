@@ -16,6 +16,10 @@ class Lots extends GuzzleHttpRequest {
 		return $this->get("lots/{$id}");
 	}
 
+	public function findByPost($id) {
+		return $this->get("lots/posts/{$id}");
+	}
+
 	public function findMostRecent() {
 		return $this->get("lots/news/recent");
 	}

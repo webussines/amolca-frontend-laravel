@@ -52,26 +52,26 @@
                 
                 <tr>
                     <th>Enviado por:</th>
-                    <td>{!! $form->name !!} - <b>[{{ $form->from }}]</b></td>
+                    <td>{!! $form->name !!} - <b>[{!! $form->from !!}]</b></td>
                 </tr>
 
                 @if ($form->cc !== null)
                     <tr>
                         <th>Con copia a:</th>
-                        <td>{{ $form->cc }}</td>
+                        <td>{!! $form->cc !!}</td>
                     </tr>
                 @endif
 
                 <tr>
                     <th>Asunto del correo:</th>
-                    <td>{{ $form->subject }}</td>
+                    <td>{!! $form->subject !!}</td>
                 </tr>
 
                 <tr>
                     <th>Fecha de envío:</th>
                     <td>
                         @php $date = new Date($form->created_at); @endphp
-                        {{ $date->format('j F, Y') }}
+                        {!! $date->format('j F, Y') !!}
                     </td>
                 </tr>
 
@@ -82,7 +82,7 @@
 
                 <tr>
                     <th>Dominio del sitio web desde donde se envió:</th>
-                    <td>{{ $form->domain }}</td>
+                    <td>{!! $form->domain !!}</td>
                 </tr>
                 
                 @if (isset($form->items) && count($form->items) > 0)

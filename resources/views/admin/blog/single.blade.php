@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="form-group col s12 m12">
-                        <span id="slug">{{Request::root()}}/<span>{{$slug}}</span></span>
+                        <span id="slug">{{Request::root()}}/<span>{!! $slug !!}</span></span>
                     </div>
                     
                     <div class="form-group col s12">

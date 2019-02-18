@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Jenssegers\Date\Date;
 
 class BooksController extends Controller
 {
@@ -43,7 +44,28 @@ class BooksController extends Controller
 
 		$related = $this->posts->taxonomies($related_specialty, $params)->posts;
 
-		return view('ecommerce.books.show', ["book" => $book, "related" => $related]);
+		$send_data = [
+			"book" => $book,
+			"related" => $related
+		];
+
+		if($book->state == 'RELEASE') {
+			$lot = $this->lots->findByPost($book->id);
+
+			if( isset($lot->id) ) {
+				if($lot->arrival_date !== null) {
+
+					$date = format_date($lot->arrival_date);
+
+					$send_data['release'] = 'Este libro es una de nuestras novedades con fecha de llegada: <b>' . $date . '</b>.';
+
+				} else {
+					$send_data['release'] = 'Este libro es una de nuestras novedades. <b>¡Pronto podrás comprarlo!</b>.';
+				}
+			}
+		}
+
+		return view('ecommerce.books.show', $send_data);
 
 	}
 

@@ -151,7 +151,7 @@
                                 Default case...
                     @endswitch
                     
-                    <li><a href="/am-admin/usuarios">Ajustes</a></li>
+                    <li><a href="/am-admin/pagos">Ajustes</a></li>
                 </ul>
             </li>
         @endif

@@ -46,7 +46,7 @@
 
     <div class="row single section-header valign-wrapper">
 		<div class="col s12 m10 l10">
-			<p class="title">@if ($title !== '') {{$title}} @else Creando nueva especialidad @endif</p>
+			<p class="title">@if ($title !== '') {!! $title !!} @else Creando nueva especialidad @endif</p>
 		</div>
 		<div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
@@ -117,13 +117,13 @@
 
                     <div class="form-group col s12 m12">
                         <label for="title"><span class="required">*</span> Título de la especialidad:</label>
-                        <input type="text" name="title" id="title" value="{{ $title }}">
+                        <input type="text" name="title" id="title" value="{!! $title !!}">
                     </div>
 
                     <div class="form-group col s12 m12">
                         <label for="slug"><span class="required">*</span> Slug:</label>
                         @if ($slug !== '')
-                        {{$slug}}
+                        {!! $slug !!}
                         @else
                         <input type="text" name="slug" id="slug">
                         @endif
@@ -131,7 +131,7 @@
 
                     <div class="form-group col s12 m12">
                         <label for="description">Descripción:</label>
-                        <textarea name="description" id="description">{{ $description }}</textarea>
+                        <textarea name="description" id="description">{!! $description !!}</textarea>
                     </div>
 
                 </div>

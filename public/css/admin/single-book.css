@@ -58,3 +58,19 @@
 			padding-bottom: 5px;
 			padding-top: 5px;
 		}
+
+/*Inventory*/
+.row.row-country {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 25px;
+}
+	.row.row-country .title {
+	    color: #00396f;
+	    font-size: 20px;
+	    font-style: italic;
+	    margin-bottom: 5px;
+	}
+		.row.row-country .title span {
+			font-style: normal;
+			font-weight: bold;
+		}

@@ -54,6 +54,13 @@ function mailer_get_cc() {
 	return ["gerencia@amolca.com.co", "asistentepresidencia@amolca.us", "contacto@amolca.com"];
 }
 
+function format_date($str) {
+	$date = new Date($str);
+	$date = $date->format('j F, Y');
+
+	return $date;
+}
+
 //Global function to get option of this single database
 function get_option($name) {
 	$option = Options::where('option_name', '=', $name)->first();

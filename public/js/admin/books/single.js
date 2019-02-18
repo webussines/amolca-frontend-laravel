@@ -19,6 +19,16 @@ jQuery(function($){
 		placeholder: 'Seleccione al menos un autor...'
 	});
 
+	// Borrar inventario de cada pais al hacer click sobre el botón de "borrar"
+	$('.row.row-country .delete-country').on('click', () => {
+
+		let parent = $(this)[0].activeElement;
+		let row = $(parent).parent().parent().parent();
+
+		row.remove();
+
+	});
+
 });
 
 const InitTinyMceEditor = function() {
@@ -103,6 +113,9 @@ const GetPrices = function() {
 		elem.price = 0;
 		elem.quantity = 0;
 
+		elem.active_offer = $(this).find('.country-active_offer').val();
+		elem.offer_price = $(this).find('.country-offer_price').val();
+
 		//Condicional para parsear el "precio" si es una variable tipo "string"
 		/*
 		if(typeof price == 'string' && price !== '' && price !== ' ') {
@@ -171,9 +184,21 @@ const AddNewCountry = function() {
 					    <div class="col s12 m2">
 					        <label>Acciones:</label>
 					        <div>
-					            <button class="button primary delete-attribute">Borrar</button>
+					            <input type="button" class="button primary delete-country" value="Borrar">
 					        </div>
 					    </div>
+					    <div class="col s4">
+                            <label for="active_offer">Activar oferta:</label>
+                            <select name="country-active_offer" id="country-active_offer" class="country-active_offer normal-select">
+                                <option value="1">Activa</option>
+                                <option selected value="0">Inactiva</option>
+                            </select>
+                        </div>
+
+                        <div class="col s4">
+                            <label for="offer_price">Precio en oferta:</label>
+                            <input type="text" class="country-offer_price" id="offer_price" name="offer_price" value="0">
+                        </div>
 					</div>`;
 
 		let lastRow = $('.content-tabs#precios .row-country:last');
@@ -367,6 +392,8 @@ const SaveBookInfo = function() {
 		$('.select2-selection--multiple').addClass('field-error');
 		flag = false;
 	}
+
+	console.log(send);
 
 	if(flag) {
 		$.ajax({

@@ -63,7 +63,26 @@ const sendLoginData = (username, password, token) => {
 		let error = { show: false, msg: '' };
 
 		if(data.token !== null && data.token !== undefined) {
-			return window.location.href = '/am-admin/libros';
+
+			let pass = true;
+			let params = window.location.search.substr(1).split('&');
+
+			params.forEach((item) => {
+
+				tmp = item.split("=");
+				result = null;
+		        if (tmp[0] == 'redirect') result = tmp[1];
+
+		        if(result !== null) {
+		        	pass = false;
+		        	return window.location.href = result;
+		        }
+
+			});
+
+			if(pass) {
+				return window.location.href = '/am-admin/libros';
+			}
 		}
 
 		switch (data.status) {
@@ -76,10 +95,6 @@ const sendLoginData = (username, password, token) => {
 					error.show = true;
 				break;
 			case 401:
-					error.msg = 'El usuario y la contraseña no coinciden.';
-					error.show = true;
-				break;
-			default:
 					error.msg = 'El usuario y la contraseña no coinciden.';
 					error.show = true;
 				break;

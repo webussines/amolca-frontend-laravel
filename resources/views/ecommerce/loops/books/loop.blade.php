@@ -20,12 +20,64 @@
 	@for ($i = 0; $i < count($books); $i++)
 		@php
 			$book = $books[$i];
+			$showtarget = false;
+			$target_class = '';
+			$target_text = '';
+
+			if($book->state == 'SPENT' || $book->state == 'RESERVED' || $book->state == 'RELEASE') {
+				$showtarget = true;
+			}
+
+			switch ($book->state) {
+				case 'SPENT':
+					$target_class = 'spent';
+					$target_text = 'Agotado';
+					break;
+				
+				case 'RESERVED':
+					$target_class = 'reserved';
+					$target_text = 'Reservado';
+					break;
+
+				case 'RELEASE':
+					$target_class = 'release';
+					$target_text = 'Novedad';
+					break;
+			}
+
+			foreach ($book->inventory as $inventory) {
+				if ( strtoupper($inventory->country_name) == get_option('sitecountry') ) {
+
+					switch ($inventory->state) {
+						case 'SPENT':
+							$target_class = 'spent';
+							$target_text = 'Agotado';
+							$showtarget = true;
+							break;
+						
+						case 'RESERVED':
+							$target_class = 'reserved';
+							$target_text = 'Reservado';
+							$showtarget = true;
+							break;
+					}
+				}
+
+				if($inventory->state !== 'SPENT' && $inventory->state !== 'RESERVED' && $inventory->active_offer == '1' && $inventory->offer_price > 0) {
+					$target_class = 'offer';
+					$target_text = 'En oferta!';
+					$showtarget = true;
+				}
+			}
 		@endphp
 
 		<div class="item">
 
 			<!--Portada del libro-->
 			<a class="contain-img" href="/{{ $book->slug }}">
+				@if($showtarget)
+				    <div class="target {{ $target_class }}">{!! $target_text !!}</div>
+				@endif
 				<img src="{{ $book->thumbnail }}" alt="{!! $book->title !!}" title="{!! $book->title !!}">
 			</a>
 
@@ -112,7 +164,7 @@
 							}
 						@endphp
 
-						@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $showactions)
+						@if ($book->state !== 'SPENT' && $book->state !== 'RELEASE' && strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showactions)
 							@php
 								array_push($activeds, $inventory->country_name); 
 							@endphp

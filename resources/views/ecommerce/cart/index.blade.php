@@ -43,7 +43,7 @@ fbq('track', 'AddToWishlist');
 						<img class="materialboxed" src="{{ $product->thumbnail }}">
 					</td>
 					<td class="name">
-						{{ $product->title }}
+						{!! $product->title !!}
 					</td>
 					<td class="price">
 						{{ COPMoney($product->price) }}

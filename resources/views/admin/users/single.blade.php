@@ -100,17 +100,17 @@
 
                     <div class="form-group col s6 m6">
                         <label for="name"><span class="required">*</span> Nombre del usuario:</label>
-                        <input type="text" name="name" id="name" class="required-field" placeholder="Nombre del usuario..." value="{{ $name }}">
+                        <input type="text" name="name" id="name" class="required-field" placeholder="Nombre del usuario..." value="{!! $name !!}">
                     </div>
 
                     <div class="form-group col s6 m6">
                         <label for="lastname"><span class="required">*</span> Apellidos del usuario:</label>
-                        <input type="text" name="lastname" id="lastname" class="required-field" placeholder="Apellidos del usuario..." value="{{ $lastname }}">
+                        <input type="text" name="lastname" id="lastname" class="required-field" placeholder="Apellidos del usuario..." value="{{!! $lastname !!}">
                     </div>
 
                     <div class="form-group col s12 m12">
                         <label for="email"><span class="required">*</span> Correo electrónico:</label>
-                        <input type="text" name="email" id="email" class="required-field" placeholder="Correo electrónico..." value="{{ $email }}">
+                        <input type="text" name="email" id="email" class="required-field" placeholder="Correo electrónico..." value="{{!! $email !!}">
                     </div>
 
                     <div class="form-group col s6 m6">
@@ -168,7 +168,7 @@
                         <label for="country"><span class="required">*</span> País:</label>
                         <select name="country" id="country" class="select2-normal">
                             @foreach ($countries as $pais)
-                                <option value="{{ $pais->id }}" @if ($country == strtoupper($pais->id)) selected="selected" @endif>{{ $pais->title }}</option>
+                                <option value="{{!! $pais->id !!}" @if ($country == strtoupper($pais->id)) selected="selected" @endif>{{!! $pais->title !!}</option>
                             @endforeach
                         </select>
                     </div>
@@ -187,24 +187,24 @@
 
                     <div class="form-group col s6 m6">
                         <label for="mobile">Número de celular:</label>
-                        <input type="text" name="mobile" id="mobile" placeholder="Número de celular..." value="{{ $mobile }}">
+                        <input type="text" name="mobile" id="mobile" placeholder="Número de celular..." value="{{!! $mobile !!}">
                     </div>
 
                     <div class="form-group col s6 m6">
                         <label for="phone">Teléfono fijo:</label>
-                        <input type="text" name="phone" id="phone" placeholder="Teléfono fijo..." value="{{ $phone }}">
+                        <input type="text" name="phone" id="phone" placeholder="Teléfono fijo..." value="{{!! $phone !!}">
                     </div>
 
                     <div class="form-group col s12 m12">
                         <label for="company">Empresa dónde trabaja:</label>
-                        <input type="text" name="company" id="company" placeholder="Empresa dónde trabaja..." value="{{ $company }}">
+                        <input type="text" name="company" id="company" placeholder="Empresa dónde trabaja..." value="{{!! $company !!}">
                     </div>
 
                 </div>
 
                 <div class="form-group col s12 m12">
                     <label for="description">Descripción:</label>
-                    <textarea name="description" id="description" placeholder="Descripción del usuario...">{{ $description }}</textarea>
+                    <textarea name="description" id="description" placeholder="Descripción del usuario...">{{!! $description !!}</textarea>
                 </div>
                 
             </div>

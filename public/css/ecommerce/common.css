@@ -858,6 +858,46 @@ form.big-searcher {
         padding-bottom: 100%;
         position: relative;
     }
+        .books-loop .item .contain-img .target {
+            color: #fff;
+            font-family: Tahoma;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 100%;
+            position: absolute;
+            padding: 8px 15px;
+            z-index: 100;
+        }
+            .books-loop .item .contain-img .target:before {
+                border-top: 15px solid transparent;
+                border-left: 15px solid;
+                border-bottom: 15px solid transparent;
+                content: '';
+                height: 0;
+                left: 100%;
+                position: absolute;
+                top: 0px;
+                width: 0;
+            }
+                .books-loop .item .contain-img .target.offer {
+                    background-color: #e2231a;
+                }
+                    .books-loop .item .contain-img .target.offer:before {
+                        border-left-color: #e2231a;
+                    }
+                .books-loop .item .contain-img .target.spent {
+                    background-color: #55b9d4;
+                }
+                    .books-loop .item .contain-img .target.spent:before {
+                        border-left-color: #55b9d4;
+                    }
+                .books-loop .item .contain-img .target.release {
+                    background-color: #00396f;
+                }
+                    .books-loop .item .contain-img .target.release:before {
+                        border-left-color: #00396f;
+                    }
+
         .books-loop .item .contain-img img {
             display: block;
             left: 50%;
@@ -926,6 +966,12 @@ form.big-searcher {
                 font-weight: 700;
                 font-size: 18px;
             }
+                .books-loop .item .actions .price span.offer-price {
+                    color: #666;
+                    font-size: 14px;
+                    font-style: italic;
+                    text-decoration: line-through;
+                }
             .books-loop .item .actions a {
                 cursor: pointer;
                 display: inline-block;

@@ -3,6 +3,30 @@
 @php
 	$showaddtocart = true;
 	$showprices = true;
+	$showtarget = false;
+	$target_class = '';
+	$target_text = '';
+
+	if($book->state == 'SPENT' || $book->state == 'RESERVED' || $book->state == 'RELEASE') {
+		$showtarget = true;
+	}
+
+	switch ($book->state) {
+		case 'SPENT':
+			$target_class = 'spent';
+			$target_text = 'Agotado';
+			break;
+		
+		case 'RESERVED':
+			$target_class = 'reserved';
+			$target_text = 'Reservado';
+			break;
+
+		case 'RELEASE':
+			$target_class = 'release';
+			$target_text = 'Novedad';
+			break;
+	}
 
 	if (get_option('shop_catalog_mode') == 'SI') {
 		$showaddtocart = false;
@@ -10,6 +34,31 @@
 
 	if (get_option('shop_show_prices') == 'NO') {
 		$showprices = false;
+	}
+
+	foreach ($book->inventory as $inventory) {
+		if ( strtoupper($inventory->country_name) == get_option('sitecountry') ) {
+
+			switch ($inventory->state) {
+				case 'SPENT':
+					$target_class = 'spent';
+					$target_text = 'Agotado';
+					$showtarget = true;
+					break;
+				
+				case 'RESERVED':
+					$target_class = 'reserved';
+					$target_text = 'Reservado';
+					$showtarget = true;
+					break;
+			}
+
+			if($inventory->state !== 'SPENT' && $inventory->state !== 'RESERVED' && $inventory->active_offer == '1' && $inventory->offer_price > 0) {
+				$target_class = 'offer';
+				$target_text = 'En oferta!';
+				$showtarget = true;
+			}
+		}
 	}
 @endphp
 
@@ -43,21 +92,36 @@ fbq('track', 'Lead');
 		<div class="col s12 l5 image-book">
 			<div id="image-container">
 				<div class="material-placeholder">
+					@if($showtarget)
+					    <div class="target {{ $target_class }}">{!! $target_text !!}</div>
+					@endif
+					
 					<img alt="{!! $book->title !!}" title="{!! $book->title !!}" class="materialboxed" src="{{ $book->thumbnail }}">
 				</div>
 
 				<!--Countries loop for scroll info interaction-->
 				@foreach ($book->inventory as $inventory)
-					@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK")
+					@if ($book->state !== 'SPENT' && $book->state !== 'RELEASE' && strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showaddtocart)
 					<div class="scroll-info">
 						@if ($showprices)
-							<p class="price">{{ COPMoney($inventory->price) }}</p>
+							@if ($inventory->active_offer == '1' && $inventory->offer_price > 0)
+								<p class="price">
+									{{ COPMoney($inventory->offer_price) }}<br/>
+									<span class="before">Antes:</span> <span class="offer-price">{{ COPMoney($inventory->price) }}</span>
+								</p>
+							@else
+								<p class="price">{{ COPMoney($inventory->price) }}</p>
+							@endif
 						@endif
 						@if ($showaddtocart)
 							<div class="add-to-cart">
 								<input type="hidden" class="book-id" value="{{ $book->id }}">
-								<input type="hidden" class="book-price" value="{{ $inventory->price }}">
-								<input class="qty" placeholder="Cantidad..." type="number">
+								@if ($inventory->active_offer == '1' && $inventory->offer_price > 0)
+									<input type="hidden" class="book-price" value="{{ $inventory->offer_price }}">
+								@else
+									<input type="hidden" class="book-price" value="{{ $inventory->price }}">
+								@endif
+								<input class="quantity" placeholder="Cantidad..." type="number" value="1">
 								<button class="add-btn button danger waves-effect waves-light">Añadir al carrito</button>
 							</div>
 						@endif
@@ -85,9 +149,19 @@ fbq('track', 'Lead');
 
 			@foreach ($book->inventory as $inventory)
 				@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showprices)
-					<p class="price">{{ COPMoney($inventory->price) }}</p>
+
+					@if ($inventory->active_offer == '1' && $inventory->offer_price > 0)
+						<p class="price">{{ COPMoney($inventory->offer_price) }} - <span class="before">Antes:</span> <span class="offer-price">{{ COPMoney($inventory->price) }}</span></p>
+					@else
+						<p class="price">{{ COPMoney($inventory->price) }}</p>
+					@endif
+
 				@endif
 			@endforeach
+
+			@if( isset($release) )
+				<p class="release_note"><span class="important">Importante:</span> {!! $release !!}</p>
+			@endif
 			
 			@if (get_option('sitecountry') == 'COLOMBIA')
 				<p class="shipping">¡Envío gratis a cualquier ciudad de Colombia!</p>
@@ -145,10 +219,14 @@ fbq('track', 'Lead');
 			</div>
 
 			@foreach ($book->inventory as $inventory)
-				@if (strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showaddtocart)
+				@if ($book->state !== 'SPENT' && $book->state !== 'RELEASE' && strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showaddtocart)
 					<div class="add-to-cart">
 						<input type="hidden" class="book-id" value="{{ $book->id }}">
-						<input type="hidden" class="book-price" value="{{ $inventory->price }}">
+						@if ($inventory->active_offer == '1' && $inventory->offer_price > 0)
+							<input type="hidden" class="book-price" value="{{ $inventory->offer_price }}">
+						@else
+							<input type="hidden" class="book-price" value="{{ $inventory->price }}">
+						@endif
 						<input class="quantity" placeholder="Cantidad..." type="number" value="1">
 						<button class="add-btn button danger waves-effect waves-light">Añadir al carrito</button>
 					</div>

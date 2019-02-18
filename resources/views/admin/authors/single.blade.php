@@ -80,7 +80,7 @@
 
     <div class="row single section-header valign-wrapper">
         <div class="col s12 m10 l10">
-            <p class="title">@if ($title !== '') {{$title}} @else Creando nuevo autor @endif</p>
+            <p class="title">@if ($title !== '') {!! $title !!} @else Creando nuevo autor @endif</p>
         </div>
         <div class="col s12 m2 l2 actions">
             <a class="btn-floating btn-large green save-resource">
@@ -160,17 +160,17 @@
 
                     <div class="form-group col s12 m12">
                         <label for="title"><span class="required">*</span> Nombre del autor:</label>
-                        <input type="text" name="title" id="title" class="required-field" placeholder="Nombre del autor..." value="{{ $title }}">
+                        <input type="text" name="title" id="title" class="required-field" placeholder="Nombre del autor..." value="{!! $title !!}">
                     </div>
 
                     <div class="form-group col s12 m12">
                         <label for="slug"><span class="required">*</span> Slug:</label>
-                        <span id="slug">{{Request::root()}}/autor/<span>{{$slug}}</span></span>
+                        <span id="slug">{{Request::root()}}/autor/<span>{!! $slug !!}</span></span>
                     </div>
 
                     <div class="form-group col s12 m12">
                         <label for="content">Descripción:</label>
-                        <textarea name="content" id="content" placeholder="Descripción del autor...">{{ $content }}</textarea>
+                        <textarea name="content" id="content" placeholder="Descripción del autor...">{!! $content !!}</textarea>
                     </div>
 
                 </div>
@@ -202,7 +202,7 @@
 
                                     <input type="checkbox" name="specialty" id="specialty-{{$specialty->id}}"  {{$checked}} value="{{$specialty->id}}">
 
-                                    <span>{{$specialty->title}}</span>
+                                    <span>{!! $specialty->title !!}</span>
                                 </label>
 
                             </div>
@@ -227,7 +227,7 @@
 
                                             <input type="checkbox" name="specialty" id="specialty-{{$child->id}}"  {{$checked}} value="{{$child->id}}">
 
-                                            <span>{{$child->title}}</span>
+                                            <span>{!! $child->title !!}</span>
                                         </label>
                                     </div>
                                     
@@ -250,7 +250,7 @@
 
                 <div class="form-group col s12 m8">
                     <label for="meta-title">Meta titulo:</label>
-                    <input type="text" id="meta-title" name="meta-title" placeholder="Meta titulo del autor..." value="{{ $meta_title }}">
+                    <input type="text" id="meta-title" name="meta-title" placeholder="Meta titulo del autor..." value="{!! $meta_title !!}">
                 </div>
             </div>
 
@@ -261,7 +261,7 @@
 
                 <div class="form-group col s12 m8">
                     <label for="meta-description">Meta descripción:</label>
-                    <textarea rows="3" id="meta-description" name="meta-description" placeholder="Meta descripción del autor...">{{$meta_description}}</textarea>
+                    <textarea rows="3" id="meta-description" name="meta-description" placeholder="Meta descripción del autor...">{!! $meta_description !!}</textarea>
                 </div>
             </div>
 
@@ -274,7 +274,7 @@
                     <label for="meta-tags">Meta etiquetas:</label>
                     
                         @if (count($meta_tags) > 0)
-                            <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Meta etiquetas del autor...">@foreach ($meta_tags as $tag){{$tag}},@endforeach</textarea>
+                            <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Meta etiquetas del autor...">@foreach ($meta_tags as $tag){!! $tag !!},@endforeach</textarea>
                         @else
                             <textarea rows="6" id="meta-tags" name="meta-tags" placeholder="Separar cada etiqueta con una comma ( , )..."></textarea>
                         @endif

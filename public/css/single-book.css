@@ -15,6 +15,45 @@
 }
 
 /*COLUMN IMAGE*/
+.image-book .target {
+    color: #fff;
+    font-family: Tahoma;
+    font-weight: bold;
+    line-height: 100%;
+    position: absolute;
+    padding: 12.5px 15px;
+    z-index: 100;
+}
+    .image-book .target:before {
+        border-top: 20px solid transparent;
+        border-left: 20px solid;
+        border-bottom: 20px solid transparent;
+        content: '';
+        height: 0;
+        left: 100%;
+        position: absolute;
+        top: 0px;
+        width: 0;
+    }
+        .image-book .target.offer {
+            background-color: #e2231a;
+        }
+            .image-book .target.offer:before {
+                border-left-color: #e2231a;
+            }
+        .image-book .target.spent {
+            background-color: #55b9d4;
+        }
+            .image-book .target.spent:before {
+                border-left-color: #55b9d4;
+            }
+        .image-book .target.release {
+            background-color: #00396f;
+        }
+            .image-book .target.release:before {
+                border-left-color: #00396f;
+            }
+
 .image-book img {
     display: block;
     height: auto;
@@ -129,13 +168,37 @@
             width: 100%;
         }
 
-.price {
-    color: #e2231a;
-    font-size: 28px;
-    font-weight: bold;
+.price  {
     line-height: 100%;
     margin: 0px;
 }
+    .price .offer-price, .price .before {
+        color: #666;
+        font-size: 22px;
+        font-weight: normal;        
+    }
+        .price .offer-price {
+            font-style: italic;
+            text-decoration: line-through;
+        }
+    .price {
+        color: #e2231a;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+.summary-book .release_note {
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-align: left;
+}
+    .summary-book .release_note .important {
+        color: #00396f;
+        font-weight: bold;
+        font-style: normal;
+    }
 
 .shipping {
     font-size: 20px;

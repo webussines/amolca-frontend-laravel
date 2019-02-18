@@ -107,7 +107,7 @@
 
     <div class="row single section-header valign-wrapper">
         <div class="col s12 m9 l9">
-            <p class="title">Pedido #{{ $order->id }} - <span>{{ $order->address->name }} {{ $order->address->lastname }}</span></p>
+            <p class="title">Pedido #{{ $order->id }} - <span>{!! $order->address->name !!} {!! $order->address->lastname !!}</span></p>
         </div>
         <div class="col s12 m3 l3 actions">
             <a class="btn-navigation red previous" href="/am-admin/pedidos">

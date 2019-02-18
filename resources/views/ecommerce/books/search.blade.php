@@ -12,7 +12,7 @@ fbq('track', 'Search');
 @section('content')
 
 <div class="header-page">
-  Resultados de busqueda para: <b>{{Request::input('s')}}</b>
+  Resultados de busqueda para: <b>{!! Request::input('s') !!}</b>
   @include('ecommerce.layouts.partials.big-searcher')
 </div>
 

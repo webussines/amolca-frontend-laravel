@@ -12,8 +12,17 @@
 
 <!--Add single books scripts-->
 @section('scripts')
-<script src="https://www.paypal.com/sdk/js?client-id=AX1NFLhCijJRNeF0LSe3WxowryHscT4IuMcjLt6YbTxsAVeN67Vvaw36YkNG4nZryi747-DcJPGPCYt2"></script>
-<script src="{{ asset('js/payments/paypal/payment.js') }}"></script>
+	@switch(get_option('payment_method'))
+	    @case('TUCOMPRA')
+	        <script src="{{ asset('js/payments/tucompra/redirect.js') }}"></script>
+			<script src="{{ asset('js/payments/tucompra/payment.js') }}"></script>
+	        @break
+
+	    @case('PAYPAL')
+		    <script src="https://www.paypal.com/sdk/js?client-id=AX1NFLhCijJRNeF0LSe3WxowryHscT4IuMcjLt6YbTxsAVeN67Vvaw36YkNG4nZryi747-DcJPGPCYt2"></script>
+			<script src="{{ asset('js/payments/paypal/payment.js') }}"></script>
+	    	@break
+	@endswitch
 @endsection
 
 @section('contentClass', 'page-container order')
@@ -112,7 +121,16 @@
 					<div class="col s12 m12 l12">
 						<input type="hidden" id="country" name="country" value="{{ get_option('sitecountry') }}">
 						<input type="hidden" id="total-amount" name="total-amount" value="{{ $cart->amount }}">
-						<div id="paypal-button-container"></div>
+
+						@switch(get_option('payment_method'))
+						    @case('TUCOMPRA')
+						        <input type="submit" class="button primary" value="¡Pagar ahora!">
+						        @break
+
+						    @case('PAYPAL')
+							    <div id="paypal-button-container"></div>
+						    	@break
+						@endswitch
 					</div>
 
 				</div> 
@@ -134,8 +152,8 @@
 				<tbody>
 					@foreach ($cart->products as $product)
 						<tr>
-							<td class="product">{{$product->title}}</td>
-							<td class="qty">{{$product->quantity}}</td>
+							<td class="product">{!! $product->title !!}</td>
+							<td class="qty">{{ $product->quantity }}</td>
 						</tr>
 					@endforeach
 				</tbody>
