@@ -97,7 +97,23 @@ const createDataTable = function() {
                   	return str;
                 }
 	    	},
-	    ]
+	    ],
+	    dom: "Blfrtip",
+		buttons: [
+			{
+				"extend": 'excel',
+				"text": 'Exportar a Excel',
+				"className": "button primary",
+				"filename": "Lotes Amolca",
+				"exportOptions": {
+					"modifier": {
+						"order":  'current',
+						"page":   'all',
+						"search": 'none',
+					}
+				}
+            }
+		]
 	});
 
 	DeleteLot('.data-table tbody', table, SortColumn);

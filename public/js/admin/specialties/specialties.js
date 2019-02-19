@@ -30,6 +30,33 @@ const language = {
 };
 
 const createDataTable = function() {
+
+	var _div = document.createElement('div');
+	jQuery.fn.dataTable.ext.type.search.html = function(data) {
+		_div.innerHTML = data;
+		return _div.textContent ?
+			_div.textContent
+				.replace(/[áÁàÀâÂäÄãÃåÅæÆ]/g, 'a')
+				.replace(/[çÇ]/g, 'c')
+				.replace(/[éÉèÈêÊëË]/g, 'e')
+				.replace(/[íÍìÌîÎïÏîĩĨĬĭ]/g, 'i')
+				.replace(/[ñÑ]/g, 'n')
+				.replace(/[óÓòÒôÔöÖœŒ]/g, 'o')
+				.replace(/[ß]/g, 's')
+				.replace(/[úÚùÙûÛüÜ]/g, 'u')
+				.replace(/[ýÝŷŶŸÿ]/g, 'n') :
+			_div.innerText.replace(/[üÜ]/g, 'u')
+				.replace(/[áÁàÀâÂäÄãÃåÅæÆ]/g, 'a')
+				.replace(/[çÇ]/g, 'c')
+				.replace(/[éÉèÈêÊëË]/g, 'e')
+				.replace(/[íÍìÌîÎïÏîĩĨĬĭ]/g, 'i')
+				.replace(/[ñÑ]/g, 'n')
+				.replace(/[óÓòÒôÔöÖœŒ]/g, 'o')
+				.replace(/[ß]/g, 's')
+				.replace(/[úÚùÙûÛüÜ]/g, 'u')
+				.replace(/[ýÝŷŶŸÿ]/g, 'n');
+	};
+
 	var table = $('table.specialties').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
@@ -76,8 +103,32 @@ const createDataTable = function() {
                   	return str;
                 }
 	    	},
-	    ]
+	    ],
+	    dom: "Blfrtip",
+		buttons: [
+			{
+				"extend": 'excel',
+				"text": 'Exportar a Excel',
+				"className": "button primary",
+				"filename": "Especialidades Amolca",
+				"exportOptions": {
+					"modifier": {
+						"order":  'current',
+						"page":   'all',
+						"search": 'none',
+					}
+				}
+            }
+		]
 	});
+
+	// Remove accented character from search input as well
+    $('.dataTables_filter input[type=search]').keyup( function () {
+        var table = $('table.specialties').DataTable(); 
+        table.search(
+            jQuery.fn.DataTable.ext.type.search.html(this.value)
+        ).draw();
+    });
 
 	DeleteBook('.data-table tbody', table);
 

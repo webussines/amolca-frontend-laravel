@@ -9,6 +9,11 @@
 @section('scripts')
 <script src="{{ asset('js/admin/books/books.js') }}"></script>
 <script src="{{ asset('libs/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('libs/datatables/js/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('libs/datatables/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('libs/datatables/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('libs/datatables/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('libs/datatables/js/jszip.min.js') }}"></script>
 @endsection
 
 @section('contentClass', 'all-books')

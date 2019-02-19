@@ -128,7 +128,23 @@ const createDataTable = function() {
                     return str;
           }
 	    	},
-	    ]
+	    ],
+      dom: "Blfrtip",
+      buttons: [
+        {
+          "extend": 'excel',
+          "text": 'Exportar a Excel',
+          "className": "button primary",
+          "filename": "Cupones Amolca",
+          "exportOptions": {
+            "modifier": {
+              "order":  'current',
+              "page":   'all',
+              "search": 'none',
+            }
+          }
+        }
+      ]
 	});
 
   DeleteCoupon('.data-table tbody', table);

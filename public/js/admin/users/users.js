@@ -113,7 +113,23 @@ const createDataTable = function() {
                   	return str;
                 }
 	    	}
-	    ]
+	    ],
+	    dom: "Blfrtip",
+		buttons: [
+			{
+				"extend": 'excel',
+				"text": 'Exportar a Excel',
+				"className": "button primary",
+				"filename": "Usuarios - Amolca",
+				"exportOptions": {
+					"modifier": {
+						"order":  'current',
+						"page":   'all',
+						"search": 'none',
+					}
+				}
+            }
+		]
 	})
 
 	$('#DataTables_Table_0_length select').formSelect();
