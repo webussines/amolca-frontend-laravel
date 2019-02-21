@@ -63,7 +63,7 @@
 					}
 				}
 
-				if($inventory->state !== 'SPENT' && $inventory->state !== 'RESERVED' && $inventory->active_offer == '1' && $inventory->offer_price > 0) {
+				if( strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->state !== 'SPENT' && $inventory->state !== 'RESERVED' && $inventory->active_offer == '1' && $inventory->offer_price > 0) {
 					$target_class = 'offer';
 					$target_text = 'En oferta!';
 					$showtarget = true;

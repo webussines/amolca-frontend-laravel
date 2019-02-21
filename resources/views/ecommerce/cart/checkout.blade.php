@@ -12,15 +12,20 @@
 
 <!--Add single books scripts-->
 @section('scripts')
-	@switch(get_option('payment_method'))
-	    @case('TUCOMPRA')
-	        <script src="{{ asset('js/payments/tucompra/redirect.js') }}"></script>
+	@switch(get_option('sitecountry'))
+	    @case('COLOMBIA')
+	        <script src="{{ asset('js/payments/redirect.js') }}"></script>
 			<script src="{{ asset('js/payments/tucompra/payment.js') }}"></script>
 	        @break
 
-	    @case('PAYPAL')
+	    @case('PANAMA')
 		    <script src="https://www.paypal.com/sdk/js?client-id=AX1NFLhCijJRNeF0LSe3WxowryHscT4IuMcjLt6YbTxsAVeN67Vvaw36YkNG4nZryi747-DcJPGPCYt2"></script>
 			<script src="{{ asset('js/payments/paypal/payment.js') }}"></script>
+	    	@break
+
+	    @case('DOMINICAN REPUBLIC')
+	    	<script src="{{ asset('js/payments/redirect.js') }}"></script>
+	    	<script src="{{ asset('js/payments/cardnet/payment.js') }}"></script>
 	    	@break
 	@endswitch
 @endsection

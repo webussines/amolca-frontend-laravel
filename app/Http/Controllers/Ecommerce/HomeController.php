@@ -18,11 +18,13 @@ class HomeController extends Controller
     protected $sliders;
     protected $lots;
 
-    public function __construct(Posts $posts, Authors $authors, Sliders $sliders, Lots $lots) {
+    public function __construct(Posts $posts, Authors $authors, Sliders $sliders, Lots $lots, Request $request) {
+
         $this->posts = $posts;
         $this->authors = $authors;
         $this->sliders = $sliders;
         $this->lots = $lots;
+
     }
 
     public function index()
@@ -71,19 +73,6 @@ class HomeController extends Controller
         return view('ecommerce.login');
     }
 
-    public function checkout() 
-    {
-
-        if (!session('cart')) {
-            return view('ecommerce.cart.empty');
-        } else {
-
-            $cart = session('cart');
-            return view('ecommerce.cart.checkout', [ 'cart' => $cart ]);
-
-        }
-    }
-
     public function contact() 
     {
         return view('ecommerce.contact');
@@ -91,6 +80,33 @@ class HomeController extends Controller
 
     public function termsandconditions() 
     {
-        return view('ecommerce.terms-and-conditions');
+        switch ( get_option('sitecountry') ) {
+
+            case 'COLOMBIA':
+
+                return view('ecommerce.terms-policy.colombia');
+
+                break;
+
+            case 'ARGENTINA':
+
+                return view('ecommerce.terms-policy.argentina');
+                
+                break;
+
+            case 'MEXICO':
+
+                return view('ecommerce.terms-policy.mexico');
+                
+                break;
+
+            case 'DOMINICAN REPUBLIC':
+
+                return view('ecommerce.terms-policy.dominican-republic');
+                
+                break;
+
+        }
     }
+
 }

@@ -132,28 +132,6 @@
                     <li><a href="/am-admin/usuarios/create">Añadir usuario</a></li>
                 </ul>
             </li>
-            <li>
-                <a data-id="payments" @if ($active == 'AdminPaymentsController') class="actived" @endif>
-                    <span class="icon icon-payment"></span> <span class="text">Medios de pago</span>
-                </a>
-
-                <ul class="submenu" data-menu="payments" style="@if ($active == 'AdminPaymentsController') {{$submenu_show}} @endif">
-                    @switch(get_option('payment_method'))
-                        @case('TUCOMPRA')
-                            <li><a href="/am-admin/pagos/tu-compra">Tu compra</a></li>
-                            @break
-
-                        @case('PAYPAL')
-                            <li><a href="/am-admin/pagos/paypal">PayPal</a></li>
-                            @break
-                    
-                        @default
-                                Default case...
-                    @endswitch
-                    
-                    <li><a href="/am-admin/pagos">Ajustes</a></li>
-                </ul>
-            </li>
         @endif
 
         <li>

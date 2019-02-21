@@ -1,0 +1,1 @@
+No existe ninguna compra realizada
