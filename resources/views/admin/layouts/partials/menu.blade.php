@@ -102,6 +102,17 @@
                     <li><a href="/am-admin/blog/create">Añadir publicación</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a data-id="events" @if ($active == 'AdminEventsController') class="actived" @endif>
+                    <span class="icon icon-newspaper"></span> <span class="text">Eventos</span>
+                </a>
+
+                <ul class="submenu" data-menu="events" style="@if ($active == 'AdminEventsController') {{$submenu_show}} @endif">
+                    <li><a href="/am-admin/eventos">Ver eventos</a></li>
+                    <li><a href="/am-admin/eventos/create">Añadir evento</a></li>
+                </ul>
+            </li>
         @endif
 
         @if (session('user')->role == 'SUPERADMIN' || session('user')->role == 'ADMIN')

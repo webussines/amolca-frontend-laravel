@@ -38,6 +38,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		    'sliders' => 'Admin\AdminSlidersController',
 		    'usuarios' => 'Admin\AdminUsersController',
 		    'blog' => 'Admin\AdminBlogsController',
+		    'eventos' => 'Admin\AdminEventsController',
 		    'pedidos' => 'Admin\AdminOrdersController',
 		    'formularios' => 'Admin\AdminFormsController',
 		    'lotes' => 'Admin\AdminLotsController',
@@ -58,6 +59,12 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::prefix('blogs')->group(function(){
 			Route::get('/', 'Admin\AdminBlogsController@all');
 			Route::post('/edit/{id}', 'Admin\AdminBlogsController@edit');
+		});
+
+		//Routes for get info "EVENTOS"
+		Route::prefix('events')->group(function(){
+			Route::get('/', 'Admin\AdminEventsController@all');
+			Route::post('/edit/{id}', 'Admin\AdminEventsController@edit');
 		});
 
 		//Routes for get info "ESPECIALIDADES"
