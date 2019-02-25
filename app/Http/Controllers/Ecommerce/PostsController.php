@@ -6,6 +6,7 @@ use App\Repositories\Posts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Ecommerce\BooksController;
+use App\Http\Controllers\Ecommerce\EventsController;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Response;
@@ -15,13 +16,15 @@ class PostsController extends Controller
 
     protected $posts;
     protected $books;
+    protected $events;
     protected $request;
     protected $pagination_number = 16;
 
-    public function __construct(Request $request, Posts $posts, BooksController $books) {
+    public function __construct(Request $request, Posts $posts, BooksController $books, EventsController $events) {
     	$this->request = $request;
         $this->posts = $posts;
         $this->books = $books;
+        $this->events = $events;
     }
     
 	public function index() {
@@ -65,6 +68,10 @@ class PostsController extends Controller
 
 			case 'book':
 				return $this->books->show($post->slug);
+				break;
+
+			case 'event':
+				return redirect('/evento/' . $post->slug);
 				break;
 		}
 

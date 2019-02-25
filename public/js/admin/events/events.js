@@ -84,8 +84,12 @@ const createDataTable = function() {
 	    		className: "title"
 	    	},
 	    	{ 	
-	    		data: "date",
-	    		className: "title"
+	    		data: "event_date",
+	    		className: "date",
+	    		render: function (data, type, JsonResultRow, meta) {
+	    			let date = new Date(JsonResultRow.event_date);
+                  	return FormattingDate(date);
+                }
 	    	},
 	    	{ 	
 	    		data: "state",
@@ -161,7 +165,7 @@ const DeletePost = function(tbody, table, sort) {
 
 		let data = table.row($(this).parents("tr")).data();
 
-		let alerta = confirm('Seguro que deseas eliminar permanentemente la publicacion: ' + data.title);
+		let alerta = confirm('Seguro que deseas eliminar permanentemente el evento: ' + data.title);
 
 		if(alerta) {
 			if($('.loader').hasClass('hidde'))
@@ -169,18 +173,18 @@ const DeletePost = function(tbody, table, sort) {
 
 			$.ajax({
 				type: "DELETE",
-				url: "/am-admin/blog/" + data.id,
+				url: "/am-admin/eventos/" + data.id,
 				data: { "_token": $('#_token').val() }
 			}).done(function(resp) {
 				console.log(resp)
 
 				$('.data-table').DataTable().ajax.reload();
 
-				$('table.blog').DataTable().on('draw', function() {
+				$('table.events').DataTable().on('draw', function() {
 					if(!$('.loader').hasClass('hidde'))
 					$('.loader').addClass('hidde')
 
-					let toastMsg = 'Se elminó exitosamente la publicacion: ' + data.title + '.';
+					let toastMsg = 'Se elminó exitosamente el evento: ' + data.title + '.';
 					M.toast({html: toastMsg, classes: 'green accent-4 bottom'});
 				})
 

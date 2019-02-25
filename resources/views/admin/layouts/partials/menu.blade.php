@@ -105,7 +105,7 @@
 
             <li>
                 <a data-id="events" @if ($active == 'AdminEventsController') class="actived" @endif>
-                    <span class="icon icon-newspaper"></span> <span class="text">Eventos</span>
+                    <span class="icon icon-event_note"></span> <span class="text">Eventos</span>
                 </a>
 
                 <ul class="submenu" data-menu="events" style="@if ($active == 'AdminEventsController') {{$submenu_show}} @endif">

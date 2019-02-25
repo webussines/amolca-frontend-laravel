@@ -475,6 +475,13 @@ a.btn-navigation {
         background-color: #00396F;
     }
 
-span#slug span {
-    font-weight: bold;
+#slug {
+    color: #666666;
 }
+    #slug:hover {
+        color: #00396f;
+        text-decoration: underline;
+    }
+    #slug span {
+        font-weight: bold;
+    }

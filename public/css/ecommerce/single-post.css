@@ -1,3 +1,7 @@
+.main .content-container:last-child {
+	padding-top: 0px;
+}
+
 .main .post-column {
 	padding-right: 40px;
 }
@@ -39,11 +43,21 @@
 	max-width: 100%;
 }
 
+.event .post-content {
+	border-bottom: 0px;
+}
+	.event .subtitle {
+		font-size: 23px;
+	}
+
 .post-content {
 	border-bottom: 1px solid #a5a5a5;
 	margin-bottom: 20px;
 	padding-bottom: 20px;
 }
+	.post-content img {
+		margin: 10px 15px;
+	}
 
 .related-column .subtitle {
 	border-bottom: 1px solid #a5a5a5;

@@ -81,7 +81,7 @@ const SaveEventInfo = function() {
     let thumbnail = $('#image-url').val();
     let date = $('#date').val();
     let state = $('#state').val();
-    let description = tinyMCE.get('description').getContent().replace(/"/gi, "'");
+    let description = tinymce.get('content').getContent().replace(/"/gi, "'");
 
     let book = {
         title: title,
@@ -125,12 +125,7 @@ const SaveEventInfo = function() {
 
     });
 
-    if($('#autores').val().length < 1) {
-        $('.select2-selection--multiple').addClass('field-error');
-        flag = false;
-    }
-
-    return console.log(send);
+    console.log(send);
 
     if(flag) {
         $.ajax({
@@ -158,14 +153,14 @@ const SaveEventInfo = function() {
                         location.reload();
                     break;
                     case 'create':
-                        window.location.href = '/am-admin/libros/' + data.post.id;
+                        window.location.href = '/am-admin/eventos/' + data.post.id;
                     break;
                 }
 
             }
             
             if(data.posts_id !== undefined && data.posts_id.length > 0) {
-                window.location.href = '/am-admin/libros/' + data.posts_id[0];
+                window.location.href = '/am-admin/eventos/' + data.posts_id[0];
             }
         }).catch(function(err) {
             console.log(err)

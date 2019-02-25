@@ -8,8 +8,7 @@
     $state = (isset($post->state)) ? $post->state : '';
     $content = (isset($post->content)) ? $post->content : '';
     $excerpt = (isset($post->excerpt)) ? $post->excerpt : '';
-
-    $date = (isset($post->date)) ? $post->date : '';
+    $date = (isset($post->event_date)) ? $post->event_date : '';
 
 @endphp
 
@@ -73,12 +72,14 @@
                 <div class="col s12 m8">
 
                     <div class="form-group col s12">
-                        <label for="title"><span class="required">*</span> Título de la publicación:</label>
-                        <input type="text" name="title" id="title" class="required-field" placeholder="Título del libro..." value="{!! $title !!}">
+                        <label for="title"><span class="required">*</span> Nombre del evento:</label>
+                        <input type="text" name="title" id="title" class="required-field" placeholder="Nombre del evento..." value="{!! $title !!}">
                     </div>
 
                     <div class="form-group col s12 m12">
-                        <span id="slug">{{Request::root()}}/<span>{!! $slug !!}</span></span>
+                        <a id="slug" href="{{Request::root()}}/evento/{!! $slug !!}" target="_blank">
+                            {{Request::root()}}/evento/<span>{!! $slug !!}</span>
+                        </a>
                     </div>
                     
                     <div class="form-group col s12">
@@ -91,7 +92,7 @@
                 <div class="col s12 m4">
 
                     <div class="meta-box">
-                        <p class="title">Estado</p>
+                        <p class="title">Estado:</p>
 
                         <div class="form-group">
                             <select name="state" id="state" class="normal-select">
@@ -104,8 +105,8 @@
 
                     <div class="meta-box">
                         <div class="form-group">
-                            <p class="title">Fecha del evento</p>
-                            <input type="text" id="date" name="date" value="{{ $date }}">
+                            <p class="title"><span class="required">*</span> Fecha del evento:</p>
+                            <input type="text" id="date" name="date" class="datepicker required-field" placeholder="Fecha del evento..." value="{{ $date }}">
                         </div>
                     </div>
 

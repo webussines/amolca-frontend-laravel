@@ -87,6 +87,16 @@ class AdminBlogsController extends Controller
     {
         $post = $this->blog->inventory($id, "post");
 
+        if($post->post->type == 'event') {
+
+            return redirect('/am-admin/eventos/' . $post->post->id);
+
+        } else if($post->post->type == 'book') {
+
+            return redirect('/am-admin/libros/' . $post->post->id);
+            
+        }
+
         $send_info = [];
         $send_info['action'] = 'edit';
 

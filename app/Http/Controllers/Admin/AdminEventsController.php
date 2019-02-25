@@ -74,7 +74,8 @@ class AdminEventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = $request->post('body');
+        return $this->events->create($book);
     }
 
     /**
@@ -85,7 +86,17 @@ class AdminEventsController extends Controller
      */
     public function show($id)
     {
-        $post = $this->events->inventory($id, "post");
+        $post = $this->events->inventory($id, "event");
+
+        if($post->post->type == 'post') {
+
+            return redirect('/am-admin/blog/' . $post->post->id);
+
+        } else if($post->post->type == 'book') {
+
+            return redirect('/am-admin/libros/' . $post->post->id);
+            
+        }
 
         $send_info = [];
         $send_info['action'] = 'edit';
@@ -111,19 +122,8 @@ class AdminEventsController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $body = Input::post('body');
+        return $this->events->updateById($id, $body);
     }
 
     /**
@@ -134,6 +134,6 @@ class AdminEventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->events->deleteById($id);
     }
 }

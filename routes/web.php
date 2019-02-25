@@ -154,6 +154,11 @@ Route::get('/especialidad/{slug}', 'Ecommerce\SpecialtiesController@show');
 Route::get('/especialidad', function() { return redirect('/especialidades'); });
 Route::get('/especialidades', 'Ecommerce\SpecialtiesController@index');
 
+//Eventos
+Route::get('/evento/{slug}', 'Ecommerce\EventsController@show');
+Route::get('/evento', function() { return redirect('/eventos'); });
+Route::get('/eventos', 'Ecommerce\EventsController@index');
+
 //Autores
 Route::get('/autores', 'Ecommerce\AuthorsController@index');
 Route::get('/autor', function() { return redirect('/autores'); });

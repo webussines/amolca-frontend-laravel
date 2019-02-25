@@ -59,8 +59,25 @@
     height: 50px;
     line-height: 47px;
     margin-left: 20px;
+    text-transform: uppercase;
 }
 
+/*View site button*/
+a.view-site-btn {
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 10px;
+    border-radius: 35px;
+    background-color: #00396f;
+    color: #fff;
+    padding: 7px 15px 9px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 100%;
+    vertical-align: middle;
+}
 
 /*User button and dropdown*/
 .user-btn {

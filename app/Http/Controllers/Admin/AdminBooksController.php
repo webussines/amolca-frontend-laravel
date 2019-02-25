@@ -67,6 +67,16 @@ class AdminBooksController extends Controller
         $specialties = $this->specialties->all();
         $book = $this->books->inventory($id, "book");
 
+        if($book->post->type == 'post') {
+
+            return redirect('/am-admin/blog/' . $book->post->id);
+
+        } else if($book->post->type == 'event') {
+
+            return redirect('/am-admin/eventos/' . $book->post->id);
+            
+        }
+
         $send_info = [];
 
         $send_info['specialties'] = $specialties->taxonomies;
