@@ -133,6 +133,19 @@
 
         @if (session('user')->role == 'SUPERADMIN')
             <li>
+                <a data-id="dealers" @if ($active == 'AdminDealersController') class="actived" @endif>
+                    <span class="icon icon-flag3"></span> <span class="text">Distribuidores</span>
+                </a>
+
+                <ul class="submenu" data-menu="dealers" style="@if ($active == 'AdminDealersController') {{$submenu_show}} @endif">
+                    <li><a href="/am-admin/distribuidores">Ver todos los distribuidors</a></li>
+                    <li><a href="/am-admin/distribuidores/create">Añadir distribuidor</a></li>
+                </ul>
+            </li>
+        @endif
+
+        @if (session('user')->role == 'SUPERADMIN')
+            <li>
                 <a data-id="users" @if ($active == 'AdminUsersController') class="actived" @endif>
                     <span class="icon icon-users"></span> <span class="text">Usuarios</span>
                 </a>

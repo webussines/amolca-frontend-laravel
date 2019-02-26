@@ -43,6 +43,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		    'formularios' => 'Admin\AdminFormsController',
 		    'lotes' => 'Admin\AdminLotsController',
 		    'cupones' => 'Admin\AdminCouponsController',
+		    'distribuidores' => 'Admin\AdminDealersController',
 		]);
 
 		Route::get('carritos', 'Admin\AdminOrdersController@carts');
@@ -116,6 +117,12 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::prefix('coupons')->group(function(){
 			Route::get('/', 'Admin\AdminCouponsController@all');
 			Route::post('/edit/{id}', 'Admin\AdminCouponsController@edit');
+		});
+
+		//Routes for get info "DISTRIBUIDORES"
+		Route::prefix('dealers')->group(function(){
+			Route::get('/', 'Admin\AdminDealersController@all');
+			Route::post('/edit/{id}', 'Admin\AdminDealersController@edit');
 		});
 
 		//Routes for get info "PAISES"
