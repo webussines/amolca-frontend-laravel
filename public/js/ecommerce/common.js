@@ -86,10 +86,17 @@ const FormatMoney = (n, c, d, t, sym, sympos) => {
 			break;
 
 		case 'PERU':
+			/*
 			c = 2;
 			sym = 'S/ ';
 			sympos = 'before';
 			t = ',';
+			d = '.';
+			*/
+			c = 2;
+			sym = '$';
+			sympos = 'before';
+			code = 'USD';
 			d = '.';
 			break;
 

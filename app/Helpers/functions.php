@@ -24,7 +24,8 @@ function COPMoney($money) {
 			break;
 
 		case 'PERU':
-			return 'S/ ' . number_format($money, 2, '.', ',');
+			//return 'S/ ' . number_format($money, 2, '.', ',');
+			return '$' . number_format($money, 2, '.', ',') . 'USD';
 			break;
 
 		case 'DOMINICAN REPUBLIC':
