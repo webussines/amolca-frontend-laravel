@@ -42,6 +42,13 @@ class AdminDealersController extends Controller
         return Response::json($dealers);
     }
 
+    public function getbycountry($id) {
+
+        $dealers = $this->dealers->findByCountry($id);
+        return Response::json($dealers);
+
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -14,12 +14,8 @@ class Dealers extends GuzzleHttpRequest {
 		return $this->get("dealers/{$id}");
 	}
 
-	public function findByPost($id) {
-		return $this->get("dealers/posts/{$id}");
-	}
-
-	public function findMostRecent() {
-		return $this->get("dealers/news/recent");
+	public function findByCountry($id) {
+		return $this->get("dealers?country={$id}");
 	}
 
 	public function create($body) {

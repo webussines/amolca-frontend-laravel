@@ -92,10 +92,39 @@
 	@include('ecommerce.layouts.partials.bottom-bar')
 
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-	<script src="{{ asset('js/geolocalization/countries.js') }}"></script>
-	<script src="{{ asset('js/geolocalization/colombia.js') }}"></script>
 	<script src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/common.js') }}"></script>
+	<script src="{{ asset('js/geolocalization/countries.js') }}"></script>
+	
+	@switch(get_option('sitecountry'))
+	    @case('COLOMBIA')
+	        <script src="{{ asset('js/geolocalization/colombia.js') }}"></script>
+	        @break
+
+	    @case('ARGENTINA')
+	        <script src="{{ asset('js/geolocalization/argentina.js') }}"></script>
+	        @break
+
+	    @case('DOMINICAN REPUBLIC')
+	        <script src="{{ asset('js/geolocalization/republica-dominicana.js') }}"></script>
+	        @break
+
+	    @case('PERU')
+	        <script src="{{ asset('js/geolocalization/peru.js') }}"></script>
+	        @break
+
+	    @case('PANAMA')
+	        <script src="{{ asset('js/geolocalization/panama.js') }}"></script>
+	        @break
+
+	    @case('MEXICO')
+	        <script src="{{ asset('js/geolocalization/mexico.js') }}"></script>
+	        @break
+	
+	    @default
+	        <script src="{{ asset('js/geolocalization/casa-matriz.js') }}"></script>
+	@endswitch
+	
 	<script src="{{ asset('js/ecommerce/responsive-menu.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/cart.js') }}"></script>
 	<script src="{{ asset('js/common.js') }}"></script>

@@ -122,6 +122,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		//Routes for get info "DISTRIBUIDORES"
 		Route::prefix('dealers')->group(function(){
 			Route::get('/', 'Admin\AdminDealersController@all');
+			Route::get('/country/{id}', 'Admin\AdminDealersController@getbycountry');
 			Route::post('/edit/{id}', 'Admin\AdminDealersController@edit');
 		});
 

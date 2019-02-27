@@ -26,6 +26,34 @@ fbq('track', 'AddToWishlist');
 @section('contentClass', 'home')
 @section('content')
 
+<!-- Modal Structure -->
+<div id="dealers-modal" class="modal">
+	<div class="modal-content">
+		<div class="modal-description">
+			<h3 class="title">¡Hola! nos estás visitando desde <span class="country">Bolivia</span></h3>
+			<p>A continuación te dejamos una lista de nuestros distribuidores en <b class="country">Bolivia</b></p>
+		</div>
+			
+		<table class="modal-dealers striped highlight">
+			<thead>
+				<tr>
+					<th>Nombre:</th>
+					<th>Contacto:</th>
+					<th>Dirección:</th>
+					<th>Teléfono:</th>
+					<th>Correo electróncio:</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-close button primary">Cerrar</a>
+	</div>
+</div>
+
 <div class="home-slider">
 	@include('ecommerce.layouts.partials.big-slider', [ "items" => $slider ])
 </div>

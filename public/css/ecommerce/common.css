@@ -774,6 +774,33 @@ form.big-searcher {
     text-align: center;
 }
 
+/*Dealers modal*/
+#dealers-modal {
+    max-height: 80%;
+    width: 90%;
+}
+    #dealers-modal .modal-description .title {
+        margin-bottom: 10px;
+    }
+
+    #dealers-modal .modal-dealers {
+        margin-top: 30px;
+    }
+        #dealers-modal .modal-dealers thead th {
+            border-bottom: 1px solid #ccc;
+            color: #00396f;
+        }
+
+        #dealers-modal .modal-dealers tbody td.name {
+            color: #666666;
+            font-weight: bold;
+        }
+
+    #dealers-modal .modal-description,
+    #dealers-modal .modal-footer {
+        text-align: center;
+    }
+
 /*Material progress bar*/
 .loader.hidde {
     display: none;
