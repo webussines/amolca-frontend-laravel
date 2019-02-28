@@ -101,7 +101,7 @@ const UpdateOrder = (data) => {
 		let user = resp.address;
 		let order = resp.order;
 
-		RedirectFunction(user, order);
+		TuCompraRedirectFunction(user, order);
 
 	}).catch(function(err) {
 		console.log(err)
@@ -109,7 +109,7 @@ const UpdateOrder = (data) => {
 
 }
 
-const RedirectFunction = (user, order) => {
+const TuCompraRedirectFunction = (user, order) => {
 
 	//Cambiar el valor en el botón del carrito en el header
 	$('.top-bar #cart-btn span').html("$0 COP");

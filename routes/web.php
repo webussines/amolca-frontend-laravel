@@ -153,6 +153,7 @@ Route::get('/terminos-y-condiciones', 'Ecommerce\HomeController@termsandconditio
 Route::get('/finalizar-compra', 'Ecommerce\CheckoutController@checkout');
 Route::post('/checkout/response', 'Ecommerce\CheckoutController@PaymentResponse');
 Route::get('/checkout/respuesta', 'Ecommerce\CheckoutController@PaymentResponseView');
+Route::post('/checkout/mercadopago', 'Ecommerce\CheckoutController@mercadopago');
 
 //Novedades
 Route::get('/novedades/{slug}', 'Ecommerce\BooksController@news');

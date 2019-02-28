@@ -25,37 +25,37 @@ const RedirectFunction = (country) => {
     switch (active) {
       case 'PERU':
         if (window.location.href.indexOf("amolca.com.pe") < 1) {
-          return window.location.href = 'http://www.amolca.com.pe'
+          return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.pe')
         }
         break;
 
       case 'DOMINICAN REPUBLIC':
         if (window.location.href.indexOf("amolca.com.do") < 1) {
-          return window.location.href = 'http://www.amolca.com.do'
+          return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.do')
         }
         break;
 
       case 'COLOMBIA1':
         if (window.location.href.indexOf("amolca.com.co") < 1) {
-          return window.location.href = 'http://www.amolca.com.co'
+          return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.co')
         }
         break;
 
       case 'PANAMA':
         if (window.location.href.indexOf("amolca.com.pa") < 1) {
-          return window.location.href = 'http://www.amolca.com.pa'
+          return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.pa')
         }
         break;
 
       case 'ARGENTINA':
         if (window.location.href.indexOf("amolca.com.ar") < 1) {
-          return window.location.href = 'http://www.amolca.com.ar'
+          return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.ar')
         }
         break;
 
       default:
         if (window.location.href.indexOf("amolca.com") < 1) {
-          return window.location.href = 'http://www.amolca.com';
+          return window.location.href = window.location.href.replace(window.location.host, 'amolca.com')
         }
 
         ShowDealersModal(search[0].id, search[0].title);
@@ -65,9 +65,7 @@ const RedirectFunction = (country) => {
     }
 
   }, "jsonp").fail(function(jqXHR, exception) {
-    if (window.location.href.indexOf("amolca.com") < 1) {
-      window.location.href = 'http://www.amolca.com';
-    }
+    $('.books-loop .item .actions, .scroll-info, .main.book .add-to-cart, .price').css('display', 'none');
     return console.log('CASA MATRIZ')
   });
 }

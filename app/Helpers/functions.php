@@ -34,25 +34,146 @@ function COPMoney($money) {
 	}
 }
 
-/*Mailer*/
+//Mailer country
 function mailer_get_country() {
-    return "COLOMBIA";
+
+    if(get_option('sitecountry') == 'DOMINICAN REPUBLIC') {
+    	return 'REPUBLICA DOMINICANA';
+    } else {
+    	get_option('sitecountry');
+    }
+
 }
 
+//Mailer domain
 function mailer_get_domain() {
-    return "www.amolca.com.co";
+    
+    switch (get_option('sitecountry')) {
+		case 'COLOMBIA':
+			return "www.amolca.com.co";
+			break;
+
+		case 'PANAMA':
+			return "www.amolca.com.pa";
+			break;
+
+		case 'ARGENTINA':
+			return "www.amolca.com.ar";
+			break;
+
+		case 'MEXICO':
+			return "www.amolca.com.mx";
+			break;
+
+		case 'PERU':
+			return "www.amolca.com.pe";
+			break;
+
+		case 'DOMINICAN REPUBLIC':
+			return "www.amolca.com.do";
+			break;
+
+		default:
+			return "www.amolca.com";
+			break;
+	}
+
 }
 
 function mailer_get_name() {
-    return "Amolca Colombia";
+    switch (get_option('sitecountry')) {
+		case 'COLOMBIA':
+			return "Amolca Colombia";
+			break;
+
+		case 'PANAMA':
+			return "Amolca Panamá";
+			break;
+
+		case 'ARGENTINA':
+			return "Amolca Argentina";
+			break;
+
+		case 'MEXICO':
+			return "Amolca México";
+			break;
+
+		case 'PERU':
+			return "Amolca Perú";
+			break;
+
+		case 'DOMINICAN REPUBLIC':
+			return "Amolca Republica Dominicana";
+			break;
+
+		default:
+			return "Amolca Casa Matriz";
+			break;
+	}
 }
 
 function mailer_get_me() {
-    return "ventas@amolca.com.co";
+    switch (get_option('sitecountry')) {
+		case 'COLOMBIA':
+			return "ventas@amolca.com.co";
+			break;
+
+		case 'PANAMA':
+			return "ventas@amolca.com.pa";
+			break;
+
+		case 'ARGENTINA':
+			return "ventas@amolca.com.ar";
+			break;
+
+		case 'MEXICO':
+			return "ventas@amolca.com.mx";
+			break;
+
+		case 'PERU':
+			return "ventas@amolca.com.pe";
+			break;
+
+		case 'DOMINICAN REPUBLIC':
+			return "ventas@amolca.com.do";
+			break;
+
+		default:
+			return "contacto@amolca.com";
+			break;
+	}
 }
 
 function mailer_get_cc() {
-	return ["gerencia@amolca.com.co", "asistentepresidencia@amolca.us", "contacto@amolca.com"];
+	switch (get_option('sitecountry')) {
+		case 'COLOMBIA':
+			return ["gerencia@amolca.com.co", "asistentepresidencia@amolca.us", "contacto@amolca.com"];
+			break;
+
+		case 'PANAMA':
+			return ["asistentepresidencia@amolca.us", "contacto@amolca.com"];
+			break;
+
+		case 'ARGENTINA':
+			return ["asistentepresidencia@amolca.us", "contacto@amolca.com"];
+			break;
+
+		case 'MEXICO':
+			return ["asistentepresidencia@amolca.us", "contacto@amolca.com"];
+			break;
+
+		case 'PERU':
+			return ["asistentepresidencia@amolca.us", "contacto@amolca.com"];
+			break;
+
+		case 'DOMINICAN REPUBLIC':
+			return ["asistentepresidencia@amolca.us", "contacto@amolca.com"];
+			break;
+
+		default:
+			return ["asistentepresidencia@amolca.us"];
+			break;
+	}
 }
 
 function format_date($str) {

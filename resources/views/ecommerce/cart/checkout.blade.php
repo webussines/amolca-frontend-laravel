@@ -27,6 +27,12 @@
 	    	<script src="{{ asset('js/payments/redirect.js') }}"></script>
 	    	<script src="{{ asset('js/payments/cardnet/payment.js') }}"></script>
 	    	@break
+
+	    @case('ARGENTINA')
+		    <script src="{{ asset('js/payments/redirect.js') }}"></script>
+	    	<script src="{{ asset('js/payments/mercadopago/payment.js') }}"></script>
+	    	@break
+
 	@endswitch
 @endsection
 

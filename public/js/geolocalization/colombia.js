@@ -25,46 +25,44 @@ const RedirectFunction = (country) => {
     switch (active) {
       case 'ARGENTINA':
         if (window.location.href.indexOf("amolca.com.co") > 0) {
-          window.location.href = 'http://www.amolca.com.ar'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.ar')
         }
 
         break;
 
       case 'PERU':
         if (window.location.href.indexOf("amolca.com.co") > 0) {
-          window.location.href = 'http://www.amolca.com.pe'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.pe')
         }
         break;
 
       case 'DOMINICAN REPUBLIC':
         if (window.location.href.indexOf("amolca.com.co") > 0) {
-          window.location.href = 'http://www.amolca.com.do'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.do')
         }
 
         break;
 
       case 'PANAMA':
         if (window.location.href.indexOf("amolca.com.co") > 0) {
-          window.location.href = 'http://www.amolca.com.pa'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.pa')
         }
         break;
 
       case 'COLOMBIA':
         if (window.location.href.indexOf("amolca.com.co") < 1) {
-          window.location.href = 'http://www.amolca.com.co'
+          window.location.href.replace(window.location.host, 'amolca.com.co')
         }
         return console.log('COLOMBIA')
         break;
 
       default:
-        window.location.href = 'http://www.amolca.com';
+        window.location.href = window.location.href.replace(window.location.host, 'amolca.com')
         break;
     }
 
   }, "jsonp").fail(function(jqXHR, exception) {
-    if (window.location.href.indexOf("amolca.com.co") < 1) {
-      window.location.href = 'http://www.amolca.com';
-    }
+    $('.books-loop .item .actions, .scroll-info, .main.book .add-to-cart, .price').css('display', 'none');
     return console.log('ARGENTINA')
   });
 

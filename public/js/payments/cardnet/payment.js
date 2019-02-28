@@ -101,7 +101,7 @@ const UpdateOrder = (data) => {
 		let user = resp.address;
 		let order = resp.order;
 
-		RedirectFunction(user, order);
+		CardnetRedirectFunction(user, order);
 
 	}).catch(function(err) {
 		console.log(err)
@@ -109,7 +109,7 @@ const UpdateOrder = (data) => {
 
 }
 
-const RedirectFunction = (user, order) => {
+const CardnetRedirectFunction = (user, order) => {
 
 	//Cambiar el valor en el botón del carrito en el header
 	$('.top-bar #cart-btn span').html("DOP$ 0");
@@ -120,18 +120,6 @@ const RedirectFunction = (user, order) => {
 	const terminal_id = 58585858;
 	const categoria_comercio = 7997;
 	const tipo_transaccion = 200;
-
-	/*
-	let usuario = 'usuario=c57l7o3zx0l26u7t';
-    let factura = '&factura=' + order.id;
-    let valor = '&valor=' + order.amount;
-    let descripcionFactura = '&descripcionFactura=Compra de los libros: ' + products.join(', ') + '.';
-    let tokenSeguridad = "&tokenSeguridad=4bef434dc8effd38e36a082a898a17d4";
-    let tipoDocumento = '&tipoDocumento=CC';
-    let nombreComprador = '&nombreComprador=' + user.name;
-    let apellidoComprador = '&apellidoComprador=' + user.lastname;
-    let correoComprador = '&correoComprador=' + user.email;
-    */
 
     // Get domain for Return and Cancel routes
     let http = 'http://';

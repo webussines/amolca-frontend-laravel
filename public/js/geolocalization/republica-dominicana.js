@@ -25,45 +25,43 @@ const RedirectFunction = (country) => {
     switch (active) {
       case 'ARGENTINA':
         if (window.location.href.indexOf("amolca.com.do") > 0) {
-          window.location.href = 'http://www.amolca.com.ar'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.ar')
         }
         break;
 
       case 'COLOMBIA':
         if (window.location.href.indexOf("amolca.com.do") > 0) {
-          window.location.href = 'http://www.amolca.com.co'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.co')
         }
         break;
 
       case 'PANAMA':
         if (window.location.href.indexOf("amolca.com.do") > 0) {
-          window.location.href = 'http://www.amolca.com.pa'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.pa')
         }
         break;
 
       case 'PERU':
         if (window.location.href.indexOf("amolca.com.do") > 0) {
-          window.location.href = 'http://www.amolca.com.pe'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.pe')
         }
         break;
 
       case 'DOMINICAN REPUBLIC':
         if (window.location.href.indexOf("amolca.com.do") < 1) {
-          window.location.href = 'http://www.amolca.com.do'
+          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.do')
         }
         return console.log('DOMINICAN REPUBLIC')
         break;
 
       default:
-        if (window.location.href.indexOf("amolca.com.do") < 1) {
-          window.location.href = 'http://www.amolca.com'
-        }
-        return console.log('DOMINICAN REPUBLIC')
+         window.location.href = window.location.href.replace(window.location.host, 'amolca.com')
         break;
     }
 
   }, "jsonp").fail(function(jqXHR, exception) {
-    window.location.href = 'http://www.amolca.com';
+    $('.books-loop .item .actions, .scroll-info, .main.book .add-to-cart, .price').css('display', 'none');
+    return console.log('REPUBLICA DOMINICANA')
   });
 
 }

@@ -742,7 +742,7 @@ form.big-searcher {
 #notification-modal {
     max-height: 90%;
     text-align: center;
-    z-index: 1000000;
+    z-index: 1000000 !important;
 }
 #notification-modal #resp-icon a {
     background-color: #000;
