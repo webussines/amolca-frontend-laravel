@@ -29,9 +29,38 @@ class HomeController extends Controller
 
     public function index()
     {
+
+        $slider_name = 'casa-matriz-slider';
+
+        switch (get_option('sitecountry')) {
+            case 'COLOMBIA':
+                $slider_name = 'home-slider';
+                break;
+
+            case 'PANAMA':
+                $slider_name = 'panama-slider';
+                break;
+
+            case 'ARGENTINA':
+                $slider_name = 'argentina-slider';
+                break;
+
+            case 'MEXICO':
+                $slider_name = 'mexico-slider';
+                break;
+
+            case 'PERU':
+                $slider_name = 'peru-slider';
+                break;
+
+            case 'DOMINICAN REPUBLIC':
+                $slider_name = 'republica-dominicana-slider';
+                break;
+        }
+
         $authors = $this->authors->all('limit=8&orderby=thumbnail&order=asc');
         $posts = $this->posts->all("post", 'skip=0&limit=8&orderby=created_at&order=asc');
-        $slider = $this->sliders->find('home-slider');
+        $slider = $this->sliders->find($slider_name);
 
         // Obtener los libros del ultimo lote
         $lot_books = $this->lots->findMostRecent()->books;

@@ -118,18 +118,18 @@ Route::group(['prefix' => 'am-admin'], function() {
 			Route::get('/', 'Admin\AdminCouponsController@all');
 			Route::post('/edit/{id}', 'Admin\AdminCouponsController@edit');
 		});
+	});
 
-		//Routes for get info "DISTRIBUIDORES"
-		Route::prefix('dealers')->group(function(){
-			Route::get('/', 'Admin\AdminDealersController@all');
-			Route::get('/country/{id}', 'Admin\AdminDealersController@getbycountry');
-			Route::post('/edit/{id}', 'Admin\AdminDealersController@edit');
-		});
-
-		//Routes for get info "PAISES"
-		Route::prefix('countries')->group(function(){
-			Route::get('/all', 'CountriesController@index');
-		});
+	//Routes for get info "DISTRIBUIDORES"
+	Route::prefix('dealers')->group(function(){
+		Route::get('/', 'Admin\AdminDealersController@all');
+		Route::get('/country/{id}', 'Admin\AdminDealersController@getbycountry');
+		Route::post('/edit/{id}', 'Admin\AdminDealersController@edit');
+	});
+	
+	//Routes for get info "PAISES"
+	Route::prefix('countries')->group(function(){
+		Route::get('/all', 'CountriesController@index');
 	});
 });
 
