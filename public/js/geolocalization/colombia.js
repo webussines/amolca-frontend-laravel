@@ -1,13 +1,26 @@
 jQuery(function($) {
 
-  let country = AllCountries();
+  $.ajax({
+    method: 'GET',
+    url: '/am-admin/countries/all'
+  }).done((resp) => {
 
-  /*
+    //console.log(resp)
+    RedirectFunction(JSON.parse(resp))
+
+  }).catch((err) => {
+    console.log(err)
+  })
+
+});
+
+const RedirectFunction = (country) => {
+
   $.get("https://ipinfo.io", function(response) {
     //console.log(response);
 
     let search = country.filter(c => c.code == response.country);
-    let active = search[0].name.toUpperCase();
+    let active = search[0].title.toUpperCase();
 
     switch (active) {
       case 'ARGENTINA':
@@ -38,7 +51,7 @@ jQuery(function($) {
 
       case 'COLOMBIA':
         if (window.location.href.indexOf("amolca.com.co") < 1) {
-          //window.location.href = 'http://www.amolca.com.co'
+          window.location.href = 'http://www.amolca.com.co'
         }
         return console.log('COLOMBIA')
         break;
@@ -54,6 +67,5 @@ jQuery(function($) {
     }
     return console.log('ARGENTINA')
   });
-    */
 
-});
+}

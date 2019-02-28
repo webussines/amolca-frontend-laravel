@@ -94,7 +94,6 @@
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/common.js') }}"></script>
-	<script src="{{ asset('js/geolocalization/countries.js') }}"></script>
 	
 	@switch(get_option('sitecountry'))
 	    @case('COLOMBIA')
