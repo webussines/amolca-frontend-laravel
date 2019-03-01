@@ -278,6 +278,9 @@ fbq('track', 'Lead');
 											case 'formato':
 												$key_title = 'Formato';
 												break;
+											case 'volumes':
+												$key_title = 'Número de tomos';
+												break;
 											case 'isbn':
 												$key_title = 'ISBN';
 												break;

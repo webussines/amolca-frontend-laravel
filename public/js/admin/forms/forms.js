@@ -68,7 +68,7 @@ const createDataTable = function() {
 	    		className: "to"
 	    	},
 	    	{ 	
-	    		data: "country_id",
+	    		data: "country_name",
 	    		className: "country"
 	    	},
 	    	{ 	

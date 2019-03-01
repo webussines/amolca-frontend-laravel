@@ -1573,6 +1573,9 @@ form.big-searcher {
     .custom-row .custom-col.block-contact {
         width: 30%;
     }
+        .custom-row .custom-col.block-contact .title {
+            text-transform: capitalize;
+        }
 
     .footer .block-contact #direction {
         display: block;

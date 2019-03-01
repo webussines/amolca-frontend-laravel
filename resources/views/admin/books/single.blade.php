@@ -364,8 +364,8 @@
                     
             <div class="row">
                 <div class="col s6 m5">
-                    <label for="impresion"><span class="required">*</span> Impresión:</label>
-                    <input type="text" readonly id="impresion" name="impresion" value="Impresión">
+                    <label for="impresion-name"><span class="required">*</span> Impresión:</label>
+                    <input type="text" readonly id="impresion-name" name="impresion-name" value="Impresión">
                 </div>
                 <div class="col s6 m5">
                     <label for="impresion"><span class="required">*</span> Valor:</label>
