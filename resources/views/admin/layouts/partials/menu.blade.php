@@ -65,6 +65,17 @@
                     <li><a>Añadir slider</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a data-id="banner" @if ($active == 'AdminBannersController') class="actived" @endif>
+                    <span class="icon icon-image2"></span> <span class="text">Banners internos</span>
+                </a>
+
+                <ul class="submenu" data-menu="banner" style="@if ($active == 'AdminBannersController') {{$submenu_show}} @endif">
+                    <li><a href="/am-admin/banner">Todos los banners</a></li>
+                    <li><a href="/am-admin/banner/create">Añadir banner</a></li>
+                </ul>
+            </li>
         @endif
 
         @if (session('user')->role == 'SUPERADMIN' || session('user')->role == 'ADMIN')

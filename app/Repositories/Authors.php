@@ -10,6 +10,10 @@ class Authors extends GuzzleHttpRequest {
         return $this->get("posts?type=author&{$params}");
 	}
 
+	public function provisional($params = 'limit=800') {
+        return $this->get("authors/provisional?{$params}");
+	}
+
 	public function findById($id) {
 		return $this->get("posts/{$id}");
 	}

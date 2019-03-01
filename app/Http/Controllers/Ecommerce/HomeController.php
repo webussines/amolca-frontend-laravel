@@ -58,7 +58,7 @@ class HomeController extends Controller
                 break;
         }
 
-        $authors = $this->authors->all('limit=8&orderby=thumbnail&order=asc');
+        $authors = $this->authors->provisional('orderby=thumbnail&order=asc&limit=8');
         $posts = $this->posts->all("post", 'skip=0&limit=8&orderby=created_at&order=asc');
         $slider = $this->sliders->find($slider_name);
 

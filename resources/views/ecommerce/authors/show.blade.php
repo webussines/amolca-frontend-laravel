@@ -15,7 +15,24 @@ fbq('track', 'Lead');
 		<!--Image column-->
 		<div class="col s12 m3 l3 image">
 			<div class="image-container">
-				<img src="{{$author->thumbnail}}" />
+				@php
+					$thumbnails = [
+						'http://amolca.webussines.com/uploads/authors/odontologia-hombre.png',
+	                    'http://amolca.webussines.com/uploads/authors/odontologia-mujer.png',
+	                    'http://amolca.webussines.com/uploads/authors/medicina-hombre.png',
+	                    'http://amolca.webussines.com/uploads/authors/medicina-mujer.png'
+					];
+
+					$styles = '';
+
+					if ( in_array($author->thumbnail, $thumbnails) ) {
+						$styles = 'width: 100%; height: auto;';
+					} else {
+						$styles = 'max-height: 150%; max-width: 150%;';
+					}
+				@endphp
+				
+				<img src="{{$author->thumbnail}}" title="{!! $author->title !!}" alt="{!! $author->title !!}" style="{!! $styles !!}">
 			</div>
 		</div>
 		<!--Information column-->

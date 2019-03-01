@@ -155,3 +155,12 @@ const FormattingDate = (date) => {
 
 	return day + ' de ' + monthNames[monthIndex] + ', ' + year;
 }
+
+const AddCountryToForm = (name) => {
+
+	let field = $('#country_name');
+
+	if(field.length > 0) {
+		field.val(name)
+	}
+}

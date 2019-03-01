@@ -1092,11 +1092,22 @@ form.big-searcher {
             .authors-loop .image a {
                 display: block;
                 height: 150px;
+                overflow: hidden;
+                position: relative;
                 width: 150px;
             }
                 .authors-loop .image img {
+                    left: 50%;
                     max-height: 150px;
+                    min-height: 100%;
                     max-width: 150px;
+                    min-width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    -webkit-transform: translate(-50%, -50%);
+                    -ms-transform: translate(-50%, -50%);
+                    -o-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
                 }
         .authors-loop .name, .authors-loop .name a {
             color: #00396F;

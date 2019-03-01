@@ -1,0 +1,52 @@
+
+
+.image-wrap img {
+  max-width: 100%;
+  width: 100%;
+}
+
+/*Uploader*/
+.buttons {
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  position: relative;
+  width: 100%;
+}
+    .buttons .form-group {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+        .buttons .form-group span {
+            font-size: 13px;
+            font-style: italic;
+        }
+    
+  .buttons a {
+    border: 2px solid;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0px 10px;
+    padding: 10px 20px 13px;
+    font-family: 'Tahoma';
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: normal;
+    text-decoration: none;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+  }
+    .buttons a.save-changes {
+        bottom: 0px;
+        left: 0px;
+        margin-left: 0px;
+        position: absolute;
+    }
+    .buttons a.cancel {
+        background-color: red;
+        border-color: red;
+        color: #fff;
+    }
+    .file-upload-wrapper, .buttons .save {
+        width: 250px !important;
+    }

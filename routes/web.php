@@ -44,6 +44,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		    'lotes' => 'Admin\AdminLotsController',
 		    'cupones' => 'Admin\AdminCouponsController',
 		    'distribuidores' => 'Admin\AdminDealersController',
+		    'banner' => 'Admin\AdminBannersController',
 		]);
 
 		Route::get('carritos', 'Admin\AdminOrdersController@carts');
@@ -85,6 +86,12 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::prefix('api-sliders')->group(function(){
 			Route::get('/all', 'Admin\AdminSlidersController@all');
 			Route::post('/edit/{id}', 'Admin\AdminSlidersController@edit');
+		});
+
+		//Routes for get info "SLIDERS"
+		Route::prefix('api-banners')->group(function(){
+			Route::get('/all', 'Admin\AdminBannersController@all');
+			Route::post('/edit/{id}', 'Admin\AdminBannersController@edit');
 		});
 
 		//Routes for get info "USERS"

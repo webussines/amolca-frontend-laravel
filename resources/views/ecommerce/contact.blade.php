@@ -73,7 +73,7 @@ fbq('track', 'Contact');
 			</div>
 
 			<div class="form-group col s12 btns-column">
-				<input type="hidden" id="country_name" name="country_name" value="Colombia">
+				<input type="hidden" id="country_name" name="country_name" value="">
 				<input type="hidden" id="country_id" name="country_id" value="48">
 				<input class="button primary" type="submit" value="Enviar formulario">
 				<input type="reset" class="button" value="Limpiar">

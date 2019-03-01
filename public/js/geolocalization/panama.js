@@ -22,6 +22,8 @@ const RedirectFunction = (country) => {
     let search = country.filter(c => c.code == response.country);
     let active = search[0].title.toUpperCase();
 
+    AddCountryToForm(search[0].title);
+
     switch (active) {
       case 'ARGENTINA':
         if (window.location.href.indexOf("amolca.com.pa") > 0) {
