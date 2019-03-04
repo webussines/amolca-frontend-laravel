@@ -30,8 +30,8 @@
 	<table class="table data-table banners">
 		<thead>
 			<tr>
-				<th class="title">Link de la imagen:</th>
-				<th class="slug">Slug:</th>
+				<th class="title">Título:</th>
+				<th class="page_type">Tipo de página:</th>
 				<th class="country">País:</th>
 				<th class="specialty">Estado:</th>
 				<th class="actions">Acciones:</th>

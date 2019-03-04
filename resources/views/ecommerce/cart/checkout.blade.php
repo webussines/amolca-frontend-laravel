@@ -133,15 +133,23 @@
 						<input type="hidden" id="country" name="country" value="{{ get_option('sitecountry') }}">
 						<input type="hidden" id="total-amount" name="total-amount" value="{{ $cart->amount }}">
 
-						@switch(get_option('payment_method'))
-						    @case('TUCOMPRA')
-						        <input type="submit" class="button primary" value="¡Pagar ahora!">
-						        @break
-
-						    @case('PAYPAL')
-							    <div id="paypal-button-container"></div>
-						    	@break
-						@endswitch
+						@switch(get_option('sitecountry'))
+							@case('COLOMBIA')
+	                	        <input type="submit" class="button primary" value="¡Pagar ahora!">
+	                	        @break
+	                
+	                	    @case('PANAMA')
+	                		    <div id="paypal-button-container"></div>
+	                	    	@break
+	                
+	                	    @case('DOMINICAN REPUBLIC')
+	                	    	<input type="submit" class="button primary" value="¡Pagar ahora!">
+	                	    	@break
+	                
+	                	    @case('ARGENTINA')
+	                		    <input type="submit" class="button primary" value="¡Pagar ahora!">
+	                	    	@break
+	                	@endswitch
 					</div>
 
 				</div> 

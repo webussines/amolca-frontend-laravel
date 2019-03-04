@@ -44,12 +44,31 @@ const createDataTable = function() {
 	    },
 	    columns: [
 	    	{ 	
-	    		data: "image",
+	    		data: "title",
 	    		className: "title"
 	    	},
 	    	{ 	
-	    		data: "resource_slug",
-	    		className: "slug"
+	    		data: "resource_type",
+	    		className: "resource_type",
+	    		"render": function (data, type, JsonResultRow, meta) {
+                  	switch(JsonResultRow.resource_type) {
+                  		case 'PAGE':
+                  			return 'Página estática';
+                  		break;
+                  		case 'BOOK':
+                  			return 'Página de libro';
+                  		break;
+                  		case 'AUTHOR':
+                  			return 'Página de autor';
+                  		break;
+                  		case 'SPECIALTY':
+                  			return 'Página de especialidad';
+                  		break;
+                  		case 'BLOG':
+                  			return 'Publicación del blog';
+                  		break;
+                  	}
+                } 
 	    	},
 	    	{ 	
 	    		data: "country_name",
@@ -79,7 +98,7 @@ const createDataTable = function() {
 	    		data: "_id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
-	    			let str = `<a class="edit" href="/am-admin/banners/${JsonResultRow.id}">
+	    			let str = `<a class="edit" href="/am-admin/banner/${JsonResultRow.id}">
 				                    <span class="icon-mode_edit"></span>
 				                </a>
 

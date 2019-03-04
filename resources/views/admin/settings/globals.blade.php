@@ -94,6 +94,15 @@
 					</select>
 				</td>
 			</tr>
+
+			<tr class="options" style="display: none;">
+				<td class="option_name">
+					<label for="sitecountry">País activo:</label>
+				</td>
+				<td class="option_value">
+					<input type="hidden" name="sitecountry_id" id="sitecountry_id" value="{!! get_option('sitecountry_id') !!}">
+				</td>
+			</tr>
 			@endif
 
 			<tr class="options">

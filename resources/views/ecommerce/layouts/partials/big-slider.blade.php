@@ -6,17 +6,13 @@
 
 		<div class="item item-{{$s}}">
 			@if ($item->link !== null)
-			<a href="{{ $item->link }}" target="{{ $item->target_link }}">
+			<a href="{{ $item->link }}" target="{{ $item->target_link }}" class="slider-link"></a>
 			@endif
 
-				<div class="bg-item" style="background-image: url( {{ $item->image }} )"></div>
+			<div class="bg-item" style="background-image: url( {{ $item->image }} )"></div>
 
-				<img class="visible-img" src="{{ $item->image }}">
-				<img class="hidden-img" src="{{ $item->image }}">
-
-			@if ($item->link !== null)
-			</a>
-			@endif
+			<img class="visible-img" src="{{ $item->image }}">
+			<img class="hidden-img" src="{{ $item->image }}">
 
 		</div>
 		

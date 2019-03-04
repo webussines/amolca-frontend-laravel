@@ -14,8 +14,16 @@ class Banners extends GuzzleHttpRequest {
 		return $this->get("banners/{$id}");
 	}
 
+	public function findByResource($type = 'specialty', $id) {
+		return $this->get("banners/type/{$type}/{$id}");
+	}
+
 	public function find($slug) {
 		return $this->get("banners/slug/{$slug}");
+	}
+
+	public function create($body) {
+		return $this->post("banners", $body);
 	}
 
 	public function updateById($id, $update) {

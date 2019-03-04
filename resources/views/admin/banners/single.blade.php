@@ -1,15 +1,23 @@
 @extends('admin.layouts.account')
 
 @php
-    $id = (isset($slider->id)) ? $slider->id : '';
-    $image = (isset($slider->image)) ? $slider->image : '';
-    $state = (isset($slider->state)) ? $slider->state : '';
-    $link = (isset($slider->link)) ? $slider->link : '';
-    $resource_slug = (isset($slider->resource_slug)) ? $slider->resource_slug : '';
+    $id = (isset($banner->id)) ? $banner->id : '';
+    $title = (isset($banner->title)) ? $banner->title : '';
+    $image = (isset($banner->image)) ? $banner->image : 'https://amolca.webussines.com/uploads/sliders/slider-no-image.jpg';
+    $state = (isset($banner->state)) ? $banner->state : '';
+    $link = (isset($banner->link)) ? $banner->link : '';
+
+    $resource_type = (isset($banner->resource_type)) ? $banner->resource_type : '';
+    $resource_id = (isset($banner->resource_id)) ? $banner->resource_id : '';
+    $resource_title = (isset($banner->resource_title)) ? $banner->resource_title : '';
+
+    $country_id = (isset($banner->country_id)) ? $banner->country_id : '';
+    $country_title = (isset($banner->country_title)) ? $banner->country_title : '';
+
 @endphp
 
-@if ($id !== '')
-    @section('title', 'Banner: ' . $resource_slug . ' - Admin Amolca')
+@if ($title !== '')
+    @section('title', 'Banner: ' . $title . ' - Admin Amolca')
 @else
     @section('title', 'Creando banner nuevo - Admin Amolca')
 @endif
@@ -38,26 +46,27 @@
     </div>
 
     <div class="row single section-header valign-wrapper">
-        <div class="col s12 m10 l10">
+        <div class="col s12 m7 l7">
             <p class="title">
                 @if ($id !== '')
-                    Banner: {{ $resource_slug }} 
+                    Banner: {!! $title !!} 
                 @else
                     Creando banner nuevo
                 @endif
             </p>
         </div>
-        <div class="col s12 m2 l2 actions">
-            <a class="btn-floating btn-large green save-resource">
-                <span class="icon-save1"></span>
+        <div class="col s12 m5 l5 actions">
+            <a class="btn-navigation green save-resource">
+                Guardar banner
             </a>
-            <a class="btn-floating btn-large red go-all-resources" href="/am-admin/libros">
-                <span class="icon-cross"></span>
+            <a class="btn-navigation red previous" href="/am-admin/banner">
+                Ver todos los banners
             </a>
         </div>
     </div>
 
     <form id="slider-edit" class="slider-edit">
+        <input type="hidden" id="_action" value="{{ $action }}">
         <input type="hidden" id="_token" value="{{ csrf_token() }}">
         <input type="hidden" id="_src" value="banners">
         <input type="hidden" id="id" value="{{ $id }}">
@@ -74,9 +83,8 @@
 
                 <div class="col s12 m7">
                     <div class="image-wrap">
-                        <img id="resource-image" src="https://amolca.webussines.com/uploads/sliders/slider-no-image.jpg" alt="">
-                        <input type="hidden" id="image-url" name="image-url" value="">
-                        <input type="hidden" id="slide-index" name="slide-index" value="">
+                        <img id="resource-image" src="{{ $image }}" alt="">
+                        <input type="hidden" id="image-url" name="image-url" value="{{ $image }}">
 
                         <div class="circle-preloader preloader-wrapper big active">
                             <div class="spinner-layer spinner-green-only">
@@ -116,17 +124,55 @@
                 </div>
 
                 <div class="col s5">
-                    
+
                     <div class="form-group">
-                        <label for="resource_slug"><span class="required">*</span> ¿En qué página desea publicar el banner?:</label>
-                        <input type="text" id="resource_slug" name="resource_slug" value="{{ $resource_slug }}">
+                        <label for="title"><span class="required">*</span> Título del banner:</label>
+                        <input type="text" name="title" id="title" class="required-field" value="{!! $title !!}" placeholder="Título del banner...">
                     </div>
 
                     <div class="form-group">
-                        <label for="link">Link del slide:</label>
-                        <input type="text" name="image-link" id="image-link" value="{{ $link }}" placeholder="Ejemplo de URL: /novedades/medicina">
-                        <span><b>Importante:</b> En el link del slide no poner el dominio. Solo poner la url relativa como por ejemplo: "/medicina"</span>
+                        <label for="resource_slug"><span class="required">*</span> Tipo de página donde se publicará el banner:</label>
+                        <select name="resource_type" id="resource_type" class="normal-select required-field">
+                            <option value="0">Seleccione una opción</option>
+                            <option @if ( $resource_type == 'BOOK') selected="selected" @endif value="BOOK">Página de libro</option>
+                            <option @if ( $resource_type == 'AUTHOR') selected="selected" @endif value="AUTHOR">Página de autor</option>
+                            <option @if ( $resource_type == 'SPECIALTY') selected="selected" @endif value="SPECIALTY">Especialidad</option>
+                            <option @if ( $resource_type == 'PAGE') selected="selected" @endif value="PAGE">Página estática</option>
+                            <option @if ( $resource_type == 'BLOG') selected="selected" @endif value="BLOG">Publicación del blog</option>
+                        </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="resource_id"><span class="required">*</span> ¿En qué recurso desea publicar el banner?:</label>
+                        <select name="resource_id" id="resource_id" class="select2-normal required-field">
+                            @if ($resource_id !== '')
+                                <option selected="selected" value="{!! $resource_id !!}">{!! $resource_title !!}</option>
+                            @endif
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country_id"><span class="required">*</span> País donde estará activo el banner:</label>
+                        <select name="country_id" id="country_id" class="select2-normal required-field">
+                            @if ($country_id !== '')
+                                <option selected="selected" value="{!! $country_id !!}">{!! $country_title !!}</option>
+                            @endif
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="link">Link del banner:</label>
+                        <input type="text" name="image-link" id="image-link" value="{!! $link !!}" placeholder="Ejemplo de URL: https://www.dominio.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="target_link">Abrir link en:</label>
+                        <select name="target_link" id="target_link" class="normal-select">
+                            <option @if ( $resource_type == '_self') checked="checked" @endif value="_self">Misma pestaña</option>
+                            <option @if ( $resource_type == '_blank') checked="checked" @endif value="_blank">Nueva pestaña</option>
+                        </select>
+                    </div>
+
                 </div>
 
             </div>
@@ -134,11 +180,11 @@
         </div>
 
         <div class="fixed-action-btn">
-            <a class="btn-floating btn-large green save-resource">
-                <span class="icon-save1"></span>
+            <a class="btn-navigation green save-resource">
+                Guardar banner
             </a>
-            <a class="btn-floating btn-large red go-all-resources" href="/am-admin/libros">
-                <span class="icon-cross"></span>
+            <a class="btn-navigation red previous" href="/am-admin/banner">
+                Ver todos los banners
             </a>
         </div>
 

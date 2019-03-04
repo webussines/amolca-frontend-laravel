@@ -17,6 +17,8 @@ const ResetRequiredFields = () => {
 		if($(this).val() !== '' && $(this).val() !== ' ') {
 			$(errorId).css('display', 'none');
 		}
+
+		$('#register-form .global-error').css('display', 'none');
 	});
 
 	$('#register-form #password, #register-form #repassword').on('keyup change', function() {
@@ -164,7 +166,7 @@ const Register = (e) => {
 			lastname: lastname,
 			email: email,
 			role: 'CLIENT',
-			country: 'COLOMBIA',
+			country: $('meta[name="country-active-id"]').attr('content'),
 			password: password,
 			document_id: Math.floor((Math.random() * 10000) + 1),
 			_token: $('#_token').val()
@@ -211,6 +213,10 @@ const UserRegister = (user) => {
 					error.msg = 'El usuario y la contraseña no coinciden.';
 					error.show = true;
 				break;
+			case 400:
+					error.msg = 'Ya existse un usuario con el mismo correo electrónico.';
+					error.show = true;
+				break;
 			default:
 					error.msg = 'El usuario y la contraseña no coinciden.';
 					error.show = true;
@@ -220,11 +226,16 @@ const UserRegister = (user) => {
 		if(!$('#login .loader').hasClass('hidde'))
 			$('#login .loader').addClass('hidde')
 
+		$('#register-form .global-error')
+			.html(error.msg)
+			.css('display', 'block')
+
 		$('#register-form input[type="submit"]')
 			.val('Crear cuenta')
 			.removeAttr('disabled')
 
 	}).catch(function(err) {
-		console.log(err)
+		if(!$('#login .loader').hasClass('hidde'))
+			$('#login .loader').addClass('hidde')
 	})
 }

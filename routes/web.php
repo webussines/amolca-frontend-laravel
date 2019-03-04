@@ -136,6 +136,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 	
 	//Routes for get info "PAISES"
 	Route::prefix('countries')->group(function(){
+		Route::get('/title/{title}', 'CountriesController@bytitle');
 		Route::get('/all', 'CountriesController@index');
 	});
 });

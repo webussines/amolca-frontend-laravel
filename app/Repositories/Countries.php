@@ -12,4 +12,8 @@ class Countries extends GuzzleHttpRequest {
 
     }
 
+    public function findByTitle($title) {
+    	return $this->get('countries/title/' . $title);
+    }
+
 }

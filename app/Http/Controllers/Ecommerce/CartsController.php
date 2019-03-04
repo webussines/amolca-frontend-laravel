@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Orders;
 use App\Repositories\Posts;
+use App\Repositories\Banners;
 use App\Repositories\Coupons;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,12 +19,14 @@ class CartsController extends Controller
     protected $orders;
     protected $coupons;
     protected $posts;
+    protected $banners;
 
-    public function __construct(Request $request, Orders $orders, Coupons $coupons, Posts $posts) {
+    public function __construct(Request $request, Orders $orders, Coupons $coupons, Posts $posts, Banners $banners) {
         $this->request = $request;
         $this->orders = $orders;
         $this->coupons = $coupons;
         $this->posts = $posts;
+        $this->banners = $banners;
     }
 
     public function get_orders($id) {
@@ -44,8 +47,16 @@ class CartsController extends Controller
     public function index() 
     {
 
+        $page_id = 1;
+        $send = [];
+        $banner = $this->banners->findByResource('page', $page_id);
+
+        if( isset($banner->id) ) {
+            $send['banner'] = $banner;
+        }
+
         if (!session('cart')) {
-            return view('ecommerce.cart.empty');
+            return view('ecommerce.cart.empty', $send);
         } else {
 
             $cart = session('cart');
@@ -58,10 +69,13 @@ class CartsController extends Controller
                 return view('ecommerce.cart.empty');
             }
 
+            $send = [ 'cart' => $cart ];
+
             //Related posts
             $related = $this->posts->all("book", "orderby=title&order=asc&limit=8&random=1")->posts;
+            $send['related'] = $related;
 
-            return view('ecommerce.cart.index', [ 'cart' => $cart, 'related' => $related ]);
+            return view('ecommerce.cart.index', $send);
 
         }
     }

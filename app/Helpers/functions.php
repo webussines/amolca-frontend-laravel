@@ -1,8 +1,19 @@
 <?php 
 
+use App\Repositories\Countries;
 use App\Http\Models\Options;
 use App\Http\Models\Menus;
 use App\Http\Models\MenuItems;
+
+function get_sitecountry_id() {
+
+	if (get_option('sitecountry_id') !== 'NULL') {
+		return get_option('sitecountry_id');
+	} else {
+		return 0;
+	}
+
+}
 
 function COPMoney($money) {
 

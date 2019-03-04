@@ -20,4 +20,10 @@ class CountriesController extends Controller
 
 	}
 
+	public function bytitle($title) {
+
+		return json_encode($this->countries->findByTitle($title));
+
+	}
+
 }

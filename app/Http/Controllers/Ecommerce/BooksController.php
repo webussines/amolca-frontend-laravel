@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Posts;
 use App\Repositories\Lots;
+use App\Repositories\Banners;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
@@ -15,11 +16,13 @@ class BooksController extends Controller
 
     protected $posts;
     protected $lots;
+    protected $banners;
     protected $pagination_number = 16;
 
-    public function __construct(Posts $posts, Lots $lots) {
+    public function __construct(Posts $posts, Lots $lots, Banners $banners) {
         $this->posts = $posts;
         $this->lots = $lots;
+        $this->banners = $banners;
     }
     
 	public function index() {
@@ -34,6 +37,13 @@ class BooksController extends Controller
 			return redirect('/');
 		}
 
+        $send_data = [];
+        $banner = $this->banners->findByResource('book', $book->id);
+
+        if( isset($banner->id) ) {
+            $send_data['banner'] = $banner;
+        }
+
 		$related_specialty = $book->taxonomies[0]->id;
 
 		if(count($book->taxonomies) > 1) {
@@ -44,10 +54,8 @@ class BooksController extends Controller
 
 		$related = $this->posts->taxonomies($related_specialty, $params)->posts;
 
-		$send_data = [
-			"book" => $book,
-			"related" => $related
-		];
+		$send_data["book"] = $book;
+		$send_data["related"] = $related;
 
 		if($book->state == 'RELEASE') {
 			$lot = $this->lots->findByPost($book->id);

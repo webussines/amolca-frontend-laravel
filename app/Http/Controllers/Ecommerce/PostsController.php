@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Posts;
+use App\Repositories\Banners;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Ecommerce\BooksController;
@@ -18,13 +19,15 @@ class PostsController extends Controller
     protected $books;
     protected $events;
     protected $request;
+    protected $banners;
     protected $pagination_number = 16;
 
-    public function __construct(Request $request, Posts $posts, BooksController $books, EventsController $events) {
+    public function __construct(Request $request, Posts $posts, BooksController $books, EventsController $events, Banners $banners) {
     	$this->request = $request;
         $this->posts = $posts;
         $this->books = $books;
         $this->events = $events;
+        $this->banners = $banners;
     }
     
 	public function index() {
@@ -75,9 +78,19 @@ class PostsController extends Controller
 				break;
 		}
 
-		$related = $this->posts->all("post", "limit=3&orderby=title&order=desc&random=1")->posts;
+		$send_data = [];
+		$send_data['post'] = $post;
 
-		return view('ecommerce.posts.show', ["post" => $post, "related" => $related]);
+        $banner = $this->banners->findByResource('blog', $post->id);
+
+        if( isset($banner->id) ) {
+            $send_data['banner'] = $banner;
+        }
+
+		$related = $this->posts->all("post", "limit=3&orderby=title&order=desc&random=1")->posts;
+		$send_data['related'] = $related;
+
+		return view('ecommerce.posts.show', $send_data);
 
 	}
 

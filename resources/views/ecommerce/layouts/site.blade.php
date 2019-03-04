@@ -7,6 +7,7 @@
 		<link rel="canonical" href="{{ Request::fullUrl() }}" >
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="country-active" content="{{ get_option('sitecountry') }}">
+		<meta name="country-active-id" content="">
 		<meta name="user-id" content="@if (session('user')) {{ session('user')->id }} @else 0 @endif">
 		<link rel="icon" type="image/x-icon" href="{{ asset('img/common/favicon.ico') }}">
 		@yield('meta')
@@ -76,12 +77,19 @@
 				$complete = explode('\\', Route::getCurrentRoute()->getActionName());
 				$controller = $complete[count($complete) - 1];
 				$active_controller = explode('@', $controller)[0];
-				$pages_not_banner = ["/", "iniciar-sesion", "buscar", "carrito", "finalizar-compra", "mi-cuenta"];
+				$pages_not_banner = ["/", "iniciar-sesion", "buscar", "mi-cuenta"];
+
+				$send_to_banner = ["show_searcher" => true, "exists_banner" => false];
+
+				if (isset($banner)) {
+					$send_to_banner["exists_banner"] = true; 
+				}
+
 			@endphp
 
-			@if (!in_array(Route::getCurrentRoute()->uri(), $pages_not_banner) && $active_controller !== 'AccountController')
+			@if (!in_array(Route::getCurrentRoute()->uri(), $pages_not_banner) && $active_controller !== 'AccountController' )
 				<div class="content-container">
-					@include('ecommerce.layouts.partials.banner', ["show_searcher" => true])
+					@include('ecommerce.layouts.partials.banner', $send_to_banner)
 				</div>
 			@endif
 

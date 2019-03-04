@@ -6,6 +6,7 @@ use App\Repositories\Posts;
 use App\Repositories\Lots;
 use App\Repositories\Authors;
 use App\Repositories\Sliders;
+use App\Repositories\Banners;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -18,12 +19,13 @@ class HomeController extends Controller
     protected $sliders;
     protected $lots;
 
-    public function __construct(Posts $posts, Authors $authors, Sliders $sliders, Lots $lots, Request $request) {
+    public function __construct(Posts $posts, Authors $authors, Sliders $sliders, Lots $lots, Banners $banners, Request $request) {
 
         $this->posts = $posts;
         $this->authors = $authors;
         $this->sliders = $sliders;
         $this->lots = $lots;
+        $this->banners = $banners;
 
     }
 
@@ -104,38 +106,58 @@ class HomeController extends Controller
 
     public function contact() 
     {
-        return view('ecommerce.contact');
+
+        $page_id = 4;
+
+        $banner = $this->banners->findByResource('page', $page_id);
+
+        $send = [];
+
+        if( isset($banner->id) ) {
+            $send['banner'] = $banner;
+        }
+
+        return view('ecommerce.contact', $send);
+
     }
 
     public function termsandconditions() 
     {
+
+        $page_id = 3;
+
+        $banner = $this->banners->findByResource('page', $page_id);
+
+        $send = [];
+
+        if( isset($banner->id) ) {
+            $send['banner'] = $banner;
+        }
+
         switch ( get_option('sitecountry') ) {
 
             case 'COLOMBIA':
-
-                return view('ecommerce.terms-policy.colombia');
-
+                return view('ecommerce.terms-policy.colombia', $send);
                 break;
 
             case 'ARGENTINA':
-
-                return view('ecommerce.terms-policy.argentina');
-                
+                return view('ecommerce.terms-policy.argentina', $send);
                 break;
 
             case 'MEXICO':
-
-                return view('ecommerce.terms-policy.mexico');
-                
+                return view('ecommerce.terms-policy.mexico', $send);
                 break;
 
             case 'DOMINICAN REPUBLIC':
+                return view('ecommerce.terms-policy.dominican-republic', $send);
+                break;
 
-                return view('ecommerce.terms-policy.dominican-republic');
-                
+            default:
+                return redirect('/');
                 break;
 
         }
+
     }
 
 }

@@ -11,11 +11,13 @@ class AdminBannersController extends Controller
 {
 
     protected $banners;
+    protected $request;
 
-    public function __construct(Banners $banners) {
+    public function __construct(Banners $banners, Request $request) {
 
         $this->middleware('superadmin');
         $this->banners = $banners;
+        $this->request = $request;
 
     }
 
@@ -75,9 +77,42 @@ class AdminBannersController extends Controller
      */
     public function show($id)
     {
-        $banner = $this->banner->findById($id);
+        $banner = $this->banners->findById($id);
 
-        return view('admin.banners.single', ['slider' => $banner]);
+        if( !$banner->id ) {
+            return redirect('/am-admin/banner');
+        }
+
+        if( $banner->resource_type == 'PAGE' ) {
+        switch ( $banner->resource_id ) {
+            case 1:
+                $banner->resource_title = 'Carrito de compras';
+                break;
+            case 2:
+                $banner->resource_title = 'Finalizar compra';
+                break;
+            case 3:
+                $banner->resource_title = 'Términos y condiciones';
+                break;
+            case 4:
+                $banner->resource_title = 'Contacto';
+                break;
+            case 5:
+                $banner->resource_title = 'Página de todos los blogs';
+                break;
+            case 6:
+                $banner->resource_title = 'Página de todos los autores';
+                break;
+            case 7:
+                $banner->resource_title = 'Página de novedades médicas';
+                break;
+            case 8:
+                $banner->resource_title = 'Página de novedades odontológicas';
+                break;
+        }
+    }
+
+        return view('admin.banners.single', ['banner' => $banner, 'action' => 'edit']);
     }
 
     /**

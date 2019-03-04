@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ecommerce;
 
+use App\Repositories\Banners;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -11,20 +12,32 @@ class CheckoutController extends Controller
 {
 
     protected $request;
+    protected $banners;
 
-    public function __construct(Request $request) {
+    public function __construct(Request $request, Banners $banners) {
         $this->request = $request;
+        $this->banners = $banners;
     }
 
     public function checkout() 
     {
 
+        $page_id = 2;
+        $send = [];
+        $banner = $this->banners->findByResource('page', $page_id);
+
+        if( isset($banner->id) ) {
+            $send['banner'] = $banner;
+        }
+
         if (!session('cart')) {
-            return view('ecommerce.cart.empty');
+            return view('ecommerce.cart.empty', $send);
         } else {
 
             $cart = session('cart');
-            return view('ecommerce.cart.checkout', [ 'cart' => $cart ]);
+            $send['cart'] = $cart;
+
+            return view('ecommerce.cart.checkout', $send);
 
         }
     }

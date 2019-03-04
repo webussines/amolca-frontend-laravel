@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Authors;
 use App\Repositories\Posts;
+use App\Repositories\Banners;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
@@ -14,12 +15,14 @@ class AuthorsController extends Controller
     protected $authors;
     protected $posts;
     protected $request;
+    protected $banners;
     protected $pagination_number = 16;
 
-    public function __construct(Authors $authors, Posts $posts, Request $request) {
+    public function __construct(Authors $authors, Posts $posts, Request $request, Banners $banners) {
         $this->authors = $authors;
         $this->posts = $posts;
         $this->request = $request;
+        $this->banners = $banners;
     }
     
 	public function index() {
@@ -56,6 +59,13 @@ class AuthorsController extends Controller
 			return redirect('/');
 		}
 
+		$send_data = [];
+
+		$banner = $this->banners->findByResource('author', $author->id);
+        if( isset($banner->id) ) {
+            $send_data['banner'] = $banner;
+        }
+
 		$params = "orderby=publication_year&order=-1";
 		$author_books = $this->posts->author($author->id, $params);
 
@@ -68,7 +78,10 @@ class AuthorsController extends Controller
 	        'pageName' => $pageName,
 	    ]);
 
-		return view('ecommerce.authors.show', ["author" => $author, "books" => $books]);
+	    $send_data["author"] = $author;
+	    $send_data["books"] = $books;
+
+		return view('ecommerce.authors.show', $send_data);
 
 	}
 }

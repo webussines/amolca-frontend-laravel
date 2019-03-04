@@ -16,6 +16,32 @@ jQuery(function($) {
 });
 
 const GetCountriesData = () => {
+
+	if ($('#sitecountry')) {
+		$('#sitecountry').on('change', () => {
+
+			let url = '/am-admin/countries/title/' + $('#sitecountry').val().toLowerCase();
+
+			console.log(url)
+
+			$.ajax({
+				method: 'GET',
+				url: url
+			}).done( (resp) => {
+
+				console.log(resp)
+
+				resp = JSON.parse(resp);
+				let country_id = resp.id;
+				$('#sitecountry_id').val(country_id);
+
+			}).catch( (err) => {
+				console.log(err)
+			})
+
+		});
+	}
+
 	$.ajax({
 		method: "GET",
 		url: '/am-admin/countries/all',

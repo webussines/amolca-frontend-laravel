@@ -28,8 +28,8 @@ class AuthController extends Controller
 
         $mailer['name'] = mailer_get_name();
         $mailer['from'] = mailer_get_me();
-        //$mailer['cc'] = $cc;
-        $mailer['cc'] = 'mstiven013@gmail.com';
+        $mailer['cc'] = $cc;
+        //$mailer['cc'] = 'mstiven013@gmail.com';
         $mailer['domain'] = mailer_get_domain();
         $mailer['country'] = mailer_get_country();
         $mailer['send_mail'] = true;

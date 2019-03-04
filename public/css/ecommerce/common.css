@@ -603,6 +603,15 @@ form.big-searcher {
     position: relative;
 }
 
+.big-slider .slider-link {
+    bottom: 0px;
+    left: 0px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 10;
+}
+
 .big-slider .bg-item {
     background-position: center;
     background-repeat: no-repeat;
@@ -682,24 +691,49 @@ form.big-searcher {
 /*Common banners*/
 .common-banner {
     align-items: center;
-    background: url('/img/banner/banner-example-02.jpg');
-    background-color: #00396F;
-    background-position: center;
-    background-size: cover;
+    background-color: #fff;
     border-radius: 15px;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     min-height: 100px;
     max-height: 100px;
+    overflow: hidden;
     padding: 0px 30px;
+    position: relative;
 }
+    .common-banner.example {
+        background: url('/img/banner/banner-example-02.jpg');
+        background-position: center;
+        background-size: cover;
+    }
     .common-banner p {
         color: #ffffff;
         font-size: 30px;
         font-weight: bold;
         text-align: center;
         text-shadow: 2px 2px 5px #000;
+    }
+    .common-banner img {
+        height: auto;
+        left: 50%;
+        margin: 0px;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 100%;
+    }
+    .common-banner a.banner-link {
+        bottom: 0px;
+        display: block;
+        left: 0px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 10;
     }
 
 /*Home styles*/

@@ -22,6 +22,8 @@ const RedirectFunction = (country) => {
     let search = country.filter(c => c.code == response.country);
     let active = search[0].title.toUpperCase();
 
+    $('meta[name="country-active-id"]').attr('content', search[0].id)
+
     AddCountryToForm(search[0].title);
 
     switch (active) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Specialties;
 use App\Repositories\Posts;
+use App\Repositories\Banners;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
@@ -13,15 +14,16 @@ class SpecialtiesController extends Controller
 {
     
     protected $request;
-    protected $banners;
 	protected $specialties;
 	protected $posts;
+	protected $banners;
 	protected $pagination_number = 16;
 
-	public function __construct(Specialties $specialties, Posts $posts, Request $request) {
+	public function __construct(Specialties $specialties, Posts $posts, Request $request, Banners $banners) {
 		$this->specialties = $specialties;
 		$this->posts = $posts;
 		$this->request = $request;
+		$this->banners = $banners;
 	}
 
 	public function index() {
@@ -50,6 +52,13 @@ class SpecialtiesController extends Controller
 			return redirect('/');
 		}
 
+        $send_data = [];
+        $banner = $this->banners->findByResource('specialty', $specialty->id);
+
+        if( isset($banner->id) ) {
+            $send_data['banner'] = $banner;
+        }
+
 		$books = $this->posts->taxonomies($specialty->id, $params);
 
 		// Crear paginacion y arreglo con los posts
@@ -61,7 +70,10 @@ class SpecialtiesController extends Controller
 	        'pageName' => $pageName,
 	    ]);
 
-        return view('ecommerce.specialties.show', [ 'posts' => $posts, 'specialty' => $specialty ]);
+	    $send_data['posts'] = $posts;
+	    $send_data['specialty'] = $specialty;
+
+        return view('ecommerce.specialties.show', $send_data );
 
 	}
 
