@@ -265,7 +265,7 @@ const DeleteBook = function(tbody, table, sort) {
 
 			$.ajax({
 				type: "DELETE",
-				url: "/am-admin/libros/" + data._id,
+				url: "/am-admin/libros/" + data.id,
 				data: { "_token": $('#_token').val() }
 			}).done(function(resp) {
 				console.log(resp)
