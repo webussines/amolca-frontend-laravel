@@ -91,7 +91,7 @@ const UpdateOrder = (data) => {
 
 		$('#notification-modal #resp-buttons').css('display', 'none');
 
-		$('#notification-modal #resp-text').html(`¡Hola, <b>${resp.address.name} ${resp.address.lastname}</b>!<br/> Recibimos tu pedido exitosamente.`);
+		$('#notification-modal #resp-text').html(`¡Hola, <b>${resp.address.name} ${resp.address.lastname}</b>!<br/> Tu pedido se ha procesado exitosamente.<br/> Solo debes <b>realizar tu pago</b> para finalizar tu compra.`);
 
 		$('#notification-modal #resp-desc').html('En 5 segundos te redirigiremos a la plataforma de pagos...');
 
@@ -146,6 +146,8 @@ const CardnetRedirectFunction = (user, order) => {
     	total += '00';
     }
 
+    let transaction_id = order.id + date;
+
     // Set all params to send for transaction
 	let params = {
 		TransactionType: tipo_transaccion,
@@ -158,7 +160,7 @@ const CardnetRedirectFunction = (user, order) => {
 		CancelUrl: url_to_return,
 		PageLanguaje: 'ESP',
 		OrdenId: order.id,
-		TransactionId: order.id + date,
+		TransactionId: transaction_id.substr(0,6),
 		Amount: '0000000' + total,
 		Tax: '00000001523',
 		MerchantName: 'COMERCIO PARA REALIZAR PRUEBAS DO',

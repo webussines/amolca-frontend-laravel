@@ -99,7 +99,7 @@ class CartsController extends Controller
             $this->request->session()->put('session_id', $order_session);
 
             $order['user_id'] = $order_session;
-            $order['country_id'] = 48;
+            $order['country_id'] = get_option('sitecountry_id');
             $order['state'] = 'CART';
             $order['products'] = [$add];
 

@@ -63,6 +63,17 @@
 				</tr>
 			@endif
 
+			@if ( isset($response['authorization_code']) )
+				<tr>
+					<th>
+						Código de autorización:
+					</th>
+					<td>
+						{{ $response['authorization_code'] }}
+					</td>
+				</tr>
+			@endif
+
 			@if ( isset($response['transaction_id']) )
 				<tr>
 					<th>
