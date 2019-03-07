@@ -33,7 +33,8 @@ const SaveLotInfo = () => {
 		_token = $('#_token').val();
 
 	let lote = {
-		title: $('#title').val()
+		title: $('#title').val(),
+		state: $('#state').val()
 	};
 
 	// Agregar libros al lote si hay al menos uno seleccionado
@@ -89,7 +90,7 @@ const SaveLotInfo = () => {
 
 	if(flag) {
 
-		console.log(lote)
+		return console.log(lote)
 
 		if($('.loader').hasClass('hidde'))
 			$('.loader').removeClass('hidde')

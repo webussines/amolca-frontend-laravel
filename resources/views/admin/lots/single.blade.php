@@ -7,6 +7,7 @@
     $arrival_date = (isset($lot->arrival_date)) ? $lot->arrival_date : '';
     $start_sales = (isset($lot->start_sales)) ? $lot->start_sales : '';
     $books = (isset($lot->books)) ? $lot->books : [];
+    $state = (isset($lot->state)) ? $lot->state : 'INACTIVE';
 
     $all_books = (isset($all_books)) ? $all_books : [];
 @endphp
@@ -80,6 +81,16 @@
                     <label for="title"><span class="required">*</span> Nombre del lote:</label>
                     <input type="text" name="title" id="title" class="required-field" placeholder="Título del libro..." value="{{ $title }}">
                     <p id="title-error" class="error"></p>
+                </div>
+
+                <div class="form-group col s12 m12">
+                    <label for="state"><span class="required">*</span> Mostrar este lote en la página de novedades:</label>
+                    <select name="state" id="state" class="normal-select required-field">
+                        <option value="0">Seleccione una opción</option>
+                        <option @if ( $state == 'ACTIVE') selected="selected" @endif value="ACTIVE">Mostrar en página de novedades</option>
+                        <option @if ( $state == 'INACTIVE') selected="selected" @endif value="INACTIVE">Mantener oculto</option>
+                    </select>
+                    <p id="state-error" class="error"></p>
                 </div>
 
                 <div class="form-group col s12 m12 l6">
