@@ -120,10 +120,12 @@ const createDataTable = function() {
 	    		data: "taxonomies",
 	    		className: "specialty",
 	    		render: function(data, type, JsonResultRow, meta) {
-	    			if(JsonResultRow.taxonomies.length > 1) {
+	    			if(JsonResultRow.taxonomies !== undefined && JsonResultRow.taxonomies.length > 1) {
 	    				return JsonResultRow.taxonomies[1].title;
-	    			} else {
+	    			} else if(JsonResultRow.taxonomies !== undefined &&  JsonResultRow.taxonomies.length <= 1) {
 	    				return JsonResultRow.taxonomies[0].title;
+	    			} else {
+	    			    return 'Sin especialidad';
 	    			}
 
 	    		}
