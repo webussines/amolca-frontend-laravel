@@ -64,20 +64,25 @@ class HomeController extends Controller
         $posts = $this->posts->all("post", 'skip=0&limit=8&orderby=created_at&order=asc');
         $slider = $this->sliders->find($slider_name);
 
-        // Obtener los libros del ultimo lote
-        $lot_books = $this->lots->findMostRecent()->books;
+        $lot_books = $this->lots->findActiveLot();
+        if( !isset($lot_books->id) ) {
+            // Obtener los libros del ultimo lote
+            $releases_books = $this->lots->findMostRecent()->books;
+        } else {
+            $releases_books = $lot_books->books;
+        }
 
         $medician = [];
         $odontologic = [];
 
-        for ($i = 0; $i < count($lot_books); $i++) { 
+        for ($i = 0; $i < count($releases_books); $i++) { 
 
-            $book = $lot_books[$i];
+            $book = $releases_books[$i];
 
-            for ($t=0; $t < count($lot_books[$i]->taxonomies); $t++) { 
-                if($lot_books[$i]->taxonomies[$t]->id == 1) {
+            for ($t=0; $t < count($releases_books[$i]->taxonomies); $t++) { 
+                if($releases_books[$i]->taxonomies[$t]->id == 1) {
                     array_push($medician, $book);
-                } else if($lot_books[$i]->taxonomies[$t]->id == 2) {
+                } else if($releases_books[$i]->taxonomies[$t]->id == 2) {
                     array_push($odontologic, $book);
                 }
             }

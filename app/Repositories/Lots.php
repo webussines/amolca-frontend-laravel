@@ -6,8 +6,6 @@ use GuzzleHttp\Client;
 
 class Lots extends GuzzleHttpRequest {
 
-	public $country = "COLOMBIA";
-
 	public function all($params = 'limit=3000') {
         return $this->get("lots?{$params}");
 	}
@@ -20,8 +18,12 @@ class Lots extends GuzzleHttpRequest {
 		return $this->get("lots/posts/{$id}");
 	}
 
+	public function findActiveLot() {
+		return $this->get("lots/releases/active");
+	}
+
 	public function findMostRecent() {
-		return $this->get("lots/news/recent");
+		return $this->get("lots/releases/recent");
 	}
 
 	public function create($body) {

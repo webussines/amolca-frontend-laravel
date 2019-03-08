@@ -90,8 +90,6 @@ const SaveLotInfo = () => {
 
 	if(flag) {
 
-		return console.log(lote)
-
 		if($('.loader').hasClass('hidde'))
 			$('.loader').removeClass('hidde')
 
