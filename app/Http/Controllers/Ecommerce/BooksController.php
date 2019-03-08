@@ -38,7 +38,15 @@ class BooksController extends Controller
 		}
 
         $send_data = [];
-        $banner = $this->banners->findByResource('book', $book->id);
+
+        $banner = get_banners_src($this->banners, 'book', $book->id);
+
+        for ($taxs = 0; $taxs < count($book->taxonomies); $taxs++) { 
+        	$specialty_banner = get_banners_src($this->banners, 'specialty', $book->taxonomies[$taxs]->id);
+        	if( isset($specialty_banner->id) ) {
+        		$banner = $specialty_banner;
+        	}
+        }
 
         if( isset($banner->id) ) {
             $send_data['banner'] = $banner;

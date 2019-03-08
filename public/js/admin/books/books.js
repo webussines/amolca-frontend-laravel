@@ -159,16 +159,7 @@ const createDataTable = function() {
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
 	    			//console.log(JsonResultRow)
-	    			/*let str = `<a class="edit" href="/am-admin/libros/${JsonResultRow._id}">
-				                    <span class="icon-mode_edit"></span>
-				                </a>
-
-				                <a class="delete">
-				                    <span class="icon-trash"></span>
-				                </a>
-		                  	`;*/
-
-		            let str = `<a class="edit">
+	    			let str = `<a class="edit" href="/am-admin/libros/${JsonResultRow.id}">
 				                    <span class="icon-mode_edit"></span>
 				                </a>
 
@@ -176,6 +167,15 @@ const createDataTable = function() {
 				                    <span class="icon-trash"></span>
 				                </a>
 		                  	`;
+
+		            /*let str = `<a class="edit" href="/am-admin/libros/">
+				                    <span class="icon-mode_edit"></span>
+				                </a>
+
+				                <a class="delete">
+				                    <span class="icon-trash"></span>
+				                </a>
+		                  	`;*/
                   	return str;
                 }
 	    	},
@@ -206,51 +206,10 @@ const createDataTable = function() {
         ).draw();
     });
 
-	SingleBookRedirect('.data-table tbody', table, SortColumn);
 	DeleteBook('.data-table tbody', table, SortColumn);
 
 	$('#DataTables_Table_0_length select').formSelect();
 	$('.dataTables_filter input[type="search"]').attr('placeholder', 'Escribe una palabra clave para encontrar un libro');
-}
-
-const SingleBookRedirect = function(tbody, table, sort) {
-
-	$(tbody).on('click', '.edit', function() {
-		let data = table.row($(this).parents("tr")).data();
-
-		let ItemIndex = table.row($(this).parents("tr")).index();
-		let TableIndexes = table.rows().indexes();
-		let IndexArrayKeys = TableIndexes.indexOf(ItemIndex);
-
-		let previous = TableIndexes[IndexArrayKeys - 1];
-		let next = TableIndexes[IndexArrayKeys + 1];
-
-		let PreviousRow = table.row(previous).data();
-		let NextRow = table.row(next).data();
-
-		let PreviousParam = '?';
-		let NextParam = '';
-		let SortParam = '';
-
-		if(data._id !== PreviousRow._id) {
-			PreviousParam = '?previous=' + PreviousRow._id
-		}
-
-		if(data._id !== NextRow._id && PreviousParam !== '?') {
-			NextParam = '&next=' + NextRow._id
-		} else if(data._id !== NextRow._id && PreviousParam == '?') {
-			NextParam = 'next=' + NextRow._id
-		}
-
-		if(PreviousParam !== '?' || NextParam !== '') {
-			SortParam = '&orderby=' + sort.column + '&order=' + sort.order;
-		}
-
-		let RedirectRoute = '/am-admin/libros/' + data.id + PreviousParam + NextParam + SortParam;
-
-		window.location.href = RedirectRoute;
-	});
-
 }
 
 const DeleteBook = function(tbody, table, sort) {

@@ -5,6 +5,10 @@ use App\Http\Models\Options;
 use App\Http\Models\Menus;
 use App\Http\Models\MenuItems;
 
+function get_banners_src($banners, $src, $id) {
+	return $banners->findByResource($src, $id);
+}
+
 function get_sitecountry_id() {
 
 	if (get_option('sitecountry_id') !== 'NULL') {
