@@ -1,24 +1,35 @@
 jQuery(function($){
 	$(document).ready(function() {
-		
 		createDataTable();
 
+		 $.ajax({
+			method: "GET",
+			url: '/am-admin/users/' + $('#_id').val() + '/orders',
+			data: {
+				"cart": 0,
+				"_token": $('#_token').val()
+			}
+		}).done((resp) => {
+			console.log(resp)
+		}).catch( (err) => {
+			console.log(err)
+		} )
 	});
 });
 
 const language = {
     "sProcessing":     "Procesando...",
-    "sLengthMenu":     "Eventos por pagina _MENU_",
+    "sLengthMenu":     "Pedidos por pagina _MENU_",
     "sZeroRecords":    "No se encontraron resultados",
     "sEmptyTable":     "Ningún dato disponible en esta tabla",
-    "sInfo":           "Mostrando eventos del _START_ al _END_ de un total de _TOTAL_ eventos",
-    "sInfoEmpty":      "Mostrando eventos del 0 al 0 de un total de 0 eventos",
-    "sInfoFiltered":   "(filtrado de un total de _MAX_ eventos)",
+    "sInfo":           "Mostrando pedidos del _START_ al _END_ de un total de _TOTAL_ pedidos",
+    "sInfoEmpty":      "Mostrando pedidos del 0 al 0 de un total de 0 pedidos",
+    "sInfoFiltered":   "(filtrado de un total de _MAX_ pedidos)",
     "sInfoPostFix":    "",
-    "sSearch":         "Buscar eventos:",
+    "sSearch":         "Buscar pedidos:",
     "sUrl":            "",
     "sInfoThousands":  ",",
-    "sLoadingRecords": "Cargando eventos...",
+    "sLoadingRecords": "Cargando pedidos...",
     "oPaginate": {
         "sFirst":    "Primero",
         "sLast":     "Último",
@@ -59,61 +70,88 @@ const createDataTable = function() {
 				.replace(/[úÚùÙûÛüÜ]/g, 'u')
 				.replace(/[ýÝŷŶŸÿ]/g, 'n');
 	};
-
-	var table = $('table.events').DataTable( {
+	
+	var table = $('table.orders').DataTable( {
 		language: language,
-		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
+		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todos"]],
 	    ajax: {
 	    	method: "GET",
-	    	url: '/am-admin/events',
+	    	url: '/am-admin/users/' + $('#_id').val() + '/orders',
 	    	data: {
-	    		"inventory": 1,
+	    		"cart": 0,
 				"_token": $('#_token').val()
 	    	}
 	    },
 	    columns: [
 	    	{ 
-	    		data: "thumbnail",
-	    		className: "image",
-	    		"render": function (data, type, JsonResultRow, meta) {
-                    return '<img src="'+ JsonResultRow.thumbnail + '">';
-                } 
+	    		data: "id",
+	    		className: "image"
             },
 	    	{ 	
-	    		data: "title",
-	    		className: "title"
+	    		data: "address",
+	    		className: "title",
+	    		render: function(data, type, JsonResultRow, meta) {
+	    			if(JsonResultRow.address !== undefined) {
+	    				return JsonResultRow.address.name + ' ' + JsonResultRow.address.lastname;
+	    			} else {
+	    				return '';
+	    			}
+	    		}
 	    	},
 	    	{ 	
-	    		data: "event_date",
-	    		className: "date",
-	    		render: function (data, type, JsonResultRow, meta) {
-
-	    			let event_date = '';
-
-	    			JsonResultRow.meta.forEach( function(element, index) {
-	    				if(element.key == 'event_date') {
-	    					event_date = element.value;
-	    				}
-	    			});
-
-	    			let date = new Date(event_date);
-	    			
-                  	return FormattingDate(date);
-                }
+	    		data: "address",
+	    		className: "email",
+	    		render: function(data, type, JsonResultRow, meta) {
+	    			if(JsonResultRow.address !== undefined) {
+	    				return JsonResultRow.address.email;
+	    			} else {
+	    				return '';
+	    			}
+	    		}
+	    	},
+	    	{ 	
+	    		data: "country_name",
+	    		className: "country"
+	    	},
+	    	{ 	
+	    		data: "id",
+	    		className: "products",
+	    		render: function(data, type, JsonResultRow, meta) {
+	    			if(JsonResultRow.products !== undefined) {
+	    				return JsonResultRow.products.length;
+	    			} else {
+	    				return 0;
+	    			}
+	    		}
 	    	},
 	    	{ 	
 	    		data: "state",
 	    		className: "state",
 	    		"render": function (data, type, JsonResultRow, meta) {
                   	switch(JsonResultRow.state) {
-                  		case 'PUBLISHED':
-                  			return 'Publicado';
+                  		case 'PENDING':
+                  			return 'Pendiente';
                   		break;
-                  		case 'DRAFT':
-                  			return 'Borrador';
+                  		case 'QUEUED_PAYMENT':
+                  			return 'Pago pendiente';
                   		break;
-                  		case 'TRASH':
-                  			return 'En papelera';
+                  		case 'PROCESSING':
+                  			return 'En proceso';
+                  		break;
+                  		case 'COMPLETED':
+                  			return 'Completado';
+                  		break;
+                  		case 'CANCELLED':
+                  			return 'Cancelado';
+                  		break;
+                  		case 'FAILED':
+                  			return 'Fallido';
+                  		break;
+                  		case 'REFUNDED':
+                  			return 'Reembolsado';
+                  		break;
+                  		case 'FAILED':
+                  			return 'Fallido';
                   		break;
                   		default:
                   			return 'Publicado';
@@ -125,12 +163,8 @@ const createDataTable = function() {
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
-		            let str = `<a class="edit" href="blog/${JsonResultRow.id}">
-				                    <span class="icon-mode_edit"></span>
-				                </a>
-
-				                <a class="delete">
-				                    <span class="icon-trash"></span>
+		            let str = `<a class="see" href="/am-admin/pedidos/${JsonResultRow.id}">
+				                    Ver
 				                </a>
 		                  	`;
                   	return str;
@@ -143,7 +177,7 @@ const createDataTable = function() {
 				"extend": 'excel',
 				"text": 'Exportar a Excel',
 				"className": "button primary",
-				"filename": "Eventos - Amolca",
+				"filename": "Pedidos Amolca",
 				"exportOptions": {
 					"modifier": {
 						"order":  'current',
@@ -151,58 +185,18 @@ const createDataTable = function() {
 						"search": 'none',
 					}
 				}
-            }
+			}
 		]
 	});
 
 	// Remove accented character from search input as well
     $('.dataTables_filter input[type=search]').keyup( function () {
-        var table = $('table.blog').DataTable(); 
+        var table = $('table.orders').DataTable(); 
         table.search(
             jQuery.fn.DataTable.ext.type.search.html(this.value)
         ).draw();
     });
 
-	DeletePost('.data-table tbody', table, SortColumn);
-
 	$('#DataTables_Table_0_length select').formSelect();
-	$('.dataTables_filter input[type="search"]').attr('placeholder', 'Escribe una palabra clave para encontrar una publicacion');
-}
-
-const DeletePost = function(tbody, table, sort) {
-
-	$(tbody).on('click', '.delete', function() {
-
-		let data = table.row($(this).parents("tr")).data();
-
-		let alerta = confirm('Seguro que deseas eliminar permanentemente el evento: ' + data.title);
-
-		if(alerta) {
-			if($('.loader').hasClass('hidde'))
-				$('.loader').removeClass('hidde')
-
-			$.ajax({
-				type: "DELETE",
-				url: "/am-admin/eventos/" + data.id,
-				data: { "_token": $('#_token').val() }
-			}).done(function(resp) {
-				console.log(resp)
-
-				$('.data-table').DataTable().ajax.reload();
-
-				$('table.events').DataTable().on('draw', function() {
-					if(!$('.loader').hasClass('hidde'))
-					$('.loader').addClass('hidde')
-
-					let toastMsg = 'Se elminó exitosamente el evento: ' + data.title + '.';
-					M.toast({html: toastMsg, classes: 'green accent-4 bottom'});
-				})
-
-			}).catch(function(err) {
-				console.log(err)
-			})
-		}
-
-	});
-
+	$('.dataTables_filter input[type="search"]').attr('placeholder', 'Escribe una palabra clave para encontrar un libro');
 }

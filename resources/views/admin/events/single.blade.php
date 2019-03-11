@@ -8,7 +8,27 @@
     $state = (isset($post->state)) ? $post->state : '';
     $content = (isset($post->content)) ? $post->content : '';
     $excerpt = (isset($post->excerpt)) ? $post->excerpt : '';
-    $date = (isset($post->event_date)) ? $post->event_date : '';
+    $date = '';
+    $info_btn_type = '';
+    $info_btn = '';
+
+    $meta = (isset($post->meta)) ? $post->meta : [];
+
+    foreach ($meta as $key => $value) {
+
+        switch ($value->key) {
+            case 'event_date':
+                    $date = $value->value;
+                break;
+            case 'event_info_btn_type':
+                    $info_btn_type = $value->value;
+                break;
+            case 'event_info_btn':
+                    $info_btn = $value->value;
+                break;
+        }
+
+    }
 
 @endphp
 
@@ -90,6 +110,28 @@
                 </div>
 
                 <div class="col s12 m4">
+
+                    <div class="meta-box info-btn">
+                        <div class="form-group">
+                            <p class="title">Botón para pedir más información:</p>
+
+                            <div class="radio-inputs">
+                                <label>
+                                    <input name="info_btn_type" type="radio" value="whatsapp" @if ($info_btn_type == 'whatsapp') checked @endif />
+                                    <span>Botón a Whatsapp</span>
+                                </label>
+                                <label>
+                                    <input name="info_btn_type" type="radio" value="external" @if ($info_btn_type == 'external') checked @endif />
+                                    <span>Página externa</span>
+                                </label>
+                            </div>
+                            
+                            <div class="btn-input @if ($info_btn == '') hidden @endif ">
+                                <label for="info_btn" id="info_btn_label">Escriba el número de celular al que se va enviar el mensaje:</label>
+                                <input type="text" name="info_btn" id="info_btn" placeholder="Botón para pedir información..." value="{!! $info_btn !!}">
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="meta-box">
                         <p class="title">Estado:</p>

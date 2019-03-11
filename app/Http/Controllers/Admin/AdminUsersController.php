@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Repositories\Users;
 use App\Repositories\Countries;
+use App\Repositories\Orders;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -14,14 +15,17 @@ class AdminUsersController extends Controller
     protected $users;
     protected $request;
     protected $countries;
+    protected $orders;
 
-    public function __construct(Users $users, Request $request, Countries $countries) {
+    public function __construct(Users $users, Request $request, Countries $countries, Orders $orders) {
 
-        $this->middleware('superadmin', [ "except" => [ "clients", "getclients" ] ]);
+        $this->middleware('superadmin', [ "except" => [ "clients", "getclients", "orders" ] ]);
 
         $this->users = $users;
         $this->request = $request;
         $this->countries = $countries;
+        $this->orders = $orders;
+
     }
 
     public function all() {
@@ -122,6 +126,34 @@ class AdminUsersController extends Controller
             'action' => 'edit',
             'user' => $user,
             'countries' => $countries
+        ]);
+    }
+
+    public function orders($id)
+    {
+        $user = $this->users->findById($id);
+        $orders = $this->orders->findByUser($user->email);
+
+        if($this->request->ajax()) {
+            $resp = [];
+
+            if ( is_object($orders) ) {
+                $decode = json_decode($orders);
+
+                if( isset($decode->status) && $decode->status == 404 ) {
+                    $resp['data'] = [];
+                }
+
+            } else { 
+                $resp['data'] = $orders;
+            }
+
+            return $resp;
+        }
+
+        return view('admin.users.orders', [
+            'user' => $user,
+            'orders' => $orders
         ]);
     }
 

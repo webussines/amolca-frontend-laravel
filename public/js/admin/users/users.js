@@ -60,8 +60,6 @@ const createDataTable = function() {
 		}
     }
 
-    console.log(route)
-
 	var table = $('table.users').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todos"]],
@@ -72,7 +70,7 @@ const createDataTable = function() {
 	    columns: [
 	    	{ 	
 	    		data: "name",
-	    		className: "name",
+	    		className: "title",
 	    		"render": function (data, type, JsonResultRow, meta) {
 	    			if(JsonResultRow.lastname !== null) {
                     	return JsonResultRow.name + ' ' + JsonResultRow.lastname;
@@ -107,9 +105,16 @@ const createDataTable = function() {
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
-	    			let str = `<a class="edit" href="/am-admin/usuarios/${JsonResultRow.id}">
+	    			let str = `<a class="see" href="/am-admin/usuarios/${JsonResultRow.id}">
 				                    <span class="icon-mode_edit"></span>
 				                </a>`;
+
+				    if(src == 'clients') {
+				    	str += `<a class="see" href="/am-admin/usuarios/${JsonResultRow.id}/pedidos">
+				                    Historial
+				                </a>`;
+				    }
+
                   	return str;
                 }
 	    	}

@@ -50,6 +50,8 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::get('carritos', 'Admin\AdminOrdersController@carts');
 		Route::get('carritos/{id}', 'Admin\AdminOrdersController@show');
 
+		Route::get('usuarios/{id}/pedidos', 'Admin\AdminUsersController@orders');
+
 		//Routes for get info "LIBOS"
 		Route::prefix('books')->group(function(){
 			Route::get('/', 'Admin\AdminBooksController@all');
@@ -99,6 +101,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 			Route::get('/all', 'Admin\AdminUsersController@all');
 			Route::get('/clients', 'Admin\AdminUsersController@getclients');
 			Route::post('/edit/{id}', 'Admin\AdminUsersController@edit');
+			Route::get('/{id}/orders', 'Admin\AdminUsersController@orders');
 		});
 
 		//Routes for get info "PEDIDOS"

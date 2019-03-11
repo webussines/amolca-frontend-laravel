@@ -28,8 +28,8 @@ class Orders extends GuzzleHttpRequest {
 		return $this->post("orders/{$id}/states", $body);
 	}
 
-	public function findByUser($id) {
-		return $this->get("orders/user/{$id}");
+	public function findByUser($email) {
+		return $this->get("orders/email/{$email}");
 	}
 
 	public function findAllByUser($id) {

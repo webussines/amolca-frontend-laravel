@@ -215,14 +215,17 @@
 				</td>
 			</tr>
 
-			<tr class="options">
-				<td class="option_name">
-					<label for="amolca_email"><b>Correo de contacto</b> de Amolca <b>{!! get_option('sitecountry') !!}</b>:</label>
-				</td>
-				<td class="option_value">
-					<input type="text" id="amolca_email" value="@if(get_option('amolca_email') !== 'NULL'){!! get_option('amolca_email') !!}@endif" placeholder="Correo de contacto de Amolca {!! get_option('sitecountry') !!}...">
-				</td>
-			</tr>
+			@if (session('user')->role == 'SUPERADMIN')
+				<tr class="options">
+					<td class="option_name">
+						<label for="amolca_email"><b>Correo de contacto</b> de Amolca <b>{!! get_option('sitecountry') !!}</b>:</label>
+					</td>
+					<td class="option_value">
+						<input type="text" id="amolca_email" value="@if(get_option('amolca_email') !== 'NULL'){!! get_option('amolca_email') !!}@endif" placeholder="Correo de contacto de Amolca {!! get_option('sitecountry') !!}...">
+					</td>
+				</tr>
+			@endif
+			
 		</tbody>
 	</table>
 

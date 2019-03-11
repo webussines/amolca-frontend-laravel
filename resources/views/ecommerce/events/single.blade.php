@@ -77,10 +77,38 @@
 			</div>
 
 			<div class="col s12 m12 l8 post-content">
+
 				@php $event_date = new Date($event->event_date); @endphp
 				<p class="subtitle"><b>Fecha del evento:</b> {{ $event_date->format('j F, Y') }}.</p>
+
 				<p class="subtitle"><b>Descripción:</b></p>
 				{!! $event->content !!}
+				
+				@if (isset($event->info_btn) && $event->info_btn !== '')
+
+					@if (isset($event->info_btn_type))
+						@php
+
+							switch ($event->info_btn_type) {
+								case 'whatsapp':
+										$btn = '<a class="social-share whatsapp" href="https://wa.me/' . $event->info_btn . '?text=¡Hola!, deseo obtener más información sobre este evento: ' . Request::fullUrl() . '" target="_blank">';
+										$btn .= '<span class="icon-whatsapp"></span> Escribir por whatsapp';
+										$btn .= '</a>';
+									break;
+								
+								case 'external':
+										$btn = '<a class="button primary" href="' . $event->info_btn . '" target="_blank">';
+										$btn .= 'Obtener información';
+										$btn .= '</a>';
+									break;
+							}
+						@endphp
+					@endif
+
+					<p class="subtitle"><b>Más información:</b> {!! $btn !!}</p>
+					
+				@endif
+
 			</div>
 		</div>
 		

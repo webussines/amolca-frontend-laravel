@@ -77,7 +77,7 @@
 
                 <tr>
                     <th>País desde dónde se envió:</th>
-                    <td>{{ $form->country_id }}</td>
+                    <td>{{ $form->country_name }}</td>
                 </tr>
 
                 <tr>

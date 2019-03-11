@@ -50,6 +50,12 @@
 		font-size: 23px;
 	}
 
+	.event .subtitle .button,
+	.event .subtitle .social-share {
+		margin-left: 10px;
+		font-size: 16px;
+	}
+
 .post-content {
 	border-bottom: 1px solid #a5a5a5;
 	margin-bottom: 20px;
@@ -96,6 +102,20 @@
 	}
 	.post-related .button {
 		font-size: 14px;
+	}
+
+.event .related-column {
+	margin-top: 50px;
+}
+.event .related-posts-loop {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+	.event .related-posts-loop .post-related {
+		margin-left: 20px;
+		margin-right: 20px;
+		width: 25%;
 	}
 
 @media screen and (max-width: 992px) {

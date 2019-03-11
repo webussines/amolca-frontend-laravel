@@ -14,6 +14,23 @@ jQuery(function($){
 
     $('.select2-normal').select2();
 
+    $('input[name="info_btn_type"]').on('change', () => {
+        let val = $('input[name="info_btn_type"]:checked').val();
+
+        if(val !== '' && val !== undefined && val !== ' ') {
+            $('.btn-input').slideDown('slow');
+
+            switch (val) {
+                case 'whatsapp':
+                    $('#info_btn_label').html('Escriba el número de whatsapp sin espacios...');
+                    break;
+                case 'external':
+                    $('#info_btn_label').html('Escriba aquí la URL destino...');
+                    break;
+            }
+        }
+    });
+
 });
 
 const InitTinyMceEditor = function() {
@@ -78,12 +95,14 @@ const SaveEventInfo = function() {
     //Unique values
     let id = $('#id').val();
     let title = $('#title').val();
+    let info_btn_type = $('input[name="info_btn_type"]:checked').val();
+    let info_btn = $('#info_btn').val();
     let thumbnail = $('#image-url').val();
     let date = $('#date').val();
     let state = $('#state').val();
     let description = tinymce.get('content').getContent().replace(/"/gi, "'");
 
-    let book = {
+    let event = {
         title: title,
         state: state,
         content: description,
@@ -98,19 +117,37 @@ const SaveEventInfo = function() {
         ]
     }
 
+    if(info_btn_type !== undefined) {
+        let obj = {
+            "key": "event_info_btn_type",
+            "value": info_btn_type
+        }
+
+        event.meta.push(obj);
+    }
+
+    if (info_btn !== '' && info_btn !== ' ') {
+        let obj = {
+            "key": "event_info_btn",
+            "value": info_btn
+        }
+
+        event.meta.push(obj);
+    }
+
     let ActionRoute;
     let send;
     
     switch(_action) {
         case 'edit':
-            send = book;
+            send = event;
             ActionRoute = '/am-admin/events/edit/' + id;
         break;
 
         case 'create':
             ActionRoute = '/am-admin/eventos';
-            book.slug = GenerateSlug(book.title);
-            send = [ book ];
+            event.slug = GenerateSlug(event.title);
+            send = [ event ];
         break;
     }
 

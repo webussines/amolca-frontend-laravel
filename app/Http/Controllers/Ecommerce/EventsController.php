@@ -66,6 +66,22 @@ class EventsController extends Controller
 				break;
 		}
 
+		foreach ($event->meta as $key => $value) {
+
+	        switch ($value->key) {
+	            case 'event_date':
+	                    $event->event_date = $value->value;
+	                break;
+	            case 'event_info_btn_type':
+	                    $event->info_btn_type = $value->value;
+	                break;
+	            case 'event_info_btn':
+	                    $event->info_btn = $value->value;
+	                break;
+	        }
+
+	    }
+
 		$related = $this->posts->all("event", "limit=3&orderby=title&order=desc&random=1")->posts;
 
 		return view('ecommerce.events.single', ["event" => $event, "related" => $related]);
