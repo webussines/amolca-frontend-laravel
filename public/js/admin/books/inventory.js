@@ -258,7 +258,7 @@ const UpdateBook = function(tbody, table) {
 			let lastRow = $('.book-form .countries .last-row-country');
 
 			if(user.role != 'SUPERADMIN') {
-				if(user.country == co.country_name.toUpperCase()) {
+				if(user.country == co.country_id) {
 					//console.log(co.country_name.toUpperCase())
 					lastRow.after(newRow);
 				}
