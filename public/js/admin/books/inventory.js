@@ -180,7 +180,8 @@ const UpdateBook = function(tbody, table) {
 		let user = {
 			id: $('#user_id').val(),
 			role: $('#user_role').val(),
-			country: $('#user_country').val()
+			country: $('#user_country').val(),
+			country_name: $('#country_name').val()
 		}
 
 		//console.log(data)
@@ -188,6 +189,7 @@ const UpdateBook = function(tbody, table) {
 		var _id = $('#_id').val(data.id);
 		var title = $('#book-title').html(data.title);
 		var country = data.inventory;
+		let exist_country = 0;
 			
 		let prices = GetPrices();
 
@@ -260,11 +262,45 @@ const UpdateBook = function(tbody, table) {
 			if(user.role != 'SUPERADMIN') {
 				if(user.country == co.country_id) {
 					//console.log(co.country_name.toUpperCase())
+					exist_country = 1;
 					lastRow.after(newRow);
 				}
 			} else {
 				lastRow.after(newRow);
 			}
+			
+		}
+		
+		if(exist_country == 0) {
+		    let rowClass = 'country-' + $('.row-country').length + 1;
+		    let lastRow = $('.book-form .countries .last-row-country');
+		    
+		    let newRow = `<div class="row row-country ${rowClass}">
+					<div class="col s12 m4">
+				        <label for="name"><span class="required">*</span> País:</label>
+				        <input type="hidden" readonly name="country-id" class="country-id" id="country-id" value="${user.country}">
+				        <input type="text" readonly name="country-name" class="country-name" id="country-name" value="${user.country_name}">
+				    </div>
+				    <div class="col s12 m3">
+				        <label for="price"><span class="required">*</span> Precio:</label>
+				        <input type="text" class="country-price" id="price" name="price" placeholder="Precio sin espacios ni caracteres especiales..."  value="0">
+				    </div>
+				    <div class="col s12 m3">
+				        <label for="country-state">Estado:</label>
+				        <select class="country-state normal-select" name="country-state" id="country-state">
+                            <option value="STOCK" selected>Disponible</option>
+			                <option value="RESERVED">Reservado</option>
+			                <option value="SPENT">Agotado</option>
+                        </select>
+				    </div>
+				    <div class="col s12 m2">
+				        <label for="quantity">Cantidad:</label>
+				        <input type="hidden" readonly name="post-id" class="post-id" id="post-id" value="${_id.val()}">
+				        <input type="text" class="country-quantity" id="quantity" name="quantity" placeholder="Escriba la cantidad de libros que hay disponibles" value="0">
+				    </div>
+				</div>`;
+				
+				lastRow.after(newRow);
 		}
 
 		/*

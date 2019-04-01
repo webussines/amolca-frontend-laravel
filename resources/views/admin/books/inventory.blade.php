@@ -19,6 +19,7 @@
 	<input type="hidden" id="user_id" value="{{ session('user')->id }}">
 	<input type="hidden" id="user_role" value="{{ session('user')->role }}">
 	<input type="hidden" id="user_country" value="{{ session('user')->country }}">
+	<input type="hidden" id="country_name" value="{{ get_option('sitecountry') }}">
 
 	<!-- Modal Structure -->
 	<div id="book-modal" class="modal modal-fixed-footer">
