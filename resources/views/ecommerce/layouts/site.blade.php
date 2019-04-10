@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="{{ asset('libs/materialize/css/materialize.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('libs/icomoon/icomoon.css') }}">
 		@yield('styles')
-		
+
 
 		@if (get_option('sitecountry') == 'COLOMBIA')
 			<!-- Facebook Pixel Code-->
@@ -31,18 +31,16 @@
 				t.src=v;s=b.getElementsByTagName(e)[0];
 				s.parentNode.insertBefore(t,s)}(window,document,'script',
 				'https://connect.facebook.net/en_US/fbevents.js');
-				fbq('init', '942229042628428'); 
+				fbq('init', '942229042628428');
 				fbq('track', 'PageView');
 
 				fbq('track', 'ViewContent');
 				@yield('fbPixel')
 			</script>
 			<noscript>
-				<img height="1" width="1" 
-				src="https://www.facebook.com/tr?id=942229042628428&ev=PageView
-				&noscript=1"/>
+				<img height="1" width="1" src="https://www.facebook.com/tr?id=942229042628428&ev=PageView&noscript=1"/>
 			</noscript>
-			
+
 			<!-- End Facebook Pixel Code -->
 
 			<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -73,7 +71,7 @@
 				<p id="resp-buttons"><a href="/carrito" class="button primary">Ver carrito</a> <a class="modal-close button gray">Cerrar</a></p>
 			</div>
 		</div>
-		
+
 		<div class="main @yield('contentClass')">
 
 			@php
@@ -85,7 +83,7 @@
 				$send_to_banner = ["show_searcher" => true, "exists_banner" => false];
 
 				if (isset($banner)) {
-					$send_to_banner["exists_banner"] = true; 
+					$send_to_banner["exists_banner"] = true;
 				}
 
 			@endphp
@@ -105,7 +103,7 @@
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('libs/materialize/js/materialize.min.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/common.js') }}"></script>
-	
+
 	@switch(get_option('sitecountry'))
 	    @case('COLOMBIA')
 	        <script src="{{ asset('js/geolocalization/colombia.js') }}"></script>
@@ -130,11 +128,11 @@
 	    @case('MEXICO')
 	        <script src="{{ asset('js/geolocalization/mexico.js') }}"></script>
 	        @break
-	
+
 	    @default
 	        <script src="{{ asset('js/geolocalization/casa-matriz.js') }}"></script>
 	@endswitch
-	
+
 	<script src="{{ asset('js/ecommerce/responsive-menu.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/cart.js') }}"></script>
 	<script src="{{ asset('js/common.js') }}"></script>

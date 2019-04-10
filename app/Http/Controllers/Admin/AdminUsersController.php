@@ -119,7 +119,7 @@ class AdminUsersController extends Controller
 
     public function show($id)
     {
-        $user = $this->users->me();
+        $user = $this->users->findById($id);
         $countries = $this->countries->all();
 
         return view('admin.users.single', [
@@ -144,7 +144,7 @@ class AdminUsersController extends Controller
                     $resp['data'] = [];
                 }
 
-            } else { 
+            } else {
                 $resp['data'] = $orders;
             }
 

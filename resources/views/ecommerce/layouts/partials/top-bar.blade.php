@@ -23,7 +23,7 @@
 			<li>
 				<a class="waves-effect waves-light" id="cart-btn" routerlink="/carrito" href="/carrito">
 					<i class="icon-shopping-cart1"></i>
-					@if (session('cart') !== null)
+					@if (session('cart') !== null && isset(session('cart')->amount) )
 						<span>{{ COPMoney(session('cart')->amount) }}</span>
 					@else
 						<span>{{ COPMoney(0) }}</span>

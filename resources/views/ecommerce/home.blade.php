@@ -27,13 +27,14 @@ fbq('track', 'AddToWishlist');
 @section('content')
 
 <!-- Modal Structure -->
+@if (get_option('sitecountry') == 'CASA MATRIZ')
 <div id="dealers-modal" class="modal">
 	<div class="modal-content">
 		<div class="modal-description">
 			<h3 class="title">¡Hola! nos estás visitando desde <span class="country">Bolivia</span></h3>
 			<p>A continuación te dejamos una lista de nuestros distribuidores en <b class="country">Bolivia</b></p>
 		</div>
-			
+
 		<table class="modal-dealers striped highlight">
 			<thead>
 				<tr>
@@ -53,6 +54,7 @@ fbq('track', 'AddToWishlist');
 		<a href="#!" class="modal-close button primary">Cerrar</a>
 	</div>
 </div>
+@endif
 
 <div class="home-slider">
 	@include('ecommerce.layouts.partials.big-slider', [ "items" => $slider ])
