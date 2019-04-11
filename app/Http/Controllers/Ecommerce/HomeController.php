@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {
-    
+
     protected $posts;
     protected $authors;
     protected $sliders;
@@ -67,7 +67,11 @@ class HomeController extends Controller
         $lot_books = $this->lots->findActiveLot();
         if( !isset($lot_books->id) ) {
             // Obtener los libros del ultimo lote
-            $releases_books = $this->lots->findMostRecent()->books;
+            if( isset($this->lots->findMostRecent()->books) ) {
+                $releases_books = $this->lots->findMostRecent()->books;
+            } else {
+                $releases_books = [];
+            }
         } else {
             $releases_books = $lot_books->books;
         }
@@ -75,11 +79,11 @@ class HomeController extends Controller
         $medician = [];
         $odontologic = [];
 
-        for ($i = 0; $i < count($releases_books); $i++) { 
+        for ($i = 0; $i < count($releases_books); $i++) {
 
             $book = $releases_books[$i];
 
-            for ($t=0; $t < count($releases_books[$i]->taxonomies); $t++) { 
+            for ($t=0; $t < count($releases_books[$i]->taxonomies); $t++) {
                 if($releases_books[$i]->taxonomies[$t]->id == 1) {
                     array_push($medician, $book);
                 } else if($releases_books[$i]->taxonomies[$t]->id == 2) {
@@ -91,15 +95,30 @@ class HomeController extends Controller
         $info_send = [
             'medician' => $medician,
             'odontologic' => $odontologic,
-            'authors' => $authors->posts,
-            'posts' => $posts->posts,
-            'slider' => $slider->items,
+            'authors' => [],
+            'posts' => [],
+            'slider' => [],
         ];
+
+        // If isset authors posts
+        if( isset($authors->posts) ) {
+            $info_send['authors'] = $authors->posts;
+        }
+
+        // If isset blog posts
+        if( isset($posts->posts) ) {
+            $info_send['posts'] = $posts->posts;
+        }
+
+        // If isset slider items
+        if( isset($slider->items) ) {
+            $info_send['slider'] = $slider->items;
+        }
 
         return view('ecommerce.home', $info_send);
     }
 
-    public function login() 
+    public function login()
     {
 
         if(session('user')) {
@@ -109,7 +128,7 @@ class HomeController extends Controller
         return view('ecommerce.login');
     }
 
-    public function contact() 
+    public function contact()
     {
 
         $page_id = 4;
@@ -126,7 +145,7 @@ class HomeController extends Controller
 
     }
 
-    public function termsandconditions() 
+    public function termsandconditions()
     {
 
         $page_id = 3;
