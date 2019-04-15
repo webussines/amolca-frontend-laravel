@@ -23,7 +23,7 @@ const RedirectFunction = (country) => {
     let active = search[0].title.toUpperCase();
 
     $('meta[name="country-active-id"]').attr('content', search[0].id)
-    
+
     AddCountryToForm(search[0].title);
 
     switch (active) {
@@ -57,6 +57,12 @@ const RedirectFunction = (country) => {
         }
         return console.log('PERU')
         break;
+
+      case 'MEXICO':
+          if (window.location.href.indexOf("amolca.com.mx") < 1) {
+            return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.mx')
+          }
+          break;
 
       default:
         window.location.href = window.location.href.replace(window.location.host, 'amolca.com')

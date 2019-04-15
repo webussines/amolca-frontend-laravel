@@ -51,6 +51,12 @@ const RedirectFunction = (country) => {
         }
         break;
 
+      case 'MEXICO':
+          if (window.location.href.indexOf("amolca.com.mx") < 1) {
+            return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.mx')
+          }
+          break;
+
       case 'DOMINICAN REPUBLIC':
         if (window.location.href.indexOf("amolca.com.do") < 1) {
           window.location.href = window.location.href.replace(window.location.host, 'amolca.com.do')

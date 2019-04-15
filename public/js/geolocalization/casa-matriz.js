@@ -57,6 +57,12 @@ const RedirectFunction = (country) => {
         }
         break;
 
+      case 'MEXICO':
+          if (window.location.href.indexOf("amolca.com.mx") < 1) {
+            return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.mx')
+          }
+          break;
+
       default:
         if (window.location.href.indexOf("amolca.com") < 1) {
           return window.location.href = window.location.href.replace(window.location.host, 'amolca.com')
@@ -86,11 +92,11 @@ const ShowDealersModal = (id, country) => {
     for (let i = 0; i < resp.length; i++) {
 
       let tmp = DealerTmp(resp[i]);
-      
+
       $('.modal-dealers').append(tmp);
 
     }
-    
+
   }).catch((err) => {
     console.log(err)
   })

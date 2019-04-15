@@ -197,7 +197,7 @@ ul.social-networks.top {
     margin-right: 10px;
     width: 40px;
     text-align: center;
-} 
+}
     #login-btn.view-mobile i {
         font-size: 39px;
     }
@@ -468,18 +468,18 @@ ul.social-networks.top {
 
 /*Global form styles*/
 .main input:not([type]),
-.main input[type=date]:not(.browser-default), 
-.main input[type=datetime-local]:not(.browser-default), 
-.main input[type=datetime]:not(.browser-default), 
-.main input[type=email]:not(.browser-default), 
-.main input[type=number]:not(.browser-default), 
-.main input[type=password]:not(.browser-default), 
-.main input[type=search]:not(.browser-default), 
-.main input[type=tel]:not(.browser-default), 
-.main input[type=text]:not(.browser-default), 
-.main input[type=time]:not(.browser-default), 
-.main input[type=url]:not(.browser-default), 
-.main textarea, 
+.main input[type=date]:not(.browser-default),
+.main input[type=datetime-local]:not(.browser-default),
+.main input[type=datetime]:not(.browser-default),
+.main input[type=email]:not(.browser-default),
+.main input[type=number]:not(.browser-default),
+.main input[type=password]:not(.browser-default),
+.main input[type=search]:not(.browser-default),
+.main input[type=tel]:not(.browser-default),
+.main input[type=text]:not(.browser-default),
+.main input[type=time]:not(.browser-default),
+.main input[type=url]:not(.browser-default),
+.main textarea,
 .main textarea.materialize-textarea {
     border-radius: 5px;
     border: 1px solid #a5a5a5;
@@ -494,25 +494,25 @@ ul.social-networks.top {
     padding-right: 10px;
 }
 
-    .main input:not([type]):focus:not([readonly]), 
-    .main input[type=date]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=datetime]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=email]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=number]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=password]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=search]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=tel]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=text]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=time]:not(.browser-default):focus:not([readonly]), 
-    .main input[type=url]:not(.browser-default):focus:not([readonly]), 
-    .main textarea.materialize-textarea:focus:not([readonly]), 
+    .main input:not([type]):focus:not([readonly]),
+    .main input[type=date]:not(.browser-default):focus:not([readonly]),
+    .main input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+    .main input[type=datetime]:not(.browser-default):focus:not([readonly]),
+    .main input[type=email]:not(.browser-default):focus:not([readonly]),
+    .main input[type=number]:not(.browser-default):focus:not([readonly]),
+    .main input[type=password]:not(.browser-default):focus:not([readonly]),
+    .main input[type=search]:not(.browser-default):focus:not([readonly]),
+    .main input[type=tel]:not(.browser-default):focus:not([readonly]),
+    .main input[type=text]:not(.browser-default):focus:not([readonly]),
+    .main input[type=time]:not(.browser-default):focus:not([readonly]),
+    .main input[type=url]:not(.browser-default):focus:not([readonly]),
+    .main textarea.materialize-textarea:focus:not([readonly]),
     .main textarea:focus:not([readonly]) {
         border: 1px solid #00396f !important;
         box-shadow: none !important;
     }
 
-.main textarea, 
+.main textarea,
 .main textarea.materialize-textarea  {
     padding: 13px;
 }
@@ -1507,7 +1507,7 @@ form.big-searcher {
     .main.not-found .content-not-found {
         padding: 100px 5%;
     }
-    
+
     .social-list {
         align-items: center;
         display: flex;
@@ -1535,7 +1535,7 @@ form.big-searcher {
             }
 
 /*Contact page*/
-.main.contact textarea, 
+.main.contact textarea,
 .main.contact textarea.materialize-textarea {
     height: 75px;
 }
@@ -1661,6 +1661,7 @@ form.big-searcher {
             color: #a1b3c7;
         }
         #bottom-bar .item#designed {
+            display: none;
             position: absolute;
             right: 5%;
         }
