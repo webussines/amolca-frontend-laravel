@@ -33,6 +33,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 		Route::resources([
 		    'libros' => 'Admin\AdminBooksController',
+				'catalogos' => 'Admin\AdminCatalogsController',
 		    'especialidades' => 'Admin\AdminSpecialtiesController',
 		    'autores' => 'Admin\AdminAuthorsController',
 		    'sliders' => 'Admin\AdminSlidersController',
@@ -57,6 +58,12 @@ Route::group(['prefix' => 'am-admin'], function() {
 			Route::get('/', 'Admin\AdminBooksController@all');
 			Route::post('/edit/{id}', 'Admin\AdminBooksController@edit');
 			Route::post('/inventory', 'Admin\AdminBooksController@update_inventory');
+		});
+
+		//Routes for get info "CATALOGS"
+		Route::prefix('catalogs')->group(function(){
+			Route::get('/', 'Admin\AdminCatalogsController@all');
+			Route::post('/edit/{id}', 'Admin\AdminCatalogsController@edit');
 		});
 
 		//Routes for get info "BLOGS"
@@ -136,7 +143,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::get('/country/{id}', 'Admin\AdminDealersController@getbycountry');
 		Route::post('/edit/{id}', 'Admin\AdminDealersController@edit');
 	});
-	
+
 	//Routes for get info "PAISES"
 	Route::prefix('countries')->group(function(){
 		Route::get('/title/{title}', 'CountriesController@bytitle');
@@ -168,6 +175,10 @@ Route::post('/checkout/mercadopago', 'Ecommerce\CheckoutController@mercadopago')
 
 //Novedades
 Route::get('/novedades/{slug}', 'Ecommerce\BooksController@news');
+
+//Catalogos
+Route::get('/catalogos/medicina', 'Ecommerce\HomeController@MedicianCatalog');
+Route::get('/catalogos/odontologia', 'Ecommerce\HomeController@OdontologyCatalog');
 
 //Especialidades
 Route::get('/especialidad/{slug}', 'Ecommerce\SpecialtiesController@show');

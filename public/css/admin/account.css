@@ -269,7 +269,7 @@ a.view-site-btn {
                     .nav-menu ul.vmenu > li .submenu li:hover:after {
                         background-color: #666666;
                     }
-                    
+
                     .nav-menu ul.vmenu > li .submenu li a {
                         background-color: #ededed;
                         color: #A5A5A5;
@@ -560,7 +560,7 @@ div#book-modal {
     display: inline-block;
     width: 100%;
 }
-    .file-upload-wrapper #upload-file-btn, #save-file-btn {
+    .file-upload-wrapper #upload-file-btn, #save-file-btn, #pdf-save-file-btn {
         border: 2px solid;
         cursor: pointer;
         padding: 10px 20px 13px;
@@ -583,13 +583,15 @@ div#book-modal {
             border-color: #00396F;
         }
 
-        #save-file-btn {
+        #save-file-btn,
+        #pdf-save-file-btn {
             background-color: #4CAF50;
             border-color: #4CAF50;
             color: #fff;
             display: none;
         }
-        #save-file-btn:hover {
+        #save-file-btn:hover,
+        #pdf-save-file-btn:hover {
             background-color: #2f7b32;
             border-color: #2f7b32;
         }

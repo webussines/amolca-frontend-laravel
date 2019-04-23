@@ -24,6 +24,20 @@
                 </ul>
             </li>
         @endif
+
+        @if (session('user')->role == 'SUPERADMIN' || session('user')->role == 'ADMIN')
+            <li>
+                <a data-id="catalogs" @if ($active == 'AdminCatalogsController') class="actived" @endif>
+                    <span class="icon icon-stack"></span> <span class="text">Catalogos</span>
+                </a>
+
+                <ul class="submenu" data-menu="catalogs" style="@if ($active == 'AdminCatalogsController') {{$submenu_show}} @endif">
+                    <li><a href="/am-admin/catalogos">Todos los catalogos</a></li>
+                    <li><a href="/am-admin/catalogos/create">Añadir catalogo</a></li>
+                </ul>
+            </li>
+        @endif
+
         @if (session('user')->role == 'SUPERADMIN')
             <li>
                 <a data-id="lots" @if ($active == 'AdminLotsController') class="actived" @endif>
@@ -89,7 +103,7 @@
                     <li><a href="/am-admin/cupones/create">Añadir cupón</a></li>
                 </ul>
             </li>
-            
+
             <li>
                 <a data-id="orders" @if ($active == 'AdminOrdersController') class="actived" @endif>
                     <span class="icon icon-database"></span> <span class="text">Pedidos</span>

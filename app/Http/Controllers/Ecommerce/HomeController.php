@@ -184,4 +184,14 @@ class HomeController extends Controller
 
     }
 
+    // Medician catalog
+    public function MedicianCatalog() {
+      return view('ecommerce.catalogs.odontology');
+    }
+
+    // Odontology Catalog
+    public function OdontologyCatalog() {
+      return view('ecommerce.catalogs.odontology');
+    }
+
 }

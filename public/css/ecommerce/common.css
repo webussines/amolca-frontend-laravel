@@ -1563,6 +1563,42 @@ form.big-searcher {
         min-width: 200px;
     }
 
+/*Catalogs page*/
+.catalogs-list {
+  align-items: top;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+  .catalogs-list .item {
+    border: 1px solid #e4e4e4;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 30px;
+    text-align: center;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    max-width: -webkit-calc( 20% - 20px );
+    max-width: -moz-calc( 20% - 20px );
+    max-width: -ms-calc( 20% - 20px );
+    max-width: calc( 20% - 20px );
+    width: 100%;
+  }
+    .catalogs-list .item:hover {
+      border-color: #00396f;
+    }
+    .catalogs-list .item img {
+      max-width: 150px;
+    }
+    .catalogs-list .item .title {
+      font-size: 16px;
+      margin: 10px 0px 20px;
+    }
+    .catalogs-list .item .button {
+      font-size: 12px;
+    }
+
 /*Footer styles*/
 .footer {
     background-color: #eaeaea;
