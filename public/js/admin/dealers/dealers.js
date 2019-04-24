@@ -30,7 +30,7 @@ const language = {
 };
 
 const createDataTable = function() {
-	let SortColumn = { column: 'title', order: -1};
+	let SortColumn = { column: 'title', order: -1 };
 
 	var table = $('table.dealers').DataTable( {
 		language: language,
@@ -44,15 +44,15 @@ const createDataTable = function() {
 	    	}
 	    },
 	    columns: [
-	    	{ 
+	    	{
 	    		data: "id",
 	    		className: "id"
             },
-	    	{ 	
+	    	{
 	    		data: "title",
 	    		className: "title"
 	    	},
-	    	{ 	
+	    	{
 	    		data: "meta",
 	    		className: "code",
           render: function (data, type, JsonResultRow, meta) {
@@ -67,11 +67,11 @@ const createDataTable = function() {
               }
 
             }
-            
+
             return contact;
           }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "meta",
 	    		className: "meta",
 	    		render: function (data, type, JsonResultRow, meta) {
@@ -86,11 +86,11 @@ const createDataTable = function() {
               }
 
             }
-            
+
             return phone;
 		      }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "meta",
           className: "meta",
           render: function (data, type, JsonResultRow, meta) {
@@ -105,11 +105,11 @@ const createDataTable = function() {
               }
 
             }
-            
+
             return email;
           }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
@@ -174,7 +174,7 @@ const DeleteCoupon = function(tbody, table) {
           if (json.error == 'token_expired') {
             let toastMsg = 'Su sesión ha expirado, en segundo será redirigido para iniciar sesión de nuevo.';
             M.toast({html: toastMsg, classes: 'red accent-4 bottom'});
-            
+
             setTimeout(function() {
               window.location.href = '/am-admin/logout?redirect=';
             }, 5000);

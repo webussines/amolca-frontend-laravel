@@ -18,6 +18,14 @@ class Catalogs extends GuzzleHttpRequest {
 		return $this->get("posts/slug/{$slug}");
 	}
 
+	public function medician() {
+		return $this->get("catalogs/medician");
+	}
+
+	public function odontology() {
+		return $this->get("catalogs/odontology");
+	}
+
 	public function create($body) {
 		return $this->post("posts", $body);
 	}

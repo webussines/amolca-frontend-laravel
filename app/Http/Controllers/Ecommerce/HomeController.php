@@ -7,6 +7,7 @@ use App\Repositories\Lots;
 use App\Repositories\Authors;
 use App\Repositories\Sliders;
 use App\Repositories\Banners;
+use App\Repositories\Catalogs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -18,14 +19,18 @@ class HomeController extends Controller
     protected $authors;
     protected $sliders;
     protected $lots;
+    protected $catalogs;
 
-    public function __construct(Posts $posts, Authors $authors, Sliders $sliders, Lots $lots, Banners $banners, Request $request) {
+    public function __construct(
+        Posts $posts, Authors $authors, Sliders $sliders, Lots $lots, Banners $banners, Request $request, Catalogs $catalogs
+    ) {
 
         $this->posts = $posts;
         $this->authors = $authors;
         $this->sliders = $sliders;
         $this->lots = $lots;
         $this->banners = $banners;
+        $this->catalogs = $catalogs;
 
     }
 
@@ -186,12 +191,14 @@ class HomeController extends Controller
 
     // Medician catalog
     public function MedicianCatalog() {
-      return view('ecommerce.catalogs.odontology');
+        $catalogs = $this->catalogs->medician();
+        return view('ecommerce.catalogs.index', [ 'specialty' => 'Medicina', 'catalogs' => $catalogs ]);
     }
 
     // Odontology Catalog
     public function OdontologyCatalog() {
-      return view('ecommerce.catalogs.odontology');
+        $catalogs = $this->catalogs->odontology();
+        return view('ecommerce.catalogs.index', [ 'specialty' => 'Odontología', 'catalogs' => $catalogs ]);
     }
 
 }

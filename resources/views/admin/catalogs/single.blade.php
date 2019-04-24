@@ -153,7 +153,7 @@
                     <label for="specialty"><span class="required">*</span> Especialidad a la que pertenece:</label>
                     <select name="specialty" id="specialty" class="select2-normal required-field">
                         <option value="MEDICIAN" @if ($specialty == 'MEDICIAN') selected="selected" @endif>Medicina</option>
-                        <option value="ODONTOLOGY" @if ($specialty == 'MEDICIAN') selected="selected" @endif>Odontología</option>
+                        <option value="ODONTOLOGY" @if ($specialty == 'ODONTOLOGY') selected="selected" @endif>Odontología</option>
                     </select>
                     <p id="country-error" class="error"></p>
                 </div>

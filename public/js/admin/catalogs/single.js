@@ -36,6 +36,7 @@ const SaveCouponInfo = () => {
 	let catalog = {
 		title: $('#title').val(),
 		thumbnail: $('#image-url').val(),
+		type: 'catalog',
 		meta: [
 			{ 'key': 'catalog_country_id', 'value': $('#country').val() },
 			{ 'key': 'catalog_specialty', 'value': $('#specialty').val() }
@@ -44,18 +45,6 @@ const SaveCouponInfo = () => {
 
 	if( $('#pdf-url').val() !== '' &&  $('#pdf-url').val() !== ' ' ) {
 		catalog.meta.push({ 'key': 'catalog_pdf_url', 'value': $('#pdf-url').val() })
-	}
-
-	let ActionRoute = '';
-
-	switch (_action) {
-		case 'edit':
-			ActionRoute = '/am-admin/catalogs/edit/' + _id;
-			break;
-		case 'create':
-			ActionRoute = '/am-admin/catalogos';
-			catalog.slug = GenerateSlug(catalog.title);
-			break;
 	}
 
 	// Recorres campos requeridos para validar el formulario
@@ -74,13 +63,28 @@ const SaveCouponInfo = () => {
 
 	});
 
+	let ActionRoute = '';
+	let send;
+
+	switch (_action) {
+		case 'edit':
+			ActionRoute = '/am-admin/catalogs/edit/' + _id;
+			send = catalog;
+			break;
+		case 'create':
+			ActionRoute = '/am-admin/catalogos';
+			catalog.slug = GenerateSlug(catalog.title);
+			send = [ catalog ];
+			break;
+	}
+
 	if(flag) {
 
 		if($('.loader').hasClass('hidde'))
 			$('.loader').removeClass('hidde')
 
 		let data_send = {
-			body: catalog,
+			body: send,
 			_token: _token
 		}
 
@@ -112,6 +116,10 @@ const SaveCouponInfo = () => {
 					break;
 				}
 
+			}
+
+			if(data.posts_id !== undefined && data.posts_id.length > 0) {
+			    window.location.href = '/am-admin/catalogos/' + data.posts_id[0];
 			}
 		}).catch(function(err) {
 

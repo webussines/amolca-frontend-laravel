@@ -58,6 +58,27 @@ const createDataTable = function() {
 				.replace(/[ýÝŷŶŸÿ]/g, 'n');
 	};
 
+	jQuery.fn.dataTableExt.ofnSearch['string'] = function ( data ) {
+		return ! data ?
+		    '' :
+		    typeof data === 'string' ?
+		        data
+		            .replace( /\n/g, ' ' )
+		            .replace( /[áÁàÀâÂäÄãÃåÅæÆ]/g, 'a' )
+		            .replace( /é/g, 'e' )
+		            .replace( /í/g, 'i' )
+		            .replace( /ó/g, 'o' )
+		            .replace( /ú/g, 'u' )
+		            .replace( /ê/g, 'e' )
+		            .replace( /[íÍìÌîÎïÏîĩĨĬĭ]/g, 'i' )
+		            .replace( /ô/g, 'o' )
+		            .replace( /è/g, 'e' )
+		            .replace( /ï/g, 'i' )
+		            .replace( /ü/g, 'u' )
+		            .replace( /ç/g, 'c' ) :
+		        data;
+	};
+
 	var table = $('table.carts').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todos"]],
@@ -70,15 +91,15 @@ const createDataTable = function() {
 	    	}
 	    },
 	    columns: [
-	    	{ 
+	    	{
 	    		data: "id",
 	    		className: "image"
             },
-	    	{ 	
+	    	{
 	    		data: "country_name",
 	    		className: "country"
 	    	},
-	    	{ 	
+	    	{
 	    		data: "id",
 	    		className: "products",
 	    		render: function(data, type, JsonResultRow, meta) {
@@ -89,15 +110,15 @@ const createDataTable = function() {
 	    			}
 	    		}
 	    	},
-	    	{ 	
+	    	{
 	    		data: "created_at",
 	    		className: "state",
 	    		"render": function (data, type, JsonResultRow, meta) {
 	    			let date = new Date(JsonResultRow.created_at);
                   	return FormattingDate(date);
-                } 
+                }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
@@ -129,7 +150,7 @@ const createDataTable = function() {
 
 	// Remove accented character from search input as well
     $('.dataTables_filter input[type=search]').keyup( function () {
-        var table = $('table.carts').DataTable(); 
+        var table = $('table.carts').DataTable();
         table.search(
             jQuery.fn.DataTable.ext.type.search.html(this.value)
         ).draw();

@@ -59,6 +59,27 @@ const createDataTable = function() {
 				.replace(/[ýÝŷŶŸÿ]/g, 'n');
 	};
 
+	jQuery.fn.dataTableExt.ofnSearch['string'] = function ( data ) {
+		return ! data ?
+		    '' :
+		    typeof data === 'string' ?
+		        data
+		            .replace( /\n/g, ' ' )
+		            .replace( /[áÁàÀâÂäÄãÃåÅæÆ]/g, 'a' )
+		            .replace( /é/g, 'e' )
+		            .replace( /í/g, 'i' )
+		            .replace( /ó/g, 'o' )
+		            .replace( /ú/g, 'u' )
+		            .replace( /ê/g, 'e' )
+		            .replace( /[íÍìÌîÎïÏîĩĨĬĭ]/g, 'i' )
+		            .replace( /ô/g, 'o' )
+		            .replace( /è/g, 'e' )
+		            .replace( /ï/g, 'i' )
+		            .replace( /ü/g, 'u' )
+		            .replace( /ç/g, 'c' ) :
+		        data;
+	};
+
 	var table = $('table.books').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
@@ -66,7 +87,7 @@ const createDataTable = function() {
 	    	method: "GET",
 	    	url: '/am-admin/books',
 	    	data: {
-	    		"limit": 1200,
+	    		"limit": 500,
 	    		"inventory": 1,
 				"_token": $('#_token').val()
 	    	}
@@ -105,18 +126,18 @@ const createDataTable = function() {
 		    }
 		},
 	    columns: [
-	    	{ 
+	    	{
 	    		data: "thumbnail",
 	    		className: "image",
 	    		"render": function (data, type, JsonResultRow, meta) {
                     return '<img src="'+ JsonResultRow.thumbnail + '">';
-                } 
+                }
             },
-	    	{ 	
+	    	{
 	    		data: "title",
 	    		className: "title"
 	    	},
-	    	{ 	
+	    	{
 	    		data: "taxonomies",
 	    		className: "specialty",
 	    		render: function(data, type, JsonResultRow, meta) {
@@ -130,11 +151,11 @@ const createDataTable = function() {
 
 	    		}
 	    	},
-	    	{ 	
+	    	{
 	    		data: "isbn",
 	    		className: "isbn"
 	    	},
-	    	{ 	
+	    	{
 	    		data: "state",
 	    		className: "state",
 	    		"render": function (data, type, JsonResultRow, meta) {
@@ -152,9 +173,9 @@ const createDataTable = function() {
                   			return 'Publicado';
                   		break;
                   	}
-                } 
+                }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
@@ -200,7 +221,7 @@ const createDataTable = function() {
 
 	// Remove accented character from search input as well
     $('.dataTables_filter input[type=search]').keyup( function () {
-        var table = $('table.books').DataTable(); 
+        var table = $('table.books').DataTable();
         table.search(
             jQuery.fn.DataTable.ext.type.search.html(this.value)
         ).draw();
@@ -253,7 +274,7 @@ const DeleteBook = function(tbody, table, sort) {
 const getMoreBooks = function() {
 
 	$('#btn-load-more').on('click', function() {
-		
+
 		$('#btn-load-more').attr('disabled', 'disabled');
 
 		let table = $('.table').DataTable();
@@ -276,20 +297,20 @@ const getMoreBooks = function() {
 
 			if(!$('.loader').hasClass('hidde'))
 				$('.loader').addClass('hidde')
-			
+
 			if(resp.data.length > 0) {
 
 				for (var i = 0; i < resp.data.length; i++) {
 					let el = resp.data[i];
 					let state = 'Publicado';
 
-					if(el.state == 'PUBLISHED') 
+					if(el.state == 'PUBLISHED')
 						state = 'Publicado';
 
 					if(el.state == 'DRAFT')
 						state = 'Borrador';
 
-					if(el.state == 'TRASH') 
+					if(el.state == 'TRASH')
 						state = 'En papelera';
 
 					let actionStr = `<a class="edit" href="/am-admin/libros/${el._id}">
@@ -320,7 +341,7 @@ const getMoreBooks = function() {
 				M.toast({html: toastMsg, classes: 'amber accent-4 bottom'});
 
 			}
-				
+
 		});
 
 

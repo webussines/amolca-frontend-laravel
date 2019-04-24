@@ -72,6 +72,27 @@ const createDataTable = function() {
 				.replace(/[ýÝŷŶŸÿ]/g, 'n');
 	};
 
+	jQuery.fn.dataTableExt.ofnSearch['string'] = function ( data ) {
+		return ! data ?
+		    '' :
+		    typeof data === 'string' ?
+		        data
+		            .replace( /\n/g, ' ' )
+		            .replace( /[áÁàÀâÂäÄãÃåÅæÆ]/g, 'a' )
+		            .replace( /é/g, 'e' )
+		            .replace( /í/g, 'i' )
+		            .replace( /ó/g, 'o' )
+		            .replace( /ú/g, 'u' )
+		            .replace( /ê/g, 'e' )
+		            .replace( /[íÍìÌîÎïÏîĩĨĬĭ]/g, 'i' )
+		            .replace( /ô/g, 'o' )
+		            .replace( /è/g, 'e' )
+		            .replace( /ï/g, 'i' )
+		            .replace( /ü/g, 'u' )
+		            .replace( /ç/g, 'c' ) :
+		        data;
+	};
+
 	var table = $('table.authors').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todas"]],
@@ -86,7 +107,7 @@ const createDataTable = function() {
 	    	}
 	    },
 	    columns: [
-	    	{ 
+	    	{
 	    		data: "thumbnail",
 	    		className: "image",
 	    		"render": function (data, type, JsonResultRow, meta) {
@@ -95,13 +116,13 @@ const createDataTable = function() {
                     } else {
                     	return '<img src="https://amolca.webussines.com/uploads/images/no-image.jpg">';
                     }
-                } 
+                }
             },
-	    	{ 	
+	    	{
 	    		data: "title",
 	    		className: "title"
 	    	},
-	    	{ 	
+	    	{
 	    		data: "taxonomies",
 	    		className: "specialty",
 	    		render: function(data, type, JsonResultRow, meta) {
@@ -112,7 +133,7 @@ const createDataTable = function() {
 	    			}
 	    		}
 	    	},
-	    	{ 	
+	    	{
 	    		data: "_id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
@@ -148,7 +169,7 @@ const createDataTable = function() {
 
 	// Remove accented character from search input as well
     $('.dataTables_filter input[type=search]').keyup( function () {
-        var table = $('table.authors').DataTable(); 
+        var table = $('table.authors').DataTable();
         table.search(
             jQuery.fn.DataTable.ext.type.search.html(this.value)
         ).draw();
@@ -185,7 +206,7 @@ const DeleteAuthor = function(tbody, table) {
 					if (json.error == 'token_expired') {
 						let toastMsg = 'Su sesión ha expirado, en segundo será redirigido para iniciar sesión de nuevo.';
 						M.toast({html: toastMsg, classes: 'red accent-4 bottom'});
-						
+
 						setTimeOut(function() {
 							window.location.href = '/am-admin/logout?redirect=';
 						}, 5000);

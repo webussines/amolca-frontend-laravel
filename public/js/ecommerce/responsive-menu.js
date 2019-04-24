@@ -53,5 +53,12 @@ const ShowSubmenuItem = (elem) => {
 	    	$(this).css('display', 'flex')
 	    }
 	  });
-	}
+  } else if(windowWidth <= 480) {
+	  $(submenuId).slideToggle('slow', function() {
+	    //Change display "block" for "flex"
+	    if($(this).is(':visible')) {
+	    	$(this).css('display', 'block')
+	    }
+	  });
+  }
 }

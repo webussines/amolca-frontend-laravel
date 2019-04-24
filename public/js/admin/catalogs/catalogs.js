@@ -120,7 +120,7 @@ const DeleteCoupon = function(tbody, table) {
 
     let data = table.row($(this).parents("tr")).data();
 
-    let alerta = confirm('Seguro que deseas eliminar permanentemente el cupón: ' + data.title);
+    let alerta = confirm('Seguro que deseas eliminar permanentemente el catálogo: ' + data.title);
 
     if(alerta) {
       if($('.loader').hasClass('hidde'))

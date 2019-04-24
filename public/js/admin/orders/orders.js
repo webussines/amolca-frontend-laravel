@@ -57,7 +57,28 @@ const createDataTable = function() {
 				.replace(/[úÚùÙûÛüÜ]/g, 'u')
 				.replace(/[ýÝŷŶŸÿ]/g, 'n');
 	};
-	
+
+	jQuery.fn.dataTableExt.ofnSearch['string'] = function ( data ) {
+		return ! data ?
+		    '' :
+		    typeof data === 'string' ?
+		        data
+		            .replace( /\n/g, ' ' )
+		            .replace( /[áÁàÀâÂäÄãÃåÅæÆ]/g, 'a' )
+		            .replace( /é/g, 'e' )
+		            .replace( /í/g, 'i' )
+		            .replace( /ó/g, 'o' )
+		            .replace( /ú/g, 'u' )
+		            .replace( /ê/g, 'e' )
+		            .replace( /[íÍìÌîÎïÏîĩĨĬĭ]/g, 'i' )
+		            .replace( /ô/g, 'o' )
+		            .replace( /è/g, 'e' )
+		            .replace( /ï/g, 'i' )
+		            .replace( /ü/g, 'u' )
+		            .replace( /ç/g, 'c' ) :
+		        data;
+	};
+
 	var table = $('table.orders').DataTable( {
 		language: language,
 		lengthMenu: [[50, 100, 300, -1], [50, 100, 300, "Todos"]],
@@ -70,11 +91,11 @@ const createDataTable = function() {
 	    	}
 	    },
 	    columns: [
-	    	{ 
+	    	{
 	    		data: "id",
 	    		className: "image"
             },
-	    	{ 	
+	    	{
 	    		data: "address",
 	    		className: "title",
 	    		render: function(data, type, JsonResultRow, meta) {
@@ -85,7 +106,7 @@ const createDataTable = function() {
 	    			}
 	    		}
 	    	},
-	    	{ 	
+	    	{
 	    		data: "address",
 	    		className: "email",
 	    		render: function(data, type, JsonResultRow, meta) {
@@ -96,11 +117,11 @@ const createDataTable = function() {
 	    			}
 	    		}
 	    	},
-	    	{ 	
+	    	{
 	    		data: "country_name",
 	    		className: "country"
 	    	},
-	    	{ 	
+	    	{
 	    		data: "id",
 	    		className: "products",
 	    		render: function(data, type, JsonResultRow, meta) {
@@ -111,7 +132,7 @@ const createDataTable = function() {
 	    			}
 	    		}
 	    	},
-	    	{ 	
+	    	{
 	    		data: "state",
 	    		className: "state",
 	    		"render": function (data, type, JsonResultRow, meta) {
@@ -144,9 +165,9 @@ const createDataTable = function() {
                   			return 'Publicado';
                   		break;
                   	}
-                } 
+                }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
@@ -178,7 +199,7 @@ const createDataTable = function() {
 
 	// Remove accented character from search input as well
     $('.dataTables_filter input[type=search]').keyup( function () {
-        var table = $('table.orders').DataTable(); 
+        var table = $('table.orders').DataTable();
         table.search(
             jQuery.fn.DataTable.ext.type.search.html(this.value)
         ).draw();
