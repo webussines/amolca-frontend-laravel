@@ -84,7 +84,7 @@ class CartsController extends Controller
 
         $add = $this->request->all();
 
-        if(session('cart') === null || count(session('cart')) < 1) {
+        if(session('cart') === null || is_array(session('cart')) ) {
 
             $order = [];
 
