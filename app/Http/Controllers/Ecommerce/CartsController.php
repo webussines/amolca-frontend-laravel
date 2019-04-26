@@ -44,7 +44,7 @@ class CartsController extends Controller
         return Response::json($orders);
     }
 
-    public function index() 
+    public function index()
     {
 
         $page_id = 1;
@@ -84,7 +84,7 @@ class CartsController extends Controller
 
         $add = $this->request->all();
 
-        if(session('cart') === null) {
+        if(session('cart') === null || count(session('cart')) < 1) {
 
             $order = [];
 
@@ -129,7 +129,7 @@ class CartsController extends Controller
             $price = $add['price'];
 
             if(isset($cart->products)) {
-                for ($i = 0; $i < count($cart->products); $i++) { 
+                for ($i = 0; $i < count($cart->products); $i++) {
                     $product = json_decode(json_encode($cart->products[$i]));
 
                     if ($product->object_id == $object_id) {
@@ -143,7 +143,7 @@ class CartsController extends Controller
                                 unset($cart->products[$i]);
                                 $cart->products = array_values($cart->products);
                                 break;
-                            
+
                             default:
                                 $product->quantity = $product->quantity + $quantity;
                                 break;
@@ -178,13 +178,13 @@ class CartsController extends Controller
 
                 switch ( session('coupon')['affected'] ) {
                     case 'PRODUCT':
-                        
-                        for ($i = 0; $i < count( session('coupon')['objects'] ); $i++) { 
+
+                        for ($i = 0; $i < count( session('coupon')['objects'] ); $i++) {
 
                             $id = session('coupon')['objects'][$i]['id']; // Objeto afectado por el cupon
-                            
+
                             for ($o = 0; $o < count( $order->products ); $o++) {
-                                
+
                                 // Si el producto y el objeto coinciden
                                 if($order->products[$o]->object_id == $id) {
 
@@ -207,13 +207,13 @@ class CartsController extends Controller
                         }
 
                         break;
-                    
+
                     case 'USER':
 
-                        for ($i = 0; $i < count( session('coupon')['objects'] ); $i++) { 
+                        for ($i = 0; $i < count( session('coupon')['objects'] ); $i++) {
 
                             $id = session('coupon')['objects'][$i]['id'];
-                                
+
                             // Si el id del usuario y el objeto coinciden
                             if(session('user')->id == $id) {
                                 array_push($coupon_objects_affected, $id);
@@ -245,7 +245,7 @@ class CartsController extends Controller
                                     $discount = ( $order->amount * session('coupon')['discount_amount'] ) / 100;
                                     $order->amount = $order->amount - $discount;
                                     break;
-                                
+
                                 case 'PRODUCT':
                                     $products_amount = 0;
 
@@ -261,7 +261,7 @@ class CartsController extends Controller
                                     break;
                             }
                         break;
-                    
+
                     case 'PERCENTAGE':
                             $order->subtotal = $order->amount;
 
@@ -270,7 +270,7 @@ class CartsController extends Controller
                                     $discount = ( $order->amount * session('coupon')['discount_amount'] ) / 100;
                                     $order->amount = $order->amount - $discount;
                                     break;
-                                
+
                                 case 'PRODUCT':
                                     $products_amount = 0;
 
@@ -311,7 +311,7 @@ class CartsController extends Controller
                 if($this->request->ajax()) {
                     $send->amountstring = COPMoney($order->amount);
 
-                    for ($sp = 0; $sp < count($order->products); $sp++) { 
+                    for ($sp = 0; $sp < count($order->products); $sp++) {
                         $order->products[$sp]->pricestring = COPMoney($order->products[$sp]->price);
                         $order->products[$sp]->totalstring = COPMoney($order->products[$sp]->price * $order->products[$sp]->quantity);
                     }
@@ -349,8 +349,8 @@ class CartsController extends Controller
 
         $json = json_encode(json_decode($resp));
         $order = json_decode($json);
-        
-        if($order->address) {
+
+        if( isset($order->address) ) {
             $this->request->session()->pull('cart');
         }
 

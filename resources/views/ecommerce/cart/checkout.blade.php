@@ -39,9 +39,9 @@
 @section('contentClass', 'page-container order')
 @section('content')
 <div class="content-container">
-	
+
 	<div class="row">
-		
+
 		<!--Form column-->
     	<div class="col s12 m8 l8">
     		<p class="title">Detalles de facturación y envío</p>
@@ -98,17 +98,24 @@
 					</div>
 
 					<!--Aditionals column-->
-					<div class="col s12 m6 l6">
+					<?php if( get_option('sitecountry') !== 'COLOMBIA' ) {
+						$col_extra = 'm6 l6';
+					} else {
+						$col_extra = 'm12 l12';
+					} ?>
+					<div class="col s12 <?php echo $col_extra; ?>">
 						<label for="extra_address">Extra (oficina, interior, etc):</label>
 						<input type="text" name="extra_address" id="extra_address" placeholder="Extra (oficina, interior, etc)...">
 					</div>
 
-					<!--Postal code column-->
-					<div class="col s12 m6 l6">
-						<label for="postal_code"><span class="required">*</span> Código postal:</label>
-						<input type="text" name="postal_code" class="required-field" id="postal_code" placeholder="Escribe tu código postal...">
-						<p id="error-postal_code" class="error"></p>
-					</div>
+					@if( get_option('sitecountry') !== 'COLOMBIA' )
+						<!--Postal code column-->
+						<div class="col s12 m6 l6">
+							<label for="postal_code"><span class="required">*</span> Código postal:</label>
+							<input type="text" name="postal_code" class="required-field" id="postal_code" placeholder="Escribe tu código postal...">
+							<p id="error-postal_code" class="error"></p>
+						</div>
+					@endif
 
 					<!--Notes column-->
 					<div class="col s12 m12 l12">
@@ -125,7 +132,7 @@
 					</div>
 
 					<div class="col s12 m12 l12 global-error error">
-						
+
 					</div>
 
 					<!--Button column-->
@@ -137,22 +144,22 @@
 							@case('COLOMBIA')
 	                	        <input type="submit" class="button primary" value="¡Pagar ahora!">
 	                	        @break
-	                
+
 	                	    @case('PANAMA')
 	                		    <div id="paypal-button-container"></div>
 	                	    	@break
-	                
+
 	                	    @case('DOMINICAN REPUBLIC')
 	                	    	<input type="submit" class="button primary" value="¡Pagar ahora!">
 	                	    	@break
-	                
+
 	                	    @case('ARGENTINA')
 	                		    <input type="submit" class="button primary" value="¡Pagar ahora!">
 	                	    	@break
 	                	@endswitch
 					</div>
 
-				</div> 
+				</div>
 			</form>
 
     	</div>
@@ -201,7 +208,7 @@
 							case 'FIXED':
 								$amount = COPMoney(session('coupon')['discount_amount']);
 								break;
-							
+
 							case 'PERCENTAGE':
 								$amount = session('coupon')['discount_amount'] . '%';
 								break;

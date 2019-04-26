@@ -26,7 +26,7 @@ const ValidateForm = (e) => {
 	let flag = true;
 
 	$('#checkoutform .required-field').each(function() {
-		
+
 		if($(this).val() == '' || $(this).val() == ' ') {
 
 			let errorId = '#error-' + $(this).attr('id');

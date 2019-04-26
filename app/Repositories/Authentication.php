@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -64,7 +64,7 @@ class Authentication extends GuzzleHttpRequest {
         	} else {
         		return $responseBodyAsString;
         	}
-        	
+
 		}
 
 	}
@@ -116,8 +116,8 @@ class Authentication extends GuzzleHttpRequest {
             } else {
                 return $responseBodyAsString;
             }
-        	
+
 		}
 	}
-	
+
 }
