@@ -23,13 +23,13 @@
 			<div class="custom-col" id="block-about">
 				<p class="title">Acerca de</p>
 				<p>
-					<a>Amolca</a>
+					<a href="/eventos">Eventos</a>
 				</p>
 				<p>
-					<a>Novedades</a>
+					<a href="/catalogos/medicina">Cat&aacute;logos Medicina</a>
 				</p>
 				<p>
-					<a>Eventos</a>
+					<a href="/catalogos/odontologia">Cat&aacute;logos Odontología</a>
 				</p>
 				<p>
 					<a href="/terminos-y-condiciones">Términos y condiciones</a>
@@ -56,7 +56,7 @@
 						<a href="/contacto">Contacto</a>
 					</p>
 				</div>
-				
+
 				@if (get_option('sitecountry') !== 'CASA MATRIZ')
 					<div class="custom-col block-contact" id="block-country">
 						<p class="title">Amolca {!! strtolower( get_option('sitecountry') ) !!}</p>
@@ -90,7 +90,7 @@
 						</p>
 					</div>
 				@endif
-				
+
 			</div>
 		</div>
 

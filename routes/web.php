@@ -33,7 +33,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 		Route::resources([
 		    'libros' => 'Admin\AdminBooksController',
-				'catalogos' => 'Admin\AdminCatalogsController',
+			'catalogos' => 'Admin\AdminCatalogsController',
 		    'especialidades' => 'Admin\AdminSpecialtiesController',
 		    'autores' => 'Admin\AdminAuthorsController',
 		    'sliders' => 'Admin\AdminSlidersController',

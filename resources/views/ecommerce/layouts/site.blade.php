@@ -7,7 +7,7 @@
 		<link rel="canonical" href="{{ Request::fullUrl() }}" >
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="country-active" content="{{ get_option('sitecountry') }}">
-		<meta name="country-active-id" content="">
+		<meta name="country-active-id" content="{{ get_option('sitecountry_id') }}">
 		<meta name="user-id" content="@if (session('user')) {{ session('user')->id }} @else 0 @endif">
 		<link rel="icon" type="image/x-icon" href="{{ asset('img/common/favicon.ico') }}">
 		@yield('meta')

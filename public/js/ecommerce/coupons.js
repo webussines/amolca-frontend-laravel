@@ -62,7 +62,7 @@ const ValidateCouponExists = (e) => {
 				"_token": $('meta[name="csrf-token"]').attr('content')
 			}
 		}).done((resp) => {
-			
+
 			if(typeof resp == 'object') {
 
 				return ValidateOrderInfo(resp);
@@ -92,11 +92,18 @@ const ValidateOrderInfo = (coupon) => {
 	let flag = true;
 	const sc = /[' '’_,.%$#¬|/¡!¿?*=""\/\\( )[\]:;]/gi; // Special chars to replace in str
 
+	if( $('meta[name="country-active-id"]').attr('content') !== coupon.country_id ) {
+		$('#coupon-error').html('Este cup&oacute;n no es v&aacute;lido en tu pa&iacute;s').css('display', 'block')
+		flag = false;
+
+		return CommonResponseAction();
+	}
+
 	switch (coupon.affected) {
 
 		// Realizar acción si el cupon es valido para usuario
 		case 'USER':
-			
+
 				if(GetUserId() == 0) {
 					$('#coupon-error').html('Este cup&oacute;n es v&aacute;lido solo para usuarios registrados. Por favor iniciar sesi&oacute;n.').css('display', 'block')
 					flag = false;
@@ -189,7 +196,7 @@ const ValidateOrderInfo = (coupon) => {
 						$('table.cart td.actions .book-id').each(function() {
 
 							let id = $(this).val();
-							
+
 							if(id == productsInCart[i].id) {
 								let parent = $(this).parent('td').parent('tr');
 								let total_column = $(parent).find('td.total');
@@ -236,7 +243,7 @@ const ValidateOrderInfo = (coupon) => {
 						$('table.cart td.actions .book-id').each(function() {
 
 							let id = $(this).val();
-							
+
 							if(id == productsInCart[i].id) {
 								let parent = $(this).parent('td').parent('tr');
 								let total_column = $(parent).find('td.total');
@@ -280,7 +287,7 @@ const ValidateOrderInfo = (coupon) => {
 				}
 
 			break;
-			
+
 		default:
 			// statements_def
 			break;

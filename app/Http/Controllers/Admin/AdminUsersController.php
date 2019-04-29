@@ -19,7 +19,7 @@ class AdminUsersController extends Controller
 
     public function __construct(Users $users, Request $request, Countries $countries, Orders $orders) {
 
-        $this->middleware('superadmin', [ "except" => [ "clients", "getclients", "orders" ] ]);
+        $this->middleware('superadmin', [ "except" => [ "all", "clients", "getclients", "orders" ] ]);
 
         $this->users = $users;
         $this->request = $request;

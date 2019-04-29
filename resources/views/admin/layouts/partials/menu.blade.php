@@ -25,7 +25,7 @@
             </li>
         @endif
 
-        @if (session('user')->role == 'SUPERADMIN' || session('user')->role == 'ADMIN')
+        @if (session('user')->role == 'SUPERADMIN')
             <li>
                 <a data-id="catalogs" @if ($active == 'AdminCatalogsController') class="actived" @endif>
                     <span class="icon icon-stack"></span> <span class="text">Catalogos</span>

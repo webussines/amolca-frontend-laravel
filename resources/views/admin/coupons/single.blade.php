@@ -9,13 +9,23 @@
     $description = (isset($coupon->description)) ? $coupon->description : '';
     $start_date = (isset($coupon->start_date)) ? $coupon->start_date : '';
     $expired_date = (isset($coupon->expired_date)) ? $coupon->expired_date : '';
-    $limit_of_use = (isset($coupon->limit_of_use)) ? $coupon->limit_of_use : '';
+    $limit_of_use = (isset($coupon->limit_of_use)) ? $coupon->limit_of_use : 0;
     $used_count = (isset($coupon->used_count)) ? $coupon->used_count : '';
     $cumulative = (isset($coupon->cumulative)) ? $coupon->cumulative : '';
     $discount_type = (isset($coupon->discount_type)) ? $coupon->discount_type : '';
     $discount_amount = (isset($coupon->discount_amount)) ? $coupon->discount_amount : 0;
     $affected = (isset($coupon->affected)) ? $coupon->affected : '';
     $objects = (isset($coupon->objects)) ? $coupon->objects : [];
+    $country_id = (isset($coupon->country_id)) ? $coupon->country_id : '0';
+    $country_name = (isset($coupon->country_name)) ? $coupon->country_name : 'Seleccione una opción';
+
+    if( $user_country_name !== '' && $user_country_name !== ' ' ) {
+        $country_name = $user_country_name;
+    }
+
+    if( $user_country_id !== '' && $user_country_id !== ' ' ) {
+        $country_id = $user_country_id;
+    }
 
 @endphp
 
@@ -100,10 +110,32 @@
                 </div>
 
                 <div class="form-group col s6 m6">
+                    <label for="country"><span class="required">*</span> País donde estará activo el cupón:</label>
+
+                    @if( session('user')->role == 'SUPERADMIN')
+                        <select name="country_id" id="country_id" class="select2-normal required-field">
+                            @foreach ($countries as $pais)
+                                <option value="{!! $pais->id !!}" @if ($country_id == strtoupper($pais->id)) selected="selected" @endif>{!! $pais->title !!}</option>
+                            @endforeach
+                        </select>
+                    @else
+                        <input type="text" disabled name="country" id="country_name" value="{!! $country_name !!}">
+                        <input type="hidden" name="country_id" id="country_id" value="{!! $country_id !!}">
+                    @endif
+                    <p id="country-error" class="error"></p>
+                </div>
+
+                <div class="form-group col s6 m6">
+                    <label for="limit_of_use">Limite de uso:</label>
+                    <input type="number" name="limit_of_use" id="limit_of_use" class="required-field" placeholder="Limite de uso..." value="{{ $limit_of_use }}">
+                    <p class="error"></p>
+                </div>
+
+                <div class="form-group col s6 m6">
                     <label for="affected"><span class="required">*</span> Cupón disponible para:</label>
                     <select name="affected" id="affected" class="normal-select">
                         @php
-                            $selected = ''; 
+                            $selected = '';
                             $all = '';
                             $taxonomie = '';
                             $product = '';
@@ -124,7 +156,7 @@
                                     break;
                             }
                         @endphp
-                        
+
                         <option {{ $all }} value="ALL">Todo</option>
                         <option {{ $taxonomie }} value="TAXONOMIE">Especialidad</option>
                         <option {{ $product }} value="PRODUCT">Producto</option>
@@ -137,7 +169,7 @@
                     <label for="cumulative">Cupón acumulable:</label>
                     <select name="cumulative" id="cumulative" class="normal-select">
                         @php
-                            $selected = ''; 
+                            $selected = '';
                             $yes = '';
                             $no = '';
 
@@ -150,7 +182,7 @@
                                     break;
                             }
                         @endphp
-                        
+
                         <option {{ $no }} value="0">No acumulable</option>
                         <option {{ $yes }} value="1">Acumulable</option>
                     </select>
@@ -172,7 +204,7 @@
                     <label for="discount_type"><span class="required">*</span>Tipo de descuento:</label>
                     <select name="discount_type" id="discount_type" class="normal-select required-field">
                         @php
-                            $selected = ''; 
+                            $selected = '';
                             $fixed = '';
                             $percentage = '';
                             $product = '';
@@ -186,7 +218,7 @@
                                     break;
                             }
                         @endphp
-                        
+
                         <option {{ $fixed }} value="FIXED">Monto fijo</option>
                         <option {{ $percentage }} value="PERCENTAGE">Porcentaje</option>
                     </select>

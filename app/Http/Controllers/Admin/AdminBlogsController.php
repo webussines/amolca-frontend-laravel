@@ -17,7 +17,7 @@ class AdminBlogsController extends Controller
 
     public function __construct(Posts $blog, Request $request, Response $response) {
 
-        $this->middleware('superadmin');
+        $this->middleware('superadmin', 'except' => [ 'all' ]);
 
         $this->blog = $blog;
         $this->request = $request;
@@ -94,7 +94,7 @@ class AdminBlogsController extends Controller
         } else if($post->post->type == 'book') {
 
             return redirect('/am-admin/libros/' . $post->post->id);
-            
+
         }
 
         $send_info = [];

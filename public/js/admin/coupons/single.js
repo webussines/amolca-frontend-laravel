@@ -1,5 +1,7 @@
 jQuery(function($){
 
+	$('.select2-normal').select2();
+
 	if($('#affected').val() !== 'ALL') {
 		setTimeout(function() {
 			GetResourcesData($('#affected').val(), true);
@@ -76,7 +78,9 @@ const GetResourcesData = (src, init) => {
 				"_token": $('#_token').val()
 			}
 		}).done((resp) => {
-			//Agregar opciones a la lista 
+			console.log(SrcRoute)
+			console.log(resp)
+			//Agregar opciones a la lista
 			for (let i = 0; i < resp.data.length; i++) {
 
 				let title = '';
@@ -159,6 +163,7 @@ const SaveCouponInfo = () => {
 	let coupon = {
 		title: $('#title').val(),
 		description: $('#description').val(),
+		country_id: $('#country_id').val(),
 		affected: $('#affected').val(),
 		code: $('#code').val(),
 		cumulative: $('#cumulative').val(),
@@ -174,11 +179,15 @@ const SaveCouponInfo = () => {
 		coupon.expired_date = new Date($('#expired_date').val()).toISOString().slice(0, 19).replace('T', ' ');
 	}
 
+	if($('#limit_of_use').val() !== '' && $('#limit_of_use').val() !== ' ' && $('#limit_of_use').val() != '0') {
+		coupon.limit_of_use = $('#limit_of_use').val();
+	}
+
 	if($('#objects').val() !== '' && $('#objects').val() !== ' ' && $('#objects').val().length > 0) {
 
 		let arr = [];
 		for (var i = 0; i < $('#objects').val().length; i++) {
-			let obj = { 
+			let obj = {
 				'object_id': $('#objects').val()[i],
 				'object_type': $('#affected').val()
 			}
@@ -203,7 +212,7 @@ const SaveCouponInfo = () => {
 
 	// Recorres campos requeridos para validar el formulario
 	$('.required-field').each(function(){
-			
+
 		let val = $(this).val();
 		if(val === ' ' || val === '' || val === null) {
 
@@ -243,7 +252,7 @@ const SaveCouponInfo = () => {
 			}
 
 			if(data.id !== undefined) {
-				
+
 				switch(_action) {
 					case 'edit':
 						location.reload();

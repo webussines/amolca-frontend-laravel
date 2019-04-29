@@ -14,8 +14,8 @@ class AdminSpecialtiesController extends Controller
 
     public function __construct(Specialties $specialties) {
 
-        $this->middleware('superadmin');
-        
+        $this->middleware('superadmin', [ 'except' => [ 'all' ] ]);
+
         $this->specialties = $specialties;
     }
 

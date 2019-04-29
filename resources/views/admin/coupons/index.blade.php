@@ -36,6 +36,7 @@
 				<th class="affected">Contenido afectado</th>
 				<th class="type">Tipo</th>
 				<th class="amount">Descuento</th>
+				<th class="country">País</th>
 				<th class="actions"></th>
 			</tr>
 		</thead>
@@ -44,7 +45,7 @@
 		</tbody>
 
 		<tfoot>
-			
+
 		</tfoot>
 	</table>
 
