@@ -34,11 +34,11 @@ const DatePickerOptions = {
 			"Noviembre", "Diciembre"
 		],
 		monthsShort: [
-			'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 
+			'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
 			'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
 		],
 		weekdays: [
-			'Domingo', 'Lunes', 'Martes', 'Miércoles', 
+			'Domingo', 'Lunes', 'Martes', 'Miércoles',
 			'Jueves', 'Viernes', 'Sábado'
 		],
 		weekdaysShort: [ 'Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vier', 'Sab' ],
@@ -156,11 +156,17 @@ const FormattingDate = (date) => {
 	return day + ' de ' + monthNames[monthIndex] + ', ' + year;
 }
 
-const AddCountryToForm = (name) => {
+const AddCountryToForm = (id, name) => {
 
-	let field = $('#country_name');
+    let id_field = $('#country_id');
+	let name_field = $('#country_name');
 
-	if(field.length > 0) {
-		field.val(name)
+	if(name_field.length > 0) {
+		name_field.val(name)
 	}
+
+    if(id_field.length > 0) {
+		id_field.val(id)
+	}
+    
 }
