@@ -49,7 +49,7 @@
         <div class="col s12 m7 l7">
             <p class="title">
                 @if ($id !== '')
-                    Banner: {!! $title !!} 
+                    Banner: {!! $title !!}
                 @else
                     Creando banner nuevo
                 @endif
@@ -78,7 +78,7 @@
         </ul>
 
         <div id="ajustes-basicos" class="content-tabs">
-            
+
             <div class="row">
 
                 <div class="col s12 m7">
@@ -107,13 +107,13 @@
 
                         <p class="desc">
                             El archivo debe pesar menos de 25mb.<br/>
-                            Las medidas recomendadas son <b>1888 x 560</b> (en pixeles).
+                            Las medidas recomendadas son <b>1600 x 132</b> (en pixeles).
                         </p>
 
                         <div class="buttons">
 
                             <input type="button" id="save-file-btn" class="save" value="Subir imagen">
-                            
+
                             <div class="file-upload-wrapper">
                                 <button id="upload-file-btn" class="upload">Seleccionar imagen</button>
                                 <input type="file" id="image" name="image">
@@ -141,7 +141,7 @@
                             <option @if ( $resource_type == 'BLOG') selected="selected" @endif value="BLOG">Publicación del blog</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="resource_id"><span class="required">*</span> ¿En qué recurso desea publicar el banner?:</label>
                         <select name="resource_id" id="resource_id" class="select2-normal required-field">

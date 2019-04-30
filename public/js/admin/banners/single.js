@@ -2,7 +2,7 @@ jQuery(($) => {
 
 	LoadCountries();
 
-	if($('#resource_type').val() !== '') {
+	if($('#resource_type').val() !== '' && $('#resource_type').val() !== '0') {
 		setTimeout(function() {
 			LoadResources($('#resource_type').val(), true);
 		}, 2000);
@@ -73,7 +73,7 @@ const SaveBannerInfo = (e) => {
 
 	let ActionRoute;
 	let send;
-	
+
 	switch(_action) {
 		case 'edit':
 		    send = banner;
@@ -87,7 +87,7 @@ const SaveBannerInfo = (e) => {
 	}
 
 	$('.required-field').each(function(){
-		
+
 		let val = $(this).val();
 
 		if(val === ' ' || val === '' || val === null || val == '0') {
@@ -122,7 +122,7 @@ const SaveBannerInfo = (e) => {
 			console.log(resp)
 
 			let data = JSON.parse(resp);
-			
+
 			if(data.error !== undefined) {
 				if (data.error == 'token_expired') {
 					window.location.href = '/am-admin/logout';
@@ -130,7 +130,7 @@ const SaveBannerInfo = (e) => {
 			}
 
 			if(data.banner !== undefined && data.banner.id !== undefined) {
-				
+
 				switch(_action) {
 					case 'edit':
 						location.reload();
@@ -141,7 +141,7 @@ const SaveBannerInfo = (e) => {
 				}
 
 			}
-			
+
 			if(data.banners_id !== undefined && data.banners_id.length > 0) {
 			    window.location.href = '/am-admin/banner/' + data.banners_id[0];
 			}
@@ -172,12 +172,12 @@ const LoadCountries = (init) => {
 	}).done((resp) => {
 
 		resp = JSON.parse(resp)
-		
-		//Agregar opciones a la lista 
+
+		//Agregar opciones a la lista
 		for (let i = 0; i < resp.length; i++) {
 
 			let title = '';
-			
+
 			title = resp[i].title;
 
 			let o = new Option(title, resp[i].id);
@@ -246,12 +246,12 @@ const LoadResources = (src, init) => {
 			if(!init) {
 				$('#resource_id').find('option').remove()
 			}
-			
-			//Agregar opciones a la lista 
+
+			//Agregar opciones a la lista
 			for (let i = 0; i < resp.data.length; i++) {
 
 				let title = '';
-				
+
 				title = resp.data[i].title;
 
 				let o = new Option(title, resp.data[i].id);
@@ -351,12 +351,12 @@ const LoadResources = (src, init) => {
 		if(!init) {
 			$('#resource_id').find('option').remove()
 		}
-		
-		//Agregar opciones a la lista 
+
+		//Agregar opciones a la lista
 		for (let i = 0; i < pages.length; i++) {
 
 			let title = '';
-			
+
 			title = pages[i].title;
 
 			let o = new Option(title, pages[i].id);

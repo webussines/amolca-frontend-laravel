@@ -87,7 +87,7 @@ const createDataTable = function() {
 	    	method: "GET",
 	    	url: '/am-admin/books',
 	    	data: {
-	    		"limit": 500,
+	    		"limit": 1000,
 	    		"inventory": 1,
 				"_token": $('#_token').val()
 	    	}
