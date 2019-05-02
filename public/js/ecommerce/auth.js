@@ -235,6 +235,7 @@ const UserRegister = (user) => {
 			.removeAttr('disabled')
 
 	}).catch(function(err) {
+		console.log(err)
 		if(!$('#login .loader').hasClass('hidde'))
 			$('#login .loader').addClass('hidde')
 	})

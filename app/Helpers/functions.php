@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use App\Repositories\Countries;
 use App\Http\Models\Options;
@@ -55,14 +55,14 @@ function mailer_get_country() {
     if(get_option('sitecountry') == 'DOMINICAN REPUBLIC') {
     	return 'REPUBLICA DOMINICANA';
     } else {
-    	get_option('sitecountry');
+    	return get_option('sitecountry');
     }
 
 }
 
 //Mailer domain
 function mailer_get_domain() {
-    
+
     switch (get_option('sitecountry')) {
 		case 'COLOMBIA':
 			return "www.amolca.com.co";
@@ -223,7 +223,7 @@ function get_nav_menu($slug, $class = 'hmenu', $id = 'hmenu') {
     					->get();
 
     //Recorrer parent items y agregar los items hijos si es que existen
-    for ($i = 0; $i < count($items); $i++) { 
+    for ($i = 0; $i < count($items); $i++) {
 
     	$childs = MenuItems::where([ ['menu_id', '=', $menu->id], ['parent_id', '=', $items[$i]->id] ])
     					->orderBy('order', 'asc')
@@ -255,7 +255,7 @@ function get_nav_menu($slug, $class = 'hmenu', $id = 'hmenu') {
 				<?php if ( $item->childs && count($item->childs) > 0 ) { ?>
 
 				<ul class="submenu" id="submenu-item-<?php echo $item->id; ?>">
-					
+
 					<?php foreach ($item->childs as $child) { ?>
 
 					<li class="<?php echo 'item-menu-' . $class . ' item-' . $child->id; ($child->class !== null) ? ' ' . $child->class : ''; ?>" id="item-<?php echo $child->id; ?>">
@@ -279,9 +279,9 @@ function get_nav_menu($slug, $class = 'hmenu', $id = 'hmenu') {
 			</li>
 
 			<?php } ?>
-			
+
 		<?php }; ?>
-		
+
 	</ul>
 
 	<?php

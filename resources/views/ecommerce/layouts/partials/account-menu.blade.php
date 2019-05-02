@@ -15,17 +15,22 @@
 	</li>
 	<li @if ($active == 'direction') class="active" @endif>
 		<a class="waves-effect waves-light" href="/mi-cuenta/direccion">
-			<span class="icon-location-outline"></span> Dirección
+			<span class="icon-location-outline"></span> Direcci&oacute;n
 		</a>
 	</li>
 	<li @if ($active == 'information') class="active" @endif>
 		<a class="waves-effect waves-light" href="/mi-cuenta/informacion">
-			<span class="icon-cog-outline"></span> Mi información
+			<span class="icon-cog-outline"></span> Mi informaci&oacute;n
+		</a>
+	</li>
+	<li>
+		<a class="waves-effect waves-light" href="http://online.amolca.com" target="_blank">
+			<span class="icon-books"></span> Biblioteca virtual
 		</a>
 	</li>
 	<li>
 		<a class="waves-effect waves-light" href="/logout">
-			<span class="icon-exit"></span> Cerrar sesión
+			<span class="icon-exit"></span> Cerrar sesi&oacute;n
 		</a>
 	</li>
 </ul>

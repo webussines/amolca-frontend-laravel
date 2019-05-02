@@ -33,7 +33,7 @@
 					$target_class = 'spent';
 					$target_text = 'Agotado';
 					break;
-				
+
 				case 'RESERVED':
 					$target_class = 'reserved';
 					$target_text = 'Reservado';
@@ -54,7 +54,7 @@
 							$target_text = 'Agotado';
 							$showtarget = true;
 							break;
-						
+
 						case 'RESERVED':
 							$target_class = 'reserved';
 							$target_text = 'Reservado';
@@ -86,8 +86,8 @@
 
 				@if (isset($book->version))
 					@for ($v = 0; $v < count($book->version); $v++)
-						
-						@php 
+
+						@php
 							$title = '';
 							$icon = '';
 							$version = $book->version[$v];
@@ -109,14 +109,14 @@
 							        $title = 'Ebook';
 							        $icon = '<span class="icon-device-tablet"></span>';
 							        break;
-							
+
 							    default:
 							        $title = 'Papel';
 							        $icon = '<span class="icon-book"></span>';
 							        break;
 							endswitch;
 						@endphp
-						
+
 
 						<a class="version-btn tooltipped" data-position="top" data-tooltip="{{ $title }}">
 							@php echo $icon; @endphp
@@ -124,7 +124,7 @@
 					@endfor
 				@endif
 			</div>
-			
+
 			<div class="info">
 
 				<!--Titulo del libro-->
@@ -150,9 +150,9 @@
 				<!--Acciones-->
 				@if ( isset($book->inventory) && count($book->inventory) > 0 )
 					@for ($c = 0; $c < count($book->inventory); $c++)
-						
-						@php 
-							$inventory = $book->inventory[$c]; 
+
+						@php
+							$inventory = $book->inventory[$c];
 							$activeds = [];
 
 							$showactions = true;
@@ -164,9 +164,9 @@
 							}
 						@endphp
 
-						@if ($book->state !== 'SPENT' && $book->state !== 'RELEASE' && strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showactions)
+						@if ($book->state !== 'SPENT' && strtoupper($inventory->country_name) == get_option('sitecountry') && $inventory->price > 0 && $inventory->state == "STOCK" && $showactions)
 							@php
-								array_push($activeds, $inventory->country_name); 
+								array_push($activeds, $inventory->country_name);
 							@endphp
 							@include('ecommerce.loops.books.actions', ['show_price' => true, 'price' => $inventory->price])
 						@else
