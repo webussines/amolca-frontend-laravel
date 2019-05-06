@@ -175,7 +175,7 @@
     .price .offer-price, .price .before {
         color: #666;
         font-size: 22px;
-        font-weight: normal;        
+        font-weight: normal;
     }
         .price .offer-price {
             font-style: italic;
@@ -227,6 +227,12 @@
             max-width: 43px;
             vertical-align: middle;
         }
+        .summary-book .cont-specialties p a {
+            color: #666;
+        }
+            .summary-book .cont-specialties p a:hover {
+                color: #00396f;
+            }
 
 .summary-book .cont-versions {
     display: flex;
@@ -432,7 +438,7 @@
     .content-container#single-book {
         padding-top: 0px !important;
     }
-    
+
     .image-book {
         margin-bottom: 40px;
         padding-left: 0px;
@@ -472,7 +478,7 @@
         .author {
             font-size: 20px;
         }
-    
+
     .summary-book .name {
         font-size: 26px;
     }
@@ -490,20 +496,20 @@
         .summary-book .cont-specialties .items {
             margin-top: 10px;
         }
-        
+
     .summary-book .cont-versions {
         flex-flow: column;
         align-items: flex-start;
     }
-    
+
     .summary-book .versions {
         margin: 20px 0px 5px;
     }
-    
+
     .summary-book .shared {
         margin-left: 0px;
     }
-    
+
     .main.book .add-to-cart {
         margin-left: 0px;
         margin-right: 0px;

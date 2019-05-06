@@ -287,7 +287,7 @@ a.view-site-btn {
     height: 100%;
     left: 20%;
     overflow-x: auto;
-    padding: 20px;
+    padding: 20px 20px 100px;
     position: fixed;
     top: 50px;
     -webkit-transition: all 0.4s ease;

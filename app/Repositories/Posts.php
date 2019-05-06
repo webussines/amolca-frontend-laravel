@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -20,8 +20,8 @@ class Posts extends GuzzleHttpRequest {
 		return $this->get("posts/{$id}");
 	}
 
-	public function inventory($id, $type) {
-		return $this->get("posts/inventory/{$id}?type={$type}");
+	public function inventory($id, $type, $params = '') {
+		return $this->get("posts/inventory/{$id}?type={$type}&{$params}");
 	}
 
 	public function findBySlug($slug) {
@@ -52,8 +52,8 @@ class Posts extends GuzzleHttpRequest {
 		return $this->get("authors/{$id}/posts?{$params}");
 	}
 
-	public function taxonomies($id, $params = '') {
+	public function taxonomies($id, $params = 'type=book') {
 		return $this->get("taxonomies/{$id}/posts?{$params}");
 	}
-	
+
 }

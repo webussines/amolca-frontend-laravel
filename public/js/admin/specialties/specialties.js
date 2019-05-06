@@ -113,7 +113,10 @@ const createDataTable = function() {
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {
-	    			let str = `<a class="edit" href="/am-admin/especialidades/${JsonResultRow.id}">
+	    			let str = `<a class="see" href="/am-admin/especialidades/${JsonResultRow.id}/libros">
+									Ver libros
+								</a>
+								<a class="edit" href="/am-admin/especialidades/${JsonResultRow.id}">
 				                    <span class="icon-mode_edit"></span>
 				                </a>
 

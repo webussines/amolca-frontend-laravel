@@ -25,6 +25,17 @@
     $attributes = (isset($book->attributes)) ? $book->attributes : [];
     $inventory = (isset($book->inventory)) ? $book->inventory : [];
 
+    // Get active controller
+    $complete = explode('\\', Route::getCurrentRoute()->getActionName());
+    $controller = $complete[count($complete) - 1];
+    $active = explode('@', $controller)[0];
+
+    if( $active == 'AdminBooksController' ) {
+        $return_route = '/am-admin/libros';
+    } else if($active == 'AdminSpecialtiesController') {
+        $return_route = '/am-admin/especialidades/' . $specialty_active . '/libros' ;
+    }
+
 @endphp
 
 @section('title', 'Libro: ' . $title . ' - Admin Amolca')
@@ -58,7 +69,7 @@
             <a class="btn-navigation green save-resource">
                 Guardar libro
             </a>
-            <a class="btn-navigation red previous" href="/am-admin/libros">
+            <a class="btn-navigation red previous" href="{{ $return_route }}">
                 Ver todos los libros
             </a>
         </div>
@@ -166,7 +177,7 @@
 
                             @foreach ($authors as $aut)
                                 @php $checked = ''; @endphp
-                                        
+
                                 @if (count($bookAuthor) > 0)
                                     @foreach ($bookAuthor as $selected)
                                         @php
@@ -236,7 +247,7 @@
             </div>
 
             <div class="row">
-                
+
                 <ul class="tabs inside-tabs">
                     <li class="tab">
                         <a class="active" href="#indice">Índice</a>
@@ -271,7 +282,7 @@
 
                                 <label for="specialty-{{$specialty->id}}">
                                     @php $checked = ''; @endphp
-                                    
+
                                     @if (count($book_specialty) > 0)
                                         @foreach ($book_specialty as $selected)
                                             @php
@@ -290,13 +301,13 @@
                             </div>
 
                             <div class="childs">
-                                
+
                                 @foreach ($specialty->childs as $child)
 
                                     <div class="form-group col s6 m6">
                                         <label for="specialty-{{$child->id}}">
                                             @php $checked = ''; @endphp
-                                            
+
                                             @if (count($book_specialty) > 0)
                                                 @foreach ($book_specialty as $selected)
                                                     @php
@@ -312,7 +323,7 @@
                                             <span>{!! $child->title !!}</span>
                                         </label>
                                     </div>
-                                    
+
                                 @endforeach
 
                             </div>
@@ -361,7 +372,7 @@
         </div>
 
         <div id="atributos" class="content-tabs">
-                    
+
             <div class="row">
                 <div class="col s6 m5">
                     <label for="impresion-name"><span class="required">*</span> Impresión:</label>
@@ -397,16 +408,16 @@
 
         </div>
         <div id="precios" class="content-tabs">
-            
+
             @if (count($inventory) > 0)
                 @foreach ($inventory as $country)
-                    
+
                     <div class="row row-country">
 
                         <div class="col s12">
                             <p class="title">Precios de <span>{!! $country->country_name !!}</span>:</p>
                         </div>
-                        
+
                         <div class="col s12 m4">
                             <label for="name"><span class="required">*</span> País:</label>
                             <input type="text" readonly class="country-title" id="name" name="name" value="{!! $country->country_name !!}">
@@ -468,11 +479,11 @@
         <div class="single-navigation">
 
             @if (isset($prev))
-                <a class="btn-navigation previous" href="/am-admin/libros/{{$prev}}"><span class="icon-arrow-left2"></span> Anterior</a>
+                <a class="btn-navigation previous" href="{{ $return_route }}/{{$prev}}"><span class="icon-arrow-left2"></span> Anterior</a>
             @endif
 
             @if (isset($next))
-                <a class="btn-navigation next" href="/am-admin/libros/{{$next}}">Siguiente <span class="icon-arrow-right2"></span></a>
+                <a class="btn-navigation next" href="{{ $return_route }}/{{$next}}">Siguiente <span class="icon-arrow-right2"></span></a>
             @endif
 
         </div>
@@ -481,7 +492,7 @@
             <a class="btn-navigation green save-resource">
                 Guardar libro
             </a>
-            <a class="btn-navigation red previous" href="/am-admin/libros">
+            <a class="btn-navigation red previous" href="{{ $return_route }}">
                 Ver todos los libros
             </a>
         </div>

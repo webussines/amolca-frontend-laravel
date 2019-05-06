@@ -1,13 +1,21 @@
 @extends('admin.layouts.account')
 
-@section('title', 'Todos los libros - Admin Amolca')
+@if ( isset($page_type) && $page_type == 'books' )
+	@section('title', 'Todos los libros - Admin Amolca')
+@elseif ( isset($page_type) && $page_type == 'specialties' )
+	@section('title', $specialty->title . ' - Todos los libros - Admin Amolca')
+@endif
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('libs/datatables/css/jquery.dataTables.min.css') }}">
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/admin/books/books.js') }}"></script>
+	@if ( isset($page_type) && $page_type == 'books' )
+		<script src="{{ asset('js/admin/books/books.js') }}"></script>
+	@elseif ( isset($page_type) && $page_type == 'specialties' )
+		<script src="{{ asset('js/admin/specialties/books.js') }}"></script>
+	@endif
 <script src="{{ asset('libs/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('libs/datatables/js/buttons.flash.min.js') }}"></script>
 <script src="{{ asset('libs/datatables/js/buttons.html5.min.js') }}"></script>
@@ -18,6 +26,10 @@
 
 @section('contentClass', 'all-books')
 @section('content')
+
+	@if ( isset($page_type) && $page_type == 'specialties' )
+		<input type="hidden" name="specialty_id" id="specialty_id" value="{{ $specialty->id }}">
+	@endif
 
 	<div class="loader hidde">
 		<div class="progress">
@@ -43,8 +55,16 @@
 		</tbody>
 
 		<tfoot>
-			
+
 		</tfoot>
 	</table>
+
+	@if ( isset($page_type) && $page_type == 'specialties')
+		<div class="fixed-action-btn">
+            <a class="btn-navigation red" href="/am-admin/especialidades">
+                Regresar a especialidades
+            </a>
+        </div>
+	@endif
 
 @endsection

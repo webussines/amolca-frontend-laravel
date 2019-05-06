@@ -27,6 +27,11 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 		//Custom routes for "LIBROS"
 		Route::get('libros/inventario', 'Admin\AdminBooksController@inventory');
+		Route::get('libros/especialidad', 'Admin\AdminBooksController@specialty');
+
+		//Custom routes for "ESPECIALIDADES"
+		Route::get('especialidades/{id}/libros', 'Admin\AdminSpecialtiesController@books');
+		Route::get('especialidades/{id}/libros/{book}', 'Admin\AdminSpecialtiesController@show_book');
 
 		//Custom routes for "Usuarios"
 		Route::get('clientes', 'Admin\AdminUsersController@clients');
@@ -81,6 +86,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		//Routes for get info "ESPECIALIDADES"
 		Route::prefix('specialties')->group(function(){
 			Route::get('/', 'Admin\AdminSpecialtiesController@all');
+			Route::get('/{id}/books', 'Admin\AdminSpecialtiesController@get_books');
 			Route::post('/', 'Admin\AdminSpecialtiesController@store');
 			Route::post('/edit/{id}', 'Admin\AdminSpecialtiesController@edit');
 		});

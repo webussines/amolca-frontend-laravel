@@ -16,7 +16,7 @@
 			$target_class = 'spent';
 			$target_text = 'Agotado';
 			break;
-		
+
 		case 'RESERVED':
 			$target_class = 'reserved';
 			$target_text = 'Reservado';
@@ -45,7 +45,7 @@
 					$target_text = 'Agotado';
 					$showtarget = true;
 					break;
-				
+
 				case 'RESERVED':
 					$target_class = 'reserved';
 					$target_text = 'Reservado';
@@ -95,8 +95,8 @@ fbq('track', 'Lead');
 					@if($showtarget)
 					    <div class="target {{ $target_class }}">{!! $target_text !!}</div>
 					@endif
-					
-					<img alt="{!! $book->title !!}" title="{!! $book->title !!}" class="materialboxed" src="{{ $book->thumbnail }}">
+
+					<img alt="{!! $book->title !!}" title="{!! $book->title !!}" src="{{ $book->thumbnail }}">
 				</div>
 
 				<!--Countries loop for scroll info interaction-->
@@ -162,11 +162,11 @@ fbq('track', 'Lead');
 			@if( isset($release) )
 				<p class="release_note"><span class="important">Importante:</span> {!! $release !!}</p>
 			@endif
-			
+
 			@if (get_option('sitecountry') == 'COLOMBIA')
 				<p class="shipping">¡Envío gratis a cualquier ciudad de Colombia!</p>
 			@endif
-			
+
 			<!--Specialties icons-->
 			<div class="cont-specialties">
 				<div class="label">Especialidades:</div>
@@ -174,7 +174,9 @@ fbq('track', 'Lead');
 					@foreach ($book->taxonomies as $taxonomy)
 						@if ($taxonomy->slug != 'medicina' && $taxonomy->slug != 'odontologia' && $taxonomy->icon_img != NULL)
 						<p>
-							<img class="specialty-icon" src="{{ $taxonomy->icon_img }}" alt="{!! $taxonomy->title!!} "> {!! $taxonomy->title !!}
+							<a href="/especialidad/{!! $taxonomy->slug !!}">
+								<img class="specialty-icon" src="{{ $taxonomy->icon_img }}" alt="{!! $taxonomy->title!!} "> {!! $taxonomy->title !!}
+							</a>
 						</p>
 						@endif
 					@endforeach
@@ -182,17 +184,17 @@ fbq('track', 'Lead');
 			</div>
 
 			<div class="cont-versions">
-				<p class="versions">Disponible en: 
+				<p class="versions">Disponible en:
 
 				@foreach ($book->version as $version)
-						
+
 					<!--Paper version icon-->
 					@if ($version == "PAPER")
 						<a class="version-btn tooltipped" data-position="top" data-tooltip="Papel" title="Papel">
 							<span class="icon-book"></span>
 						</a>
 					@endif
-					
+
 					<!--Ebook version icon-->
 					@if ($version == "EBOOK")
 						<a class="version-btn tooltipped" data-position="top" data-tooltip="Ebook" title="Ebook">
@@ -309,7 +311,7 @@ fbq('track', 'Lead');
 						</div>
 					</li>
 				@endif
-				
+
 				<!--Book keypoints-->
 				@if (isset($book->keypoints) && $book->keypoints !== "")
 					<li class="collapsible-item">
@@ -362,14 +364,14 @@ fbq('track', 'Lead');
 </div>
 
 <div class="related-products">
-		
+
 	<div class="section-title">Libros relacionados</div>
 
 	<div class="content-container">
 		<div class="books-loop items-per-page-4">
 
 			@php
-				$related_options = [ 
+				$related_options = [
 					'type' => 'carousel',
 					'items_per_page' => 8,
 					'items_per_row' => 4,

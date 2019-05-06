@@ -55,8 +55,9 @@ class AdminBooksController extends Controller
     {
         $params = "orderby=title&order=1&limit=1&skip=0";
         $books = $this->books->all($params);
+        $page_type = 'books';
 
-        return view('admin.books.index', ['books' => $books]);
+        return view('admin.books.index', ['books' => $books, 'page_type' => $page_type]);
     }
 
     /*Mostrar*/
@@ -74,7 +75,7 @@ class AdminBooksController extends Controller
         } else if($book->post->type == 'event') {
 
             return redirect('/am-admin/eventos/' . $book->post->id);
-            
+
         }
 
         $send_info = [];
@@ -112,6 +113,12 @@ class AdminBooksController extends Controller
         return view('admin.books.inventory', ['books' => $books]);
     }
 
+    /*Por especilidad*/
+    public function specialty()
+    {
+        return view('admin.books.specialties');
+    }
+
     public function update_inventory() {
 
         $inventories = $this->request->post('body');
@@ -146,7 +153,7 @@ class AdminBooksController extends Controller
         //
     }
 
-    
+
     public function destroy($id)
     {
         return $this->books->deleteById($id);

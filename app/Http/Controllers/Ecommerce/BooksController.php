@@ -24,7 +24,7 @@ class BooksController extends Controller
         $this->lots = $lots;
         $this->banners = $banners;
     }
-    
+
 	public function index() {
 	}
 
@@ -34,14 +34,14 @@ class BooksController extends Controller
 
 		// Redirigir al home si el recurso no existe
 		if(!isset($book->id)) {
-			return redirect('/');
+			return redirect('/' . $slug);
 		}
 
         $send_data = [];
 
         $banner = get_banners_src($this->banners, 'book', $book->id);
 
-        for ($taxs = 0; $taxs < count($book->taxonomies); $taxs++) { 
+        for ($taxs = 0; $taxs < count($book->taxonomies); $taxs++) {
         	$specialty_banner = get_banners_src($this->banners, 'specialty', $book->taxonomies[$taxs]->id);
         	if( isset($specialty_banner->id) ) {
         		$banner = $specialty_banner;
@@ -111,11 +111,11 @@ class BooksController extends Controller
 
 		$books = [];
 
-		for ($i = 0; $i < count($releases_books); $i++) { 
+		for ($i = 0; $i < count($releases_books); $i++) {
 
 			$book = $releases_books[$i];
 
-			for ($t=0; $t < count($releases_books[$i]->taxonomies); $t++) { 
+			for ($t=0; $t < count($releases_books[$i]->taxonomies); $t++) {
 				if($releases_books[$i]->taxonomies[$t]->id == $specialty_id) {
 					array_push($books, $book);
 				}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -18,6 +18,10 @@ class Specialties extends GuzzleHttpRequest {
 		return $this->get("taxonomies/{$id}");
 	}
 
+	public function book($tax, $book) {
+		return $this->get("taxonomies/{$tax}/posts/{$book}");
+	}
+
 	public function find($slug) {
 		return $this->get("taxonomies/slug/{$slug}");
 	}
@@ -33,5 +37,5 @@ class Specialties extends GuzzleHttpRequest {
 	public function deleteById($id) {
 		return $this->delete("taxonomies/{$id}");
 	}
-	
+
 }

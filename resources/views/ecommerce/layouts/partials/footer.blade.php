@@ -1,3 +1,9 @@
+
+	<!--Go back button-->
+	<a class="btn-go-back" href="javascript:history.back()">
+		<span class="icon-arrow-left-thick"></span>
+	</a>
+
 	<div class="footer">
 		<div class="custom-row">
 			<div class="custom-col block-contact" id="block-principal">
