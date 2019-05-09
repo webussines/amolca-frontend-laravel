@@ -43,14 +43,14 @@ const CreateDataTable = () => {
 	    	url: '/carts/' + user_id
 	    },
 	    columns: [
-	    	{ 
+	    	{
 	    		data: "id",
 	    		className: "id",
 	    		"render": function (data, type, JsonResultRow, meta) {
                     return '#' + JsonResultRow.id;
                 }
             },
-	    	{ 	
+	    	{
 	    		data: "products",
 	    		className: "products",
 	    		"render": function (data, type, JsonResultRow, meta) {
@@ -59,9 +59,9 @@ const CreateDataTable = () => {
                     } else {
                         return 0;
                     }
-                } 
+                }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "state",
 	    		className: "state",
 	    		"render": function (data, type, JsonResultRow, meta) {
@@ -94,9 +94,9 @@ const CreateDataTable = () => {
                 			return 'Expirado';
                 		break;
                 	}
-                } 
+                }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "created_at",
 	    		className: "date",
 	    		"render": function (data, type, JsonResultRow, meta) {
@@ -104,7 +104,7 @@ const CreateDataTable = () => {
                     return FormattingDate(date);
                 }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "amount",
 	    		className: "amount",
                 "render": function (data, type, JsonResultRow, meta) {
@@ -115,7 +115,7 @@ const CreateDataTable = () => {
                     }
                 }
 	    	},
-	    	{ 	
+	    	{
 	    		data: "id",
 	    		className: "actions",
 	    		"render":  function (data, type, JsonResultRow, meta) {

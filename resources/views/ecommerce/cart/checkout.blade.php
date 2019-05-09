@@ -1,4 +1,13 @@
 @extends('ecommerce.layouts.site')
+
+@php
+	$nombre = ( session('user') ) ? session('user')->name : '';
+	$apellido = ( session('user') ) ? session('user')->lastname : '';
+	$correo = ( session('user') ) ? session('user')->email : '';
+	$telefono = ( session('user') ) ? session('user')->phone : '';
+	$celular = ( session('user') ) ? session('user')->mobile : '';
+@endphp
+
 @section('meta')
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 @endsection
@@ -52,34 +61,34 @@
 					<!--Name column-->
 					<div class="col s12 m6 l6">
 						<label for="name"><span class="required">*</span> Nombres:</label>
-						<input type="text" name="name" class="required-field" id="name" placeholder="Escribe tu nombre...">
+						<input type="text" name="name" class="required-field" id="name" placeholder="Escribe tu nombre..." value="{!! $nombre !!}">
 						<p id="error-name" class="error"></p>
 					</div>
 
 					<!--Lastname column-->
 					<div class="col s12 m6 l6">
 						<label for="lastname"><span class="required">*</span> Apellidos:</label>
-						<input type="text" name="lastname" class="required-field" id="lastname" placeholder="Escribe tus apellidos...">
+						<input type="text" name="lastname" class="required-field" id="lastname" placeholder="Escribe tus apellidos..." value="{!! $apellido !!}">
 						<p id="error-lastname" class="error"></p>
 					</div>
 
 					<!--Mobile column-->
 					<div class="col s12 m6 l6">
 						<label for="mobile"><span class="required">*</span> Teléfono celular:</label>
-						<input type="text" name="mobile" class="required-field" id="mobile" placeholder="Escribe tu número de celular...">
+						<input type="text" name="mobile" class="required-field" id="mobile" placeholder="Escribe tu número de celular..." value="{!! $celular !!}">
 						<p id="error-mobile" class="error"></p>
 					</div>
 
 					<!--Phone column-->
 					<div class="col s12 m6 l6">
 						<label for="phone">Teléfono fijo:</label>
-						<input type="text" name="phone" id="phone" placeholder="Escribe tu número de teléfono fijo...">
+						<input type="text" name="phone" id="phone" placeholder="Escribe tu número de teléfono fijo..." value="{!! $telefono !!}">
 					</div>
 
 					<!--Email column-->
 					<div class="col s12 m12 l12">
 						<label for="email"><span class="required">*</span> Correo electrónico:</label>
-						<input type="email" name="email" class="required-field" id="email" placeholder="Escribe tu correo electrónico...">
+						<input type="email" name="email" class="required-field" id="email" placeholder="Escribe tu correo electrónico..." value="{!! $correo !!}">
 						<p id="error-email" class="error"></p>
 					</div>
 

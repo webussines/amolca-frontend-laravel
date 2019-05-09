@@ -1,5 +1,11 @@
 @extends('ecommerce.layouts.site')
 
+@php
+	$telefono = ( session('user') ) ? session('user')->phone : '';
+	$correo = ( session('user') ) ? session('user')->email : '';
+	$nombre = ( session('user') ) ? session('user')->name . ' ' . session('user')->lastname : '';
+@endphp
+
 @section('fbPixel')
 fbq('track', 'Lead');
 fbq('track', 'Contact');
@@ -24,19 +30,19 @@ fbq('track', 'Contact');
 
 			<div class="form-group col s12 m6 l4">
 				<label for="name"><span class="required">*</span> Nombre completo:</label>
-				<input type="text" id="name" class="required-field" name="name" placeholder="Nombre completo...">
+				<input type="text" id="name" class="required-field" name="name" placeholder="Nombre completo..." value="{!! $nombre !!}">
 				<p id="error-name" class="error"></p>
 			</div>
 
 			<div class="form-group col s12 m6 l4">
 				<label for="phone"><span class="required">*</span> Número de teléfono / Celular:</label>
-				<input type="text" id="phone" class="required-field" name="phone" placeholder="Número de teléfono / Celular...">
+				<input type="text" id="phone" class="required-field" name="phone" placeholder="Número de teléfono / Celular..." value="{!! $telefono !!}">
 				<p id="error-phone" class="error"></p>
 			</div>
 
 			<div class="form-group col s12 m6 l4">
 				<label for="email"><span class="required">*</span> Correo eléctronico:</label>
-				<input type="text" id="email" class="required-field" name="email" placeholder="Correo eléctronico...">
+				<input type="text" id="email" class="required-field" name="email" placeholder="Correo eléctronico..." value="{!! $correo !!}">
 				<p id="error-email" class="error"></p>
 			</div>
 
