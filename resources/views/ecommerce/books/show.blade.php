@@ -348,7 +348,7 @@ fbq('track', 'Lead');
 										@endif
 									</p>
 									<p>
-										<a routerLink="/autor/{{ $author->slug }}" class="button primary">Ver libros de este autor</a>
+										<a href="/autor/{{ $author->slug }}" class="button primary">Ver libros de este autor</a>
 									</p>
 								</div>
 							</div>

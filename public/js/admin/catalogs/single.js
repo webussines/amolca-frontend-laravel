@@ -73,7 +73,7 @@ const SaveCouponInfo = () => {
 			break;
 		case 'create':
 			ActionRoute = '/am-admin/catalogos';
-			catalog.slug = GenerateSlug(catalog.title);
+			catalog.slug = 'catalogo-' + GenerateSlug(catalog.title);
 			send = [ catalog ];
 			break;
 	}
