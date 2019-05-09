@@ -42,7 +42,7 @@ class Authentication extends GuzzleHttpRequest {
 			$this->request->session()->put('user', json_decode($user));
 
 			// Get cart if this exists
-			$order_req = $this->client->request('GET', '/orders/user/' . $user_json->id);
+			$order_req = $this->client->request('GET', '/orders/user/' . $user_json->id . '/cart');
             $order = $order_req->getBody()->getContents();
             $order_json = json_decode($order);
 
