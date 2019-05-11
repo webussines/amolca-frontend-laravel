@@ -88,7 +88,7 @@ const ValidateCouponExists = (e) => {
 
 const ValidateOrderInfo = (coupon) => {
 
-	// console.log(coupon)
+	//console.log(coupon)
 	let flag = true;
 	const sc = /[' '’_,.%$#¬|/¡!¿?*=""\/\\( )[\]:;]/gi; // Special chars to replace in str
 
@@ -288,8 +288,38 @@ const ValidateOrderInfo = (coupon) => {
 
 			break;
 
+		case 'ALL':
+		    // Convertir el total del carrito actual a una variable tipo numero
+			let all_total_str = $('.cart-totals #price').html();
+
+			let all_total = all_total_str.replace(sc, '');
+
+			if(typeof all_total == 'string') {
+				all_total = parseInt(all_total);
+			}
+
+			// Si no hay errores y el cupon es de tipo FIXED
+			if(flag && coupon.discount_type == 'FIXED') {
+
+				let all_changed = all_total - coupon.discount_amount;
+
+				ChangeTotalCart(coupon, all_changed)
+
+			}
+
+			// Si no hay errores y el cupon es de tipo FIXED
+			if(flag && coupon.discount_type == 'PERCENTAGE') {
+
+				let all_discount = (all_total * coupon.discount_amount) / 100;
+				let all_changed = all_total - all_discount;
+
+				ChangeTotalCart(coupon, all_changed)
+
+			}
+		    break;
+
 		default:
-			// statements_def
+			console.log('DEFAULT')
 			break;
 	}
 
