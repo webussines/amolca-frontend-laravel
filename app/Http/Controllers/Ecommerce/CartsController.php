@@ -93,7 +93,7 @@ class CartsController extends Controller
             if(session('user')) {
                 $order_session = session('user')->id;
             } else {
-                $order_session = date('Ymdi');
+                $order_session = date('Ymdis');
             }
 
             $this->request->session()->put('session_id', $order_session);
@@ -158,6 +158,7 @@ class CartsController extends Controller
                 }
             } else {
                 $cart->products = [];
+                $this->request->session()->forget('coupon');
             }
 
             if($update) {
@@ -223,6 +224,10 @@ class CartsController extends Controller
 
                         break;
 
+                    case 'ALL':
+                        array_push($coupon_objects_affected, '0');
+                        break;
+
                     default:
                         # code...
                         break;
@@ -259,6 +264,11 @@ class CartsController extends Controller
 
                                     $order->amount = $products_amount;
                                     break;
+
+                                case 'ALL':
+                                    $discount = ( $order->amount * session('coupon')['discount_amount'] ) / 100;
+                                    $order->amount = $order->amount - $discount;
+                                    break;
                             }
                         break;
 
@@ -283,6 +293,11 @@ class CartsController extends Controller
                                     }
 
                                     $order->amount = $products_amount;
+                                    break;
+
+                                case 'ALL':
+                                    $discount = ( $order->amount * session('coupon')['discount_amount'] ) / 100;
+                                    $order->amount = $order->amount - $discount;
                                     break;
                             }
 
@@ -337,24 +352,31 @@ class CartsController extends Controller
         $mailer['name'] = mailer_get_name();
         $mailer['from'] = mailer_get_me();
         $mailer['cc'] = $cc;
-        //$mailer['cc'] = 'mstiven013@gmail.com';
+        //$mailer['cc'] = 'diseno@webussines.com';
         $mailer['domain'] = mailer_get_domain();
 
         $send = [
             "address" => $address,
-            "mailer" => $mailer
+            "mailer" => $mailer,
+            "cart" => $cart
         ];
+
+        if( session('coupon') ) {
+            $send['coupon'] = session('coupon');
+        }
 
         $resp = $this->orders->createPending($cart->id, $send);
 
         $json = json_encode(json_decode($resp));
         $order = json_decode($json);
 
+        $resp = [ 'order' => $order, 'cart' => $cart ];
+
         if( isset($order->address) ) {
             $this->request->session()->pull('cart');
         }
 
-        return Response::json($order);
+        return Response::json($resp);
 
     }
 

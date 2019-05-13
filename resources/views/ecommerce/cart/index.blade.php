@@ -70,14 +70,14 @@ fbq('track', 'AddToWishlist');
 			@endforeach
 		</tbody>
 	</table>
-	
+
 	<!--Coupons container-->
 	<div class="coupon-contain">
       <input type="text" id="coupon" placeholder="Escribe aquí el código de tu cupón">
       <button class="button primary">Aplicar cupón</button>
       <p id="coupon-error" class="error"></p>
     </div>
-	
+
 	<!--Info cart-->
     <div class="info-cart">
 
@@ -85,7 +85,7 @@ fbq('track', 'AddToWishlist');
 			<p class="title">Libros relacionados</p>
 
 			@php
-				$related_options = [ 
+				$related_options = [
 					'type' => 'carousel',
 					'items_per_page' => 8,
 					'items_per_row' => 2,
@@ -95,7 +95,7 @@ fbq('track', 'AddToWishlist');
 
 			@include('ecommerce.loops.books.loop', $related_options)
 		</div>
-      
+
 		<div class="cart-totals">
 			<table>
 				<tr id="subtotal">
@@ -120,7 +120,7 @@ fbq('track', 'AddToWishlist');
 							case 'FIXED':
 								$amount = COPMoney(session('coupon')['discount_amount']);
 								break;
-							
+
 							case 'PERCENTAGE':
 								$amount = session('coupon')['discount_amount'] . '%';
 								break;

@@ -47,7 +47,7 @@ jQuery(function($) {
 
 	// Button delete product in cart page
 	$('button.delete').on('click', function() {
-		
+
 		if($(this).attr('disabled') !== 'disabled') {
 			$(this).attr('disabled', 'disabled');
 
@@ -178,7 +178,7 @@ const AddCartProdut = (added, page, actions = null) => {
 		if(!$('.loader.fixed').hasClass('hidde')) {
 			$('.loader.fixed').addClass('hidde');
 		}
-			
+
 
 	}).catch(function(err){
 		console.log(err)
@@ -233,7 +233,7 @@ const DeleteCartProduct = (deleted, page) => {
 		$('button.delete').removeAttr('disabled');
 		if(!$('.loader.fixed').hasClass('hidde')) {
 			$('.loader.fixed').addClass('hidde');
-		}	
+		}
 
 	}).catch(function(err){
 		console.log(err)

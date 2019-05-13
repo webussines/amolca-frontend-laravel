@@ -26,7 +26,7 @@ const ValidateForm = (e) => {
 	let flag = true;
 
 	$('#checkoutform .required-field').each(function() {
-		
+
 		if($(this).val() == '' || $(this).val() == ' ') {
 
 			let errorId = '#error-' + $(this).attr('id');
@@ -91,15 +91,15 @@ const UpdateOrder = (data) => {
 
 		$('#notification-modal #resp-buttons').css('display', 'none');
 
-		$('#notification-modal #resp-text').html(`¡Hola, <b>${resp.address.name} ${resp.address.lastname}</b>!<br/> Tu pedido se ha procesado exitosamente.<br/> Solo debes <b>realizar tu pago</b> para finalizar tu compra.`);
+		$('#notification-modal #resp-text').html(`¡Hola, <b>${resp.order.address.name} ${resp.order.address.lastname}</b>!<br/> Recibimos tu pedido exitosamente.`);
 
 		$('#notification-modal #resp-desc').html('En 5 segundos te redirigiremos a la plataforma de pagos...');
 
 		$('#notification-modal').modal();
 		$('#notification-modal').modal('open');
 
-		let user = resp.address;
-		let order = resp.order;
+		let user = resp.order.address;
+		let order = resp.cart;
 
 		CardnetRedirectFunction(user, order);
 

@@ -111,7 +111,6 @@ input#coupon {
     padding-left: 20px;
     padding-right: 20px;
     margin-right: 10px;
-    text-transform: uppercase;
     width: 250px;
 }
 .coupon-contain .button {

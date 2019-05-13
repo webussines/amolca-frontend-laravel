@@ -87,19 +87,19 @@ const UpdateOrder = (data) => {
 		url: '/carts/checkout',
 		data: data
 	}).done(function(resp) {
-		//console.log(resp)
+		//return console.log(resp)
 
 		$('#notification-modal #resp-buttons').css('display', 'none');
 
-		$('#notification-modal #resp-text').html(`¡Hola, <b>${resp.address.name} ${resp.address.lastname}</b>!<br/> Recibimos tu pedido exitosamente.`);
+		$('#notification-modal #resp-text').html(`¡Hola, <b>${resp.order.address.name} ${resp.order.address.lastname}</b>!<br/> Recibimos tu pedido exitosamente.`);
 
 		$('#notification-modal #resp-desc').html('En 5 segundos te redirigiremos a la plataforma de pagos...');
 
 		$('#notification-modal').modal();
 		$('#notification-modal').modal('open');
 
-		let user = resp.address;
-		let order = resp.order;
+		let user = resp.order.address;
+		let order = resp.cart;
 
 		TuCompraRedirectFunction(user, order);
 
