@@ -5,8 +5,8 @@
     $user = $_POST['user'];
     $order = $_POST['order'];
 
-    MercadoPago\SDK::setAccessToken("TEST-8376813153840242-022212-5906e9f433a17e2d3b8758c5c9a7ce08-337985950");
-    //MercadoPago\SDK::setAccessToken("APP_USR-8376813153840242-022212-15e34f6af4fadfe03513c87eb1eae978-337985950");
+    //MercadoPago\SDK::setAccessToken("TEST-8376813153840242-022212-5906e9f433a17e2d3b8758c5c9a7ce08-337985950");
+    MercadoPago\SDK::setAccessToken("APP_USR-8376813153840242-022212-15e34f6af4fadfe03513c87eb1eae978-337985950");
 
     $body = array(
         "json_data" => array(

@@ -135,7 +135,7 @@ const MPRedirectFunction = (user, order) => {
 
 		//console.log(resp)
 		setTimeout(function() {
-			$.redirect(resp);
+			window.location.href= resp;
 		}, 5000)
 
 	}).catch((err) => {
