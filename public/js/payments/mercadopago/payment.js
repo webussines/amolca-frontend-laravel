@@ -124,7 +124,7 @@ const MPRedirectFunction = (user, order) => {
 
 	$.ajax({
 		method: 'POST',
-		url: '/checkout/mercadopago',
+		url: '/mercado-pago/get-endpoint.php',
 		data: {
 			"order": order,
 			"user": user,
