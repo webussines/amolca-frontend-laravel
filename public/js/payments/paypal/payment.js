@@ -27,11 +27,11 @@ const CreateOrderPayPal = () => {
       if($('.loader.fixed').hasClass('hidde')) {
         $('.loader.fixed').removeClass('hidde');
       }
-    
+
       let flag = true;
 
       $('#checkoutform .required-field').each(function() {
-        
+
         if($(this).val() == '' || $(this).val() == ' ') {
 
           let errorId = '#error-' + $(this).attr('id');
@@ -52,7 +52,7 @@ const CreateOrderPayPal = () => {
         "lastname": $('#checkoutform #lastname').val(),
         "email": $('#checkoutform #email').val(),
         "mobile": $('#checkoutform #mobile').val(),
-        "country": "COLOMBIA",
+        "country": $('meta[name="country-active"]').attr('content'),
         "city": $('#checkoutform #city').val(),
         "address": $('#checkoutform #address').val(),
         "_token": $('meta[name="csrf-token"]').attr('content'),

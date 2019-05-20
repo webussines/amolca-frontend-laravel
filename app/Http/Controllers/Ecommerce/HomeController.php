@@ -173,12 +173,12 @@ class HomeController extends Controller
                 return view('ecommerce.terms-policy.argentina', $send);
                 break;
 
-            case 'MEXICO':
-                return view('ecommerce.terms-policy.mexico', $send);
-                break;
-
             case 'DOMINICAN REPUBLIC':
                 return view('ecommerce.terms-policy.dominican-republic', $send);
+                break;
+
+            case 'PERU':
+                return view('ecommerce.terms-policy.peru', $send);
                 break;
 
             default:

@@ -73,7 +73,11 @@ fbq('track', 'Contact');
 			<div class="col s12 m12 l12 terms-condition">
 				<label>
 					<input id="terms-conditions" name="terms-conditions" type="checkbox" />
-					<span>He leído y acepto los <a href="/terminos-y-condiciones">Términos y condiciones y Políticas de privacidad</a></span>
+					@if (get_option('sitecountry') == 'MEXICO')
+						<span>He leído y acepto los <a href="https://amolca.webussines.com/uploads/archivos/terminos-y-condiciones-amolca-mx.pdf" target="_blank">Términos y condiciones y Políticas de privacidad</a></span>
+					@else
+						<span>He leído y acepto los <a href="/terminos-y-condiciones">Términos y condiciones y Políticas de privacidad</a></span>
+					@endif
 				</label>
 				<p class="global-error error"></p>
 			</div>

@@ -32,6 +32,11 @@
 			<script src="{{ asset('js/payments/paypal/payment.js') }}"></script>
 	    	@break
 
+		@case('MEXICO')
+		    <script src="https://www.paypal.com/sdk/js?client-id=AQNT8HrWbdXL1Y6rVtC_UHYWuV1HvGgCVEwSL3zuQsNqxvRgCOZZkfbk0jKoPjJtR_t7pEzwYvs8U1L5"></script>
+			<script src="{{ asset('js/payments/paypal/payment.js') }}"></script>
+	    	@break
+
 	    @case('DOMINICAN REPUBLIC')
 	    	<script src="{{ asset('js/payments/redirect.js') }}"></script>
 	    	<script src="{{ asset('js/payments/cardnet/payment.js') }}"></script>
@@ -136,7 +141,11 @@
 					<div class="col s12 m12 l12 terms-condition">
 						<label>
 							<input type="checkbox" id="terms" />
-							<span>He leído y acepto los <a href="/terminos-y-condiciones">Términos y condiciones y Políticas de privacidad</a></span>
+							@if (get_option('sitecountry') == 'MEXICO')
+								<span>He leído y acepto los <a href="https://amolca.webussines.com/uploads/archivos/terminos-y-condiciones-amolca-mx.pdf" target="_blank">Términos y condiciones y Políticas de privacidad</a></span>
+							@else
+								<span>He leído y acepto los <a href="/terminos-y-condiciones">Términos y condiciones y Políticas de privacidad</a></span>
+							@endif
 						</label>
 					</div>
 
@@ -155,6 +164,10 @@
 	                	        @break
 
 	                	    @case('PANAMA')
+	                		    <div id="paypal-button-container"></div>
+	                	    	@break
+
+							@case('MEXICO')
 	                		    <div id="paypal-button-container"></div>
 	                	    	@break
 

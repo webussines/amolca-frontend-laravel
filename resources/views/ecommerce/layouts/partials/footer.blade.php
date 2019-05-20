@@ -38,10 +38,10 @@
 					<a href="/catalogos/odontologia">Cat&aacute;logos Odontología</a>
 				</p>
 				<p>
-					<a href="/terminos-y-condiciones">Términos y condiciones</a>
+					<a @if (get_option('sitecountry') == 'MEXICO') href="https://amolca.webussines.com/uploads/archivos/terminos-y-condiciones-amolca-mx.pdf" target="_blank" @else href="/terminos-y-condiciones" @endif>Términos y condiciones</a>
 				</p>
 				<p>
-					<a href="/terminos-y-condiciones#privacidad">Políticas de privacidad</a>
+					<a @if (get_option('sitecountry') == 'MEXICO') href="https://amolca.webussines.com/uploads/archivos/terminos-y-condiciones-amolca-mx.pdf" target="_blank" @else href="/terminos-y-condiciones#privacidad" @endif>Políticas de privacidad</a>
 				</p>
 			</div>
 			<div class="custom-col" id="block-help">
@@ -53,10 +53,10 @@
 						<a>Preguntas frecuentes</a>
 					</p>
 					<p>
-						<a href="/terminos-y-condiciones#envios">Información de envío</a>
+						<a @if (get_option('sitecountry') == 'MEXICO') href="https://amolca.webussines.com/uploads/archivos/terminos-y-condiciones-amolca-mx.pdf" target="_blank" @else href="/terminos-y-condiciones#envios" @endif>Información de envío</a>
 					</p>
 					<p>
-						<a href="/terminos-y-condiciones#pagos">Medios de pago</a>
+						<a @if (get_option('sitecountry') == 'MEXICO') href="https://amolca.webussines.com/uploads/archivos/terminos-y-condiciones-amolca-mx.pdf" target="_blank" @else href="/terminos-y-condiciones#pagos" @endif>Medios de pago</a>
 					</p>
 					<p>
 						<a href="/contacto">Contacto</a>
