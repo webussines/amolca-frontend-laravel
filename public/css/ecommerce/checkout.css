@@ -82,6 +82,17 @@ table.payment-response {
             font-style: italic;
         }
 
+    table.payment-response tr.authorization_code {
+        background-color: #b10000 !important;
+        color: #fff;
+    }
+        table.payment-response tr.authorization_code.code_00 {
+            background-color: #00b11e !important;
+        }
+        table.payment-response tr.authorization_code td {
+            font-style: normal;
+        }
+
     table.payment-response tbody tr.finish-row td {
         text-align: center;
     }

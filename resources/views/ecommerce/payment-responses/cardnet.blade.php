@@ -18,7 +18,29 @@
 		</thead>
 
 		<tbody>
-			
+
+			@if ( isset($response['authorization_code']) )
+				<tr class="authorization_code code_{{ $response['response_code'] }}">
+					<th>
+						Código de autorización:
+					</th>
+					<td>
+						{{ $response['authorization_code'] }}
+					</td>
+				</tr>
+			@endif
+
+			@if ( isset($response['response_text']) )
+				<tr class="response_text">
+					<th>
+						Respuesta de transacción:
+					</th>
+					<td>
+						{{ $response['response_text'] }}
+					</td>
+				</tr>
+			@endif
+
 			@if ( isset($response['credit_card']) )
 				<tr>
 					<th>
@@ -26,17 +48,6 @@
 					</th>
 					<td>
 						{{ $response['credit_card'] }}
-					</td>
-				</tr>
-			@endif
-
-			@if ( isset($response['response_text']) )
-				<tr>
-					<th>
-						Respuesta de transacción:
-					</th>
-					<td>
-						{{ $response['response_text'] }}
 					</td>
 				</tr>
 			@endif
@@ -59,17 +70,6 @@
 					</th>
 					<td>
 						{{ $response['retrieval_reference'] }}
-					</td>
-				</tr>
-			@endif
-
-			@if ( isset($response['authorization_code']) )
-				<tr>
-					<th>
-						Código de autorización:
-					</th>
-					<td>
-						{{ $response['authorization_code'] }}
 					</td>
 				</tr>
 			@endif
