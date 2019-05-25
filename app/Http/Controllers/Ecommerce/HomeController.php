@@ -133,6 +133,16 @@ class HomeController extends Controller
         return view('ecommerce.login');
     }
 
+    public function register()
+    {
+
+        if(session('user')) {
+            return redirect('mi-cuenta');
+        }
+
+        return view('ecommerce.register');
+    }
+
     public function contact()
     {
 

@@ -78,7 +78,7 @@
 				$complete = explode('\\', Route::getCurrentRoute()->getActionName());
 				$controller = $complete[count($complete) - 1];
 				$active_controller = explode('@', $controller)[0];
-				$pages_not_banner = ["/", "iniciar-sesion", "buscar", "mi-cuenta"];
+				$pages_not_banner = ["/", "iniciar-sesion", "registrarse", "buscar", "mi-cuenta"];
 
 				$send_to_banner = ["show_searcher" => true, "exists_banner" => false];
 

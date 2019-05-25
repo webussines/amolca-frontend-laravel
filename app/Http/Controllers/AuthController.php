@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Authentication;
+use App\Repositories\Users;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -12,10 +13,17 @@ class AuthController extends Controller
 
 	protected $authentication;
 	protected $request;
+	protected $users;
 
-	public function __construct(Authentication $authentication, Request $request) {
+	public function __construct(Authentication $authentication, Request $request, Users $users) {
 		$this->authentication = $authentication;
+		$this->users = $users;
 		$this->request = $request;
+	}
+
+	public function validate_wb() {
+		$email = $this->request->all();
+		return $this->users->validate($email);
 	}
 
     public function register() {

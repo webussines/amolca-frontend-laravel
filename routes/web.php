@@ -166,7 +166,9 @@ Route::group(['prefix' => 'am-admin'], function() {
 
 //Authentication ecommerce routes
 Route::get('/iniciar-sesion', 'Ecommerce\HomeController@login');
+Route::get('/registrarse', 'Ecommerce\HomeController@register');
 Route::get('/logout', 'AuthController@EcommerceLogout');
+Route::get('/validate-wb', 'AuthController@validate_wb');
 
 Route::group(['middleware' => 'ecommerce', 'prefix' => 'mi-cuenta'], function() {
 	Route::get('/', 'Ecommerce\AccountController@account');

@@ -34,23 +34,129 @@
     margin: auto;
     overflow: hidden;
     position: relative;
-    width: 500px;
+    width: 100%;
 }
 
-/*Tabs headers*/
-.tabs .tab a, .tabs .tab {
-    background-color: #55B9D4;
-    color: #ffffff;
-    font-family: 'Tahoma';
-    font-size: 16px;
-    font-weight: bold;
-    opacity: 1;
-    text-transform: inherit;
+.auth .title {
+    font-size: 22px;
+    margin-bottom: 0px;
 }
-    .tabs .tab a:hover, .tabs .tab a:focus, .tabs .tab a:focus.active, .tabs .tab a.active {
-        background-color: #00396F;
-        color: #ffffff;
+
+.auth .steps {
+    display: none;
+    transition: all 0.4s ease;
+    visibility: hidden;
+}
+    .auth .steps.active {
+        display: block;
+        visibility: visible;
     }
+
+form .remember-info {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    text-align: left;
+}
+    form .remember-info a {
+        color: #565656;
+        font-size: 13px;
+    }
+        form .remember-info a:hover,
+        form .remember-info a:active {
+            color: #00396f;
+            text-decoration: underline;
+        }
+
+.auth .title#user-fullname {
+    font-size: 25px;
+}
+
+.email-sent {
+    align-items: center;
+    border-radius: 35px;
+    border: 1px solid gray;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 100%;
+    margin: 10px auto 20px;
+    padding: 5px 15px;
+    width: auto;
+}
+    .email-sent #user-avatar {
+        align-items: center;
+        background-color: #55b9d4;
+        border-radius: 50%;
+        color: #fff;
+        display: inline-flex;
+        flex-flow: column nowrap;
+        font-weight: normal;
+        height: 30px;
+        justify-content: center;
+        margin-right: 5px;
+        overflow: hidden;
+        text-transform: uppercase;
+        vertical-align: middle;
+        width: 30px;
+    }
+        .email-sent #user-avatar img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+
+/*Tabs headers*/
+.tabs-menu {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 48px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+    white-space: nowrap;
+}
+    .tabs-menu .tab {
+        text-align: center;
+        line-height: 48px;
+        height: 48px;
+        padding: 0;
+        margin: 0;
+        text-transform: uppercase;
+        width: 50%;
+    }
+        .tabs-menu .tab a {
+            color: rgba(238,110,115,0.7);
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 0 24px;
+            font-size: 14px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-transition: color .28s ease, background-color .28s ease;
+            transition: color .28s ease, background-color .28s ease;
+        }
+            .tabs-menu .tab a, .tabs-menu .tab {
+                background-color: #55B9D4;
+                color: #ffffff;
+                font-family: 'Tahoma';
+                font-size: 16px;
+                font-weight: bold;
+                opacity: 1;
+                text-transform: inherit;
+            }
+                .tabs-menu .tab a:hover, .tabs-menu .tab a:focus, .tabs-menu .tab a:focus.active, .tabs-menu .tab a.active {
+                    background-color: #00396F;
+                    color: #ffffff;
+                }
 
 .tabs .indicator {
     background-color: #00396F;
@@ -115,7 +221,7 @@
     .content {
         width: 100%;
     }
-    
+
     .content-tabs {
         padding: 20px 15px;
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -26,6 +26,10 @@ class Users extends GuzzleHttpRequest {
 		return $this->post("users/register", $body);
 	}
 
+	public function validate($body) {
+		return $this->post("users/validate-user", $body);
+	}
+
 	public function updateById($id, $update) {
 		return $this->put("users/{$id}", $update);
 	}
@@ -33,5 +37,5 @@ class Users extends GuzzleHttpRequest {
 	public function deleteById($id) {
 		return $this->delete("users/{$id}");
 	}
-	
+
 }

@@ -7,10 +7,10 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/ecommerce/auth.js') }}"></script>
+<script src="{{ asset('js/ecommerce/login.js') }}"></script>
 @endsection
 
-@section('contentClass', 'page-container auth')
+@section('contentClass', 'page-container auth login')
 @section('content')
 
 <div class="auth-container">
@@ -18,12 +18,12 @@
 	<input type="hidden" id="_token" value="{{ csrf_token() }}">
 
 	<div class="content">
-		<ul class="tabs tabs-fixed-width">
+		<ul class="tabs-menu">
 	        <li class="tab">
-	            <a class="active" href="#login">Iniciar sesión</a>
+	            <a class="active" href="/iniciar-sesion">Iniciar sesión</a>
 	        </li>
 	        <li class="tab">
-	            <a href="#register">Registrarse</a>
+	            <a href="/registrarse">Registrarse</a>
 	        </li>
 	    </ul>
 
@@ -34,73 +34,55 @@
 			    </div>
 			</div>
 			<form id="login-form">
-				<div class="row">
-					<div class="col s12 m12 l12">
-						<label for="login-username">Correo electrónico:</label>
-						<input id="login-username" autocomplete="off" placeholder="Escribe tu correo electrónico" type="email">
+				<div id="tab-email" class="steps active">
+					<p class="title">Iniciar sesión</p>
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<label for="login-username">Correo electrónico:</label>
+							<input id="login-username" placeholder="Escribe tu correo electrónico" type="email">
+						</div>
+						<div class="col s12 m12 l12">
+							<p class="error email-error">Error</p>
+						</div>
+						<div class="col s12 m12 l12">
+							<p class="remember-info">
+								<a href="#">¿Olvidaste el correo electrónico?</a>
+								<a href="/registrarse">Crear una cuenta</a>
+							</p>
+						</div>
+						<div class="col s12 m12 l12">
+							<input class="button primary" type="button" id="next-btn" value="Siguiente">
+						</div>
+					</div>
+				</div>
+
+				<div id="tab-password" class="steps">
+					<p class="title" id="user-fullname">Stiven Lopez</p>
+					<div class="email-sent">
+						<div id="user-avatar">M</div>
+						<span id="user-email-sent">mstiven013@gmail.com</span>
 					</div>
 					<div class="col s12 m12 l12">
 						<label for="login-password">Contraseña:</label>
 						<input id="login-password" placeholder="Escribe tu contraseña" type="password">
 					</div>
 					<div class="col s12 m12 l12">
-						<p class="error global-error">Error</p>
+						<p class="error password-error">Error</p>
+					</div>
+					<div class="col s12 m12 l12">
+						<p class="remember-info">
+							<a href="#">¿Olvidaste tu contraseña?</a>
+							<a id="return-to-email">Ingresar otro correo</a>
+						</p>
 					</div>
 					<div class="col s12 m12 l12">
 						<input class="button primary" type="submit" value="Iniciar sesión">
 					</div>
 				</div>
+
 			</form>
 		</div>
 
-		<div id="register" class="content-tabs">
-			<div class="loader hidde">
-			    <div class="progress">
-			        <div class="indeterminate"></div>
-			    </div>
-			</div>
-			<form id="register-form">
-				<div class="row">
-					<div class="col s12 m6 l6">
-						<label for="name">Nombres:</label>
-						<input autocomplete="off" class="required-field" id="name" placeholder="Escribe tu nombre..." type="text">
-						<p id="error-name" class="error"></p>
-					</div>
-					<div class="col s12 m6 l6">
-						<label for="lastname">Apellidos:</label>
-						<input autocomplete="off" class="required-field" id="lastname" placeholder="Escribe tu apellido..." type="text">
-						<p id="error-lastname" class="error"></p>
-					</div>
-					<div class="col s12 m12 l12">
-						<label for="email">Correo electrónico:</label>
-						<input autocomplete="off" class="required-field" id="email" placeholder="Escribe tu correo electrónico..." type="email">
-						<p id="error-email" class="error"></p>
-					</div>
-					<div class="col s12 m12 l12">
-						<label for="password">Contraseña:</label>
-						<input id="password" class="required-field" placeholder="Escribe tu contraseña..." type="password">
-						<p id="error-password" class="error"></p>
-					</div>
-					<div class="col s12 m12 l12">
-						<label for="repassword">Confirmar contraseña:</label>
-						<input id="repassword" class="required-field" placeholder="Confirma tu contraseña..." type="password">
-						<p id="error-repassword" class="error"></p>
-					</div>
-					<div class="col s12 m12 l12 terms-condition">
-						<label>
-					        <input type="checkbox" id="tersm-condition" class="required" />
-					        <span>Acepto los <a href="/terminos-y-condiciones">Términos y condiciones</a></span>
-					    </label>
-					</div>
-					<div class="col s12 m12 l12">
-						<p class="error global-error">Error</p>
-					</div>
-					<div class="col s12 m12 l12">
-						<input class="button primary" type="submit" value="Crear cuenta">
-					</div>
-				</div>
-			</form>
-		</div>
 	</div>
 </div>
 
