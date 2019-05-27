@@ -5,6 +5,9 @@ $(function($) {
 	$('#return-to-email').on('click', function() {
 		 ChangeTabContent('#tab-password', '#tab-email')
 
+		 $('#login-password').val('');
+		 $('.password-error').css('display', 'none');
+
 		 $('#login-form #next-btn')
 	 		.val('Siguiente')
 	 		.removeAttr('disabled')

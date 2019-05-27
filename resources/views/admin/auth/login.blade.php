@@ -21,7 +21,7 @@
 <form id="login-form" class="login-form">
   <div class="form-group">
     <label for="username">Usuario / Correo electrónico</label>
-    <input type="text" name="username" id="username" autocomplete="off" placeholder="Escribe tu correo electrónico...">
+    <input type="text" name="username" id="username" placeholder="Escribe tu correo electrónico...">
   </div>
 
   <div class="form-group">
@@ -37,10 +37,10 @@
     <input type="hidden" id="_token" value="{{ csrf_token() }}">
     <input type="submit" class="button primary" value="Iniciar sesión">
   </div>
-  
+
   <div class="form-group link">
     <p><a href="/recover-password">¿Olvidaste tu contraseña?</a></p>
   </div>
-  
+
 </form>
 @endsection

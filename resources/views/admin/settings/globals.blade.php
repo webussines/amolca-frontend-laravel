@@ -57,7 +57,7 @@
 <div class="error-panel card-panel grey lighten-2">
 
 	<div class="hidde-panel">Ocultar panel</div>
-	
+
 	<p id="error-title">
 		<b>Exception:</b> <span class="message"></span>
 	</p>
@@ -77,7 +77,7 @@
 
 	<table class="settings-table">
 		<tbody>
-			
+
 			<!--Informacion de AMOLCA PAIS-->
 			<tr class="subtitle">
 				<td colspan="2">Ajustes básicos del sitio</td>
@@ -145,6 +145,24 @@
 				</td>
 			</tr>
 
+            <tr class="options">
+				<td class="option_name">
+					<label for="facebook_pixel">Facebook pixel:</label>
+				</td>
+				<td class="option_value">
+                    <textarea name="facebook_pixel" id="facebook_pixel" rows="8" cols="80" placeholder="Inserte aquí el código script del pixel de facebook...">@if(get_option('facebook_pixel') !== 'NULL'){!! get_option('facebook_pixel') !!}@endif</textarea>
+				</td>
+			</tr>
+
+            <tr class="options">
+				<td class="option_name">
+					<label for="analytics_script">Script Google Analytics:</label>
+				</td>
+				<td class="option_value">
+                    <textarea name="analytics_script" id="analytics_script" rows="8" cols="80" placeholder="Inserte aquí el código script de Google Analytics...">@if(get_option('analytics_script') !== 'NULL'){!! get_option('analytics_script') !!}@endif</textarea>
+				</td>
+			</tr>
+
 		</tbody>
 	</table>
 
@@ -155,7 +173,7 @@
 
 	<table class="settings-table">
 		<tbody>
-			
+
 			<!--Informacion de AMOLCA PAIS-->
 			<tr class="subtitle">
 				<td colspan="2">Información de Amolca {!! get_option('sitecountry') !!}</td>
@@ -196,7 +214,7 @@
 					<input type="text" id="amolca_phone_link" value="@if(get_option('amolca_phone_link') !== 'NULL'){!! get_option('amolca_phone_link') !!}@endif" placeholder="Link de llamada para Amolca {!! get_option('sitecountry') !!}...">
 				</td>
 			</tr>
-			
+
 			<tr class="options">
 				<td class="option_name">
 					<label for="amolca_phone_fixed"><b>Teléfono fijo</b> de Amolca <b>{!! get_option('sitecountry') !!}</b>:</label>
@@ -225,7 +243,7 @@
 					</td>
 				</tr>
 			@endif
-			
+
 		</tbody>
 	</table>
 
@@ -235,7 +253,7 @@
 <div id="casa-matriz" class="content-tabs">
 
 	<table class="settings-table">
-		<tbody>		
+		<tbody>
 			<!--Informacion de CASA MATRIZ-->
 			<tr class="subtitle">
 				<td colspan="2">Información de Casa Matriz</td>

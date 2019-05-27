@@ -33,7 +33,7 @@
     <p>El envío de la devolución corre por parte del comprador y debe ser enviada a la siguiente dirección Jirón Inclán 312, distrito de Magdalena del Mar, Lima (código postal 017) Tel 2433161.</p>
 
     <h3 class="subtitle">SOLUCION DE PROBLEMAS CON ACCESOS ON LINE.</h3>
-    <p>Si se presentase un problema de accesibilidad o funcionamiento de los recursos on-line, ofrecidos por <b>AMOLCA</b>, enviar correo a soporte@amolca.com y recibirá la asesoría correspondiente en un máximo de 48 horas.</p>
+    <p>Si se presentase un problema de accesibilidad o funcionamiento de los recursos on-line, ofrecidos por <b>AMOLCA</b>, enviar correo a contacto@amolca.com y recibirá la asesoría correspondiente en un máximo de 48 horas.</p>
     <p>Las solicitudes de garantías y soporte de contenidos on-line tendrán un tiempo máximo de respuesta de 48 horas.</p>
 
     <div id="privacidad" class="fragment-id"></div>

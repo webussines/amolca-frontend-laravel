@@ -163,6 +163,8 @@ textarea.materialize-textarea, textarea {
     height: 75px;
     padding-bottom: 10px;
     padding-top: 10px;
+    max-width: 100%;
+    resize: vertical;
 }
 
 input:not([type]).field-error, input[type=text]:not(.browser-default).field-error, input[type=password]:not(.browser-default).field-error, input[type=email]:not(.browser-default).field-error, input[type=url]:not(.browser-default).field-error, input[type=time]:not(.browser-default).field-error, input[type=date]:not(.browser-default).field-error, input[type=datetime]:not(.browser-default).field-error, input[type=datetime-local]:not(.browser-default).field-error, input[type=tel]:not(.browser-default).field-error, input[type=number]:not(.browser-default).field-error, input[type=search]:not(.browser-default).field-error, textarea.materialize-textarea.field-error, textarea.field-error, .field-error {
@@ -359,7 +361,7 @@ nav-menu {
     }
         .main .inside-tabs .tab a:hover,
         .main .inside-tabs .tab a.active,
-        .main .inside-tabs .tab a:focus, 
+        .main .inside-tabs .tab a:focus,
         .main .inside-tabs .tab a:focus.active {
             background-color: #00396F;
             color: #fff;

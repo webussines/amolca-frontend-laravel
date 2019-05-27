@@ -55,7 +55,7 @@ const GetCountriesData = () => {
 		let countries = JSON.parse(resp);
 		let selected = $('#sitecountry').val();
 
-		//Agregar opciones a la lista 
+		//Agregar opciones a la lista
 		for (let i = 0; i < countries.length; i++) {
 
 			let title = countries[i].title.toUpperCase();
@@ -130,6 +130,10 @@ const GetFormFields = () => {
 
 		if (input.length < 1) {
 			input = $(column).find('select')
+		}
+
+		if (input.length < 1) {
+			input = $(column).find('textarea')
 		}
 
 		let key = $(input).attr('id');
