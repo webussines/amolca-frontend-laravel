@@ -40,7 +40,7 @@ const ValidateEmailWB = () => {
 				"_token": token
 	    	}
 		}).done(function(resp) {
-			console.log(resp)
+			//console.log(resp)
 			let data = JSON.parse(resp);
 			let error = { show: false, msg: '' };
 
@@ -50,8 +50,7 @@ const ValidateEmailWB = () => {
 						error.show = true;
 					break;
 				case 404:
-						error.msg = 'Este usuario no existe.';
-						error.show = true;
+						return ValidateEmailSws(email);
 					break;
 				case 401:
 						error.msg = 'El usuario y la contraseña no coinciden.';
@@ -87,23 +86,12 @@ const ValidateEmailWB = () => {
 	}
 }
 
-const ValidateEmailSws = (email) => {
-	$.ajax({
-		method: "POST",
-		url: 'http://mailsws.com.ve/amolca/web/api/user',
-		data: {
-			"email": email
-		}
-	}).done(function(resp) {
-		console.log(resp)
-	}).catch(function(err) {
-		console.log(err)
-	})
-}
-
 const ChangeTabContent = (inactive, active) => {
 	$(inactive).removeClass('active');
 	$(active).addClass('active');
+
+	$('.email-error, .password-error')
+		.css('display', 'none')
 
 	if(!$('#login .loader').hasClass('hidde'))
 		$('#login .loader').addClass('hidde')
@@ -144,8 +132,33 @@ const Login = (e) => {
 	//console.log(errors)
 
 	if(flag) {
-		console.log('holix')
-		UserLogin(username, password, token);
+		//console.log('holix')
+
+		let action_form = $('#tab-password #action-form').val();
+
+		switch (action_form) {
+			case 'login':
+
+					return UserLogin(username, password, token);
+
+				break;
+			case 'register':
+
+					let user = {
+						name: $('#tab-password #register-name').val(),
+						lastname: $('#tab-password #register-lastname').val(),
+						email: $('#tab-password #register-email').val(),
+						role: 'CLIENT',
+						country: $('meta[name="country-active-id"]').attr('content'),
+						password: password,
+						document_id: Math.floor((Math.random() * 10000) + 1),
+						_token: $('#_token').val()
+					}
+					return UserSwsRegister(user);
+
+				break;
+		}
+
 	} else {
 		$('.password-error')
 			.css('display', 'block')
@@ -210,6 +223,100 @@ const UserLogin = (username, password, token) => {
 
 	}).catch(function(err) {
 		console.log(err)
+	})
+}
+
+const ValidateEmailSws = (email) => {
+	$.ajax({
+		method: "GET",
+		url: 'https://mailsws.com.ve/amolca/web/api/user',
+		data: {
+			"user_email": email
+		}
+	}).done(function(resp) {
+		//console.log(resp)
+		let user = resp.user;
+		let error = { show: false, msg: '' };
+
+		if(user.length < 1) {
+			error.msg = 'El usuario que ingresaste no existe.';
+			error.show = true;
+
+			return UserNotExists(error);
+		} else {
+
+			$('#tab-password #user-avatar').html(user.name[0]);
+			$('#tab-password #user-fullname').html(user.name + ' ' + user.last_name)
+			$('#tab-password #user-email-sent').html(email)
+
+			$('#tab-password #register-name').val(user.name);
+			$('#tab-password #register-lastname').val(user.last_name);
+			$('#tab-password #register-email').val(email);
+			$('#tab-password #action-form').val('register');
+
+			return ChangeTabContent('#tab-email', '#tab-password');
+
+		}
+
+	}).catch(function(err) {
+		console.log(err)
+	})
+}
+
+const UserSwsRegister = (user) => {
+	console.log(user)
+
+	$.ajax({
+		method: 'POST',
+    	url: '/am-admin/register',
+    	data: user
+	}).done(function(resp) {
+		console.log(resp)
+		let data = JSON.parse(resp);
+		let error = { show: false, msg: '' };
+
+		if(data.token !== null && data.token !== undefined) {
+			return window.location.href = '/mi-cuenta';
+		}
+
+		switch (data.status) {
+			case 500:
+					error.msg = 'Ha ocurrido un error, por favor intentelo más tarde.';
+					error.show = true;
+				break;
+			case 404:
+					error.msg = 'Este usuario no existe.';
+					error.show = true;
+				break;
+			case 401:
+					error.msg = 'El usuario y la contraseña no coinciden.';
+					error.show = true;
+				break;
+			case 400:
+					error.msg = 'Ya existse un usuario con el mismo correo electrónico.';
+					error.show = true;
+				break;
+			default:
+					error.msg = 'El usuario y la contraseña no coinciden.';
+					error.show = true;
+				break;
+		}
+
+		if(!$('#login .loader').hasClass('hidde'))
+			$('#login .loader').addClass('hidde')
+
+		$('#login-form .password-error')
+			.html(error.msg)
+			.css('display', 'block')
+
+		$('#register-form input[type="submit"]')
+			.val('Crear cuenta')
+			.removeAttr('disabled')
+
+	}).catch(function(err) {
+		console.log(err)
+		if(!$('#login .loader').hasClass('hidde'))
+			$('#login .loader').addClass('hidde')
 	})
 }
 

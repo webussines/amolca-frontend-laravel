@@ -76,6 +76,15 @@
 						</p>
 					</div>
 					<div class="col s12 m12 l12">
+
+						<!--Form fields for register user from SWS-->
+						<input type="hidden" id="register-name" name="name" value="">
+						<input type="hidden" id="register-lastname" name="lastname" value="">
+						<input type="hidden" id="register-email" name="email" value="">
+						<input type="hidden" id="register-role" name="role" value="CLIENT">
+						<input type="hidden" id="action-form" name="action-form" value="login">
+						<!--End SWS form fields-->
+
 						<input class="button primary" type="submit" value="Iniciar sesión">
 					</div>
 				</div>

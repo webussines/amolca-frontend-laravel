@@ -33,8 +33,12 @@
 	    	@break
 
 		@case('MEXICO')
-		    <script src="https://www.paypal.com/sdk/js?client-id=AQNT8HrWbdXL1Y6rVtC_UHYWuV1HvGgCVEwSL3zuQsNqxvRgCOZZkfbk0jKoPjJtR_t7pEzwYvs8U1L5"></script>
+		    <!--
+			<script src="https://www.paypal.com/sdk/js?client-id=AQNT8HrWbdXL1Y6rVtC_UHYWuV1HvGgCVEwSL3zuQsNqxvRgCOZZkfbk0jKoPjJtR_t7pEzwYvs8U1L5"></script>
 			<script src="{{ asset('js/payments/paypal/payment.js') }}"></script>
+			-->
+			<script src="{{ asset('js/payments/redirect.js') }}"></script>
+			<script src="{{ asset('js/payments/payu/payment.js') }}"></script>
 	    	@break
 
 	    @case('DOMINICAN REPUBLIC')
@@ -168,7 +172,8 @@
 	                	    	@break
 
 							@case('MEXICO')
-	                		    <div id="paypal-button-container"></div>
+								@include('ecommerce.layouts.forms.payu')
+	                		    <input type="submit" class="button primary" value="¡Pagar ahora!">
 	                	    	@break
 
 	                	    @case('DOMINICAN REPUBLIC')
