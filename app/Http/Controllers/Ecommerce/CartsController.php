@@ -111,6 +111,17 @@ class CartsController extends Controller
             // Convertir la respuesta en un JSON
             $order = json_decode($json);
 
+            // Validación de precios de envio
+            $shipping_price = (gettype(get_option('shipping_price')) == 'string') ? floatval(get_option('shipping_price')) : get_option('shipping_price');
+            if( $shipping_price !== '' && $shipping_price > 0 && $order->amount > 0) {
+
+                if( !isset($order->subtotal) ) {
+                    $order->subtotal = $order->amount;
+                }
+                $order->shipping_price = $shipping_price;
+                $order->amount = $order->amount + $shipping_price;
+            }
+
             $this->request->session()->put('cart', $order);
 
             $send = session('cart');
