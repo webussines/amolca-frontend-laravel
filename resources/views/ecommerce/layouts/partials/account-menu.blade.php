@@ -24,7 +24,7 @@
 		</a>
 	</li>
 	<li>
-		<a class="waves-effect waves-light" href="http://online.amolca.com" target="_blank">
+		<a class="waves-effect waves-light" id="go-to-sws" data-user-email="{!! session('user')->email !!}">
 			<span class="icon-books"></span> Biblioteca virtual
 		</a>
 	</li>

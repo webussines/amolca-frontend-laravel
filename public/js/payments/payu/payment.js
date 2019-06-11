@@ -48,7 +48,7 @@ const ValidateForm = (e) => {
 			"lastname": $('#checkoutform #lastname').val(),
 			"email": $('#checkoutform #email').val(),
 			"mobile": $('#checkoutform #mobile').val(),
-			"country": "COLOMBIA",
+			"country": "MEXICO",
 			"city": $('#checkoutform #city').val(),
 			"address": $('#checkoutform #address').val(),
 			"_token": $('meta[name="csrf-token"]').attr('content'),

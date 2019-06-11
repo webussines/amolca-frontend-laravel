@@ -17,22 +17,36 @@ class Authentication extends GuzzleHttpRequest {
     	$this->request = $request;
     }
 
-	public function login($user, $password) {
+	public function login($user, $password, $token = null) {
+
+		$headers = [
+			"Content-type" => "application/json",
+		];
 
 		try {
 
-			// Send user info to login
-			$req = $this->client->request('POST', '/users/login', [ "form_params" => ["email" => $user, "password" => $password] ]);
-			$resp = $req->getBody()->getContents();
+			$this->request->session()->flush();
 
-			$json = json_decode($resp);
+			if( $token == null ) {
 
-			$this->request->session()->put('access_token', $json->token);
+				// Send user info to login
+				$req = $this->client->request('POST', '/users/login', [ "form_params" => ["email" => $user, "password" => $password] ]);
+				$resp = $req->getBody()->getContents();
 
-			$headers = [
-                "Content-type" => "application/json",
-                "Authorization" => "Bearer " . $json->token
-            ];
+				$json = json_decode($resp);
+
+				$this->request->session()->put('access_token', $json->token);
+				$headers["Authorization"] = "Bearer " . $json->token;
+
+			} else {
+
+				$this->request->session()->put('access_token', $token);
+				$headers["Authorization"] = "Bearer " . $token;
+				$resp = (Object) [
+					"token" => $token
+				];
+
+			}
 
             // Get user info
             $user_req = $this->client->request('GET', '/users/me', ["headers" => $headers]);

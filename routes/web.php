@@ -165,6 +165,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 });
 
 //Authentication ecommerce routes
+Route::get('/autologin', 'AuthController@autologin');
 Route::get('/iniciar-sesion', 'Ecommerce\HomeController@login');
 Route::get('/registrarse', 'Ecommerce\HomeController@register');
 Route::get('/logout', 'AuthController@EcommerceLogout');

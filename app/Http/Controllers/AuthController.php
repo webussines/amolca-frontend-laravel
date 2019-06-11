@@ -58,6 +58,17 @@ class AuthController extends Controller
 
     }
 
+	public function autologin() {
+		$token = $this->request->get('token');
+		$login = $this->authentication->login('', '', $token);
+
+		if( isset($login->token) ) {
+			return redirect('/mi-cuenta');
+		} else {
+			return redirect('/registrarse');
+		}
+	}
+
     public function AdminLogout() {
 
     	$this->request->session()->flush();

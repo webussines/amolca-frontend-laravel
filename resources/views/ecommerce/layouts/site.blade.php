@@ -9,6 +9,7 @@
 		<meta name="country-active" content="{{ get_option('sitecountry') }}">
 		<meta name="country-active-id" content="{{ get_option('sitecountry_id') }}">
 		<meta name="user-id" content="@if (session('user')) {{ session('user')->id }} @else 0 @endif">
+		<meta name="user-email" content="@if (session('user')) {{ session('user')->email }} @else 0 @endif">
 		<link rel="icon" type="image/x-icon" href="{{ asset('img/common/favicon.ico') }}">
 		@yield('meta')
 
@@ -116,4 +117,10 @@
 	<script src="{{ asset('js/ecommerce/responsive-menu.js') }}"></script>
 	<script src="{{ asset('js/ecommerce/cart.js') }}"></script>
 	<script src="{{ asset('js/common.js') }}"></script>
+
+	<script src="{{ asset('libs/crypto-js/core.js') }}"></script>
+	<script src="{{ asset('libs/crypto-js/hmac.js') }}"></script>
+	<script src="{{ asset('libs/crypto-js/enc-base64.js') }}"></script>
+	<script src="{{ asset('libs/crypto-js/sha256.js') }}"></script>
+	<script src="{{ asset('js/ecommerce/jwt-token.js') }}"></script>
 	@yield('scripts')
