@@ -112,6 +112,17 @@ fbq('track', 'AddToWishlist');
 						<td>Envío gratuito a cualquier lugar de Colombia</td>
 					</tr>
 				@endif
+
+				@php
+					$shipping_price = (gettype(get_option('shipping_price')) == 'string') ? floatval(get_option('shipping_price')) : get_option('shipping_price');
+				@endphp
+				@if ( $shipping_price > 0 )
+					<tr id="shipping">
+						<th>Envío:</th>
+						<td>{{ COPMoney($shipping_price) }}</td>
+					</tr>
+				@endif
+
 				@if ( isset($cart->subtotal) && session('coupon') )
 					@php
 						$amount = '';

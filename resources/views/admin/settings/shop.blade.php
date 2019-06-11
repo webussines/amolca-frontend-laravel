@@ -37,7 +37,7 @@
 
 <table class="settings-table">
 	<tbody>
-		
+
 		<!--Informacion de AMOLCA PAIS-->
 		<tr class="subtitle">
 			<td colspan="2">Ajustes básicos de la tienda</td>
@@ -81,6 +81,15 @@
 				</select>
 			</td>
 		</tr>
+
+        <tr class="options">
+            <td class="option_name">
+                <label for="shipping_price">Precio de envío:</label>
+            </td>
+            <td class="option_value">
+                <input type="number" name="shipping_price" id="shipping_price" value="{!! get_option('shipping_price') !!}">
+            </td>
+        </tr>
 
 	</tbody>
 </table>

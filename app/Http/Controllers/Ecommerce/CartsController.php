@@ -319,6 +319,17 @@ class CartsController extends Controller
 
             }
 
+            // Validación de precios de envio
+            $shipping_price = (gettype(get_option('shipping_price')) == 'string') ? floatval(get_option('shipping_price')) : get_option('shipping_price');
+            if( $shipping_price !== '' && $shipping_price > 0 && $order->amount > 0) {
+
+                if( !isset($order->subtotal) ) {
+                    $order->subtotal = $order->amount;
+                }
+                $order->shipping_price = $shipping_price;
+                $order->amount = $order->amount + $shipping_price;
+            }
+
             $this->request->session()->put('cart', $order);
 
             if($add['action'] != 'delete') {
@@ -363,6 +374,11 @@ class CartsController extends Controller
 
         if( session('coupon') ) {
             $send['coupon'] = session('coupon');
+        }
+
+        $shipping_price = (gettype(get_option('shipping_price')) == 'string') ? floatval(get_option('shipping_price')) : get_option('shipping_price');
+        if($shipping_price > 0) {
+            $send['shipping_price'] = $shipping_price;
         }
 
         $resp = $this->orders->createPending($cart->id, $send);

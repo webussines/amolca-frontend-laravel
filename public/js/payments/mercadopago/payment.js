@@ -111,6 +111,15 @@ const UpdateOrder = (data) => {
 
 const MPRedirectFunction = (user, order) => {
 
+	//console.log(order);
+	if(order.shipping_price !== undefined) {
+		let shipping = order.shipping_price / order.products.length;
+
+		for (var i = 0; i < order.products.length; i++) {
+			order.products[i].price = order.products[i].price + shipping;
+		}
+	}
+
 	//Cambiar el valor en el botón del carrito en el header
 
 	$('.top-bar #cart-btn span').html("$0,00 ARS");

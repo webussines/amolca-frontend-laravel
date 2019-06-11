@@ -138,6 +138,18 @@ const AddCartProdut = (added, page, actions = null) => {
 			$('.cart-totals tr#subtotal td').html(subtotal_converted);
 			$('.cart-totals tr#total #price').html(amount_converted);
 
+			if(resp.shipping_price !== null && resp.shipping_price !== undefined) {
+				let shipping_price = FormatMoney(resp.shipping_price, 0, ',', '.', '$', 'before');
+				let tr_tmp = `<tr id="shipping">
+								<th>Envío:</th>
+								<td>${shipping_price}</td>
+							  </tr>`
+
+				if($('.cart-totals tr#shipping').length < 1) {
+  					$('.cart-totals tr#subtotal').after(tr_tmp);
+  				}
+			}
+
 			$('table.cart tbody tr td.actions').each(function() {
 
 				let row = actions;
