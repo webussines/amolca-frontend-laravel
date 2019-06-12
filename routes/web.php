@@ -7,6 +7,13 @@ Route::get('/clear-cache', function() {
     return 'DONE'; //Return anything
 });
 
+//Intranet routes
+Route::group(['prefix' => 'amolca'], function() {
+    Route::get('novedades', 'Ecommerce\IntranetCatalogsController@all_catalogs');
+    Route::get('novedades/medicina', 'Ecommerce\IntranetCatalogsController@medician_catalogs');
+    Route::get('novedades/odontologia', 'Ecommerce\IntranetCatalogsController@odontology_catalogs');
+});
+
 //Admin routes
 Route::group(['prefix' => 'am-admin'], function() {
 
@@ -46,6 +53,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::resources([
 		    'libros' => 'Admin\AdminBooksController',
 			'catalogos' => 'Admin\AdminCatalogsController',
+            'intranet/catalogos' => 'Admin\AdminIntranetCatalogsController',
 		    'especialidades' => 'Admin\AdminSpecialtiesController',
 		    'autores' => 'Admin\AdminAuthorsController',
 		    'sliders' => 'Admin\AdminSlidersController',
@@ -76,6 +84,12 @@ Route::group(['prefix' => 'am-admin'], function() {
 		Route::prefix('catalogs')->group(function(){
 			Route::get('/', 'Admin\AdminCatalogsController@all');
 			Route::post('/edit/{id}', 'Admin\AdminCatalogsController@edit');
+		});
+
+        //Routes for get info "CATALOGS" de la intranet
+		Route::prefix('intranet/catalogs')->group(function(){
+			Route::get('/', 'Admin\AdminIntranetCatalogsController@all');
+			Route::post('/edit/{id}', 'Admin\AdminIntranetCatalogsController@edit');
 		});
 
 		//Routes for get info "BLOGS"

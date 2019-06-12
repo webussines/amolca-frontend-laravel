@@ -40,6 +40,19 @@
 
         @if (session('user')->role == 'SUPERADMIN')
             <li>
+                <a data-id="intranet-catalogs" @if ($active == 'AdminIntranetCatalogsController') class="actived" @endif>
+                    <span class="icon icon-stack"></span> <span class="text">Catalogos intranet</span>
+                </a>
+
+                <ul class="submenu" data-menu="intranet-catalogs" style="@if ($active == 'AdminIntranetCatalogsController') {{$submenu_show}} @endif">
+                    <li><a href="/am-admin/intranet/catalogos">Todos los catalogos</a></li>
+                    <li><a href="/am-admin/intranet/catalogos/create">Añadir catalogo</a></li>
+                </ul>
+            </li>
+        @endif
+
+        @if (session('user')->role == 'SUPERADMIN')
+            <li>
                 <a data-id="lots" @if ($active == 'AdminLotsController') class="actived" @endif>
                     <span class="icon icon-list-alt"></span> <span class="text">Lotes de novedades</span>
                 </a>
