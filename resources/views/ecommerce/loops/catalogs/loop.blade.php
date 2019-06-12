@@ -2,7 +2,7 @@
 	$type = (isset($type)) ? $type : 'loop';
 	$items_per_row = (isset($items_per_row)) ? $items_per_row : 2;
 	$show_links = (isset($show_links)) ? $show_links : 'si';
-    $btn_text = 'Descargar catálogo';
+    $btn_text = (isset($btn_text)) ? $btn_text : 'Descargar catálogo';
 @endphp
 
 <div class="catalogs-list">

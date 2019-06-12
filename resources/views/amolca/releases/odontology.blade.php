@@ -11,7 +11,7 @@
 
 <div class="content-container">
 
-	@include('ecommerce.loops.catalogs.loop', [ 'catalogs' => $catalogs, "specialty" => "Odontología" ])
+	@include('ecommerce.loops.catalogs.loop', [ 'btn_text' => 'Ver ficha', 'catalogs' => $catalogs, "specialty" => "Odontología" ])
 
 </div>
 @endsection
