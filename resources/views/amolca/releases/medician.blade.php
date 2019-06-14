@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="specialty-title">
-	<h2>Cat&aacute;logos Medicina</h2>
+	<h2>&Uacute;ltimas Novedades Medicina</h2>
 </div>
 
 <div class="content-container">

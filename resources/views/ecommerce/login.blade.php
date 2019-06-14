@@ -13,6 +13,19 @@
 @section('contentClass', 'page-container auth login')
 @section('content')
 
+<div id="login-modal" class="modal">
+	<div class="modal-content">
+		<div class="modal-description">
+			<h3 class="title">¡Hola! <span class="country">Marlon Lopez</span></h3>
+			<p class="text-md">¿Estás seguro que deseas reestablecer tu contraseña?</p>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a id="change-password-button" class="button primary">Estoy seguro</a>
+		<a href="#!" class="modal-close button danger">Cancelar</a>
+	</div>
+</div>
+
 <div class="auth-container">
 
 	<input type="hidden" id="_token" value="{{ csrf_token() }}">
@@ -36,6 +49,7 @@
 			<form id="login-form">
 				<div id="tab-email" class="steps active">
 					<p class="title">Iniciar sesión</p>
+					<p>Si tienes una cuenta en nuestra <b>Biblioteca Virtual</b> ingresa tu usuario y contraseña aquí.</p>
 					<div class="row">
 						<div class="col s12 m12 l12">
 							<label for="login-username">Correo electrónico:</label>
@@ -71,7 +85,7 @@
 					</div>
 					<div class="col s12 m12 l12">
 						<p class="remember-info">
-							<a href="#">¿Olvidaste tu contraseña?</a>
+							<a href="#" id="open-modal">¿Olvidaste tu contraseña?</a>
 							<a id="return-to-email">Ingresar otro correo</a>
 						</p>
 					</div>

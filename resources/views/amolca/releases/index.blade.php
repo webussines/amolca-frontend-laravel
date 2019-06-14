@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="specialty-title">
-	<h2>Todos los cat&aacute;logos</h2>
+	<h2>&Uacute;ltimas Novedades</h2>
 </div>
 
 <div class="content-container">

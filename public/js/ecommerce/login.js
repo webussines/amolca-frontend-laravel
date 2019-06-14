@@ -1,4 +1,14 @@
 $(function($) {
+
+	$('#change-password-button').on('click', () => {
+		return ChangePassword();
+	});
+
+	$('#open-modal').on('click', () => {
+		$('#change-password-button').css('display', 'inline-block');
+		$('#login-modal').modal('open');
+	});
+
 	$('#next-btn').on('click', ValidateEmailWB);
 	$('#login-form').on('submit', Login);
 
@@ -330,4 +340,21 @@ const ResetRequiredFields = () => {
 		$('#login-form .password-error')
 			.css('display', 'none')
 	});
+}
+
+const ChangePassword = () => {
+	let email = $('span#user-email-sent').html()
+
+	$.ajax({
+		method: 'GET',
+		url: '/am-admin/restore-password',
+		data: {
+			email: email,
+			send_mail: false
+		}
+	}).done( (resp) => {
+		console.log(resp)
+	}).catch( (err) => {
+		console.log(err)
+	})
 }

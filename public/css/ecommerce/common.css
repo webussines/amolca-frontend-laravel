@@ -1721,3 +1721,18 @@ form.big-searcher {
             position: absolute;
             right: 5%;
         }
+
+#login-modal,
+#login-modal .modal-footer {
+    text-align: center;
+}
+    #login-modal .modal-footer {
+        padding: 0px 20px 20px !important;
+        height: auto !important;
+    }
+    #login-modal .text-md {
+        font-size: 20px;
+    }
+    #login-modal .button {
+        width: auto;
+    }

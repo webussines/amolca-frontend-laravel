@@ -29,43 +29,43 @@ const RedirectFunction = (country) => {
     switch (active) {
       case 'ARGENTINA':
         if (window.location.href.indexOf("amolca.com.pe") > 0) {
-          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.ar')
+          window.location.href = RedirectToCountry(window.location.href, window.location.host, 'amolca.com.ar')
         }
         break;
 
       case 'DOMINICAN REPUBLIC':
         if (window.location.href.indexOf("amolca.com.pe") > 0) {
-          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.do')
+          window.location.href = RedirectToCountry(window.location.href, window.location.host, 'amolca.com.do')
         }
         break;
 
       case 'COLOMBIA':
         if (window.location.href.indexOf("amolca.com.pe") > 0) {
-          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.co')
+          window.location.href = RedirectToCountry(window.location.href, window.location.host, 'amolca.com.co');
         }
         break;
 
       case 'PANAMA':
         if (window.location.href.indexOf("amolca.com.pe") > 0) {
-          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.pa')
+          window.location.href = RedirectToCountry(window.location.href, window.location.host, 'amolca.com.pa')
         }
         break;
 
       case 'PERU':
         if (window.location.href.indexOf("amolca.com.pe") < 1) {
-          window.location.href = window.location.href.replace(window.location.host, 'amolca.com.pe')
+          window.location.href = RedirectToCountry(window.location.href, window.location.host, 'amolca.com.pe')
         }
         return console.log('PERU')
         break;
 
       case 'MEXICO':
           if (window.location.href.indexOf("amolca.com.mx") < 1) {
-            return window.location.href = window.location.href.replace(window.location.host, 'amolca.com.mx')
+            return window.location.href = RedirectToCountry(window.location.href, window.location.host, 'amolca.com.mx')
           }
           break;
 
       default:
-        window.location.href = window.location.href.replace(window.location.host, 'amolca.com')
+        window.location.href = RedirectToCountry(window.location.href, window.location.host, 'amolca.com')
         break;
     }
 

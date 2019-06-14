@@ -134,4 +134,15 @@ class Authentication extends GuzzleHttpRequest {
 		}
 	}
 
+	public function restore_password($email, $send_mail) {
+
+        $mailer['name'] = mailer_get_name();
+        $mailer['from'] = mailer_get_me();
+        $mailer['domain'] = mailer_get_domain();
+        $mailer['country'] = mailer_get_country();
+		$mailer['send_mail'] = $send_mail;
+
+		return $this->put("users/change-password", [ "email" => $email, "mailer" => $mailer ]);
+	}
+
 }

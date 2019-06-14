@@ -6,7 +6,7 @@
 @section('content')
 
 <div class="specialty-title">
-	<h2>Cat&aacute;logos Odontología</h2>
+	<h2>&Uacute;ltimas Novedades Odontología</h2>
 </div>
 
 <div class="content-container">

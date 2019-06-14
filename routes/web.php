@@ -24,6 +24,7 @@ Route::group(['prefix' => 'am-admin'], function() {
 	});
 
 	//Login & logout
+    Route::get('/restore-password', 'AuthController@restore_password');
 	Route::get('/login', 'AuthController@login');
 	Route::post('/register', 'AuthController@register');
 	Route::get('/logout', 'AuthController@AdminLogout');
