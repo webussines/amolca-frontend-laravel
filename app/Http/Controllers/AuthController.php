@@ -72,13 +72,10 @@ class AuthController extends Controller
 	public function restore_password() {
 		$email = $this->request->get('email');
 		$send_mail = $this->request->get('send_mail');
-		$restore_password = $this->authentication->restore_password($email, $send_mail);
+		$new_password = $this->request->get('new_password');
+		$restore_password = $this->authentication->restore_password($email, $send_mail, $new_password);
 
-		if( isset($login->token) ) {
-			return redirect('/mi-cuenta');
-		} else {
-			return redirect('/registrarse');
-		}
+		return $restore_password;
 	}
 
     public function AdminLogout() {

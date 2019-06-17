@@ -1,6 +1,6 @@
 <div id="bottom-bar">
 	<div class="item" id="copy">
-		Copyright 2018 Editorial Amolca
+		Copyright {{ date("Y") }} Editorial Amolca
 	</div>
 	<div class="item">
 		Términos y condiciones

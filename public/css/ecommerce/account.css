@@ -54,3 +54,14 @@
 .main table.dataTable tbody td {
     padding: 18px 10px;
 }
+
+div#change-password-modal,
+div#change-password-modal .title,
+div#change-password-modal input,
+div#change-password-modal .modal-footer {
+    text-align: center;
+}
+
+div#change-password-modal .loader.fixed {
+    top: -8px;
+}

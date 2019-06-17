@@ -435,6 +435,8 @@ ul.social-networks.top {
     border-radius: 5px;
     display: inline-block;
     cursor: pointer;
+    font-family: 'Tahoma';
+    line-height: 100%;
     outline: 0;
     padding: 10px 20px;
     transition: .4s;
@@ -442,6 +444,10 @@ ul.social-networks.top {
 }
     .button.primary {
         background-color: #00396f;
+        color: #fff;
+    }
+    .button.green {
+        background-color: #00C853;
         color: #fff;
     }
     .button.white {

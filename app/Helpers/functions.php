@@ -65,31 +65,31 @@ function mailer_get_domain() {
 
     switch (get_option('sitecountry')) {
 		case 'COLOMBIA':
-			return "www.amolca.com.co";
+			return "amolca.com.co";
 			break;
 
 		case 'PANAMA':
-			return "www.amolca.com.pa";
+			return "amolca.com.pa";
 			break;
 
 		case 'ARGENTINA':
-			return "www.amolca.com.ar";
+			return "amolca.com.ar";
 			break;
 
 		case 'MEXICO':
-			return "www.amolca.com.mx";
+			return "amolca.com.mx";
 			break;
 
 		case 'PERU':
-			return "www.amolca.com.pe";
+			return "amolca.com.pe";
 			break;
 
 		case 'DOMINICAN REPUBLIC':
-			return "www.amolca.com.do";
+			return "amolca.com.do";
 			break;
 
 		default:
-			return "www.amolca.com";
+			return "amolca.com";
 			break;
 	}
 

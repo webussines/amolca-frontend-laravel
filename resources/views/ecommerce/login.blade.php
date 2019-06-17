@@ -14,14 +14,20 @@
 @section('content')
 
 <div id="login-modal" class="modal">
+	<div class="loader hidde fixed">
+		<div class="progress">
+			<div class="indeterminate"></div>
+		</div>
+	</div>
 	<div class="modal-content">
 		<div class="modal-description">
-			<h3 class="title">¡Hola! <span class="country">Marlon Lopez</span></h3>
-			<p class="text-md">¿Estás seguro que deseas reestablecer tu contraseña?</p>
+			<h3 class="title">¡Hola! <span class="user">Marlon Lopez</span></h3>
+			<p class="text-md">¿Está seguro que desea reestablecer su contraseña?</p>
+			<p><i>Le enviaremos un correo electrónico con una contraseña provisional que le servirá para ingresar a su cuenta y desde allí cambiarla por la que usted desee.</i></p>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a id="change-password-button" class="button primary">Estoy seguro</a>
+		<input type="button" id="change-password-button" class="button primary" value="Estoy seguro">
 		<a href="#!" class="modal-close button danger">Cancelar</a>
 	</div>
 </div>
@@ -85,7 +91,7 @@
 					</div>
 					<div class="col s12 m12 l12">
 						<p class="remember-info">
-							<a href="#" id="open-modal">¿Olvidaste tu contraseña?</a>
+							<a id="open-modal">¿Olvidaste tu contraseña?</a>
 							<a id="return-to-email">Ingresar otro correo</a>
 						</p>
 					</div>

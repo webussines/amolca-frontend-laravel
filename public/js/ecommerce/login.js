@@ -6,6 +6,9 @@ $(function($) {
 
 	$('#open-modal').on('click', () => {
 		$('#change-password-button').css('display', 'inline-block');
+		let user_name = $('#user-fullname').html();
+
+		$('#login-modal .title .user').html(user_name)
 		$('#login-modal').modal('open');
 	});
 
@@ -343,6 +346,12 @@ const ResetRequiredFields = () => {
 }
 
 const ChangePassword = () => {
+
+	if($('#login-modal .loader').hasClass('hidde'))
+		$('#login-modal .loader').removeClass('hidde')
+
+	$('#change-password-button').attr('disabled', 'disabled');
+
 	let email = $('span#user-email-sent').html()
 
 	$.ajax({
@@ -350,11 +359,34 @@ const ChangePassword = () => {
 		url: '/am-admin/restore-password',
 		data: {
 			email: email,
-			send_mail: false
+			send_mail: 'true'
 		}
 	}).done( (resp) => {
-		console.log(resp)
+		setTimeout(() => {
+			return PasswordChangedResponse();
+		}, 2000)
 	}).catch( (err) => {
-		console.log(err)
+		console.log(err.responseJSON)
 	})
+}
+
+const PasswordChangedResponse = () => {
+
+	if(!$('#login-modal .loader').hasClass('hidde'))
+		$('#login-modal .loader').addClass('hidde')
+
+	$('#login-modal').modal('close');
+
+	$('#notification-modal #resp-buttons .button.primary').css('display', 'none');
+	$('#notification-modal #resp-buttons .modal-close').css('width', 'auto');
+
+	let user_name = $('#user-fullname').html();
+
+	$('#notification-modal #resp-text').html(`¡Hola, <b>${user_name}</b>!<br/> Le enviamos un correo electrónico con una contraseña provisional.`);
+	$('#notification-modal #resp-desc').html(`Por favor revise su correo electrónico y regrese para iniciar sesión.`);
+
+	$('#notification-modal').modal();
+	$('#notification-modal').modal('open');
+
+	$('#change-password-button').removeAttr('disabled');
 }
