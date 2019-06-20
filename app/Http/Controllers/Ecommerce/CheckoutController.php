@@ -51,6 +51,10 @@ class CheckoutController extends Controller
                 # code...
                 break;
 
+            case 'MEXICO':
+                    return redirect('/');
+                break;
+
             case 'DOMINICAN REPUBLIC':
 
                     $response['exists'] = false;
@@ -91,6 +95,10 @@ class CheckoutController extends Controller
                             break;
                     }
 
+                break;
+
+            case 'PERU':
+                return $this->request->all();
                 break;
         }
 

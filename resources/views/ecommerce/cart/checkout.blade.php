@@ -33,10 +33,6 @@
 	    	@break
 
 		@case('MEXICO')
-		    <!--
-			<script src="https://www.paypal.com/sdk/js?client-id=AQNT8HrWbdXL1Y6rVtC_UHYWuV1HvGgCVEwSL3zuQsNqxvRgCOZZkfbk0jKoPjJtR_t7pEzwYvs8U1L5"></script>
-			<script src="{{ asset('js/payments/paypal/payment.js') }}"></script>
-			-->
 			<script src="{{ asset('js/payments/redirect.js') }}"></script>
 			<script src="{{ asset('js/payments/payu/payment.js') }}"></script>
 	    	@break
@@ -50,6 +46,10 @@
 		    <script src="{{ asset('js/payments/redirect.js') }}"></script>
 	    	<script src="{{ asset('js/payments/mercadopago/payment.js') }}"></script>
 	    	@break
+
+		@case('PERU')
+			<script src="{{asset('js/payments/visanet/payment.js')}}"></script>
+			@break
 
 	@endswitch
 @endsection
@@ -183,6 +183,10 @@
 	                	    @case('ARGENTINA')
 	                		    <input type="submit" class="button primary" value="¡Pagar ahora!">
 	                	    	@break
+
+							@case('PERU')
+								<input type="submit" class="button primary" value="¡Pagar ahora!">
+								@break
 	                	@endswitch
 					</div>
 

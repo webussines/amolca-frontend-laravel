@@ -148,7 +148,7 @@ const PayURedirection = (user, order) => {
 		"buyerFullName": user.name + ' ' + user.lastname,
         "buyerEmail": user.email,
         "responseUrl": url_to_return,
-        "confirmationUrl": url_to_return
+        "confirmationUrl": url_to_return + '/checkout/response'
     };
 
 	setTimeout(function() {
