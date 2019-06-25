@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use MercadoPago;
+use Response;
 
 class CheckoutController extends Controller
 {
@@ -48,11 +49,11 @@ class CheckoutController extends Controller
 
         switch ( get_option('sitecountry') ) {
             case 'COLOMBIA':
-                # code...
+                    return Response::json(['status' => 200, 'message' => 'info received successfully'], 200);
                 break;
 
             case 'MEXICO':
-                    return redirect('/');
+                    return Response::json(['status' => 200, 'message' => 'info received successfully'], 200);
                 break;
 
             case 'DOMINICAN REPUBLIC':
