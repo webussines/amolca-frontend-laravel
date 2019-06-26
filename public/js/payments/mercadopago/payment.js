@@ -111,14 +111,18 @@ const UpdateOrder = (data) => {
 
 const MPRedirectFunction = (user, order) => {
 
-	//console.log(order);
+	//console.log(order.products[0].price);
 	if(order.shipping_price !== undefined) {
 		let shipping = order.shipping_price / order.products.length;
 
 		for (var i = 0; i < order.products.length; i++) {
+		    if(typeof order.products[i].price) {
+		        order.products[i].price = parseFloat(order.products[i].price);
+		    }
 			order.products[i].price = order.products[i].price + shipping;
 		}
 	}
+	//console.log(order.products[0].price);
 
 	//Cambiar el valor en el botón del carrito en el header
 
