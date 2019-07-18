@@ -12,8 +12,16 @@ for (var i = 0; i < lba.length; i++) {
 }
 
 $(document).ready(function() {
+    if(typeof fbq === 'function') {
+        fbq('track', 'ViewContent');
+    }
+
 	$('form#big-searcher').on('submit', function(e) {
 		e.preventDefault();
+        if(typeof fbq === 'function') {
+    		fbq('track', 'Search');
+    	}
+
 		if($('form#big-searcher input[type="text"]').val() !== '' && $('form#big-searcher input[type="text"]').val() !== '') {
 			rute = '/buscar?s=' + $('form#big-searcher input[type="text"]').val();
 			window.location.href = rute;
@@ -168,5 +176,5 @@ const AddCountryToForm = (id, name) => {
     if(id_field.length > 0) {
 		id_field.val(id)
 	}
-    
+
 }

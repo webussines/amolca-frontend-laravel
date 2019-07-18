@@ -111,6 +111,10 @@ const UpdateOrder = (data) => {
 
 const TuCompraRedirectFunction = (user, order) => {
 
+	if(typeof fbq === 'function') {
+		fbq('track', 'Purchase', {value: order.amount, currency: 'COP'});
+	}
+
 	//Cambiar el valor en el botón del carrito en el header
 	$('.top-bar #cart-btn span').html("$0 COP");
 

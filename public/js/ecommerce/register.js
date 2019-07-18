@@ -100,6 +100,11 @@ const UserRegister = (user) => {
     	url: '/am-admin/register',
     	data: user
 	}).done(function(resp) {
+
+		if(typeof fbq === 'function') {
+			fbq('track', 'CompleteRegistration');
+		}
+		
 		console.log(resp)
 		let data = JSON.parse(resp);
 		let error = { show: false, msg: '' };

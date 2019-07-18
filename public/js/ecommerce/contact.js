@@ -104,6 +104,11 @@ const SubmitForm = () => {
 
 const SendFormData = (data) => {
 
+	if(typeof fbq === 'function') {
+		fbq('track', 'Contact');
+		fbq('track', 'Lead');
+	}
+
 	//console.log(data)
 
 	let checkIcon = 'icon-check1';

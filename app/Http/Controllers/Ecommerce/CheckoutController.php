@@ -107,6 +107,10 @@ class CheckoutController extends Controller
 
     }
 
+    public function VisanetTransactionAuth() {
+        return $this->request->all();
+    }
+
     public function PaymentResponseView() {
 
         $response = session('response');

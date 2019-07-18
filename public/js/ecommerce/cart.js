@@ -109,6 +109,9 @@ jQuery(function($) {
 const AddCartProdut = (added, page, actions = null) => {
 
 	// console.log(added)
+	if(typeof fbq === 'function') {
+		fbq('track', 'AddToCart');
+	}
 
 	if($('.loader.fixed').hasClass('hidde')) {
 		$('.loader.fixed').removeClass('hidde');

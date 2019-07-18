@@ -1,5 +1,31 @@
 jQuery(function($) {
 
+	$.ajax({
+		method: 'POST',
+		url: 'https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/342062522',
+		headers: {
+            "Authorization": '38c575a926ea854e35d0bc02b8995897939f01cea4df3360791512eceb93b36c',
+            "Content-Type": "application/json"
+        },
+		data: {
+			'merchantId': '342062522',
+			'tokenSeguridad': '38c575a926ea854e35d0bc02b8995897939f01cea4df3360791512eceb93b36c',
+			'captureType': 'manual',
+			'channel': 'web',
+			'countable': true,
+			'order': {
+				'amount': 1000,
+				'currency': 'USD',
+				'purchaseNumber': 1234,
+				'tokenId': '25BFD42A1F6E46A9BFD42A1F6E66A951'
+			}
+		}
+	}).done((resp) => {
+		console.log(resp)
+	}).catch((err) => {
+		console.log(err)
+	})
+
 	$('#checkoutform').on('submit', ValidateForm);
 
 	$('#checkoutform .required-field').on('keyup change', function() {
