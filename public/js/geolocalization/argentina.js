@@ -33,11 +33,13 @@ const RedirectFunction = (country) => {
         }
         break;
 
+      /*
       case 'DOMINICAN REPUBLIC':
         if (window.location.href.indexOf("amolca.com.ar") > 0) {
           window.location.href = RedirectToCountry(window.location.href, window.location.host, 'amolca.com.do')
         }
         break;
+        */
 
       case 'COLOMBIA':
         if (window.location.href.indexOf("amolca.com.ar") > 0) {
