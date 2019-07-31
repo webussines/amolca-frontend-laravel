@@ -242,6 +242,9 @@ Route::group(['prefix' => 'carts'], function() {
 
 	Route::post('/amount', 'Ecommerce\CartsController@change_amount');
 	Route::get('/coupons/{code}', 'Ecommerce\CartsController@validate_coupon');
+
+    // Visanet
+    Route::post('/peru/visanet/save', 'Ecommerce\CartsController@visanet_save');
 });
 
 //Books

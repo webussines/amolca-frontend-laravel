@@ -407,6 +407,15 @@ class CartsController extends Controller
 
     }
 
+    public function visanet_save() {
+        $this->request->session()->put('visanet_tokenSeguridad', $this->request->get('tokenSeguridad'));
+        $this->request->session()->put('visanet_merchantId', $this->request->get('merchantId'));
+        $this->request->session()->put('visanet_order_id', $this->request->get('order')['id']);
+        $this->request->session()->put('visanet_order_amount', $this->request->get('order')['amount']);
+
+        return Response::json(['status' => 200, 'message' => 'Info saved'], 200);
+    }
+
     public function validate_coupon($code) {
 
         return Response::json($this->coupons->findByCode($code));

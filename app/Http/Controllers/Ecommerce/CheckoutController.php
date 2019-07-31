@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use App\Repositories\Banners;
+use App\Repositories\VisaNet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -14,10 +15,12 @@ class CheckoutController extends Controller
 
     protected $request;
     protected $banners;
+    protected $visanet;
 
-    public function __construct(Request $request, Banners $banners) {
+    public function __construct(Request $request, Banners $banners, VisaNet $visanet) {
         $this->request = $request;
         $this->banners = $banners;
+        $this->visanet = $visanet;
     }
 
     public function checkout()
@@ -99,7 +102,17 @@ class CheckoutController extends Controller
                 break;
 
             case 'PERU':
-                return $this->request->all();
+
+                $visa = $this->VisanetTransactionAuth($this->request->get('channel'), $this->request->get('transactionToken'));
+                if( isset($visa['error_code']) ) {
+                    return view('ecommerce.payment-responses.visanet-error', ['response' => $visa]);
+                } else if( isset($visa['transaction_date'] ) ) {
+                    return view('ecommerce.payment-responses.visanet-success', ['response' => $visa]);
+                } else {
+                    echo 'Final<br/>';
+                    return $visa;
+                }
+
                 break;
         }
 
@@ -107,8 +120,66 @@ class CheckoutController extends Controller
 
     }
 
-    public function VisanetTransactionAuth() {
-        return $this->request->all();
+    public function VisanetTransactionAuth($channel, $transaction_token) {
+        $token_seguridad = session('visanet_tokenSeguridad');
+        $merchant_id = session('visanet_merchantId');
+
+        $transaction_req = [
+            "merchantId" => $token_seguridad,
+            "tokenSeguridad" => $merchant_id,
+            "antifraud" => null,
+            "captureType" => "manual",
+            "channel" => $channel,
+            "countable" => true,
+            "order" => [
+                "tokenId" => $transaction_token,
+                "amount" => session('visanet_order_amount'),
+                "purchaseNumber" => session('visanet_order_id'),
+                "currency" => "PEN"
+            ]
+        ];
+
+        $request_visa = $this->visanet->transaction($token_seguridad, $merchant_id, $transaction_req);
+        if(gettype($request_visa) === 'string') {
+            $req_json = json_decode($request_visa, true);
+        }
+
+        if(isset($req_json['errorCode'])) {
+
+            $response = [
+                "error_code" => $req_json['errorCode'],
+                "error_message" => $req_json['errorMessage'],
+                "order_amount" => session('visanet_order_amount'),
+                "orden_id" => session('visanet_order_id'),
+            ];
+
+        } else if(isset($req_json['dataMap'])) {
+
+            $response = $this->VisaNetResponseData($req_json);
+
+        } else {
+
+            // return redirect('/');
+            $response = 'Holi';
+        }
+
+        return $response;
+    }
+
+    public function VisaNetResponseData($data) {
+
+        $response = [];
+        $response['credit_card'] = $data['dataMap']['CARD'];
+        $response['action_code'] = $data['dataMap']['ACTION_CODE'];
+        $response['response_code'] = $data['dataMap']['ECI'];
+        $response['response_text'] = $data['dataMap']['ACTION_DESCRIPTION'];
+        $response['authorization_code'] = $data['dataMap']['AUTHORIZATION_CODE'];
+        $response['orden_id'] = $data['order']['purchaseNumber'];
+        $response['transaction_id'] = $data['dataMap']['TRANSACTION_ID'];
+        $response['transaction_date'] = $data['dataMap']['TRANSACTION_DATE'];
+
+        return $response;
+
     }
 
     public function PaymentResponseView() {
