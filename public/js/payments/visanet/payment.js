@@ -100,9 +100,13 @@ const UpdateOrder = (data) => {
 }
 
 const GetVisaNetToken = (user, order) => {
+
+	let service_url = 'https://apitestenv.vnforapps.com/api.security/v1/security'; // Dev
+	//let service_url = 'https://apiprod.vnforapps.com/api.security/v1/security'; // Prod
+
     $.ajax({
         method: 'POST',
-        url: 'https://apitestenv.vnforapps.com/api.security/v1/security',
+        url: service_url,
         dataType: 'text/plain',
         headers: {
             "Authorization": "Basic " + btoa('integraciones.visanet@necomplus.com:d5e7nk$M'),
@@ -137,9 +141,14 @@ const CreateSession = (token, user, order) => {
         "channel":"web"
     }
 
+	let merchant_id = '342062522';
+
+	let service_url = 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'; // Dev
+	//let service_url = 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'; // Prod
+
     $.ajax({
         method: 'POST',
-        url: 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/342062522',
+        url: service_url + merchant_id,
         headers: {
             "Authorization": token,
             "Content-Type": "application/json"

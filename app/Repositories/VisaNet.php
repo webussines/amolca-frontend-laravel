@@ -16,10 +16,11 @@ class VisaNet extends GuzzleHttpRequest {
                         "Authorization" => $token
                     ];
 
-            $url = 'https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/' . $merchant_id;
+			$url = 'https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/'; // Dev
+			//$url = 'https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/'; // Prod
 
             $client = new Client();
-            $req = $client->request('POST', $url, [
+            $req = $client->request('POST', $url . $merchant_id, [
                 "headers" => $headers,
                 "json" => $body
             ]);
