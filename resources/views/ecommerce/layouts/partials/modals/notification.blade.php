@@ -7,7 +7,7 @@
         <p id="resp-desc">Este mensaje desaparecerá en unos segundos...</p>
 
         @if (get_option('sitecountry') == 'PERU')
-            <form id="visanet-payment-form" class="" action="/checkout/response" method="post"></form>
+            <form id="visanet-payment-form" class="" action="{{ Request::root() }}/checkout/response" method="post"></form>
         @endif
 
         <p id="resp-buttons"><a href="/carrito" class="button primary">Ver carrito</a> <a class="modal-close button gray">Cerrar</a></p>

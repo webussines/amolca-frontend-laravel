@@ -41,6 +41,17 @@
 				</tr>
 			@endif
 
+			@if ( isset($response['error_motive']) )
+				<tr class="response_text">
+					<th>
+						Motivo de la denegación:
+					</th>
+					<td>
+						{{ $response['error_motive'] }}
+					</td>
+				</tr>
+			@endif
+
 			@if ( isset($response['orden_id']) )
 				<tr>
 					<th>
@@ -48,6 +59,20 @@
 					</th>
 					<td>
 						{{ $response['orden_id'] }}
+					</td>
+				</tr>
+			@endif
+
+			@if ( isset($response['transaction_date']) )
+				<tr>
+					<th>
+						Fecha y hora de la transacción:
+					</th>
+					<td>
+						@php
+						$timestamp=(int) $response['transaction_date'] / 1000;
+						@endphp
+						{{ print_r(date('j F, Y', $timestamp)) }}
 					</td>
 				</tr>
 			@endif

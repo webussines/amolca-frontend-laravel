@@ -1,4 +1,5 @@
 jQuery(function($) {
+	console.log('aaaaaa')
 	$('#checkoutform').on('submit', ValidateForm);
 
 	$('#checkoutform .required-field').on('keyup change', function() {
@@ -101,15 +102,15 @@ const UpdateOrder = (data) => {
 
 const GetVisaNetToken = (user, order) => {
 
-	let service_url = 'https://apitestenv.vnforapps.com/api.security/v1/security'; // Dev
-	//let service_url = 'https://apiprod.vnforapps.com/api.security/v1/security'; // Prod
+	//let service_url = 'https://apitestenv.vnforapps.com/api.security/v1/security'; // Dev
+	let service_url = 'https://apiprod.vnforapps.com/api.security/v1/security'; // Prod
 
     $.ajax({
         method: 'POST',
         url: service_url,
         dataType: 'text/plain',
         headers: {
-            "Authorization": "Basic " + btoa('integraciones.visanet@necomplus.com:d5e7nk$M'),
+            "Authorization": "Basic " + btoa('diseno@webussines.com:azf2k?6R'),
             "Accept": 'text/plain'
         }
     }).done((resp) => {
@@ -141,10 +142,10 @@ const CreateSession = (token, user, order) => {
         "channel":"web"
     }
 
-	let merchant_id = '342062522';
+	let merchant_id = '650014707';
 
-	let service_url = 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'; // Dev
-	//let service_url = 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'; // Prod
+	//let service_url = 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'; // Dev
+	let service_url = 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/'; // Prod
 
     $.ajax({
         method: 'POST',
@@ -165,7 +166,7 @@ const CreateSession = (token, user, order) => {
 
 const SetScriptData = (session, token, user, order) => {
 
-    let merchantid = '342062522';
+    let merchantid = '650014707';
     let sessiontoken = session.sessionKey;
     let channel = 'web';
     let merchantlogo = 'https://amolca.com/img/common/logo.png';
@@ -192,7 +193,10 @@ const SetScriptData = (session, token, user, order) => {
 
     let visanet_script = document.createElement('script');
 
-    visanet_script.setAttribute('src','https://static-content-qas.vnforapps.com/v2/js/checkout.js');
+	//let src_url = 'https://static-content-qas.vnforapps.com/v2/js/checkout.js'; // Dev
+	let src_url = 'https://static-content.vnforapps.com/v2/js/checkout.js'; // Prod
+
+    visanet_script.setAttribute('src', src_url);
     visanet_script.setAttribute('data-sessiontoken', sessiontoken);
     visanet_script.setAttribute('data-channel', channel);
     visanet_script.setAttribute('data-merchantid', merchantid);

@@ -74,6 +74,20 @@
 				</tr>
 			@endif
 
+			@if ( isset($response['transaction_date']) )
+				<tr>
+					<th>
+						Fecha y hora de la transacción:
+					</th>
+					<td>
+						@php
+						$timestamp=(int) $response['transaction_date'] / 1000;
+						@endphp
+						{{ print_r(date('j F, Y', $timestamp)) }}
+					</td>
+				</tr>
+			@endif
+
 			@if ( isset($response['transaction_id']) )
 				<tr>
 					<th>

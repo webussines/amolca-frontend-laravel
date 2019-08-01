@@ -109,8 +109,7 @@ class CheckoutController extends Controller
                 } else if( isset($visa['transaction_date'] ) ) {
                     return view('ecommerce.payment-responses.visanet-success', ['response' => $visa]);
                 } else {
-                    echo 'Final<br/>';
-                    return $visa;
+                    return redirect('/');
                 }
 
                 break;
@@ -125,8 +124,8 @@ class CheckoutController extends Controller
         $merchant_id = session('visanet_merchantId');
 
         $transaction_req = [
-            "merchantId" => $token_seguridad,
-            "tokenSeguridad" => $merchant_id,
+            "merchantId" => $merchant_id,
+            "tokenSeguridad" => $token_seguridad,
             "antifraud" => null,
             "captureType" => "manual",
             "channel" => $channel,
@@ -135,7 +134,7 @@ class CheckoutController extends Controller
                 "tokenId" => $transaction_token,
                 "amount" => session('visanet_order_amount'),
                 "purchaseNumber" => session('visanet_order_id'),
-                "currency" => "PEN"
+                "currency" => "USD"
             ]
         ];
 
@@ -153,16 +152,23 @@ class CheckoutController extends Controller
                 "orden_id" => session('visanet_order_id'),
             ];
 
+            if( isset($req_json['data']['ACTION_DESCRIPTION']) ) {
+                $response["error_motive"] = $req_json['data']['ACTION_DESCRIPTION'];
+            }
+
+            if( isset($req_json['data']['TRANSACTION_DATE']) ) {
+                $response["transaction_date"] = $req_json['data']['TRANSACTION_DATE'];
+            }
+
         } else if(isset($req_json['dataMap'])) {
 
             $response = $this->VisaNetResponseData($req_json);
 
         } else {
-
-            // return redirect('/');
-            $response = 'Holi';
+            $response = false;
         }
 
+        $this->request->session()->forget(['visanet_tokenSeguridad', 'visanet_merchantId', 'visanet_order_id', 'visanet_order_amount']);
         return $response;
     }
 
